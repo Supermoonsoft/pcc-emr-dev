@@ -75,7 +75,7 @@ $hn = PatientHelper::getCurrentHn();
                                 ]);
                                 ?>
                                 <div class="form-group">
-                                    <input type="text" name="hn" id="hn" class="form-control" value="<?= $hn ?>" placeholder="HN">
+                                    <input type="text" name="hn" id="hn" class="form-control" value="<?= $hn ?>" placeholder="HN/CID/ชื่อ">
                                 </div>
                                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 
