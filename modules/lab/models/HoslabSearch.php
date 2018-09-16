@@ -20,7 +20,7 @@ class HoslabSearch extends Hoslab
     public function rules()
     {
         return [
-            [['id', 'cid', 'hos_hn', 'hos_vn', 'hos_date_visit', 'lab_code_hos', 'lab_code_moph', 'lab_name_hos', 'request_at', 'result_at', 'data_json', 'lab_name_moph'], 'safe'],
+            [['id', 'cid', 'hos_hn', 'hos_vn','hos_result', 'hos_date_visit', 'lab_code_hos', 'lab_code_moph', 'lab_name_hos', 'request_at', 'result_at', 'data_json', 'lab_name_moph'], 'safe'],
         ];
     }
 

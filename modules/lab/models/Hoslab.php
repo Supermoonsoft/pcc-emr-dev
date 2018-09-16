@@ -42,7 +42,7 @@ class Hoslab extends \yii\db\ActiveRecord
             [['cid'], 'string', 'max' => 13],
             [['hos_hn'], 'string', 'max' => 9],
             [['hos_vn'], 'string', 'max' => 15],
-            [['lab_code_hos', 'lab_code_moph', 'lab_name_hos', 'lab_name_moph'], 'string', 'max' => 255],
+            [['lab_code_hos','hos_result', 'lab_code_moph', 'lab_name_hos', 'lab_name_moph'], 'string', 'max' => 255],
             [['id'], 'unique'],
         ];
     }
@@ -65,6 +65,7 @@ class Hoslab extends \yii\db\ActiveRecord
             'result_at' => 'Result At',
             'data_json' => 'Data Json',
             'lab_name_moph' => 'Lab Name Moph',
+            'hos_result'=>'hos_result'
         ];
     }
 }

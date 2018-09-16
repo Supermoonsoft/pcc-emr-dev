@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'hos_date_visit', 
                 'width'=>'310px',
                 'value'=>function ($model, $key, $index, $widget) { 
-                    return $model->hos_date_visit;
+                    return "เข้ารับบริการที่ รพ.แม่ข่าย : ".$model->hos_date_visit;
                 },
                 //'filterType'=>GridView::FILTER_SELECT2,
                 //'filter'=>ArrayHelper::map(Suppliers::find()->orderBy('company_name')->asArray()->all(), 'id', 'company_name'), 
@@ -53,11 +53,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'groupedRow'=>true,
             ],
             ['class' => 'yii\grid\SerialColumn'],
-            'lab_code_hos',
+            //'lab_code_hos',
             //'lab_code_moph',
-            'lab_name_hos',
             'request_at',
+            'lab_name_hos',
             'result_at',
+            'hos_result',
             //'data_json',
             //'lab_name_moph',
 
