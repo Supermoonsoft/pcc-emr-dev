@@ -16,10 +16,10 @@ use yii\helpers\Url;
                     <a title="Appointment" href="<?= Url::to(['/appoint']) ?>"><i class="fa fa-bullhorn"></i> Appoint</a>
                 </li>
                 <li>
-                    <a title="SETTING" href="<?= Url::to(['/service-setting']) ?>"><i class="fa fa-server"></i> Setting</a>
+                    <a title="Labs" href="<?= Url::to(['/lab/hoslab']) ?>"><i class="fa fa-server"></i> Lab</a>
                 </li>
                 <li>
-                    <a title="Doctor-Order/Today" href="<?= Url::to(['doctor-order']) ?>"><i class="fa fa-stethoscope"></i> Order</a><!-- POND -->
+                    <a title="Drugs" href="<?= Url::to(['/drug/hosdrug']) ?>"><i class="fa fa-stethoscope"></i> Drug</a><!-- POND -->
                 </li>
                 <li>
                     <a title="Doctor Note" href="<?= Url::to(['/doctor-note']) ?>"><i class="fa fa-pencil-square-o"></i> Note</a>
