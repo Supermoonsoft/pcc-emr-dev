@@ -7,6 +7,7 @@ $modules['gridview'] =  ['class' => '\kartik\grid\Module'];//system
 
 $modules['lab'] =  ['class' => 'app\modules\lab\Lab'];//pond 
 $modules['drug'] =  ['class' => 'app\modules\drug\Drug'];//pond 
+$modules['doctorworkbench'] =  ['class' => 'app\modules\doctorworkbench\Doctorworkbench'];//oh
 
 return $modules;
 
