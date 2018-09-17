@@ -12,9 +12,11 @@ use app\modules\drug\models\Hosdrug;
  */
 class HosdrugSearch extends Hosdrug
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    function __construct($cid=NULL){ 
+        $this->cid = $cid;
+    }
+
     public function rules()
     {
         return [
@@ -41,13 +43,18 @@ class HosdrugSearch extends Hosdrug
      */
     public function search($params)
     {
-        $query = Hosdrug::find()->OrderBy(['hos_date_visit'=>SORT_DESC,]);
+        $query = Hosdrug::find()->where(['cid' => $this->cid])->OrderBy(['hos_date_visit'=>SORT_DESC,]);
 
         // add conditions that should always apply here
+        if ($this->load($params) && $this->validate()) {
+            $query->where(['cid' => $this->cid]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        
 
         $this->load($params);
 
@@ -56,7 +63,7 @@ class HosdrugSearch extends Hosdrug
             // $query->where('0=1');
             return $dataProvider;
         }
-
+/*
         // grid filtering conditions
         $query->andFilterWhere([
             'hos_date_visit' => $this->hos_date_visit,
@@ -73,7 +80,7 @@ class HosdrugSearch extends Hosdrug
             ->andFilterWhere(['ilike', 'data_json', $this->data_json])
             ->andFilterWhere(['ilike', 'drug_code_moph', $this->drug_code_moph])
             ->andFilterWhere(['ilike', 'drug_name_moph', $this->drug_name_moph]);
-
+*/
         return $dataProvider;
     }
 }

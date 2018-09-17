@@ -33,14 +33,15 @@ class HosdrugController extends Controller
      * Lists all Hosdrug models.
      * @return mixed
      */
-    public function actionIndex()
+    public function actionIndex($cid=NULL)
     {
-        $searchModel = new HosdrugSearch();
+        $searchModel = new HosdrugSearch($cid);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'cid'=>$cid
         ]);
     }
 

@@ -10,14 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 
-/**
- * HoslabController implements the CRUD actions for Hoslab model.
- */
 class HoslabController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public function behaviors()
     {
         return [
@@ -30,35 +25,20 @@ class HoslabController extends Controller
         ];
     }
 
-    /**
-     * Lists all Hoslab models.
-     * @return mixed
-     */
-    public function actionIndex()
+
+    public function actionIndex($cid=NULL)
     {
-        $searchModel = new HoslabSearch();
+        $searchModel = new HoslabSearch($cid);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $hn = \Yii::$app->request->post('hn');
-        $vn = '';        
-       
-        
-        if (!empty($hn)) {
-            $vn = NurseHelper::openVisit($hn);
-            PatientHelper::setCurrentVn($vn);
-        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'cid'=>$cid
         ]);
     }
 
-    /**
-     * Displays a single Hoslab model.
-     * @param string $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionView($id)
     {
         return $this->render('view', [
@@ -66,11 +46,7 @@ class HoslabController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Hoslab model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
+
     public function actionCreate()
     {
         $model = new Hoslab();
@@ -84,13 +60,7 @@ class HoslabController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Hoslab model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -104,13 +74,7 @@ class HoslabController extends Controller
         ]);
     }
 
-    /**
-     * Deletes an existing Hoslab model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
@@ -118,13 +82,7 @@ class HoslabController extends Controller
         return $this->redirect(['index']);
     }
 
-    /**
-     * Finds the Hoslab model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Hoslab the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+
     protected function findModel($id)
     {
         if (($model = Hoslab::findOne($id)) !== null) {

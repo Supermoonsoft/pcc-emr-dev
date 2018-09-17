@@ -14,9 +14,11 @@ $hn = PatientHelper::getCurrentHn();
  */
 class HoslabSearch extends Hoslab
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    function __construct($cid=NULL){ 
+        $this->cid = $cid;
+    }
+
     public function rules()
     {
         return [
@@ -40,11 +42,13 @@ class HoslabSearch extends Hoslab
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params=null)
     {
-        $query = Hoslab::find();
+        $query = Hoslab::find()->where(['cid' => $this->cid])->OrderBy(['hos_date_visit'=>SORT_DESC,]);
 
-        // add conditions that should always apply here
+        if ($this->load($params) && $this->validate()) {
+            $query->where(['cid' => $this->cid]);
+        }
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -57,7 +61,7 @@ class HoslabSearch extends Hoslab
             // $query->where('0=1');
             return $dataProvider;
         }
-
+/*
         // grid filtering conditions
         $query->andFilterWhere([
             'hos_date_visit' => $this->hos_date_visit,
@@ -75,6 +79,7 @@ class HoslabSearch extends Hoslab
             ->andFilterWhere(['ilike', 'lab_name_hos', $this->lab_name_hos])
             ->andFilterWhere(['ilike', 'data_json', $this->data_json])
             ->andFilterWhere(['ilike', 'lab_name_moph', $this->lab_name_moph]);
+*/
 
         return $dataProvider;
     }
