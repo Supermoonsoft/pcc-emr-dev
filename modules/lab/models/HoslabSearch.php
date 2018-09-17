@@ -16,6 +16,7 @@ class HoslabSearch extends Hoslab
 {
 
     function __construct($cid=NULL){ 
+        
         $this->cid = $cid;
     }
 
@@ -44,7 +45,7 @@ class HoslabSearch extends Hoslab
      */
     public function search($params=null)
     {
-        $query = Hoslab::find()->where(['cid' => $this->cid])->OrderBy(['hos_date_visit'=>SORT_DESC,]);
+        $query = Hoslab::find()->where(['cid' => '2222222222222'])->OrderBy(['hos_date_visit'=>SORT_DESC,]);
 
         if ($this->load($params) && $this->validate()) {
             $query->where(['cid' => $this->cid]);

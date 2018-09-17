@@ -3,12 +3,7 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\lab\models\HoslabSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'รายการแล๊ป';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hoslab-index">
     <?php Pjax::begin(); ?>
@@ -21,19 +16,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'pjax'=>true,
         'pjaxSettings'=>[
             'neverTimeout'=>true,
-            /*'beforeGrid'=>'<div class="col-md-6"><object align="center">'
-            .$this->render('_search', ['model' => $searchModel])
-            .'</object></div>',*/
-        ],
-        'toolbar' => [
-            [
-                'content'=>
-                '<div class="row">'
-                .$this->render('_search', ['model' => $searchModel])
-                .'</div>',
-            ],
-            '{export}',
-            '{toggleData}'
         ],
         'striped'=>true,
         'hover'=>true,

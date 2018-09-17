@@ -3,12 +3,6 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\drug\models\HosdrugSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
-
-$this->title = 'รายการยา';
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="hosdrug-index">
     <?php Pjax::begin(); ?>
@@ -24,21 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
             .$this->render('_search', ['model' => $searchModel])
             .'</object></div>',*/
         ],
-        'toolbar' => [
-            [
-                'content'=>
-                '<div class="row">'
-                .$this->render('_search', ['model' => $searchModel])
-                .'</div>',
-            ],
-            '{export}',
-            '{toggleData}'
-        ],
         'striped'=>true,
         'hover'=>true,
         'panel'=>[
             'type'=>'primary', 
-            'heading'=> 'LAB TEST ',
+            'heading'=> 'DRUG List',
         ],
         
         'columns' => [

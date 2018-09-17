@@ -43,7 +43,7 @@ class HosdrugSearch extends Hosdrug
      */
     public function search($params)
     {
-        $query = Hosdrug::find()->where(['cid' => $this->cid])->OrderBy(['hos_date_visit'=>SORT_DESC,]);
+        $query = Hosdrug::find()->where(['cid' => '2222222222222'])->OrderBy(['hos_date_visit'=>SORT_DESC,]);
 
         // add conditions that should always apply here
         if ($this->load($params) && $this->validate()) {

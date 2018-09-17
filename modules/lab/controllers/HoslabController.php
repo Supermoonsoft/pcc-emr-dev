@@ -28,9 +28,10 @@ class HoslabController extends Controller
 
     public function actionIndex($cid=NULL)
     {
+
         $searchModel = new HoslabSearch($cid);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
