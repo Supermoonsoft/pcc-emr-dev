@@ -46,7 +46,7 @@ li.dropdown:hover > .dropdown-menu {
  
 <div class="panel panel-info" style="margin-left: 20px;margin-right: 20px">
 	<div class="panel-heading">
-		<div class="panel-title"><span class="glyphicon glyphicon-edit"></span> ระบบห้องตรวจแพทย์</div>
+		<div class="panel-title"><li class="fa fa-stethoscope"></li> Order</div>
 	</div>
 	<div class="panel-body">
 <div class="row">
