@@ -9,6 +9,7 @@ use app\assets\DevAsset;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use app\components\PatientHelper;
+use app\components\loading\ShowLoading;
 
 DevAsset::register($this);
 \yii\bootstrap\BootstrapAsset::register($this);
@@ -49,6 +50,7 @@ $hn = PatientHelper::getCurrentHn();
         <?php $this->head() ?>
     </head>
     <body>
+        <?= ShowLoading::widget()?>
         <?php $this->beginBody() ?>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -60,7 +62,7 @@ $hn = PatientHelper::getCurrentHn();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="img\brand.png" height="30px" /></a>
+                    <a class="navbar-brand" href="<?= Url::to(['/site/index'])?>"><img src="img\brand.png" height="30px" /></a>
 
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">

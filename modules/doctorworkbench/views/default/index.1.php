@@ -9,7 +9,6 @@ use app\components\MessageHelper;
 use app\components\loading\ShowLoading;
 
 use unclead\multipleinput\MultipleInput;
-use kartik\widgets\Select2;
 
 
 ?>
@@ -65,7 +64,7 @@ li.dropdown:hover > .dropdown-menu {
 
 
 <?php $form = \yii\bootstrap\ActiveForm::begin([
-    'id'                        => 'diag-form',
+    'id'                        => 'tabular-form',
     'enableAjaxValidation'      => true,
     'enableClientValidation'    => false,
     'validateOnChange'          => false,
@@ -76,14 +75,14 @@ li.dropdown:hover > .dropdown-menu {
     ]
 ]) ?>
 
-<?= $form->field($model, 'diagnosis')->widget(MultipleInput::className(), [
+<?= $form->field($model, 'schedule')->widget(MultipleInput::className(), [
     'max' => 4,
     'columns' => [
         [
-            'name'  => 'icd10',
-            'type'  => Select2::className(),
+            'name'  => 'user_id',
+            'type'  => 'dropDownList',
             'title' => 'ICD10',
-           // 'defaultValue' => 1,
+            'defaultValue' => 1,
             'items' => [
                 1 => 'A001',
                 2 => 'A002'
@@ -116,71 +115,77 @@ li.dropdown:hover > .dropdown-menu {
     ]
  ]);
 ?>
+
 <?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']);?>
 <?php ActiveForm::end();?>
+<hr>
+
+      <form class="form-inline">
+  <div class="form-group">
+    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+    <div class="input-group">
+      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+      <div class="input-group-addon">ICD10</div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่ม</button>
+</form>
+
+      <table class="table table-bordered">
+    <thead>
+        <tr>
+            <td class="text-center" width="5%" style="text-align:left;">ลำดับ</td>
+            <td class="text-center" width="8%" style="text-align:left;">Dx. ICD10</td>
+            <td class="text-center" width="30%" style="text-align:left;">ชื่อโรค</td>
+            <td class="text-center" width="15%" style="text-align:left;">ประเภท</td>
+            <td class="text-center" width="15%" style="text-align:left;">แพทย์</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+            <td class="text-right">1</td>
+            <td>A001</td>
+            <td>xxxxxxxxxx</td>
+            <td>xx</td>
+            <td>นายแพทย์ xxxxx xxxxx</td>
+    </tr>
+    </tbody>
+    </table>
+
     </div>
     <div id="medication" class="tab-pane fade">
       <h3>Medication</h3>
-
-
-<?php $form = \yii\bootstrap\ActiveForm::begin([
-    'id'                        => '-form',
-    'enableAjaxValidation'      => true,
-    'enableClientValidation'    => false,
-    'validateOnChange'          => false,
-    'validateOnSubmit'          => true,
-    'validateOnBlur'            => false,
-    'options' => [
-        'enctype' => 'multipart/form-data'
-    ]
-]) ?>
-
-<?= $form->field($model, 'medication')->widget(MultipleInput::className(), [
-    'max' => 4,
-    'columns' => [
-        [
-            'name'  => 'drug_items',
-            'type'  => Select2::className(),
-            'title' => 'ยา/บริการ',
-            'defaultValue' => 1,
-            'items' => [
-                1 => 'ACTIFED .TAB',
-                2 => 'ค่าบริการผู้ป่วยนอก ในเวลาราชการ'
-            ]
-        ],
-        [
-            'name'  => 'direction',
-            'title' => 'วิิธีใช้',
-            'enableError' => true,
-            'options' => [
-                'class' => 'input-priority'
-            ]
-            ],
-            [
-                'name'  => 'qty',
-                'title' => 'จำนวน',
-                'enableError' => true,
-                'options' => [
-                    'class' => 'input-priority'
-                ]
-                ],
-        [
-            'name'  => 'price',
-            'title' => 'ราคา',
-            'enableError' => true,
-            'options' => [
-                'class' => 'input-priority'
-            ]
-        ]
-    ]
- ]);
-?>
-
-
-<?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']);?>
-<?php ActiveForm::end();?>
-
-    
+      <form class="form-inline">
+  <div class="form-group">
+    <label class="sr-only" for="">ยา/บริการ</label>
+    <input type="text" class="form-control" placeholder="ยา/บริการ">
+  </div>
+  <div class="form-group">
+    <label class="sr-only" for="">จำนวน</label>
+    <input type="text" class="form-control" placeholder="จำนวน">
+  </div>
+  <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> เพิ่ม</button>
+</form>
+      <table class="table table-bordered">
+    <thead>
+        <tr>
+            <td class="text-center" width="5%" style="text-align:left;">ลำดับ</td>
+            <td class="text-center" width="40%" style="text-align:left;">ยา/บริการ</td>
+            <td class="text-center" width="40%" style="text-align:left;">วิิธีใช้</td>
+            <td class="text-center" width="10%" style="text-align:left;">จำนวน</td>
+            <td class="text-center" width="5%" style="text-align:left;">ราคา</td>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+            <td class="text-right">1</td>
+            <td>ACTEIFED. TAB</td>
+            <td>xxxxxxxxxx</td>
+            <td>5</td>
+            <td>10</td>
+    </tr>
+    </tbody>
+    </table>
     </div>
     <div id="procedure" class="tab-pane fade">
       <h3>Procedure</h3>

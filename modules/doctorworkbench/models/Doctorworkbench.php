@@ -14,10 +14,17 @@ class Doctorworkbench extends \yii\db\ActiveRecord
     public $claim;
     public $department;
 
+    public $title;
+    public $description;
+    public $file;
+    public $date;
+
     public function rules()
     {
         return [
-            [['hn','vn','fullname','age','cc','claim','department'], 
+            [['hn','vn','fullname','age','cc','claim','department','icd10_name',
+            'title', 'description','title'
+        ], 
             'safe'],
            
         ];
