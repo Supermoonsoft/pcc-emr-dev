@@ -29,7 +29,7 @@ use yii\helpers\Url;
 
 
                 <li>
-                    <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench']) ?>"><i class="fa fa-stethoscope"></i> Order</a><!-- POND -->
+                    <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> Order</a><!-- POND -->
                 </li>
 
                 <li>
