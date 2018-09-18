@@ -44,6 +44,9 @@ use yii\helpers\Url;
                 <li>
                     <a title="PCC-STOCK" href="<?= Url::to(['/stock']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>
                 </li>
+                <li>
+                    <a title="งานบัญชี" href="#"><i class="fa fa-dollar" aria-hidden="true"></i> งานบัญชี</a>
+                </li>
             </ul>
 
         </div>

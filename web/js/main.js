@@ -1,11 +1,11 @@
-hn = $('#hn');
+cid = $('#cid_search');
 
-hn.click(function(){
-    hn.select()
+cid.click(function(){
+    cid.select()
 });
 
 $(function(){
-    hn.select();
+    cid.select();
 });
 
 

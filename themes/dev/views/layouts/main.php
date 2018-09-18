@@ -50,8 +50,9 @@ $hn = PatientHelper::getCurrentHn();
         <?php $this->head() ?>
     </head>
     <body>
-        <?= ShowLoading::widget()?>
+
         <?php $this->beginBody() ?>
+        <?= ShowLoading::widget() ?>
 
         <nav class="navbar navbar-inverse navbar-fixed-top">
             <div class="container-fluid">
@@ -62,7 +63,7 @@ $hn = PatientHelper::getCurrentHn();
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="<?= Url::to(['/site/index'])?>"><img src="img\brand.png" height="30px" /></a>
+                    <a class="navbar-brand" href="<?= Url::to(['/site/index']) ?>"><img src="img\brand.png" height="30px" /></a>
 
                 </div>
                 <div id="navbar" class="collapse navbar-collapse">
@@ -72,12 +73,12 @@ $hn = PatientHelper::getCurrentHn();
                                 <?php
                                 $form = ActiveForm::begin([
                                             'method' => 'POST',
-                                            'action' => Url::to(['/patient/search/hn']),
+                                            //'action' => Url::to(['/patient/search/hn']),
                                             'options' => ['class' => 'form-inline']
                                 ]);
                                 ?>
                                 <div class="form-group">
-                                    <input type="text" name="hn" id="hn" class="form-control" value="<?= $hn ?>" placeholder="HN/CID/ชื่อ">
+                                    <input type="text" name="cid" id="cid_search" class="form-control" maxlength="13" placeholder="CID">
                                 </div>
                                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 
