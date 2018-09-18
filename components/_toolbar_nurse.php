@@ -1,6 +1,9 @@
 <?php
 
 use yii\helpers\Url;
+
+$module = \Yii::$app->controller->module->id;
+
 ?>
 
 <div style="width: 100%; margin-top: 0px;box-shadow: 5px 3px 2px grey;" >
@@ -8,12 +11,22 @@ use yii\helpers\Url;
     <div class="container-fluid">
         <div class="navbar-header">
             <ul class="nav navbar-nav na">
-
-
+                
+                <li>
+                    <?php if ($module == 'queuemanage'): ?>
+                        <a style="background-color: #eee" title="Q. Manage" href="<?= Url::to(['/queuemanage']) ?>"><i class="fa fa-child" aria-hidden="true"></i> QUEUE</a>
+                    <?php else: ?>
+                        <a title="Q. Manage" href="<?= Url::to(['/queuemanage']) ?>"><i class="fa fa-child" aria-hidden="true"></i> QUEUE</a>
+                    <?php endif; ?>
+                </li>  
+                
+                <li>
+                    <a title="Hospital Lab Result" href="<?= Url::to(['/lab/hoslab']) ?>"><i class="fa fa-flask" aria-hidden="true"></i> LAB</a><!-- POND -->
+                </li>
 
                 <li>
-                    <a title="Q. Manage" href="<?= Url::to(['/queue-manage']) ?>"><i class="fa fa-child" aria-hidden="true"></i> QUEUE</a>
-                </li>  
+                    <a title="Drug" href="<?= Url::to(['/drug/hosdrug']) ?>"><i class="fa fa-plus-square" aria-hidden="true"></i>  Drug</a><!-- POND -->
+                </li>
 
                 <li>
                     <a title="PCC EMR" href="<?= Url::to(['/emr']) ?>"><i class="fa fa-address-card" aria-hidden="true"></i>  EMR</a><!-- POND -->
@@ -22,7 +35,11 @@ use yii\helpers\Url;
 
 
                 <li>
-                    <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> Order</a><!-- POND -->
+                    <?php if ($module == 'doctorworkbench'): ?>
+                        <a style="background-color: #eee" title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
+                    <?php else: ?>
+                        <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
+                    <?php endif; ?>
                 </li>
 
                 <li>
