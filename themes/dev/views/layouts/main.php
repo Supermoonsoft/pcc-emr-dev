@@ -73,7 +73,7 @@ $hn = PatientHelper::getCurrentHn();
                                 <?php
                                 $form = ActiveForm::begin([
                                             'method' => 'POST',
-                                            //'action' => Url::to(['/patient/search/hn']),
+                                           'action' => Url::to(['/site/patient-search']),
                                             'options' => ['class' => 'form-inline']
                                 ]);
                                 ?>
@@ -86,7 +86,7 @@ $hn = PatientHelper::getCurrentHn();
                             </div>
                         </li>
                         <li>
-                            <div style="padding-top: 8px;padding-left: 50px;color: white;"><h4><?= empty($this->params['pt_title']) ? '' : $this->params['pt_title'] ?></h4></div>
+                            <div style="padding-top: 8px;padding-left: 50px;color: white;"><h4><?= empty($this->params['pt_title']) ? '<i class="fa fa-wheelchair" aria-hidden="true"></i> กรุณาเลือกผู้รับบริการ' : '<i class="fa fa-wheelchair" aria-hidden="true"></i> '.$this->params['pt_title'] ?></h4></div>
                         </li>
 
                     </ul>

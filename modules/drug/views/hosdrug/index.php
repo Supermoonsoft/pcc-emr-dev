@@ -3,10 +3,23 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use app\components\DbHelper;
+use yii\web\JsExpression;
+use app\components\loading\ShowLoading;
+//echo ShowLoading::widget();
 ?>
 <div class="hosdrug-index">
+<div class="hoslab-index">
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="panel-title"><i class="fa fa-clock-o" aria-hidden="true"></i> Drug List</div>
+    </div>
+<div class="panel-body">
+        <div style="margin-bottom: 3px">
+        <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
+            <button class="btn btn-info" onClick=<?=new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก</button>
+        </div>
     <?php Pjax::begin(); ?>
-
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -19,28 +32,12 @@ use yii\widgets\Pjax;
             .'</object></div>',*/
         ],
         'striped'=>true,
-        'hover'=>true,
-        'panel'=>[
-            'type'=>'primary', 
-            'heading'=> 'DRUG List',
-        ],
-        
+        'hover'=>true,       
         'columns' => [
-            [
-                'attribute'=>'cid', 
-                'value'=>function ($model, $key, $index, $widget) { 
-                    return 'CID : '.$model->cid;
-                },
-                'group'=>true, 
-                'filter'=>true,
-                'groupedRow'=>true,
-                'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
-                'groupEvenCssClass'=>'kv-grouped-row',
-            ],
             [
                 'attribute'=>'hos_date_visit', 
                 'value'=>function ($model, $key, $index, $widget) { 
-                    return "เข้ารับบริการที่ รพ.แม่ข่าย : ".$model->hos_date_visit;
+                    return $model->hos_date_visit.' (รพ.แม่ข่าย)';
                 },
                 'filter'=>false,
                 //'filterType'=>GridView::FILTER_SELECT2,
@@ -54,11 +51,13 @@ use yii\widgets\Pjax;
                 'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
                 'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
             ],
-            ['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\CheckboxColumn',],
+            //['class' => 'yii\grid\SerialColumn'],
             //'drug_code_hos',
             'drug_name_hos',
+            'drug_usage',
             'drug_pay_amount',
-            'drug_pay_unit',
+            'drug_units',
             //'data_json',
             //'drug_code_moph',
             //'drug_name_moph',
@@ -67,4 +66,6 @@ use yii\widgets\Pjax;
         ],
     ]); ?>
     <?php Pjax::end(); ?>
+</div>
+</div>
 </div>

@@ -19,8 +19,10 @@ use Yii;
  * @property array $data_json
  * @property string $drug_code_moph
  * @property string $drug_name_moph
+ * @property string $drug_usage
+ * @property string $drug_units
  */
-class Hosdrug extends \yii\db\ActiveRecord
+class HosDrug extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -43,7 +45,8 @@ class Hosdrug extends \yii\db\ActiveRecord
             [['cid'], 'string', 'max' => 13],
             [['hos_hn'], 'string', 'max' => 9],
             [['hos_vn'], 'string', 'max' => 15],
-            [['drug_code_hos', 'drug_name_hos', 'drug_code_moph', 'drug_name_moph'], 'string', 'max' => 255],
+            [['drug_code_hos', 'drug_name_hos', 'drug_code_moph', 'drug_name_moph', 'drug_usage', 'drug_units'], 'string', 'max' => 255],
+            [['id'], 'unique'],
         ];
     }
 
@@ -57,14 +60,16 @@ class Hosdrug extends \yii\db\ActiveRecord
             'cid' => 'Cid',
             'hos_hn' => 'Hos Hn',
             'hos_vn' => 'Hos Vn',
-            'hos_date_visit' => 'Hos Date Visit',
-            'drug_code_hos' => 'Drug Code Hos',
-            'drug_name_hos' => 'Drug Name Hos',
-            'drug_pay_amount' => 'Drug Pay Amount',
+            'hos_date_visit' => 'วันที่มารับบริการ',
+            'drug_code_hos' => 'รหัสยา',
+            'drug_name_hos' => 'ชื่อยา',
+            'drug_pay_amount' => 'จำนวน',
             'drug_pay_unit' => 'Drug Pay Unit',
             'data_json' => 'Data Json',
             'drug_code_moph' => 'Drug Code Moph',
             'drug_name_moph' => 'Drug Name Moph',
+            'drug_usage' => 'วิธีกิน',
+            'drug_units' => 'หน่วยนับ',
         ];
     }
 
@@ -90,5 +95,4 @@ class Hosdrug extends \yii\db\ActiveRecord
         }
         return parent::afterFind();
     }
-
 }

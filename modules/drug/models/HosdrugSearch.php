@@ -20,7 +20,7 @@ class HosdrugSearch extends Hosdrug
     public function rules()
     {
         return [
-            [['id', 'cid', 'hos_hn', 'hos_vn', 'hos_date_visit', 'drug_code_hos', 'drug_name_hos', 'data_json', 'drug_code_moph', 'drug_name_moph'], 'safe'],
+            [['id', 'cid', 'hos_hn', 'hos_vn', 'hos_date_visit', 'drug_code_hos', 'drug_name_hos', 'data_json', 'drug_code_moph', 'drug_name_moph', 'drug_usage', 'drug_units'], 'safe'],
             [['drug_pay_amount', 'drug_pay_unit'], 'number'],
         ];
     }

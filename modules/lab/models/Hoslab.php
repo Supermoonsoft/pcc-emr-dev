@@ -57,15 +57,15 @@ class Hoslab extends \yii\db\ActiveRecord
             'cid' => 'Cid',
             'hos_hn' => 'Hos Hn',
             'hos_vn' => 'Hos Vn',
-            'hos_date_visit' => 'Hos Date Visit',
+            'hos_date_visit' => 'วันที่รับบริการแม่ข่าย',
             'lab_code_hos' => 'Lab Code Hos',
             'lab_code_moph' => 'Lab Code Moph',
-            'lab_name_hos' => 'Lab Name Hos',
-            'request_at' => 'Request At',
-            'result_at' => 'Result At',
+            'lab_name_hos' => 'ชื่อรายการแล๊ป',
+            'request_at' => 'วันที่สั่งแล๊ป',
+            'result_at' => 'วันที่รายงานผล',
             'data_json' => 'Data Json',
-            'lab_name_moph' => 'Lab Name Moph',
-            'hos_result'=>'hos_result'
+            'lab_name_moph' => 'ชื่อรายการแล๊ป',
+            'hos_result'=>'ผลแล๊ป'
         ];
     }
 
