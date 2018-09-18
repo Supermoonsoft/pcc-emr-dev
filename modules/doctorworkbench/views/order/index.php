@@ -65,7 +65,7 @@ li.dropdown:hover > .dropdown-menu {
 
   <div class="tab-content">
     <div id="diagnosis" class="tab-pane fade in active">
-      <h3>Diagnosis</h3>
+      <h3></h3>
 
 
 <?php $form = \yii\bootstrap\ActiveForm::begin([
@@ -140,13 +140,13 @@ li.dropdown:hover > .dropdown-menu {
             ]
         ]
     ]
- ]);
+ ])->label('');
 ?>
 <?= Html::submitButton('บันทึก', ['class' => 'btn btn-success']);?>
 <?php ActiveForm::end();?>
     </div>
     <div id="medication" class="tab-pane fade">
-      <h3>Medication</h3>
+      <h3></h3>
 
 
 
@@ -200,7 +200,7 @@ li.dropdown:hover > .dropdown-menu {
             ]
         ]
     ]
- ]);
+ ])->label('');
 ?>
 
 
@@ -211,10 +211,10 @@ li.dropdown:hover > .dropdown-menu {
     
     </div>
     <div id="procedure" class="tab-pane fade">
-      <h3>Procedure</h3>
+      <h3></h3>
     </div>
     <div id="appointment" class="tab-pane fade">
-      <h3>Appointment</h3>
+      <h3></h3>
     </div>
 </div>
 		<!-- /tabs -->
