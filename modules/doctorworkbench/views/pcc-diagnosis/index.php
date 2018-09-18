@@ -1,71 +1,69 @@
 <?php
-
-use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\bootstrap\Modal;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
+use johnitvn\ajaxcrud\CrudAsset; 
+use johnitvn\ajaxcrud\BulkButtonWidget;
 
-$this->title = 'Diagnoses';
-$this->params['breadcrumbs'][] = $this->title;
+CrudAsset::register($this);
+
 ?>
-<div class="pcc-diagnosis-index" >
-<div style="margin-bottom:20px;">
+<?=$this->render('../default/panel_top');?>
+<?php  echo $this->render('./create',['model' => $model]);?>
+<div class="pcc-diagnosis-index">
+    <div id="ajaxCrudDatatable">
+        <?=GridView::widget([
+            'id'=>'crud-datatable',
+            'dataProvider' => $dataProvider,
+            // 'filterModel' => $searchModel,
+            'pjax'=>true,
+            'columns' => require(__DIR__.'/_columns.php'),        
+            'striped' => true,
+            'condensed' => true,
+            'responsive' => true,          
+        ])?>
+    </div>
 </div>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-            [
-                'class' => 'kartik\grid\CheckboxColumn',
-                'width' => '36px',
-                'headerOptions' => ['class' => 'kartik-sheet-style'],
-            ],
-            [
-                'attribute' => 'icd_code',
-                'header' => 'ICD10',
-                'width' => '10%',
-            ],
-            [
-                'attribute' => 'icd_name',
-                'header' => 'ชื่อโรค',
-                'width' => '60%',
-            ],
-            [
-                'attribute' => 'diag_type',
-                'header' => 'ประเภท',
-                'hAlign' => 'center',
-                'vAlign' => 'middle',
-                'width' => '5%',
-            ],
-            [
-                'attribute' => 'provider_name',
-                'header' => 'แพทย์',
-                'width' => '15%',
-            ],
+<?php Modal::begin([
+    "id"=>"ajaxCrudModal",
+    "footer"=>"",// always need it for jquery plugin
+])?>
+<?php Modal::end(); ?>
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'template'=>'{delete}',
-                'buttons' => [
-                    'delete' => function ($url) {
-                        return Html::a(Yii::t('yii', 'Delete'), '#', [
-                            'title' => Yii::t('yii', 'Delete'),
-                            'aria-label' => Yii::t('yii', 'Delete'),
-                            'onclick' => "
-                                if (confirm('ok?')) {
-                                    $.ajax('$url', {
-                                        type: 'POST'
-                                    }).done(function(data) {
-                                        $.pjax.reload({container: '#pjax-container'});
-                                    });
-                                }
-                                return false;
-                            ",
-                        ]);
-                    },
-                ],
-            ],
-        ],
-    ]); ?>
+<?php
+$js = <<< JS
+$('#icd_code').change(function(){
+// $('#form-diagnosis').submit();
+var form = $("#form-diagnosis");
+var data = form.serialize();
+            var url = form.attr('action');
+            $.ajax({
+                url: url,
+                type: 'post',
+                dataType: 'json',
+                data: data
+            })
+            .done(function(response) {
+               
+                $.pjax.reload({container: "#crud-datatable-pjax"});
+                console.log(response);
 
-</div>
+            })
+            .fail(function() {
+                console.log("error");
+                $.pjax.reload({container: "#crud-datatable-pjax"});
+
+            });
+
+});
+       $("#form-diagnosis").submit(function(event) {
+            event.preventDefault(); // stopping submitting
+           
+        });
+
+
+JS;
+$this->registerJS($js);
+?>
+<?=$this->render('../default/panel_foot');?>

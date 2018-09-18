@@ -11,16 +11,7 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
 ?>
 
 <div class="pcc-diagnosis-form">
-<?php 
-    $form = ActiveForm::begin([
-        'id' => 'form-diagnosis',
-        'action' => ['create'],
-       // 'method' => 'get',
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); 
-    ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis']); ?>
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <?= $form->field($model, 'icd_code')->widget(Select2::className(), [
@@ -51,5 +42,9 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
             </div>
             
     </div>
+    
+
+
     <?php ActiveForm::end(); ?>
+
 </div>
