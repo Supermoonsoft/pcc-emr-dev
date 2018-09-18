@@ -68,7 +68,7 @@ class HosDrug extends \yii\db\ActiveRecord
             'data_json' => 'Data Json',
             'drug_code_moph' => 'Drug Code Moph',
             'drug_name_moph' => 'Drug Name Moph',
-            'drug_usage' => 'วิธีกิน',
+            'drug_usage' => 'วิธีใช้ยา',
             'drug_units' => 'หน่วยนับ',
         ];
     }

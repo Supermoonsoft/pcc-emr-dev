@@ -14,13 +14,6 @@ use yii\helpers\Url;
                 <li>
                     <a title="Q. Manage" href="<?= Url::to(['/queue-manage']) ?>"><i class="fa fa-child" aria-hidden="true"></i> QUEUE</a>
                 </li>  
-                <li>
-                    <a title="Hospital Lab Result" href="<?= Url::to(['/lab/hoslab']) ?>"><i class="fa fa-flask" aria-hidden="true"></i> LAB</a><!-- POND -->
-                </li>
-
-                <li>
-                    <a title="Drug" href="<?= Url::to(['/drug/hosdrug']) ?>"><i class="fa fa-plus-square" aria-hidden="true"></i>  Drug</a><!-- POND -->
-                </li>
 
                 <li>
                     <a title="PCC EMR" href="<?= Url::to(['/emr']) ?>"><i class="fa fa-address-card" aria-hidden="true"></i>  EMR</a><!-- POND -->
