@@ -13,14 +13,16 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
 <div class="pcc-diagnosis-form">
 <?php 
     $form = ActiveForm::begin([
-        'id' => 'form-diagnosis',
+        'id' => 'form',
         'action' => ['create'],
-       // 'method' => 'get',
         'options' => [
             'data-pjax' => 1
         ],
     ]); 
     ?>
+    <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false);?>
+    <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
+
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <?= $form->field($model, 'icd_code')->widget(Select2::className(), [
@@ -28,7 +30,7 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
                     'options'=>['id' => 'icd_code','placeholder'=>'Select ICD10...'],
                     'pluginOptions'=>[
                         'allowClear'=>true,
-                        'minimumInputLength'=>3,//ต้องพิมพ์อย่างน้อย 3 อักษร ajax จึงจะทำงาน
+                        'minimumInputLength'=>1,//ต้องพิมพ์อย่างน้อย 3 อักษร ajax จึงจะทำงาน
                         'ajax'=>[
                             'url'=>$url,
                             'dataType'=>'json',//รูปแบบการอ่านคือ json
@@ -48,7 +50,7 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
             <div class="form-group">
         <?php // Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
-            </div>
+</div>
             
     </div>
     <?php ActiveForm::end(); ?>

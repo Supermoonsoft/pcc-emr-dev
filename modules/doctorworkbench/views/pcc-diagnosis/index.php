@@ -7,18 +7,24 @@ use johnitvn\ajaxcrud\CrudAsset;
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 CrudAsset::register($this);
-
+$this->registerJS($this->render('../../dist/js/script.js'));
 ?>
-<?=$this->render('../default/panel_top');?>
+
+<?=$this->render('../default/panel_top',[
+'diagnosis' => 'active',
+'medication' => '',
+'procedure' => '',
+'ppointment' => '',
+]);?>
 <?php  echo $this->render('./create',['model' => $model]);?>
 <div class="pcc-diagnosis-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
             'id'=>'crud-datatable',
             'dataProvider' => $dataProvider,
-            // 'filterModel' => $searchModel,
             'pjax'=>true,
-            'columns' => require(__DIR__.'/_columns.php'),        
+            'columns' => require(__DIR__.'/_columns.php'),   
+	'summary'=>false,     
             'striped' => true,
             'condensed' => true,
             'responsive' => true,          
@@ -27,43 +33,7 @@ CrudAsset::register($this);
 </div>
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
-    "footer"=>"",// always need it for jquery plugin
+    "footer"=>"",
 ])?>
 <?php Modal::end(); ?>
-
-<?php
-$js = <<< JS
-$('#icd_code').change(function(){
-// $('#form-diagnosis').submit();
-var form = $("#form-diagnosis");
-var data = form.serialize();
-            var url = form.attr('action');
-            $.ajax({
-                url: url,
-                type: 'post',
-                dataType: 'json',
-                data: data
-            })
-            .done(function(response) {
-               
-                $.pjax.reload({container: "#crud-datatable-pjax"});
-                console.log(response);
-
-            })
-            .fail(function() {
-                console.log("error");
-                $.pjax.reload({container: "#crud-datatable-pjax"});
-
-            });
-
-});
-       $("#form-diagnosis").submit(function(event) {
-            event.preventDefault(); // stopping submitting
-           
-        });
-
-
-JS;
-$this->registerJS($js);
-?>
 <?=$this->render('../default/panel_foot');?>

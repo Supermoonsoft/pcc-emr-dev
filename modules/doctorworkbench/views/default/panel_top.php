@@ -58,18 +58,18 @@ li.dropdown:hover > .dropdown-menu {
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<!-- tabs -->
   <ul class="nav nav-tabs">
-    <li class="active">
+    <li class="<?=$diagnosis;?>">
     <!-- <a data-toggle="tab" href="#diagnosis"></a> -->
     <?=Html::a('Diganosis', ['/doctorworkbench/pcc-diagnosis'])?>
     </li>
-    <li>
-    <?=Html::a('Medication', ['/doctorworkbench/pcc-diagnosis'])?>
+    <li class="<?=$medication;?>">
+    <?=Html::a('Medication', ['/doctorworkbench/pcc-medication'])?>
     </li>
-    <li>
+    <li class="<?=$procedure;?>">
 
     <?=Html::a('Procedure', ['/doctorworkbench/pcc-diagnosis'])?>
     </li>
-    <li>
+    <li class="<?=$ppointment;?>">
     <?=Html::a('Appointment', ['/doctorworkbench/pcc-diagnosis'])?>
     
     </li>

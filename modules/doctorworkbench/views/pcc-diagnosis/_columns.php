@@ -1,5 +1,7 @@
 <?php
 use yii\helpers\Url;
+use kartik\editable\Editable;
+use kartik\grid\GridView;
 
 return [
     [
@@ -21,9 +23,30 @@ return [
         'header' => 'ชื่อโรค'
     ],
     [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'diag_type',
-        'header'=> 'ประเภท'
+        //'class' => 'kartik\grid\EditableColumn',
+        'attribute' => 'diag_type',
+        'hAlign' => 'center',
+        'vAlign' => 'middle',
+        'header' => 'ประเภท',         
+         
+         // 'refreshGrid' => true,
+//         'editableOptions' => [
+//             //'inputType' => \kartik\editable\Editable::INPUT_DROPDOWN_LIST,
+//             'data' => ['1' => '1', '2' => '2'],
+//             'options' => ['class' => 'form-control', 'prompt' => 'Select DiagType...'],
+//             'displayValueConfig' => [                
+//                 '1' => '1',
+//                 '2' => '2',
+//             ],
+//             //'asPopover' => false,
+//             'formOptions' => [
+//                 'action' => \yii\helpers\Url::to(['/doctorworkbench/pcc-diagnosis/editable']),
+//                 'method' => 'post'
+//             ],
+//             'valueIfNull' => '-',
+//             'submitButton' => ['class' => 'btn btn-primary', 'icon' => '<i class="glyphicon glyphicon-ok"></i>'],
+//             'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
+//         ],
     ],
     [
         'class'=>'\kartik\grid\DataColumn',

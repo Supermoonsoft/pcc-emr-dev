@@ -36,9 +36,9 @@ $module = \Yii::$app->controller->module->id;
 
                 <li>
                     <?php if ($module == 'doctorworkbench'): ?>
-                        <a style="background-color: #eee" title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
+                        <a style="background-color: #eee" title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/pcc-diagnosis']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
                     <?php else: ?>
-                        <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
+                        <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/pcc-diagnosis']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
                     <?php endif; ?>
                 </li>
 
