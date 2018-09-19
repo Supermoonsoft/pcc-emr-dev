@@ -135,7 +135,7 @@ public function actionIcd10List($q = null, $id = null){
     $out = ['results'=>['diagcode'=>'','text'=>'']];
     if(!is_null($q)){
         $query = new \yii\db\Query();
-        $query->select('diagename,diagcode as id, diagcode as text')
+        $query->select('diagename,diagtname,diagcode as id, diagcode as text')
                 ->from('c_icd10tm')
                 ->where("diagcode LIKE '%".$q."%'")
                 ->orWhere("diagename LIKE '%".$q."%'")
@@ -149,6 +149,7 @@ public function actionIcd10List($q = null, $id = null){
     }
     return $out;
 }
+
 
 public function actionEditable(){
     if (Yii::$app->request->post('hasEditable')){
@@ -167,5 +168,4 @@ public function actionEditable(){
         }
       }
 }
-
 }

@@ -51,7 +51,7 @@ li.dropdown:hover > .dropdown-menu {
  
 <div class="panel panel-info" style="margin-left: 20px;margin-right: 20px">
 	<div class="panel-heading">
-		<div class="panel-title"><li class="fa fa-stethoscope"></li> Order</div>
+		<div class="panel-title"><li class="fa fa-stethoscope"></li> Doctor / Order / Today</div>
 	</div>
 	<div class="panel-body">
 <div class="row">
@@ -66,7 +66,7 @@ li.dropdown:hover > .dropdown-menu {
     <li class="<?=$procedure;?>"><?=Html::a('Procedure', ['/doctorworkbench/order/procedure'])?></li>
     <li class="<?=$pre_order_lab;?>"><?=Html::a('Pre-Order Lab', ['/doctorworkbench/order/pre-order-lab'])?></li>
     <li class="<?=$apointment;?>"><?=Html::a('Appointment', ['/doctorworkbench/order/appointment'])?></li>
-    <li class="<?=$treatmment_plan;?>"><?=Html::a('Treatmment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    
+    <li class="<?=$treatmment_plan;?>"><?=Html::a('Treatment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    
   
   </ul>
 

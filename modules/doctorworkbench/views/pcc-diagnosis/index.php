@@ -5,6 +5,9 @@ use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 use johnitvn\ajaxcrud\CrudAsset; 
 use johnitvn\ajaxcrud\BulkButtonWidget;
+use yii\web\View;
+use kartik\widgets\Select2;
+use yii\web\JsExpression;
 
 CrudAsset::register($this);
 $this->registerJS($this->render('../../dist/js/script.js'));
@@ -69,3 +72,4 @@ $js = <<< JS
 JS;
 $this->registerJS($js);
 ?>
+

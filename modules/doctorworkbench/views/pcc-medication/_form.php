@@ -55,6 +55,10 @@ use app\modules\doctorworkbench\models\CDrugusage;
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 <?= $form->field($model, 'qty')->textInput(['id' => 'qty']) ?>  
         </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','style' => 'margin-top:25px;']) ?>
+
+        </div>
     </div>
 
 <?php ActiveForm::end(); ?>
