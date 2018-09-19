@@ -10,10 +10,9 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use app\modules\doctorworkbench\models\CDrugitems;
 
-/**
- * PccMedicationController implements the CRUD actions for PccMedication model.
- */
+
 class PccMedicationController extends Controller
 {
     /**
@@ -32,10 +31,6 @@ class PccMedicationController extends Controller
         ];
     }
 
-    /**
-     * Lists all PccMedication models.
-     * @return mixed
-     */
     public function actionIndex()
     {    
         $searchModel = new PccMedicationSearch();
@@ -69,18 +64,13 @@ class PccMedicationController extends Controller
         }
     }
 
-    /**
-     * Creates a new PccMedication model.
-     * For ajax request will return json object
-     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
     public function actionCreate()
     {
         $request = Yii::$app->request;
         $model = new PccMedication();  
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($request->post())) {
+            $model->druguse = CDrugitems::find()->where(['icode' => $model->icode])->one()->drugusage;
             $model->save(false);
         } else {
             return $this->render('create', [
@@ -90,66 +80,6 @@ class PccMedicationController extends Controller
        
     }
 
-    public function actionUpdate($id)
-    {
-        $request = Yii::$app->request;
-        $model = $this->findModel($id);       
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Update PccMedication #".$id,
-                    'content'=>$this->renderAjax('update', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "PccMedication #".$id,
-                    'content'=>$this->renderAjax('view', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-                ];    
-            }else{
-                 return [
-                    'title'=> "Update PccMedication #".$id,
-                    'content'=>$this->renderAjax('update', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-                ];        
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('update', [
-                    'model' => $model,
-                ]);
-            }
-        }
-    }
-
-    /**
-     * Delete an existing PccMedication model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
@@ -171,13 +101,6 @@ class PccMedicationController extends Controller
 
     }
 
-     /**
-     * Delete multiple existing PccMedication model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionBulkDelete()
     {        
         $request = Yii::$app->request;
@@ -202,13 +125,6 @@ class PccMedicationController extends Controller
        
     }
 
-    /**
-     * Finds the PccMedication model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return PccMedication the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = PccMedication::findOne($id)) !== null) {

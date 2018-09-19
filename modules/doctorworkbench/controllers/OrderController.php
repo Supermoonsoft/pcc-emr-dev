@@ -68,7 +68,6 @@ class OrderController extends \yii\web\Controller
 
     }
         
-
     public function actionTreatmmentPlan(){
         return $this->render('treatmment_plan');
     }
@@ -90,36 +89,6 @@ class OrderController extends \yii\web\Controller
             }
             return $out;
         }
-
-
-        public function actionDiagnosisSave(){
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            $post = Yii::$app->request->post();
-            $model = new PccDiagnosis();
-            $model->hn = 000001;
-            $model->vn = 88888888;
-            $model->icd_code = "A00";
-            $model->diag_type = 1;
-            $model->save(false);
-        }
-
-        public function actionTabsData($tab=null) {
-            $html = $this->renderPartial('index');
-            return Json::encode($html);
-        }
-        public function actionTabs1($tab=null) {
-            $html = $this->renderPartial('tab1');
-            return Json::encode($html);
-        }
-        public function actionTabs2($tab=null) {
-            $html = $this->renderPartial('tab2');
-            return Json::encode($html);
-        }
-
-        public function actionSelectTemplate(){
-            return $this->render('select2_template');
-        }
-
 
 
 }

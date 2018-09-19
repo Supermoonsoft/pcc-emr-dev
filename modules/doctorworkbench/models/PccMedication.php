@@ -48,6 +48,7 @@ class PccMedication extends \yii\db\ActiveRecord
             [['icode'], 'string', 'max' => 24],
             [['provider_code'], 'string', 'max' => 5],
             [['provider_name'], 'string', 'max' => 100],
+            [['druguse'], 'string', 'max' => 200],
             [['id'], 'unique'],
         ];
     }
@@ -68,6 +69,7 @@ class PccMedication extends \yii\db\ActiveRecord
             'costprice' => 'ราคาทุน/หน่วย',
             'totalprice' => 'รวมราคาขาย',
             'provider_code' => 'Provider Code',
+            'druguse' => 'วิธีใช้',
             'provider_name' => 'Provider Name',
             'date_service' => 'Date Service',
             'time_service' => 'Time Service',

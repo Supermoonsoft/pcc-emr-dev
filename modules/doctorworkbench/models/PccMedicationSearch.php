@@ -18,7 +18,7 @@ class PccMedicationSearch extends PccMedication
     public function rules()
     {
         return [
-            [['id', 'vn', 'hn', 'an', 'icode', 'provider_code', 'provider_name', 'date_service', 'time_service', 'data_json'], 'safe'],
+            [['id', 'vn', 'hn', 'an', 'icode', 'provider_code', 'provider_name', 'druguse','date_service', 'time_service', 'data_json'], 'safe'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
         ];
     }
@@ -71,6 +71,7 @@ class PccMedicationSearch extends PccMedication
             ->andFilterWhere(['like', 'icode', $this->icode])
             ->andFilterWhere(['like', 'provider_code', $this->provider_code])
             ->andFilterWhere(['like', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['like', 'druguse', $this->druguse])    
             ->andFilterWhere(['like', 'data_json', $this->data_json]);
 
         return $dataProvider;
