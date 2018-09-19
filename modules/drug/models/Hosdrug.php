@@ -63,7 +63,7 @@ class HosDrug extends \yii\db\ActiveRecord
             'hos_date_visit' => 'วันที่มารับบริการ',
             'drug_code_hos' => 'รหัสยา',
             'drug_name_hos' => 'ชื่อยา',
-            'drug_pay_amount' => 'จำนวน',
+            'drug_pay_amount' => 'จำนวนจ่าย',
             'drug_pay_unit' => 'Drug Pay Unit',
             'data_json' => 'Data Json',
             'drug_code_moph' => 'Drug Code Moph',

@@ -44,15 +44,6 @@ class OrderController extends \yii\web\Controller
         return $this->render('pre_order_lab');
 
     }
-    public function actionDrug(){
-        $searchModel_drug = new HosdrugSearch();
-        $dataProvider_drug = $searchModel_drug->search(Yii::$app->request->queryParams);
-        return $this->render('drug',[
-            'searchModel_drug' => $searchModel_drug,
-            'dataProvider_drug' => $dataProvider_drug,
-        ]);
-
-    }
 
     public function actionLab($cid=NULL)
     {
@@ -63,6 +54,18 @@ class OrderController extends \yii\web\Controller
             'dataProvider' => $dataProvider,
             'cid'=>$cid
         ]);
+    }
+
+    public function actionDrug($cid =NULL){
+        $searchModel = new HosdrugSearch($cid);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('drug', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'cid'=>$cid
+        ]);
+
     }
         
 
@@ -102,6 +105,14 @@ class OrderController extends \yii\web\Controller
 
         public function actionTabsData($tab=null) {
             $html = $this->renderPartial('index');
+            return Json::encode($html);
+        }
+        public function actionTabs1($tab=null) {
+            $html = $this->renderPartial('tab1');
+            return Json::encode($html);
+        }
+        public function actionTabs2($tab=null) {
+            $html = $this->renderPartial('tab2');
             return Json::encode($html);
         }
 

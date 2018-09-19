@@ -93,9 +93,14 @@ class PccDiagnosisController extends Controller
             $model->diag_type = 2;
             $model->save(false);
         } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+            // return $this->render('create', [
+            //     'model' => $model,
+            // ]);
+            $html = $this->renderAjax('create', [
+                    'model' => $model,
+                ]);
+            return Json::encode($html);
+          
         }
        
     }

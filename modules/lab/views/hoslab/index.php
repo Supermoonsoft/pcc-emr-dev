@@ -9,11 +9,7 @@ use app\components\loading\ShowLoading;
 //echo ShowLoading::widget();
 ?>
 <div class="hoslab-index">
-<div class="panel panel-info">
-    <div class="panel-heading">
-        <div class="panel-title"><i class="fa fa-clock-o" aria-hidden="true"></i> LAB TEST</div>
-    </div>
-<div class="panel-body">
+
         <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
             <button class="btn btn-info" onClick=<?=new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก</button>
@@ -63,6 +59,5 @@ use app\components\loading\ShowLoading;
         ],
     ]); ?>
     <?php Pjax::end(); ?>
-    </div>
-    </div>
+
 </div>

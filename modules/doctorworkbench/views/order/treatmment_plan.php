@@ -5,6 +5,7 @@
 'diagnosis' => '',
 'medication' => '',
 'procedure' => '',
+'pre_order_lab' =>'',
 'apointment' => '',
 'treatmment_plan' => 'active'
 ]);?>
