@@ -35,7 +35,7 @@ use app\modules\doctorworkbench\models\CDrugusage;
                     'pluginOptions' => [
                         'allowClear' => true
                 ],
-            ]);
+            ])->label('รายการยา');
             ?>
         </div>
 

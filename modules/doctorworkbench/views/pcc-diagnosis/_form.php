@@ -30,7 +30,7 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
                     'options'=>['id' => 'icd_code','placeholder'=>'Select ICD10...'],
                     'pluginOptions'=>[
                         'allowClear'=>true,
-                        'minimumInputLength'=>3,//ต้องพิมพ์อย่างน้อย 3 อักษร ajax จึงจะทำงาน
+                        'minimumInputLength'=>1,//ต้องพิมพ์อย่างน้อย 3 อักษร ajax จึงจะทำงาน
                         'ajax'=>[
                             'url'=>$url,
                             'dataType'=>'json',//รูปแบบการอ่านคือ json
@@ -46,12 +46,14 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
             </div>
 
             
-            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <div class="form-group">
-        <?php // Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+       
+        <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success']) ?>
+    
+   
+</div>       
     </div>
-</div>
-            
-    </div>
+   
+    
     <?php ActiveForm::end(); ?>
 </div>

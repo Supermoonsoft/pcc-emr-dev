@@ -30,6 +30,7 @@ CrudAsset::register($this);
             'pjax'=>true,
             'columns' => require(__DIR__.'/_columns.php'),  
             'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '-'],
+            'showPageSummary' => true,
             'striped' => true,
             'condensed' => true,
             'responsive' => true, 

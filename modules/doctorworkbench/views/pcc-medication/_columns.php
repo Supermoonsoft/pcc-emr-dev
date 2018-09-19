@@ -13,34 +13,36 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
+//    [
+//        'class'=>'\kartik\grid\DataColumn',
+//        'attribute'=>'icode',
+//    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'icode',
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'icode',
+        'header'=>'รายการยา',
          'value' => function($model){
-             return $model->drugitems->name;
+             return $model->drugitems->name.' '.$model->drugitems->strength.' '.$model->drugitems->units;
          }
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'header'=>'หน่วย',
-         'value' => function($model){
-             return $model->drugitems->units;
-         }
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'header'=>'ความแรง/ขนาด',
-         'value' => function($model){
-             return $model->drugitems->strength;
-         }
-    ],
+//    [
+//        'class'=>'\kartik\grid\DataColumn',
+//        'header'=>'หน่วย',
+//         'value' => function($model){
+//             return $model->drugitems->units;
+//         }
+//    ],
+//    [
+//        'class'=>'\kartik\grid\DataColumn',
+//        'header'=>'ความแรง/ขนาด',
+//         'value' => function($model){
+//             return $model->drugitems->strength;
+//         }
+//    ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'druguse',
+        'header'=>'วิธีใช้',
         'format'=>'raw',
          'value' => function($model){
             $models = CDrugusage::find()->where(['drugusage'=> $model->druguse])->one();
@@ -53,11 +55,16 @@ return [
     ],        
     [
         'class'=>'\kartik\grid\DataColumn',
+        'header'=>'จำนวนจ่าย',
+        'pageSummary' => 'มูลค่ารวม',
         'attribute'=>'qty',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'totalprice',
+        'header'=>'รวมราคา',
+        'format'=>['decimal',2],
+        'pageSummary' => true,
         'value' => function($model){
             $total = $model->qty * $model->unitprice;
             return $total;

@@ -27,6 +27,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         <?=GridView::widget([
             'id'=>'crud-datatable',
             'dataProvider' => $dataProvider,
+            'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '-'],
             'pjax'=>true,
             'columns' => require(__DIR__.'/_columns.php'),        
             'striped' => true,
@@ -36,9 +37,35 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         ])?>
     </div>
 </div>
+
+<?= Html::button(Yii::t('app', 'Delete All'), ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-top:8px;']) ?>
+
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
     "footer"=>"",
 ])?>
 <?php Modal::end(); ?>
 <?=$this->render('../default/panel_foot');?>
+
+<?php
+$js = <<< JS
+
+ $("#btn-delete").click(function(){
+    var keys = $("#crud-datatable").yiiGridView("getSelectedRows");
+    //console.log(keys);
+    var url = 'index.php?r=doctorworkbench/pcc-diagnosis/bulk-delete'
+    if(keys.length>0){
+        $.ajax({
+            url:url,
+            method:'post',
+            data:{pks:keys.join()},
+            success: function(){
+             $.pjax.reload({container: "#crud-datatable-pjax"});
+            }
+        });
+        
+    }
+  });
+JS;
+$this->registerJS($js);
+?>

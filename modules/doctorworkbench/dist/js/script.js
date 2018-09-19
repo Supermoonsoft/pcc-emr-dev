@@ -1,27 +1,19 @@
-$('#icd_code').on('select2:select', function (e) {
-    dataForm();
-    });
-$("#form").submit(function(event) {
-    event.preventDefault();
-    dataForm();
-
-});
-function dataForm(){
+$('body').on('beforeSubmit', '#form', function () {
     var form = $("#form");
-    var data = form.serialize();
-                var url = form.attr('action');
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    dataType: 'json',
-                    data: data
-                })
-                .done(function(response) {
-                    $.pjax.reload({container: "#crud-datatable-pjax"});
-                    console.log(response);
-                })
-                .fail(function() {
-                    console.log("error");
-                    $.pjax.reload({container: "#crud-datatable-pjax"});
+    // return false if form still have some validation errors
+    if (form.find('.has-error').length) {
+         return false;
+    }
+    $.ajax({
+         url: form.attr('action'),
+         type: 'post',
+         data: form.serialize(),
+         success: function (response) {
+              console.log('Success');
+             $.pjax.reload({container: "#crud-datatable-pjax"});
+            //  $('#icd_code').val(null).trigger('change');
+            $("#form")[0].reset();
+         }
+    });
+    return false;
 });
-}

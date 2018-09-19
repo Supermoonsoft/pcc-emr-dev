@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\helpers\Json;
 
 use app\modules\doctorworkbench\models\CIcd10tm;
 
@@ -60,14 +61,16 @@ class PccDiagnosisController extends Controller
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
             $model->diag_type = 2;
             $model->save(false);
+            return ['forceReload'=>'#crud-datatable-pjax'];
+
         } else {
-            // return $this->render('create', [
-            //     'model' => $model,
-            // ]);
-            $html = $this->renderAjax('create', [
-                    'model' => $model,
-                ]);
-            return Json::encode($html);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+            // $html = $this->renderAjax('create', [
+            //         'model' => $model,
+            //     ]);
+            // return Json::encode($html);
           
         }
        
@@ -97,7 +100,7 @@ class PccDiagnosisController extends Controller
     public function actionBulkDelete()
     {        
         $request = Yii::$app->request;
-        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
+        $pks = explode(',', $request->post('pks')); // Array or selected records primary keys
         foreach ( $pks as $pk ) {
             $model = $this->findModel($pk);
             $model->delete();
@@ -132,9 +135,11 @@ public function actionIcd10List($q = null, $id = null){
     $out = ['results'=>['diagcode'=>'','text'=>'']];
     if(!is_null($q)){
         $query = new \yii\db\Query();
-        $query->select('diagcode as id, diagcode as text')
+        $query->select('diagename,diagcode as id, diagcode as text')
                 ->from('c_icd10tm')
                 ->where("diagcode LIKE '%".$q."%'")
+                ->orWhere("diagename LIKE '%".$q."%'")
+                ->orWhere("diagtname LIKE '%".$q."%'")
                 ->limit(20);
         $command = $query->createCommand();
         $data = $command->queryAll();
