@@ -89,8 +89,6 @@ class PccDiagnosisController extends Controller
         $model = new PccDiagnosis();  
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($request->post())) {
-            $model->hn = 000001;
-            $model->vn = 88888888;
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
             $model->diag_type = 2;
             $model->save(false);
@@ -261,21 +259,23 @@ public function actionIcd10List($q = null, $id = null){
     }
     return $out;
 }
+
 public function actionEditable(){
-        if (Yii::$app->request->post('hasEditable')){
-            \Yii::$app->response->format = Response::FORMAT_JSON;
-            $id = Yii::$app->request->post('editableKey');
-            $data = PccDiagnosis::findOne($id);
-            $posted = current($_POST['PccDiagnosis']);
-            $post['PccDiagnosis'] = $posted;
-            if ($data->load($post)) {
-                $data->save();
-                //$value = $_POST['TbDataDetail']; // ÁÕÁÒ¡¡ÇèÒ1¿ÔÇ
-                $value = $data->diag_type;
-              return ['output'=>$value, 'message'=>''];
-              //$output = $posted;
-               // return ['forceReload' => '#crud-datatable'];
-            }
-          }
-    }
+    if (Yii::$app->request->post('hasEditable')){
+        \Yii::$app->response->format = Response::FORMAT_JSON;
+        $id = Yii::$app->request->post('editableKey');
+        $data = PccDiagnosis::findOne($id);
+        $posted = current($_POST['PccDiagnosis']);
+        $post['PccDiagnosis'] = $posted;
+        if ($data->load($post)) {
+            $data->save();
+            //$value = $_POST['TbDataDetail']; // à¸¡à¸µà¸¡à¸²à¸à¸à¸§à¹ˆà¸²1à¸Ÿà¸´à¸§
+            $value = $data->diag_type;
+          return ['output'=>$value, 'message'=>''];
+          //$output = $posted;
+           // return ['forceReload' => '#crud-datatable'];
+        }
+      }
+}
+
 }

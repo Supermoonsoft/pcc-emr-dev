@@ -20,29 +20,22 @@ $module = \Yii::$app->controller->module->id;
                     <?php endif; ?>
                 </li>  
                
-
-                <li>
-                    <a title="PCC EMR" href="<?= Url::to(['/emr']) ?>"><i class="fa fa-address-card" aria-hidden="true"></i>  EMR</a><!-- POND -->
-                </li>  
-
-
-
                 <li>
                     <?php if ($module == 'doctorworkbench'): ?>
                         <a style="background-color: #eee" title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/pcc-diagnosis']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
                     <?php else: ?>
-                        <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/pcc-diagnosis']) ?>"><i class="fa fa-stethoscope"></i> Order</a>
+                        <a title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/pcc-diagnosis']) ?>"><i class="fa fa-stethoscope"></i> ORDER</a>
                     <?php endif; ?>
                 </li>
 
                 <li>
-                    <a title="Appointment" href="<?= Url::to(['/appoint']) ?>"><i class="fa fa-calendar" aria-hidden="true"></i>  Appoint</a><!-- POND -->
+                    <a title="Appointment" href="<?= Url::to(['/appoint']) ?>"><i class="fa fa-calendar" aria-hidden="true"></i>  APPOINT</a><!-- POND -->
                 </li>  
                 <li>
-                    <a title="Print-Out" href="<?= Url::to(['/print-out']) ?>"><i class="fa fa-print"></i> Print</a>
+                    <a title="Print-Out" href="<?= Url::to(['/print-out']) ?>"><i class="fa fa-print"></i> PRINT</a>
                 </li>
                 <li>
-                    <a title="Report" href="<?= Url::to(['/report']) ?>"><i class="fa fa-file-o" aria-hidden="true"></i> Report</a>
+                    <a title="Report" href="<?= Url::to(['/report']) ?>"><i class="fa fa-file-o" aria-hidden="true"></i> REPORT</a>
                 </li>
                 <li>
                     <a title="PCC-STOCK" href="<?= Url::to(['/stock']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>

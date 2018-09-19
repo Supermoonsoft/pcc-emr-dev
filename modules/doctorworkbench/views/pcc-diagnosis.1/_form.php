@@ -11,18 +11,7 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
 ?>
 
 <div class="pcc-diagnosis-form">
-<?php 
-    $form = ActiveForm::begin([
-        'id' => 'form',
-        'action' => ['create'],
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); 
-    ?>
-    <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false);?>
-    <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
-
+    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis']); ?>
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <?= $form->field($model, 'icd_code')->widget(Select2::className(), [
@@ -50,8 +39,43 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
             <div class="form-group">
         <?php // Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
-</div>
+            </div>
             
     </div>
     <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+$js = <<< JS
+$('#form-diagnosis').on('beforeSubmit', function(e) {
+
+var form = $(this);
+
+var formData = form.serialize();
+
+$.ajax({
+
+    url: form.attr("action"),
+
+    type: form.attr("method"),
+
+    data: formData,
+
+    success: function (data) {
+
+    },
+
+    error: function () {
+        alert("Something went wrong");
+    }
+
+});
+
+}).on('submit', function(e){
+
+e.preventDefault();
+
+});
+
+JS;
+?>

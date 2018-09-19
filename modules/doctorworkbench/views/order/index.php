@@ -20,6 +20,16 @@ use app\modules\doctorworkbench\models\CIcd10tm;
 $url = \yii\helpers\Url::to(['order/icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
 ?>
-<?=$this->render('../default/panel_top');?>
+<?=$this->render('../default/panel_top',[
+'emr' => '',
+'lab' => '',
+'drug' => '',
+'diagnosis' => '',
+'medication' => '',
+'procedure' => '',
+'pre_order_lab' =>'',
+'apointment' => '',
+'treatmment_plan' => ''
+]);?>
 <h1 class="text-center">ORDER</h1>
 <?=$this->render('../default/panel_foot');?>

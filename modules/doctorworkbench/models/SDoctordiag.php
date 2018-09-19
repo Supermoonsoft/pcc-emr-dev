@@ -4,25 +4,11 @@ namespace app\modules\doctorworkbench\models;
 
 use Yii;
 
-/**
- * This is the model class for table "s_doctordiag".
- *
- * @property string $id
- * @property string $vn
- * @property string $hn
- * @property string $vstdate
- * @property string $vsttime
- * @property string $diagtype
- * @property string $diagcode
- * @property string $icd10
- * @property string $userid_doctor
- * @property array $data_json
- */
 class SDoctordiag extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+
+    public $items;
+    
     public static function tableName()
     {
         return 's_doctordiag';

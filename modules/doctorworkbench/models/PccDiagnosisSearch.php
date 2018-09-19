@@ -8,12 +8,12 @@ use yii\data\ActiveDataProvider;
 use app\modules\doctorworkbench\models\PccDiagnosis;
 
 /**
- * PccDiagnosisSearch represents the model behind the search form of `app\modules\doctorworkbench\models\PccDiagnosis`.
+ * PccDiagnosisSearch represents the model behind the search form about `app\modules\doctorworkbench\models\PccDiagnosis`.
  */
 class PccDiagnosisSearch extends PccDiagnosis
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
@@ -23,7 +23,7 @@ class PccDiagnosisSearch extends PccDiagnosis
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -42,8 +42,6 @@ class PccDiagnosisSearch extends PccDiagnosis
     {
         $query = PccDiagnosis::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -56,22 +54,21 @@ class PccDiagnosisSearch extends PccDiagnosis
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'date_service' => $this->date_service,
             'time_service' => $this->time_service,
             'last_update' => $this->last_update,
         ]);
 
-        $query->andFilterWhere(['ilike', 'id', $this->id])
-            ->andFilterWhere(['ilike', 'hn', $this->hn])
-            ->andFilterWhere(['ilike', 'vn', $this->vn])
-            ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
-            ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
-            ->andFilterWhere(['ilike', 'icd_code', $this->icd_code])
-            ->andFilterWhere(['ilike', 'icd_name', $this->icd_name])
-            ->andFilterWhere(['ilike', 'diag_type', $this->diag_type])
-            ->andFilterWhere(['ilike', 'data_json', $this->data_json]);
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'hn', $this->hn])
+            ->andFilterWhere(['like', 'vn', $this->vn])
+            ->andFilterWhere(['like', 'provider_code', $this->provider_code])
+            ->andFilterWhere(['like', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['like', 'icd_code', $this->icd_code])
+            ->andFilterWhere(['like', 'icd_name', $this->icd_name])
+            ->andFilterWhere(['like', 'diag_type', $this->diag_type])
+            ->andFilterWhere(['like', 'data_json', $this->data_json]);
 
         return $dataProvider;
     }

@@ -25,7 +25,7 @@ use app\modules\doctorworkbench\models\CDrugitems;
     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
     <?php echo $form->field($model, 'icode')->widget(Select2::classname(), [
     'data' => ArrayHelper::map(CDrugitems::find()->all(),'icode', 'name'),
-    'options' => ['id' => 'icode','placeholder' => 'Select Drug ...'],
+    'options' => ['id' => 'icode','placeholder' => 'Select a state ...'],
     'pluginOptions' => [
         'allowClear' => true
     ],

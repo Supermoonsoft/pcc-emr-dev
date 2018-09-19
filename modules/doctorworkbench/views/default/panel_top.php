@@ -58,21 +58,16 @@ li.dropdown:hover > .dropdown-menu {
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<!-- tabs -->
   <ul class="nav nav-tabs">
-    <li class="<?=$diagnosis;?>">
-    <!-- <a data-toggle="tab" href="#diagnosis"></a> -->
-    <?=Html::a('Diganosis', ['/doctorworkbench/pcc-diagnosis'])?>
-    </li>
-    <li class="<?=$medication;?>">
-    <?=Html::a('Medication', ['/doctorworkbench/pcc-medication'])?>
-    </li>
-    <li class="<?=$procedure;?>">
-
-    <?=Html::a('Procedure', ['/doctorworkbench/pcc-diagnosis'])?>
-    </li>
-    <li class="<?=$ppointment;?>">
-    <?=Html::a('Appointment', ['/doctorworkbench/pcc-diagnosis'])?>
-    
-    </li>
+  <li class="<?=$emr;?>"><?=Html::a('EMR', ['/doctorworkbench/order/emr'])?></li>    
+  <li class="<?=$lab;?>"><?=Html::a('Lab History', ['/doctorworkbench/order/lab'])?></li> 
+  <li class="<?=$drug;?>"><?=Html::a('Drug History', ['/doctorworkbench/order/drug'])?></li>    
+    <li class="<?=$diagnosis;?>"><?=Html::a('Diganosis', ['/doctorworkbench/pcc-diagnosis'])?></li>
+    <li class="<?=$medication;?>"><?=Html::a('Medication', ['/doctorworkbench/pcc-medication'])?></li>
+    <li class="<?=$procedure;?>"><?=Html::a('Procedure', ['/doctorworkbench/order/procedure'])?></li>
+    <li class="<?=$pre_order_lab;?>"><?=Html::a('Pre-Order Lab', ['/doctorworkbench/order/pre-order-lab'])?></li>
+    <li class="<?=$apointment;?>"><?=Html::a('Appointment', ['/doctorworkbench/order/appointment'])?></li>
+    <li class="<?=$treatmment_plan;?>"><?=Html::a('Treatmment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    
+  
   </ul>
 
   <div class="tab-content">

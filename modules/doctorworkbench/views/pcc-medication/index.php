@@ -11,10 +11,15 @@ CrudAsset::register($this);
 ?>
 
 <?=$this->render('../default/panel_top',[
+'emr' => '',
+'lab' => '',
+'drug' => '',
 'diagnosis' => '',
 'medication' => 'active',
 'procedure' => '',
-'ppointment' => '',
+'pre_order_lab' =>'',
+'apointment' => '',
+'treatmment_plan' => ''
 ]);?>
 <?php  echo $this->render('./create',['model' => $model]);?>
 <div class="pcc-diagnosis-index">
@@ -23,11 +28,11 @@ CrudAsset::register($this);
             'id'=>'crud-datatable',
             'dataProvider' => $dataProvider,
             'pjax'=>true,
-            'columns' => require(__DIR__.'/_columns.php'), 
-	'summary'=>false,       
+            'columns' => require(__DIR__.'/_columns.php'),        
             'striped' => true,
             'condensed' => true,
-            'responsive' => true,          
+            'responsive' => true, 
+            'summary'=>false,         
         ])?>
     </div>
 </div>

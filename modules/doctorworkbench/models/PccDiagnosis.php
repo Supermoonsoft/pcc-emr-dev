@@ -36,7 +36,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [[ 'hn', 'vn', 'icd_code', 'diag_type'], 'required'],
+            [['hn', 'vn', 'icd_code', 'diag_type'], 'required'],
             [['id'], 'string'],
             [['date_service', 'time_service', 'data_json', 'last_update'], 'safe'],
             [['hn'], 'string', 'max' => 9],
