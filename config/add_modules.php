@@ -9,6 +9,6 @@ $modules['lab'] =  ['class' => 'app\modules\lab\Lab'];//pond
 $modules['drug'] =  ['class' => 'app\modules\drug\Drug'];//pond 
 $modules['doctorworkbench'] =  ['class' => 'app\modules\doctorworkbench\Doctorworkbench'];//oh
 $modules['queuemanage'] = ['class' => 'app\modules\queuemanage\QueueManage']; //tehnn
-
+$modules['emr'] = ['class' => 'app\modules\emr\Emr'];//pond
 return $modules;
 
