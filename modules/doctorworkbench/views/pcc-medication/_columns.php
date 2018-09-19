@@ -1,5 +1,8 @@
 <?php
 use yii\helpers\Url;
+use yii\helpers\Html;
+use app\modules\doctorworkbench\models\CDrugusage;
+use yii\helpers\ArrayHelper;
 
 return [
     [
@@ -23,11 +26,42 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'header'=>'หน่วย',
+         'value' => function($model){
+             return $model->drugitems->units;
+         }
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'header'=>'ความแรง/ขนาด',
+         'value' => function($model){
+             return $model->drugitems->strength;
+         }
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'druguse',
+        'format'=>'raw',
+         'value' => function($model){
+            $models = CDrugusage::find()->where(['drugusage'=> $model->druguse])->one();
+            if($model->druguse != ''){
+                return $models->code;
+            } else {
+                return '-';
+            }             
+         }
+    ],        
+    [
+        'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'qty',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'unitprice',
+        'attribute'=>'totalprice',
+        'value' => function($model){
+            $total = $model->qty * $model->unitprice;
+            return $total;
+        }
     ],
     // [
         // 'class'=>'\kartik\grid\DataColumn',

@@ -69,8 +69,12 @@ class PccMedicationController extends Controller
         $request = Yii::$app->request;
         $model = new PccMedication();  
         Yii::$app->response->format = Response::FORMAT_JSON;
+        
         if ($model->load($request->post())) {
-            $model->druguse = CDrugitems::find()->where(['icode' => $model->icode])->one()->drugusage;
+            $drug = CDrugitems::find()->where(['icode' => $model->icode])->one();
+            $model->druguse = $drug->drugusage;
+            $model->unitprice = $drug->unitprice;
+            $model->totalprice =  $model->qty * $drug->unitprice;
             $model->save(false);
         } else {
             return $this->render('create', [
