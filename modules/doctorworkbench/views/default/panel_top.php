@@ -63,7 +63,7 @@ li.dropdown:hover > .dropdown-menu {
   <li class="<?=$drug;?>"><?=Html::a('Drug History', ['/doctorworkbench/order/drug'])?></li>    
     <li class="<?=$diagnosis;?>"><?=Html::a('Diganosis', ['/doctorworkbench/pcc-diagnosis'])?></li>
     <li class="<?=$medication;?>"><?=Html::a('Medication', ['/doctorworkbench/pcc-medication'])?></li>
-    <li class="<?=$procedure;?>"><?=Html::a('Procedure', ['/doctorworkbench/order/procedure'])?></li>
+    <li class="<?=$procedure;?>"><?=Html::a('Procedure', ['/doctorworkbench/pcc-procedure'])?></li>
     <li class="<?=$pre_order_lab;?>"><?=Html::a('Pre-Order Lab', ['/doctorworkbench/order/pre-order-lab'])?></li>
     <li class="<?=$apointment;?>"><?=Html::a('Appointment', ['/doctorworkbench/order/appointment'])?></li>
     <li class="<?=$treatmment_plan;?>"><?=Html::a('Treatment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    

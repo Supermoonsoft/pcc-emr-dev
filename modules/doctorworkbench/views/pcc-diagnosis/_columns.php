@@ -50,11 +50,11 @@ return [
         //     'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
         // ],
     ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'provider_name',
-        'header'=> 'แพทย์'
-    ],
+    // [
+    //     'class'=>'\kartik\grid\DataColumn',
+    //     'attribute'=>'doctor',
+    //     'header'=> 'แพทย์'
+    // ],
     // [
     //     'class' => 'kartik\grid\ActionColumn',
     //     'template' => '{delete}',
