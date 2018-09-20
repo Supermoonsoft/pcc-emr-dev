@@ -11,7 +11,7 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th><input type="checkbox" class="select-on-check-all" name="selection_all" value="1"></th>
+                    <th></th>
                     <th>#</th><th>Hn</th>
                     <th>เวลามา</th>
                     <th>เวลานัด</th>

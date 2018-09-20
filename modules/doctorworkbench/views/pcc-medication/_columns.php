@@ -24,9 +24,9 @@ return [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'icode',
         'header' => 'รายการยา',
-//        'value' => function($model) {
-//            return $model->drugitems->name . ' ' . $model->drugitems->strength . ' ' . $model->drugitems->units;
-//        }
+        'value' => function($model) {
+            return $model->drugitems->name . ' ' . $model->drugitems->strength . ' ' . $model->drugitems->units;
+        }
     ],
 //    [
 //        'class'=>'\kartik\grid\DataColumn',
