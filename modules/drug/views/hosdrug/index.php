@@ -35,7 +35,13 @@ use app\components\loading\ShowLoading;
                 'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
                 'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
             ],
-            ['class' => 'yii\grid\CheckboxColumn',],
+             [
+                'class' => 'yii\grid\CheckboxColumn',
+                'checkboxOptions' => function($model) {
+                    return ['value' => $model->id, 'data' => ['key' => $model->id]];
+                },
+                'header' => false,
+            ],
             'drug_name_hos',
             'drug_usage',
             'drug_pay_amount',
