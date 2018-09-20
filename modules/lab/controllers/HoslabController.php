@@ -92,4 +92,40 @@ class HoslabController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionAddgroup()
+    {
+
+        $id = explode(',', Yii::$app->request->post('id'));//typecasting
+
+
+        $lab_name_hos = Yii::$app->request->post('lab_name_hos');
+        $result_at = Yii::$app->request->post('result_at');
+        $hos_result = Yii::$app->request->post('hos_result');
+
+        //print_r($selection);
+        /*
+        foreach($id as $id){
+            //echo $id;
+            $immuno_staining = ImmunoStaining::find()->where(['id' => $id])->all();//->andWhere('group_name '. new Expression('IS NULL'))
+            foreach($immuno_staining as $im){
+                //echo $im->finance->charge->name.'<br />';
+                $ims = ImmunoStaining::findOne(['id' => $im->id]);
+                $ims->group_name = $group_name.$group_number;
+                if($ims->save()){
+                    //echo 'y';
+                }else{
+                    //echo 'n';
+                }
+            }
+        }*/
+        print_r($selection);
+        echo $lab_name_hos;
+        echo $result_at;
+        echo $hos_result;
+        die();
+        Yii::$app->session->setFlash('success', 'บันทึกรอบการย้อมเรียบร้อยแล้ว');
+        return $this->redirect(['index']);
+    }
+
 }

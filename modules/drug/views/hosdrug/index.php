@@ -12,7 +12,7 @@ use app\components\loading\ShowLoading;
 
         <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
-            <button class="btn btn-info" onClick=<?=new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก</button>
+            <button class="btn btn-info" onClick=<?=new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง Medication</button>
         </div>
     <?php Pjax::begin(); ?>
 <?= GridView::widget([

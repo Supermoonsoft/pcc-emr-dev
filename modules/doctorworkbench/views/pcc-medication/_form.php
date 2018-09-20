@@ -9,6 +9,22 @@ use app\modules\doctorworkbench\models\CDrugusage;
 
 ?>
 
+<style>
+.total-price{
+    border-top: 3px solid #007bff;
+    box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
+    height: 56px;
+    width: 313px;
+    margin-top: 9px;
+    background-color: #eee;
+    color: #017bfe; 
+}
+.total-price > p{
+    font-size: 36px;
+    margin-left: 6px;
+}
+
+</style>
 <div class="pcc-medication-form" style="margin-bottom:20px;">
     <?php
     $form = ActiveForm::begin([
@@ -22,9 +38,7 @@ use app\modules\doctorworkbench\models\CDrugusage;
     <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false); ?>
 <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false); ?>
 
-
     <div class="row">
-
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <?php
             echo $form->field($model, 'icode')->widget(Select2::classname(), [
@@ -55,10 +69,18 @@ use app\modules\doctorworkbench\models\CDrugusage;
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 <?= $form->field($model, 'qty')->textInput(['id' => 'qty']) ?>  
         </div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
             <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','style' => 'margin-top:25px;']) ?>
 
         </div>
+        
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+     <div class="total-price">
+     <p>131.00</p>
+     </div>
+            </div>
+        </div>
+        
     </div>
 
 <?php ActiveForm::end(); ?>

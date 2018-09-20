@@ -6,13 +6,19 @@ use yii\widgets\Pjax;
 use app\components\DbHelper;
 use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
+use yii\helpers\Url;
 //echo ShowLoading::widget();
+?>
+<?php
+$this->registerJs('
+
+')
 ?>
 <div class="hoslab-index">
 
         <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
-            <button class="btn btn-info" onClick=<?=new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก</button>
+            <button id="btn-add-group" class="btn btn-info" onClick=<?=new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
         </div>
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
@@ -23,10 +29,13 @@ use app\components\loading\ShowLoading;
         'pjaxSettings'=>[
             'neverTimeout'=>true,
         ],
+        'options' => [
+            'id' => 'gridview-id'
+        ],
         'striped'=>true,
         'hover'=>true,       
         'columns' => [
-            ['class' => 'yii\grid\CheckboxColumn',],
+            
             [
                 'attribute'=>'hos_date_visit', 
                 'value'=>function ($model, $key, $index, $widget) { 
@@ -38,11 +47,46 @@ use app\components\loading\ShowLoading;
                 'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
                 'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
             ],
-            'lab_name_hos',
-            //'request_at',
-            'result_at',
-            'hos_result',
-            'lab_normal',
+            /*[
+                'class' => 'yii\grid\CheckboxColumn',
+                'header' => false,
+                
+            ],*/
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'checkboxOptions' => function($model) {
+                    return ['value' => $model->id, 'data' => ['key' => $model->id]];
+                },
+                'header' => false,
+            ],
+            [
+                'attribute'=>'lab_name_hos',
+                'options' => ['id' => 'lab_name_hos'],
+                'value'=>function ($model, $key, $index, $widget) { 
+                    return $model->lab_name_hos;
+                },
+            ],
+            [
+                'attribute'=>'result_at',
+                'options' => ['id' => 'result_at'],
+                'value'=>function ($model, $key, $index, $widget) { 
+                    return $model->result_at;
+                },
+            ],
+            [
+                'attribute'=>'hos_result',
+                'options' => [ 'id' => 'hos_result'],
+                'value'=>function ($model, $key, $index, $widget) { 
+                    return $model->hos_result;
+                },
+            ],
+            [
+                'attribute'=>'lab_normal',
+                'options' => [ 'id' => 'lab_normal'],
+                'value'=>function ($model, $key, $index, $widget) { 
+                    return $model->lab_normal;
+                },
+            ],
             [
                 'attribute'=>'lab_possible', 
                 'width'=>'310px',
