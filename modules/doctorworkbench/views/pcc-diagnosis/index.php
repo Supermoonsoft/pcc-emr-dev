@@ -41,7 +41,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
     </div>
 </div>
 
-<?= Html::button(Yii::t('app', 'Delete All'), ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-top:8px;']) ?>
+<?= Html::button(Yii::t('app', 'Delete Select'), ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-top:8px;']) ?>
 
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",

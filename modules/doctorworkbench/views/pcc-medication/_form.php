@@ -6,6 +6,7 @@ use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
+$this->registerJS($this->render('../../dist/js/script.js'));
 
 ?>
 
@@ -35,8 +36,8 @@ use app\modules\doctorworkbench\models\CDrugusage;
                 ],
     ]);
     ?>
-    <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false); ?>
-<?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false); ?>
+<?= $form->field($model, 'hn')->hiddenInput(['value' => '0000001','id'=>'hn' ])->label(false); ?>
+<?= $form->field($model, 'vn')->hiddenInput(['value' => '8888444', 'id' => 'vn'])->label(false); ?>
 
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -76,13 +77,21 @@ use app\modules\doctorworkbench\models\CDrugusage;
         
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
      <div class="total-price">
-     <p>131.00</p>
+     <p id="totalprice"></p>
      </div>
             </div>
         </div>
-        
     </div>
-
 <?php ActiveForm::end(); ?>
-
 </div>
+
+<?php
+$js = <<< JS
+$(function(){
+totalPrice($('#hn').val(),$('#vn').val());
+
+});
+
+JS;
+$this->registerJS($js);
+?>

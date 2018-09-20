@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
@@ -8,9 +7,7 @@ use johnitvn\ajaxcrud\CrudAsset;
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 CrudAsset::register($this);
-// $this->registerJS($this->render('../../dist/js/script.js'));
 ?>
-
 <?=
 $this->render('../default/panel_top', [
     'emr' => '',
@@ -43,7 +40,7 @@ $this->render('../default/panel_top', [
         ?>
     </div>
 </div>
-<?= Html::button(Yii::t('app', 'Delete All'), ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-top:8px;']) ?>
+<?= Html::button(Yii::t('app', 'Delete Select'), ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-top:8px;']) ?>
 <?php
 Modal::begin([
     "id" => "ajaxCrudModal",
@@ -57,31 +54,27 @@ $js = <<< JS
 // $('#icode').on('select2:select', function (e) {
 //      $("#qty").focus();
 // });
-$("#form").submit(function(event) {
-    event.preventDefault();
-    var form = $("#form");
-    var data = form.serialize();
-                var url = form.attr('action');
-                $.ajax({
-                    url: url,
-                    type: 'post',
-                    dataType: 'json',
-                    data: data
-                })
-                .done(function(response) {
-                    $.pjax.reload({container: "#crud-datatable-pjax"});
-                    console.log(response);
-                })
-                .fail(function() {
-                    console.log("error");
-                    //$.pjax.reload({container: "#crud-datatable-pjax"});
-});
+// $("#form-medication").submit(function(event) {
+//     event.preventDefault();
+//     var form = $("#form-medication");
+//     var data = form.serialize();
+//                 var url = form.attr('action');
+//                 $.ajax({
+//                     url: url,
+//                     type: 'post',
+//                     dataType: 'json',
+//                     data: data
+//                 })
+//                 .done(function(response) {
+//                     $.pjax.reload({container: "#crud-datatable-pjax"});
+//                     console.log(response);
+//                 })
+//                 .fail(function() {
+//                     console.log("error");
+//                     //$.pjax.reload({container: "#crud-datatable-pjax"});
+//         });
+// });
 
-});
-function dataForm(){
-   
-
-}
  $("#btn-delete").click(function(){
     var keys = $("#crud-datatable").yiiGridView("getSelectedRows");
     //console.log(keys);

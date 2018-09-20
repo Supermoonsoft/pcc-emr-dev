@@ -30,8 +30,8 @@ class CProced extends \yii\db\ActiveRecord
     {
         return [
             [['is_active'], 'boolean'],
-            [['id'], 'required'],
-            [['id'], 'string'],
+            //[['id'], 'required'],
+            [['id'], 'string', 'max' => 7],
             [['title', 'title_th'], 'string', 'max' => 200],
             [['map_code'], 'string', 'max' => 255],
             [['id'], 'unique'],
