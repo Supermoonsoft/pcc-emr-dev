@@ -8,7 +8,7 @@ use yii\web\View;
 
 $url = \yii\helpers\Url::to(['icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
-// $this->registerJs($this->render('../../dist/js/script.js'));
+$this->registerJs($this->render('../../dist/js/script.js'));
 
 $formatJs = <<< 'JS'
 var formatRepo = function (repo) {
@@ -17,11 +17,11 @@ var formatRepo = function (repo) {
     }
     var markup =
 '<div class="row">' + 
-    '<div class="col-sm-2">' +
-        '<b style="margin-left:5px">' + repo.id+ '</b>' + 
+    '<div class="col-lg-2 col-md-2 col-sm-2">' +
+        '<b style="margin-left:5px"><code>' + repo.id+ '</code></b>' + 
     '</div>' +
-    '<div class="col-sm-3">' + repo.diagename + '</div>' +
-    '<div class="col-sm-3">' + repo.diagtname + '</div>' +
+    '<div class="col-lg-5 col-md-5 col-sm-5">' + repo.diagename + '</div>' +
+    '<div class="col-lg-5 col-md-5 col-sm-5">' + repo.diagtname + '</div>' +
 '</div>';
     return '<div style="overflow:hidden;">' + markup + '</div>';
 };
@@ -29,6 +29,7 @@ var formatRepo = function (repo) {
 var formatRepoSelection = function (repo) {
     return repo.full_name || repo.text;
 }
+
 JS;
  
 // Register the formatting script
@@ -62,9 +63,10 @@ JS;
     <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
 
     <div class="row">
-        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 <?= $form->field($model, 'icd_code')->widget(Select2::className(), [
                     'initValueText'=>$prefix,//กำหนดค่าเริ่มต้น
+                    'theme' => Select2::THEME_DEFAULT,
                     'options'=>['id' => 'icd_code','placeholder'=>'Select ICD10...'],
                     'pluginOptions' => [
                         'allowClear' => true,

@@ -52,6 +52,9 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
 <?php
 $js = <<< JS
+// $(document).ready(function() { 
+    // $("#icd_code").select2({dropdownCssClass : 'bigdrop'}); 
+// });
 
  $("#btn-delete").click(function(){
     var keys = $("#crud-datatable").yiiGridView("getSelectedRows");
