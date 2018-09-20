@@ -5,7 +5,7 @@
     </div>
     <div class="panel-body">
         <div style="margin-bottom: 3px">
-                        <button class="btn btn-info" onClick=swal("ส่งทีละหลายคน...")><i class="fa fa-check"></i> ส่งพบแพทย์เฉพาะที่เลือก</button>
+                        <button class="btn btn-info" onClick=swal("ยืนยันส่งคนที่เลือก...")><i class="fa fa-check"></i> ส่งพบแพทย์</button>
             <a class="btn btn-danger pull-right" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า</a>        </div>
         <div id="grid-view-data-table" class="grid-view">
         <table class="table table-striped table-bordered">
@@ -22,20 +22,20 @@
             <tbody>
                 <tr data-key="0">
                     <td><input type="checkbox" name="selection[]" value="0"></td>
-                    <td>1</td><td>000000009</td><td>2018-09-20 เวลา 14:09:14</td>
+                    <td>1</td><td>000000009</td><td>20/09/2561 เวลา 14:09:14</td>
                     <td>-</td><td>น.ส.สวยงาม สอง มากเลย</td>
                     <td><span style='color:green'>Lab<span></td>
                 </tr>
                 <tr data-key="1">
                     <td><input type="checkbox" name="selection[]" value="1"></td>
                     <td>2</td><td>000000012</td>
-                    <td>2018-09-20 เวลา 14:09:59</td>
+                    <td>20/09/2561 เวลา 14:09:59</td>
                     <td>-</td><td>นายพ็อกบ้า  ยิ่งมั่ว</td>
                     <td><span style='color:green'>Lab<span></td>
                 </tr>
                     <tr data-key="2"><td><input type="checkbox" name="selection[]" value="2"></td>
                     <td>3</td><td>000000004</td>
-                    <td>2018-09-20 เวลา 14:11:02</td>
+                    <td>20/09/2561 เวลา 14:11:02</td>
                     <td>-</td><td>นายสมชาย  มีมาก</td>
                     <td><span style='color:green'>Lab<span></td>
                 </tr>

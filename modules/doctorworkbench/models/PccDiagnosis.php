@@ -70,4 +70,8 @@ class PccDiagnosis extends \yii\db\ActiveRecord
             'last_update' => 'Last Update',
         ];
     }
+
+    public  function getDiagtype(){
+        return $this->hasOne(CDiagtype::className(), ['diagtype' => 'diag_type']);
+    }
 }

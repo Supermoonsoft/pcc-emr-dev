@@ -51,7 +51,7 @@ li.dropdown:hover > .dropdown-menu {
  
 <div class="panel panel-info" style="margin-left: 20px;margin-right: 20px">
 	<div class="panel-heading">
-		<div class="panel-title"><li class="fa fa-stethoscope"></li> Doctor / Order / Today</div>
+		<div class="panel-title"><li class="fa fa-stethoscope"></li> Doctor Order Today</div>
 	</div>
 	<div class="panel-body">
 <div class="row">

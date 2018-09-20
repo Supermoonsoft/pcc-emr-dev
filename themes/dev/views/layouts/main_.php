@@ -91,7 +91,7 @@ $hn = PatientHelper::getCurrentHn();
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
-                        <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i><span class="badge badge-light">2</span></a></li>
+                        <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i><span class="badge badge-light">9</span></a></li>
 
                         <li style="padding-right: 30px;"><a data-toggle="modal" data-target="#myModal2"><i class="fa fa-user-o"  style="font-size:20px;color:white;"></i></a></li>
 
@@ -142,12 +142,17 @@ $hn = PatientHelper::getCurrentHn();
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">เตือน</h4>
+                        <h4 class="modal-title" id="myModalLabel">Notification</h4>
                     </div>
 
                     <div class="modal-body">
-                        <h3><i class="fa fa-exclamation"></i> แพ้ยา Penicillin</h3>
-                        <h3><i class="fa fa-exclamation"></i> วัคซีน -</h3>
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                        </ul>
                     </div>
 
                 </div><!-- modal-content -->
@@ -161,12 +166,17 @@ $hn = PatientHelper::getCurrentHn();
 
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel2">รอตรวจ</h4>
+                        <h4 class="modal-title" id="myModalLabel2">Queue</h4>
                     </div>
 
                     <div class="modal-body">
-                        <h4><a href="#">1-นายสมชาย มีมาก</a></h4>
-                        <h4><a href="#">2-นางมาลี ผลไม้</a></h4>
+                        <ul>
+                            <li>1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li>5</li>
+                        </ul>
                     </div>
 
                 </div><!-- modal-content -->

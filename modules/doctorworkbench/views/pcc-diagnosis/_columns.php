@@ -23,9 +23,12 @@ return [
     [
         // 'class' => '\kartik\grid\DataColumn',
         'attribute' => 'diag_type',
-        'hAlign' => 'center',
+        'hAlign' => 'left',
         'vAlign' => 'middle',
         'header' => 'ประเภท',
+        'value' => function($model){
+            return $model->diagtype->name1;
+        }
         // 'pageSummary' => true,
         // 'class' => 'kartik\grid\EditableColumn',
         // // 'refreshGrid' => true,
