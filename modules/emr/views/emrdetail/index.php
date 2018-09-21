@@ -56,7 +56,8 @@ use yii\helpers\Url;
                 'attribute' => 'date_service',
                 'label'=>'วันที่มารับบริการ -> สถานที่รับบริการ',
                 'value' => function ($model, $key, $index, $widget) {
-                    return $model->date_service . ' ----- ' . $model->provider_name;
+                     $tyear = Yii::$app->formatter->asDate($model->date_service, 'yyyy')+543;
+                     return Yii::$app->formatter->asDate($model->date_service, 'dd/MM/').$tyear . ' ----- ' . $model->provider_name;
                 },
                 'filter' => false,
             ],
