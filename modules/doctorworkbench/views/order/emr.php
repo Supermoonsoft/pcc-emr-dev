@@ -11,7 +11,7 @@
                  ]);?>
 <?php
     echo $this->render('@app/modules/emr/views/emrdetail/index',[
-                       'searchModel' => $searchModel,
+                       //'searchModel' => $searchModel,
                        'dataProvider' => $dataProvider,
                        'cid'=>$cid
                        ]);

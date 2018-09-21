@@ -148,7 +148,7 @@ class PccMedicationController extends Controller
     // ปรินสติกเกอร์ยา
 
     public function actionPrintMed($hn=null,$vn=null){
-        Yii::$app->response->format = Response::FORMAT_JSON;
+        //Yii::$app->response->format = Response::FORMAT_JSON;
         return $this->renderAjax('print_med');
     }
 }

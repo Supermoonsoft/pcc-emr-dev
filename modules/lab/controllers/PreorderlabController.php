@@ -35,12 +35,12 @@ class PreorderlabController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PreorderlabSeach();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        //$searchModel = new PreorderlabSeach();
+        //$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            //'searchModel' => $searchModel,
+            //'dataProvider' => $dataProvider,
         ]);
     }
 

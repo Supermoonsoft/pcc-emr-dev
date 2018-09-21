@@ -6,13 +6,9 @@ use yii\widgets\Pjax;
 ?>
 <div class="preorderlab-index">
     <?php Pjax::begin(); ?>
-    <div class="panel panel-info">
-    <div class="panel-heading">
-        <div class="panel-title"><i class="fa fa-flask" aria-hidden="true"></i> รายการแลป</div>
-    </div>
-    <div class="panel-body">
+ 
         <div style="margin-bottom: 3px">
-            <button class="btn btn-info" onClick=swal("ยืนยันการสั่งแลป")><i class="fa fa-check"></i> สั่งแลป</button>
+            <button class="btn btn-info" onClick=swal("ยืนยันการสั่งแลป")><i class="fa fa-flask"></i> สั่งแลป</button>
             <hr>
         <div id="grid-view-data-table" class="grid-view">
         <table class="table table-striped table-bordered">
@@ -75,6 +71,6 @@ use yii\widgets\Pjax;
                 </tr>
             </tbody>
         </table>
-    </div>
+
     <?php Pjax::end(); ?>
 </div>

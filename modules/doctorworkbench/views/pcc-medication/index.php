@@ -49,7 +49,7 @@ $this->render('../default/panel_top', [
 Modal::begin([
         'header' => '<h4>Print</h4>',
         'id'     => 'modelprint',
-        'size'   => 'model-lg',
+        'size'   => 'modal-lg',
 ]);
 
 echo "<div id='modelContent'></div>";

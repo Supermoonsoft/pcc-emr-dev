@@ -11,23 +11,18 @@ use yii\helpers\Url;
 ?>
 <?php
 $this->registerJs('
-jQuery("#btn-add").click(function(){
-    alert("ส่งทีละหลายรายการ...");
-    //window.location.href = "index.php";
-    jQuery.post("'.Url::to(['/lab/preorderlab']).'",function(){
 
-    });
-});
 ')
 
 ?>
 <div class="hoslab-index">
-<form method="post" actio="#">
+
         <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
-            <button id="btn-add" class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
+            
+            <?= Html::a('<button id="btn-add" onClick='.new JsExpression($alert).' class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>', ['/doctorworkbench/order/pre-order-lab']) ?>
         </div>
-        </form>
+
     <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
