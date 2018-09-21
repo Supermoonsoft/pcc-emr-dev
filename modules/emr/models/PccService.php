@@ -67,7 +67,7 @@ class PccService extends \yii\db\ActiveRecord
             'vn' => 'Vn',
             'provider_code' => 'Provider Code',
             'provider_name' => 'Provider Name',
-            'date_service' => 'Date Service',
+        'date_service' => ' วันที่มารับบริการ ----- สถานที่รับบริการ',
             'time_service' => 'Time Service',
             'cc' => 'CC',
             'pe' => 'PE',

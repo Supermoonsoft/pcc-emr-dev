@@ -9,16 +9,38 @@ use app\components\DbHelper;
 use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
 use yii\helpers\Url;
+//use Yii;
 
 //echo ShowLoading::widget();
 ?>
 <div class="hoslab-index">
 
     <div style="margin-bottom: 3px">
-<?php $alert = 'swal("ส่งทีละหลายรายการ...")'; ?>
-        
+        <?php $alert = 'swal("ส่งทีละหลายรายการ...")'; ?>
+
     </div>
     <?php Pjax::begin(); ?>
+    <?php
+    $colorPluginOptions = [
+        'showPalette' => true,
+        'showPaletteOnly' => true,
+        'showSelectionPalette' => true,
+        'showAlpha' => false,
+        'allowEmpty' => false,
+        'preferredFormat' => 'name',
+        'palette' => [
+            [
+                "white", "black", "grey", "silver", "gold", "brown",
+            ],
+            [
+                "red", "orange", "yellow", "indigo", "maroon", "pink"
+            ],
+            [
+                "blue", "green", "violet", "cyan", "magenta", "purple",
+            ],
+        ]
+    ];
+    ?>
     <?=
     GridView::widget([
         'dataProvider' => $dataProvider,
@@ -38,28 +60,39 @@ use yii\helpers\Url;
                     return GridView::ROW_COLLAPSED;
                 },
                 'detail' => function ($model, $key, $index, $column) {
-                    
-                    //return Yii::$app->controller->renderPartial('test', ['provider_code' => $model->provider_code,'vn'=>$model->vn]);
 
+                    //return Yii::$app->controller->renderPartial('test', ['provider_code' => $model->provider_code,'vn'=>$model->vn]);
                     //return Yii::$app->controller->renderPartial('emrdetail', 
 //                            ['provider_code' => $model->provider_code,
 //                             'vn'=>$model->vn]);
-                    
-                      
                     //return Yii::$app->controller->renderPartial('_detail_orden_pago' ['ordenPagoModel' => $ordenPagoModel]);
-                    return $this->render('../emrdetail/detail', ['id' => $model->id,'vn'=>$model->vn,'provider_code'=>$model->provider_code]);
+                    return $this->render('../emrdetail/detail', ['id' => $model->id, 'vn' => $model->vn, 'provider_code' => $model->provider_code]);
                 },
                 'headerOptions' => ['class' => 'kartik-sheet-style'],
                 'expandOneOnly' => true
             ],
+            
             [
                 'attribute' => 'date_service',
-                'label'=>'วันที่มารับบริการ -> สถานที่รับบริการ',
                 'value' => function ($model, $key, $index, $widget) {
-                     $tyear = Yii::$app->formatter->asDate($model->date_service, 'yyyy')+543;
-                     return Yii::$app->formatter->asDate($model->date_service, 'dd/MM/').$tyear . ' ----- ' . $model->provider_name;
+                    if($model->cc=='' && $model->pe=='' && $model->pi=='' && $model->pulse=='' && $model->bpd==''){
+                        $color = 'red';
+                    }else{
+                        $color ='green';
+                    }
+                    $tyear = Yii::$app->formatter->asDate($model->date_service, 'yyyy') + 543;
+                    return "<span class='badge' style='background-color: {$color}'>.</span>  <code style='color: black' >" . 
+                            Yii::$app->formatter->asDate($model->date_service, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
                 },
-                'filter' => false,
+                
+                'filterType' => GridView::FILTER_COLOR,
+                'filterWidgetOptions' => [
+                    'showDefaultPalette' => false,
+                    'pluginOptions' => $colorPluginOptions,
+                ],
+                'vAlign' => 'middle',
+                'format' => 'raw',
+                
             ],
         /* [
           'attribute' => 'date_service',
