@@ -76,14 +76,14 @@ use yii\helpers\Url;
                 'attribute' => 'date_service',
                 'value' => function ($model, $key, $index, $widget) {
                     if($model->cc=='' && $model->pe=='' && $model->pi=='' && $model->pulse=='' && $model->bpd==''){
-                        $color = 'red';
-                    }else{
-                        $color ='green';
+                     $color = '#FF4081';
+                     }else{
+                     $color ='#26A69A';
                     }
                     $tyear = Yii::$app->formatter->asDate($model->date_service, 'yyyy') + 543;
-                    return "<span class='badge' style='background-color: {$color}'>.</span>  <code style='color: black' >" . 
-                            Yii::$app->formatter->asDate($model->date_service, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
-                },
+                     return "<span class='badge' style='background-color: {$color};color:{$color}'>.</span>  <code style='color: black;font-size:16px;' >" .
+                     Yii::$app->formatter->asDate($model->date_service, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
+                     },
                 
                 'filterType' => GridView::FILTER_COLOR,
                 'filterWidgetOptions' => [

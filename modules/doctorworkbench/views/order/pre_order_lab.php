@@ -9,5 +9,13 @@
 'apointment' => '',
 'treatmment_plan' => ''
 ]);?>
-<h1 class="text-center">Pre-Order Lab</h1>
+
+<?php
+   echo $this->render('@app/modules/lab/views/preorderlab/index',[
+    'searchModel' => $searchModel,
+    'dataProvider' => $dataProvider,
+]);
+?>
+
+
 <?=$this->render('../default/panel_foot');?>

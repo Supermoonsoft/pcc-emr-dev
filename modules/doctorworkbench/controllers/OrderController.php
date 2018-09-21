@@ -11,9 +11,8 @@ use app\modules\lab\models\Hoslab;
 use app\modules\lab\models\HoslabSearch;
 use app\modules\drug\models\Hosdrug;
 use app\modules\drug\models\HosdrugSearch;
-    
-use app\modules\emr\models\PccService;
-use app\modules\emr\models\PccServiceSearch;
+use app\modules\lab\models\Preorderlab;
+use app\modules\lab\models\PreorderlabSeach;
 
 
 class OrderController extends \yii\web\Controller
@@ -39,19 +38,19 @@ class OrderController extends \yii\web\Controller
         return $this->render('appointment');
 
     }
-    public function actionEmr($cid=NULL){
-        
-        $searchModel = new PccServiceSearch($cid);
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('emr',[
-                             'searchModel' => $searchModel,
-                             'dataProvider' => $dataProvider,
-                             'cid'=>$cid
-                             ]);
-        
+    public function actionEmr(){
+        return $this->render('emr');
+
     }
     public function actionPreOrderLab(){
-        return $this->render('pre_order_lab');
+        $searchModel = new PreorderlabSeach();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('pre_order_lab', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+        
 
     }
 

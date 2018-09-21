@@ -144,4 +144,11 @@ class PccMedicationController extends Controller
     public function actionSumPrice($hn=null,$vn=null){
     return PccMedication::find()->where(['hn' => $hn,'vn' => $vn])->sum('totalprice');
     }
+
+    // ปรินสติกเกอร์ยา
+
+    public function actionPrintMed($hn=null,$vn=null){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return $this->renderAjax('print_med');
+    }
 }

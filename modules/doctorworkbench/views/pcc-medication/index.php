@@ -40,7 +40,25 @@ $this->render('../default/panel_top', [
         ?>
     </div>
 </div>
-<?= Html::button(Yii::t('app', 'Delete Select'), ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-top:8px;']) ?>
+<?= Html::button('<i class="fa fa-trash"></i> Delete Select', ['class' => 'btn btn-danger', 'id' => 'btn-delete']) ?>
+
+<?= Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']) ?>
+
+<?php
+            
+Modal::begin([
+        'header' => '<h4>Print</h4>',
+        'id'     => 'modelprint',
+        'size'   => 'model-lg',
+]);
+
+echo "<div id='modelContent'></div>";
+
+Modal::end();
+?>
+
+
+
 <?php
 Modal::begin([
     "id" => "ajaxCrudModal",
@@ -53,26 +71,6 @@ Modal::begin([
 $js = <<< JS
 // $('#icode').on('select2:select', function (e) {
 //      $("#qty").focus();
-// });
-// $("#form-medication").submit(function(event) {
-//     event.preventDefault();
-//     var form = $("#form-medication");
-//     var data = form.serialize();
-//                 var url = form.attr('action');
-//                 $.ajax({
-//                     url: url,
-//                     type: 'post',
-//                     dataType: 'json',
-//                     data: data
-//                 })
-//                 .done(function(response) {
-//                     $.pjax.reload({container: "#crud-datatable-pjax"});
-//                     console.log(response);
-//                 })
-//                 .fail(function() {
-//                     console.log("error");
-//                     //$.pjax.reload({container: "#crud-datatable-pjax"});
-//         });
 // });
 
  $("#btn-delete").click(function(){
@@ -90,7 +88,18 @@ $js = <<< JS
         });
         
     }
-  });       
+  });   
+  
+  
+  $(function(){
+    $('#modelButton').click(function(){
+        $('#modelprint').modal('show')
+            .find('#modelContent')
+            .load($(this).attr('value'));
+    });
+});
+
+
 JS;
 $this->registerJS($js);
 ?>
