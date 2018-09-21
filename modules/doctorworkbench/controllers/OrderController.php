@@ -16,6 +16,9 @@ use app\modules\lab\models\PreorderlabSeach;
     
 use app\modules\emr\models\PccService;
 use app\modules\emr\models\PccServiceSearch;
+    
+use yii\web\Controller;
+use app\modules\appointment\models\PccAppoinmentShow;
 
 
 class OrderController extends \yii\web\Controller
@@ -38,12 +41,37 @@ class OrderController extends \yii\web\Controller
     }
     
     public function actionAppointment(){
-        return $this->render('appointment');
-
+        $events = PccAppoinmentShow::find()->all();
+        
+        
+        
+        $masker = [];
+        foreach ($events as $eve) {
+            
+            $event = new \yii2fullcalendar\models\Event();
+            $event->id = $eve->id;
+            $event->title = $text;
+            $event->start = $eve->vstdate;
+            $event->end = $eve->vstdate;
+            $event->backgroundColor = $eve->color;
+            $masker[] = $event;
+        }
+        
+        return $this->render('appointment',[
+                             'events' => $masker,
+                             ]);
+        
     }
-    public function actionEmr(){
-        return $this->render('emr');
-
+    public function actionEmr($cid=NULL){
+        
+        $searchModel = new PccServiceSearch($cid);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        return $this->render('emr',[
+                             'searchModel' => $searchModel,
+                             'dataProvider' => $dataProvider,
+                             'cid'=>$cid
+                             ]);
+        
     }
     public function actionPreOrderLab(){
         $searchModel = new PreorderlabSeach();

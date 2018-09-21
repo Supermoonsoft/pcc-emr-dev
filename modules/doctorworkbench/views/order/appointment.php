@@ -1,13 +1,24 @@
-<?=$this->render('../default/panel_top',[
-'emr' => '',
-'lab' => '',
-'drug' => '',
-'diagnosis' => '',
-'medication' => '',
-'procedure' => '',
-'pre_order_lab' =>'',
-'apointment' => 'active',
-'treatmment_plan' => ''
-]);?>
-<h1 class="text-center">Appointment</h1>
-<?=$this->render('../default/panel_foot');?>
+<?=
+
+$this->render('../default/panel_top', [
+              'emr' => '',
+              'lab' => '',
+              'drug' => '',
+              'diagnosis' => '',
+              'medication' => '',
+              'procedure' => '',
+              'pre_order_lab' => '',
+              'apointment' => 'active',
+              'treatmment_plan' => ''
+              ]);
+?>
+<?php
+    
+    echo $this->render('@app/modules/appointment/views/default/index', [
+                       'events' => $events
+                       //'searchModel' => $searchModel,
+                       //'dataProvider' => $dataProvider,
+                       //'cid' => $cid
+                       ]);
+    ?>
+<?= $this->render('../default/panel_foot'); ?>
