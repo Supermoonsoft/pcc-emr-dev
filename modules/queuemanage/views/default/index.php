@@ -52,7 +52,7 @@ DataTableAsset::register($this);
                                     </td>
 
                                     <td><?= $value['hn'] ?></td>
-                                    <td><div id="<?= 'v' . $value['pcc_vn'] ?>"></div></td>
+                                    <td><div class="send_no"></div></td>
                                     <td><?= $value['visit_date_begin'] . ' ' . $value['visit_time_begin'] ?></td>                                    
                                     <td><?= $value['fullname'] ?></td>
                                     <td><span style='color:green'>Lab</span></td>
@@ -76,7 +76,7 @@ DataTableAsset::register($this);
 </div>
 <pre>
 <?php
-print_r($data);
+
 $this->registerJs($this->render('script.js'));
 ?>
 </pre>

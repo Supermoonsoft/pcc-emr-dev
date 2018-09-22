@@ -6,8 +6,10 @@ $('.chk_pt').click(function (e) {
         console.log(e.target.value);
         n = n + 1;
         console.log(n)
+        
     }else{
         n=n-1;
+        console.log(n)
     }
     if (n > 0) {
         $('#btn_add_q').prop('disabled', false);

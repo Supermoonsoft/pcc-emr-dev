@@ -27,12 +27,13 @@ class DefaultController extends Controller {
             $sql_update = "update pcc_visit SET current_station = 'A1' WHERE pcc_vn IN  ($vn) ";
             DbHelper::execute('db', $sql_update);
         }
-
+        $date1 = date('Y-m-d');
+        $date2 = date('Y-m-d');
         $sql = "SELECT t.pcc_vn,p.hn,t.visit_date_begin,t.visit_time_begin 
 ,concat(p.prename,p.fname,' ',p.lname) fullname
 from pcc_visit t 
 LEFT JOIN pcc_patient  p ON p.cid = t.person_cid
-WHERE t.visit_date_begin BETWEEN '2018-09-22' AND '2018-09-22'
+WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
 AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
         $raw = DbHelper::queryAll('db', $sql);
 

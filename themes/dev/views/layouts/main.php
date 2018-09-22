@@ -10,6 +10,15 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use app\components\PatientHelper;
 use app\components\loading\ShowLoading;
+use app\components\DbHelper;
+
+$sql_q = "SELECT t.pcc_vn,p.hn,t.visit_date_begin,t.visit_time_begin 
+,concat(p.prename,p.fname,' ',p.lname) fullname
+from pcc_visit t 
+LEFT JOIN pcc_patient  p ON p.cid = t.person_cid
+WHERE t.current_station = 'A1' order by t.visit_date_begin asc,t.visit_time_begin asc";
+$pt_q = DbHelper::queryAll('db', $sql_q);
+$pt_count = count($pt_q);
 
 DevAsset::register($this);
 \yii\bootstrap\BootstrapAsset::register($this);
@@ -73,7 +82,7 @@ $hn = PatientHelper::getCurrentHn();
                                 <?php
                                 $form = ActiveForm::begin([
                                             'method' => 'POST',
-                                           'action' => Url::to(['/site/patient-search']),
+                                            'action' => Url::to(['/site/patient-search']),
                                             'options' => ['class' => 'form-inline']
                                 ]);
                                 ?>
@@ -86,14 +95,22 @@ $hn = PatientHelper::getCurrentHn();
                             </div>
                         </li>
                         <li>
-                            <div style="padding-top: 8px;padding-left: 50px;color: white;"><h4><?= empty($this->params['pt_title']) ? '<i class="fa fa-wheelchair" aria-hidden="true"></i> กรุณาเลือกผู้รับบริการ' : '<i class="fa fa-wheelchair" aria-hidden="true"></i> '.$this->params['pt_title'] ?></h4></div>
+                            <div style="padding-top: 8px;padding-left: 50px;color: white;">
+                                <h4>
+                                    <?php if (!empty(PatientHelper::getCurrentVn())): ?>
+                                        <i class="fa fa-wheelchair"></i>
+                                        <?= PatientHelper::getCurrentPatientTitle() ?> 
+                                        <?= PatientHelper::getCurrentCid() ?>
+                                    <?php endif; ?>
+                                </h4>
+                            </div>
                         </li>
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
-                        <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i><span class="badge badge-light">2</span></a></li>
+                        <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i><span class="badge badge-light"></span></a></li>
 
-                        <li style="padding-right: 30px;"><a data-toggle="modal" data-target="#myModal2"><i class="fa fa-user-o"  style="font-size:20px;color:white;"></i></a></li>
+                        <li style="padding-right: 30px;"><a data-toggle="modal" data-target="#myModal2"><i class="fa fa-user-o"  style="font-size:20px;color:white;"></i><span class="badge badge-light"><?= $pt_count ?></span></a></li>
 
                         <li><img src="img\profile.png" height="40px" class="img-circle" style="padding-top: 6px;" /></li>
                         <li  style="padding-top: 5px;padding-left: 5px;">
@@ -165,8 +182,11 @@ $hn = PatientHelper::getCurrentHn();
                     </div>
 
                     <div class="modal-body">
-                        <h4><a href="#">1-นายสมชาย มีมาก</a></h4>
-                        <h4><a href="#">2-นางมาลี ผลไม้</a></h4>
+                        <?php foreach ($pt_q as $key => $value): ?>
+                            <h4><a href="<?= Url::to(['/setsession', 'pcc_vn' => $value['pcc_vn']]) ?>" data-confirm="ตรวจรักษา <?= $value['fullname'] ?>" ><?= $value['fullname'] ?></a></h4>
+                        <?php endforeach; ?>
+
+
                     </div>
 
                 </div><!-- modal-content -->

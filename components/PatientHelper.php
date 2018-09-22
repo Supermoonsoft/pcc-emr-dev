@@ -3,27 +3,28 @@
 namespace app\components;
 
 use yii\base\Component;
-use app\modules_share\newpatient\models\mPatient;
-use app\models\lookup\CPrename;
-use yii\base\UserException;
+use app\components\DbHelper;
 
 class PatientHelper extends Component {
 
-    public static function getPatientTitleByHn($hn) {
+    public static function getCurrentPatientTitle() {
+        $vn = self::getCurrentVn();
+        $sql = " SELECT p.hn,concat(p.prename,p.fname,' ',p.lname) fullname
+from pcc_visit t 
+LEFT JOIN pcc_patient  p ON p.cid = t.person_cid
+WHERE t.pcc_vn = '$vn'";
+        $pt = DbHelper::queryOne('db', $sql);
 
-        $show = "ไม่มีผู้รับบริการ";
-        if (empty($hn)) {
-            return $show;
-        }
-        $model = mPatient::findOne($hn);
-        if ($model) {
-            $prename = CPrename::findOne($model->prename);
-            $pt_title = $prename->title_th . $model->fname . " " . $model->lname;
-            $pt_title .= " " . $model->agey . "ปี " . $model->agem . "ด " . $model->aged . "ว";
-            return $pt_title;
-        } else {
-            return "ไม่มีผู้รับบริการ";
-        }
+        return $pt['hn'] . " " . $pt['fullname'];
+    }
+
+    public static function getCurrentCid() {
+        $vn = self::getCurrentVn();
+        $sql = " SELECT t.person_cid from pcc_visit t 
+WHERE t.pcc_vn = '$vn' limit 1";
+        $cid = DbHelper::queryScalar('db', $sql);
+
+        return $cid;
     }
 
     public static function genNextHn() {
@@ -42,13 +43,13 @@ class PatientHelper extends Component {
         \Yii::$app->session->set('vn', $vn);
     }
 
-    public static function setCurrentHnVn($hn, $vn) {
+    public static function setCurrenHnVn($hn, $vn) {
         self::removeCurrentHnVn();
         \Yii::$app->session->set('hn', $hn);
         \Yii::$app->session->set('vn', $vn);
     }
 
-    public static function getCurrentHn() {        
+    public static function getCurrentHn() {
         return \Yii::$app->session->get('hn');
     }
 
@@ -68,7 +69,5 @@ class PatientHelper extends Component {
         \Yii::$app->session->remove('hn');
         \Yii::$app->session->remove('vn');
     }
-   
-   
 
 }
