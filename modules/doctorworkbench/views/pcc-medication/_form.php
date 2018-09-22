@@ -15,7 +15,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
     border-top: 3px solid #007bff;
     box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
     height: 56px;
-    width: 313px;
+    width: 324px;
     margin-top: 9px;
     background-color: #eee;
     color: #017bfe; 

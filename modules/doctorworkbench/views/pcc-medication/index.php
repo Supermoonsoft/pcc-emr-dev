@@ -22,7 +22,13 @@ $this->render('../default/panel_top', [
 ]);
 ?>
 <?php echo $this->render('./create', ['model' => $model]); ?>
-<?= Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']) ?>
+
+<div style="margin-top:15px;">
+<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger pull-eft', 'id' => 'btn-delete']) ?>
+<?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','http://122.154.235.70/medico/report/',['class' => 'btn btn-info pull-right'])?>
+<?php // Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['class' => 'pull-right','id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']);// show modal ?> 
+</div>
+
 <div class="pcc-diagnosis-index" style="margin-top:7px;">
     <div id="ajaxCrudDatatable">
         <?=
@@ -41,7 +47,6 @@ $this->render('../default/panel_top', [
         ?>
     </div>
 </div>
-<?= Html::button('<i class="fa fa-trash"></i> Delete Select', ['class' => 'btn btn-danger', 'id' => 'btn-delete']) ?>
 <?php
             
 Modal::begin([

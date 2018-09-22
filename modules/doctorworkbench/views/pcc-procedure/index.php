@@ -24,7 +24,10 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 'apointment' => '',
 'treatmment_plan' => ''
 ]);?>
+
 <?php  echo $this->render('./create',['model' => $model]);?>
+<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
+
 <div class="pcc-diagnosis-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
@@ -41,7 +44,6 @@ $this->registerJS($this->render('../../dist/js/script.js'));
     </div>
 </div>
 
-<?= Html::button(Yii::t('app', 'Delete Select'), ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-top:8px;']) ?>
 
 <?php Modal::begin([
     "id"=>"ajaxCrudModal",
