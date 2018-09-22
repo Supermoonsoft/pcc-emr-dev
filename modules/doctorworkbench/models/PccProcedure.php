@@ -41,7 +41,7 @@ class PccProcedure extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            [['id','procedure_code'], 'required'],
             [['id'], 'string'],
             [['date_service', 'time_service', 'start_date', 'start_time', 'end_date', 'end_time', 'data_json', 'last_update'], 'safe'],
             [['hn'], 'string', 'max' => 9],
@@ -68,7 +68,7 @@ class PccProcedure extends \yii\db\ActiveRecord
             'date_service' => 'Date Service',
             'time_service' => 'Time Service',
             'procedure_code' => 'Procedure Code',
-            'procedure_name' => 'Procedure Name',
+            'procedure_name' => 'หัตถการ',
             'start_date' => 'Start Date',
             'start_time' => 'Start Time',
             'end_date' => 'End Date',

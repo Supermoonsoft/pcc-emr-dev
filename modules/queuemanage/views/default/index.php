@@ -6,7 +6,10 @@ use app\components\MessageHelper;
 
 
     <div class="panel-heading">
-        <div class="panel-title"><i class="fa fa-clock-o" aria-hidden="true"></i> ผู้ป่วยรอส่งเข้าพบแพทย์</div>
+        <div class="panel-title">
+            <i class="fa fa-clock-o" aria-hidden="true"></i> ผู้ป่วยรอส่งเข้าพบแพทย์ 
+            <object align='right'><a class="btn btn-success">ทั้งหมด</a></object>
+        </div>
     </div>
     <div class="panel-body">
         <?= MessageHelper::Note(" แสดง Lab detailview ขวามือ เมื่อคลิก/hover ที่ คนไข้ ") ?>

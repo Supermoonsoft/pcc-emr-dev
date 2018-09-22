@@ -3,6 +3,7 @@
 namespace app\modules\queuemanage\controllers;
 
 use yii\web\Controller;
+use app\components\DbHelper;
 
 /**
  * Default controller for the `queuemanage` module
@@ -15,6 +16,8 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
+        $sql = "select 1";
+        $raw = DbHelper::queryAll('db', $sql);
         return $this->render('index');
     }
 }

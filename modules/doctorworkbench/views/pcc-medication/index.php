@@ -21,8 +21,9 @@ $this->render('../default/panel_top', [
     'treatmment_plan' => ''
 ]);
 ?>
-        <?php echo $this->render('./create', ['model' => $model]); ?>
-<div class="pcc-diagnosis-index">
+<?php echo $this->render('./create', ['model' => $model]); ?>
+<?= Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']) ?>
+<div class="pcc-diagnosis-index" style="margin-top:7px;">
     <div id="ajaxCrudDatatable">
         <?=
         GridView::widget([
@@ -41,15 +42,12 @@ $this->render('../default/panel_top', [
     </div>
 </div>
 <?= Html::button('<i class="fa fa-trash"></i> Delete Select', ['class' => 'btn btn-danger', 'id' => 'btn-delete']) ?>
-
-<?= Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']) ?>
-
 <?php
             
 Modal::begin([
         'header' => '<h4>Print</h4>',
         'id'     => 'modelprint',
-        'size'   => 'modal-lg',
+        'size'   => 'model-lg',
 ]);
 
 echo "<div id='modelContent'></div>";

@@ -26,7 +26,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 }
 
 </style>
-<div class="pcc-medication-form" style="margin-bottom:20px;">
+<div class="pcc-medication-form">
     <?php
     $form = ActiveForm::begin([
                 'id' => 'form',
@@ -72,9 +72,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
             <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','style' => 'margin-top:25px;']) ?>
-
         </div>
-        
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
      <div class="total-price">
      <p id="totalprice"></p>
