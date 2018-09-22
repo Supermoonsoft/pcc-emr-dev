@@ -9,7 +9,7 @@ use app\components\DbHelper;
 use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-use Yii;
+//use Yii;
 
 //echo ShowLoading::widget();
 ?>
@@ -70,7 +70,7 @@ use Yii;
                 },
                 'headerOptions' => ['class' => 'kartik-sheet-style'],
                 'expandOneOnly' => true,
-                'expandIcon' => '<i class="fa fa-plus-circle"></i>',
+                'expandIcon' => '<i class="fa fa-plus"></i>',
                  'collapseIcon'=> '<i class="fa fa-sort-desc"></i>'
             ],
             [

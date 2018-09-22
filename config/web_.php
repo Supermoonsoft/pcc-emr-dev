@@ -1,7 +1,7 @@
 <?php
 
 $dev_theme = require __DIR__ . '/dev-theme.php';
-$modules = require  './../modules/add_modules.php';
+$modules = require __DIR__ . '/add_modules.php';
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
