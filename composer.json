@@ -32,7 +32,8 @@
         "unclead/yii2-multiple-input": "~2.0",
         "johnitvn/yii2-ajaxcrud": "*",
         "kartik-v/yii2-editable": "@dev",
-        "philippfrenzel/yii2fullcalendar": "*"
+        "philippfrenzel/yii2fullcalendar": "*",
+        "dixonsatit/yii2-thai-year-formatter": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

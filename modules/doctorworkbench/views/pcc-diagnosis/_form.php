@@ -17,11 +17,11 @@ var formatRepo = function (repo) {
     }
     var markup =
 '<div class="row">' + 
+    '<div class="col-lg-5 col-md-5 col-sm-5">' + repo.diagename + '</div>' +
+    '<div class="col-lg-5 col-md-5 col-sm-5">' + repo.diagtname + '</div>' +
     '<div class="col-lg-2 col-md-2 col-sm-2">' +
         '<b style="margin-left:5px"><code>' + repo.id+ '</code></b>' + 
     '</div>' +
-    '<div class="col-lg-5 col-md-5 col-sm-5">' + repo.diagename + '</div>' +
-    '<div class="col-lg-5 col-md-5 col-sm-5">' + repo.diagtname + '</div>' +
 '</div>';
     return '<div style="overflow:hidden;">' + markup + '</div>';
 };

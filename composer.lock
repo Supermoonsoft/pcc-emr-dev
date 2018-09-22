@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e9599cb7bbd0db9f2981538a91634b81",
+    "content-hash": "d7ab3db60d3933e78a5b4579d95b9aea",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -357,6 +357,46 @@
                 "markdown-extra"
             ],
             "time": "2017-07-16T21:13:23+00:00"
+        },
+        {
+            "name": "dixonsatit/yii2-thai-year-formatter",
+            "version": "0.9.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dixonsatit/yii2-thai-year-formatter.git",
+                "reference": "7a6735dc576846785a9367a2e017c776b1d347e3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dixonsatit/yii2-thai-year-formatter/zipball/7a6735dc576846785a9367a2e017c776b1d347e3",
+                "reference": "7a6735dc576846785a9367a2e017c776b1d347e3",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "dixonsatit\\thaiYearFormatter\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "satit seethaphon",
+                    "email": "dixonsatit@gmail.com"
+                }
+            ],
+            "description": "Convert Year to Thai Buddhist Era Year",
+            "keywords": [
+                "extension",
+                "yii2"
+            ],
+            "time": "2015-07-09T03:52:56+00:00"
         },
         {
             "name": "ezyang/htmlpurifier",

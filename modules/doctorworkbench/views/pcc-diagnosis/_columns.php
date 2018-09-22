@@ -18,7 +18,7 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'icd_name',
-        'header' => 'ชื่อโรค'
+        'header' => 'ชื่อโรค',
     ],
     [
         // 'class' => '\kartik\grid\DataColumn',
@@ -27,7 +27,7 @@ return [
         'vAlign' => 'middle',
         'header' => 'ประเภท',
         'value' => function($model){
-            return $model->diagtype->name1;
+            return $model->diagtype->nhso_code.'-'.$model->diagtype->name1;
         }
         // 'pageSummary' => true,
         // 'class' => 'kartik\grid\EditableColumn',

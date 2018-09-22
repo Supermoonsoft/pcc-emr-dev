@@ -25,7 +25,7 @@ $this->render('../default/panel_top', [
 
 <div style="margin-top:15px;">
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger pull-eft', 'id' => 'btn-delete']) ?>
-<?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','http://122.154.235.70/medico/report/',['class' => 'btn btn-info pull-right'])?>
+<?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','http://122.154.235.70/medico/report/',['class' => 'btn btn-info pull-right','target' => '_blank'])?>
 <?php // Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['class' => 'pull-right','id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']);// show modal ?> 
 </div>
 

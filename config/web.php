@@ -1,13 +1,14 @@
 <?php
 
 $dev_theme = require __DIR__ . '/dev-theme.php';
-$modules = require  './../modules/add_modules.php';
+$modules = require './../modules/add_modules.php';
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
 $config = [
-    'id' => 'basic',
+    'id' => 'pcc',
+    'language' => 'th_TH',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'aliases' => [
@@ -51,6 +52,9 @@ $config = [
             ],
         ],
         'db' => $db,
+        'thaiFormatter' => [
+            'class' => 'dixonsatit\thaiYearFormatter\ThaiYearFormatter',
+        ],
     /*
       'urlManager' => [
       'enablePrettyUrl' => true,
