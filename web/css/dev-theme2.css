@@ -90,3 +90,9 @@ li {cursor: pointer}
 .btn {
     border-radius: 0px !important;
 }
+
+.form-control-inline {
+    min-width: 0;
+    width: auto;
+    display: inline;
+}

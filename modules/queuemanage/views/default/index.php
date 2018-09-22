@@ -3,6 +3,7 @@
 use app\components\MessageHelper;
 use app\assets\DataTableAsset;
 use yii\widgets\ActiveForm;
+use kartik\helpers\Html;
 
 DataTableAsset::register($this);
 ?>
@@ -20,11 +21,20 @@ DataTableAsset::register($this);
         ActiveForm::begin([
         ]);
         ?>
-        <?= MessageHelper::Note(" แสดง Lab detailview ขวามือ เมื่อคลิก/hover ที่ คนไข้ ") ?>
-        <?= MessageHelper::Note(" เลือกห้องตรวจก่อนส่งเข้าตรวจทีละหลายคน ") ?>
+        <?= MessageHelper::Note(" แสดง Lab detailview ขวามือ เมื่อคลิก/hover ที่ คนไข้ ") ?>       
         <?= MessageHelper::Note(" คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>
         <?= MessageHelper::Note("ลง SCREEN /VST / CC /PE /PI ก่อนเข้าพบแพทย์ที่นี่??? (กรณีไม่ลงที่ JHCIS)") ?>
         <div style="margin-bottom: 3px">
+            <?php
+            $array = [
+                '1'=>'ห้องตรวจ-1',
+                '2'=>'ห้องตรวจ-2',
+                '3'=>'ห้องตรวจ-3'
+            ];
+            echo Html::dropDownList('room', '', $array, ['prompt'=>'--- เลือกห้อง ---','class'=>'form-control form-control-inline'])
+            
+            ?>
+            
             <button id='btn_add_q' type="submit" class="btn btn-info"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
             <a class="btn btn-danger pull-right" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า</a>        
         </div>

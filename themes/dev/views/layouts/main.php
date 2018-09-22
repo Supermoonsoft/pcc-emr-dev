@@ -11,6 +11,7 @@ use yii\helpers\Url;
 use app\components\PatientHelper;
 use app\components\loading\ShowLoading;
 use app\components\DbHelper;
+use yii\bootstrap\Modal;
 
 $sql_q = "SELECT t.pcc_vn,p.hn,t.visit_date_begin,t.visit_time_begin 
 ,concat(p.prename,p.fname,' ',p.lname) fullname
@@ -97,10 +98,12 @@ $hn = PatientHelper::getCurrentHn();
                         <li>
                             <div style="padding-top: 8px;padding-left: 50px;color: white;">
                                 <h4>
-                                    <?php if (!empty(PatientHelper::getCurrentVn())): ?>
+                                    <?php $pcc_vn = PatientHelper::getCurrentVn(); ?>
+                                    <?php if (!empty($pcc_vn)): ?>
                                         <i class="fa fa-wheelchair"></i>
                                         <?= PatientHelper::getCurrentPatientTitle() ?> 
                                         <?= PatientHelper::getCurrentCid() ?>
+                                        <a style="color: white" href="#" data-value="<?= Url::to(['/patientexit', 'pcc_vn' => $pcc_vn]) ?>" id='btn-patient-exit'><i class="fa fa-times" aria-hidden="true"></i></a>
                                     <?php endif; ?>
                                 </h4>
                             </div>
@@ -193,6 +196,16 @@ $hn = PatientHelper::getCurrentHn();
             </div><!-- modal-dialog -->
         </div><!-- modal -->
 
+        <?php
+        Modal::begin([
+            'id' => 'modal-patient-exit',
+            'size' => 'modal-sm',
+        ]);
+        ?>
+        <div id="modal-patient-exit-content"></div>
+        <?php
+        Modal::end();
+        ?>
 
 
 

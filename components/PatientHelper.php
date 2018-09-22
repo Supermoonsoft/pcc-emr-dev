@@ -15,7 +15,7 @@ LEFT JOIN pcc_patient  p ON p.cid = t.person_cid
 WHERE t.pcc_vn = '$vn'";
         $pt = DbHelper::queryOne('db', $sql);
 
-        return $pt['hn'] . " " . $pt['fullname'];
+        return "(".$pt['hn'].")".$pt['fullname'];
     }
 
     public static function getCurrentCid() {
@@ -28,9 +28,7 @@ WHERE t.pcc_vn = '$vn' limit 1";
     }
 
     public static function genNextHn() {
-        $prev_hn = mPatient::find()->orderBy(['hn' => SORT_DESC])->one();
-        $next_hn = '000000000' . ((int) $prev_hn->hn + 1);
-        return substr($next_hn, -9);
+        
     }
 
     public static function setCurrentHn($hn) {
@@ -68,6 +66,12 @@ WHERE t.pcc_vn = '$vn' limit 1";
     public static function removeCurrentHnVn() {
         \Yii::$app->session->remove('hn');
         \Yii::$app->session->remove('vn');
+    }
+    public static function removeCurrentPatient(){
+        \Yii::$app->session->remove('hn');
+        \Yii::$app->session->remove('vn');
+        \Yii::$app->session->remove('cid');
+        
     }
 
 }
