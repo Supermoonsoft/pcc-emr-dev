@@ -9,7 +9,7 @@ use app\components\DbHelper;
 use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-//use Yii;
+use Yii;
 
 //echo ShowLoading::widget();
 ?>
@@ -69,22 +69,22 @@ use yii\helpers\Url;
                     return $this->render('../emrdetail/detail', ['id' => $model->id, 'vn' => $model->vn, 'provider_code' => $model->provider_code]);
                 },
                 'headerOptions' => ['class' => 'kartik-sheet-style'],
-                'expandOneOnly' => true
+                'expandOneOnly' => true,
+                'expandIcon' => '<i class="fa fa-plus-circle"></i>',
+                 'collapseIcon'=> '<i class="fa fa-sort-desc"></i>'
             ],
-            
             [
                 'attribute' => 'date_service',
                 'value' => function ($model, $key, $index, $widget) {
-                    if($model->cc=='' && $model->pe=='' && $model->pi=='' && $model->pulse=='' && $model->bpd==''){
-                     $color = '#FF4081';
-                     }else{
-                     $color ='#26A69A';
+                    if ($model->cc == '' && $model->pe == '' && $model->pi == '' && $model->pulse == '' && $model->bpd == '') {
+                        $color = '#FF4081';
+                    } else {
+                        $color = '#4DB6AC';
                     }
                     $tyear = Yii::$app->formatter->asDate($model->date_service, 'yyyy') + 543;
-                     return "<span class='badge' style='background-color: {$color};color:{$color}'>.</span>  <code style='color: black;font-size:16px;' >" .
-                     Yii::$app->formatter->asDate($model->date_service, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
-                     },
-                
+                    return "<span class='badge' style='background-color: {$color};color:{$color}'>.</span>  <code style='color: black;font-size:16px;' >" .
+                            Yii::$app->formatter->asDate($model->date_service, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
+                },
                 'filterType' => GridView::FILTER_COLOR,
                 'filterWidgetOptions' => [
                     'showDefaultPalette' => false,
@@ -92,7 +92,6 @@ use yii\helpers\Url;
                 ],
                 'vAlign' => 'middle',
                 'format' => 'raw',
-                
             ],
         /* [
           'attribute' => 'date_service',

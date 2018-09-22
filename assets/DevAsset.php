@@ -24,6 +24,7 @@ class DevAsset extends AssetBundle {
         //'css/site.css',
         'css/font-awesome-4.7.0/css/font-awesome.min.css',
         'css/dev-theme2.css',
+        'css/menu.css'
     ];
     public $js = [
         'js/main.js',
