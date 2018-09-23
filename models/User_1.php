@@ -1,43 +1,31 @@
 <?php
 
 namespace app\models;
-use dektrium\user\models\User as BaseUser;
 
-//class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
-class User extends BaseUser
+class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
     public $id;
     public $username;
     public $password;
     public $authKey;
     public $accessToken;
-    
-    const ROLE_ADMIN = 10;
-    const ROLE_DOCTOR = 20;
-    const ROLE_NURSE = 30;
-    const ROLE_PHAR = 40;
-    const ROLE_DENT = 50;
-    const ROLE_SASUK = 60;
-    
-    
-    public static $role =[10=>'admin',20=>'doctor',30=>'nurse',40=>'phar',50=>'dent',60=>'sasuk'];
 
-//    private static $users = [
-//        '100' => [
-//            'id' => '100',
-//            'username' => 'admin',
-//            'password' => 'admin',
-//            'authKey' => 'test100key',
-//            'accessToken' => '100-token',
-//        ],
-//        '101' => [
-//            'id' => '101',
-//            'username' => 'demo',
-//            'password' => 'demo',
-//            'authKey' => 'test101key',
-//            'accessToken' => '101-token',
-//        ],
-//    ];
+    private static $users = [
+        '100' => [
+            'id' => '100',
+            'username' => 'admin',
+            'password' => 'admin',
+            'authKey' => 'test100key',
+            'accessToken' => '100-token',
+        ],
+        '101' => [
+            'id' => '101',
+            'username' => 'demo',
+            'password' => 'demo',
+            'authKey' => 'test101key',
+            'accessToken' => '101-token',
+        ],
+    ];
 
 
     /**

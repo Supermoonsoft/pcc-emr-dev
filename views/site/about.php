@@ -3,8 +3,8 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
-use app\components\loading\ShowLoading;
-echo ShowLoading::widget();
+//use app\components\loading\ShowLoading;
+//echo ShowLoading::widget();
 
 $this->title = 'About';
 $this->params['breadcrumbs'][] = $this->title;

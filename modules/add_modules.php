@@ -15,5 +15,13 @@ $modules['report'] = ['class' => 'app\modules\report\Report'];
 $modules['stock'] = ['class' => 'app\modules\stock\Stock'];
 $modules['setsession'] = ['class' => 'app\modules\setsession\SetSession']; //tehnn
 $modules['patientexit'] = ['class' => 'app\modules\patientexit\PatientExit']; //tehnn
+$modules['user'] = [
+    'class' => 'dektrium\user\Module',
+    'enableUnconfirmedLogin' => true,
+    'confirmWithin' => 21600,
+    'cost' => 12,
+    'admins' => ['admin']]; // inam
+$modules['rbac'] = ['class' => 'dektrium\rbac\RbacWebModule']; //inam
+
 return $modules;
 
