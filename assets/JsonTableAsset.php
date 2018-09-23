@@ -6,10 +6,13 @@ class JsonTableAsset extends \yii\web\AssetBundle
 {
     
    
-    public $sourcePath = 'js';
+    public $sourcePath = 'dynatable';
     
+    public $css = [
+        'jquery.dynatable.css'
+    ];
     public $js = [
-        'JSON-to-Table.min.1.0.0.js'
+        'jquery.dynatable.js'
     ];
     public $depends =[
         'app\assets\DevAsset'

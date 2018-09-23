@@ -15,13 +15,13 @@ class AjaxController extends Controller {
      * @return string
      */
     public function actionLab($cid=null) {
-        $array =[];
-        $array[] = ['cid'=>$cid];
+        
+        //$array[] = ['cid'=>$cid];
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $sql = " SELECT t.lab_name,t.lab_result,t.standard_result from pcc_lab t LIMIT 10 ";
         $raw = DbHelper::queryAll('db', $sql);
-        //$array[] = ['data'=>$raw];
-        return $array;
+        
+        return $raw;
     }
 
 }

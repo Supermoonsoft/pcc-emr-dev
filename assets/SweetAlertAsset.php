@@ -7,12 +7,12 @@ class SweetAlertAsset extends \yii\web\AssetBundle
     
     //public $basePath = '@webroot';
     //public $baseUrl = '@web';
-    public $sourcePath = 'js';
+    public $sourcePath = 'swal';
     public $css = [
-        'swal/sweetalert.css',
+        'sweetalert.css',
     ];
     public $js = [
-        'swal/sweetalert.min.js'
+        'sweetalert.min.js'
     ];
 }
 

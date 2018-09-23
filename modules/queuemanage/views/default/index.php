@@ -4,8 +4,6 @@ use app\components\MessageHelper;
 use app\assets\DataTableAsset;
 use yii\widgets\ActiveForm;
 use kartik\helpers\Html;
-use app\assets\JsonTableAsset;
-JsonTableAsset::register($this);
 
 DataTableAsset::register($this);
 ?>
@@ -100,11 +98,10 @@ DataTableAsset::register($this);
 
     </div>
 </div>
-<pre>
-    <?php
-    $this->registerJs($this->render('script.js'));
-   
-    ?>
-</pre>
+
+<?php
+$this->registerJs($this->render('script.js'));
+?>
+
 
 
