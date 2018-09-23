@@ -21,6 +21,7 @@ DataTableAsset::register($this);
     <div class="panel-body">
         <?php
         ActiveForm::begin([
+            'id' => 'form-add-q'
         ]);
         ?>
 
@@ -33,7 +34,7 @@ DataTableAsset::register($this);
                 '2' => 'ห้องตรวจ-2',
                 '3' => 'ห้องตรวจ-3'
             ];
-            echo Html::dropDownList('room', '0', $array, ['class' => 'form-control form-control-inline','id'=>'room'])
+            echo Html::dropDownList('room', '0', $array, ['class' => 'form-control form-control-inline', 'id' => 'room'])
             ?>
 
             <button id='btn_add_q' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
@@ -41,23 +42,23 @@ DataTableAsset::register($this);
         </div>
 
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-7">
                 <div id="grid-view-data-table" class="grid-view">
                     <table class="table  table-bordered">
                         <thead>
                             <tr>
                                 <th></th>                                
                                 <th>Hn</th>
-                                <th>ลำดับส่ง</th>
-                                <th>เวลามา</th>                                
+                                <th >ลำดับส่ง</th>
+                                <th >เวลามา</th>                                
                                 <th>ชื่อ นามสกุล</th>
-                                <th>รายการตรวจสอบ</th>
+
                             </tr>
                         </thead>
                         <tbody>
 
                             <?php foreach ($raw as $key => $value): ?>
-                                <tr data-key="<?= $value['pcc_vn'] ?>">
+                                <tr data-cid="<?= $value['cid'] ?>" class="tr-vn">
                                     <td>
                                         <input class="chk_pt" type="checkbox" name="pt[]" value="<?= $value['pcc_vn'] ?>" />
                                     </td>
@@ -66,7 +67,7 @@ DataTableAsset::register($this);
                                     <td><div class="send_no"></div></td>
                                     <td><?= $value['visit_date_begin'] . ' ' . $value['visit_time_begin'] ?></td>                                    
                                     <td><?= $value['fullname'] ?></td>
-                                    <td><span style='color:green'>Lab</span></td>
+
                                 </tr>                                
                             <?php endforeach; ?>
 
@@ -77,8 +78,20 @@ DataTableAsset::register($this);
                     </table>
                 </div>
             </div>
-            <div class="col-lg-4">
-                LAB Detail view
+            <div class="col-lg-5">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            ผลตรวจทางห้องปฏิบัติการ
+                        </div>                        
+                    </div>
+                    <div class="panel-body">
+                        <div id="lab-view"></div>
+                    </div>
+
+                </div>
+
+
             </div>
         </div>
         <?php ActiveForm::end(); ?>      

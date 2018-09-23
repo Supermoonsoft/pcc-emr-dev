@@ -29,7 +29,7 @@ class DefaultController extends Controller {
         }
         $date1 = date('Y-m-d');
         $date2 = date('Y-m-d');
-        $sql = "SELECT t.pcc_vn,p.hn,t.visit_date_begin,t.visit_time_begin 
+        $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
 ,concat(p.prename,p.fname,' ',p.lname) fullname
 from pcc_visit t 
 LEFT JOIN pcc_patient  p ON p.cid = t.person_cid

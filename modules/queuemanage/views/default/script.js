@@ -1,24 +1,32 @@
+//ทำ datatable
 $('#grid-view-data-table .table').DataTable();
+
+// จัดคิว
 var n = 0;
-$('#btn_add_q').prop('disabled', true);
-var room;
-$('#room').change(function(){
-    room =  $(this).val();
-});
 $('.chk_pt').click(function (e) {
-    
-    if (e.target.checked ) {
-       
+    if (e.target.checked) {
         n = n + 1;
-        console.log(n , room)
-        
-    }else{
-        n=n-1;
-        console.log(n)
-    }
-    if (n > 0 ) {
-        $('#btn_add_q').prop('disabled', false);
+        console.log($(this).val(), Date.now());
     } else {
-        $('#btn_add_q').prop('disabled', true);
+        n = n - 1;
     }
 });
+$('#form-add-q').submit(function (e) {
+    let room = $('#room').val();
+
+    if (n < 1 || room < 1) {
+        swal("ดำเนินการไม่ถูกต้อง!");
+        e.preventDefault();
+    }
+});
+
+
+// แสดง Lab
+
+$('.tr-vn').hover(function () {
+    $(this).css("background-color", "skyblue");
+    $('#lab-view').html($(this).data('cid'));
+}, function () {
+    $(this).css("background-color", "");
+});
+
