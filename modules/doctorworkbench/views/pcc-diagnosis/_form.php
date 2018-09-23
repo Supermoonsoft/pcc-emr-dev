@@ -62,6 +62,13 @@ JS;
     <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false);?>
     <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
 
+<div class="row" style="margin-bottom:20px;">
+    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+    <?=$form->field($model,'cc')->textArea(['cols'=> 5])->label(false);?>
+        
+    </div>
+</div>
+
     <div class="row">
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 <?= $form->field($model, 'icd_code')->widget(Select2::className(), [

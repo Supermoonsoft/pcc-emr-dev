@@ -4,27 +4,10 @@ namespace app\modules\doctorworkbench\models;
 
 use Yii;
 
-/**
- * This is the model class for table "pcc_diagnosis".
- *
- * @property string $id
- * @property string $hn
- * @property string $vn
- * @property string $provider_code
- * @property string $provider_name
- * @property string $date_service
- * @property string $time_service
- * @property string $icd_code
- * @property string $icd_name
- * @property string $diag_type
- * @property array $data_json
- * @property string $last_update
- */
+
 class PccDiagnosis extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+public $cc;
     public static function tableName()
     {
         return 'pcc_diagnosis';
@@ -38,7 +21,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
         return [
             [['hn', 'vn', 'icd_code', 'diag_type'], 'required'],
             [['id'], 'string'],
-            [['date_service', 'time_service', 'data_json', 'last_update'], 'safe'],
+            [['date_service', 'time_service', 'data_json', 'last_update','cc'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn'], 'string', 'max' => 12],
             [['provider_code'], 'string', 'max' => 5],
@@ -68,6 +51,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
             'diag_type' => 'Diag Type',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
+            'cc' => 'cc'
         ];
     }
 

@@ -4,10 +4,12 @@ use app\components\MessageHelper;
 use app\assets\DataTableAsset;
 use yii\widgets\ActiveForm;
 use kartik\helpers\Html;
+use app\assets\JsonTableAsset;
+JsonTableAsset::register($this);
 
 DataTableAsset::register($this);
 ?>
-<?= MessageHelper::Note(" แสดง Lab detailview ขวามือ เมื่อคลิก/hover ที่ คนไข้ ,คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>       
+<?= MessageHelper::Note(" คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>       
 
 <div class="panel panel-info">
 
@@ -101,6 +103,7 @@ DataTableAsset::register($this);
 <pre>
     <?php
     $this->registerJs($this->render('script.js'));
+   
     ?>
 </pre>
 
