@@ -16,18 +16,19 @@ return [
         'class' => 'kartik\grid\SerialColumn',
         'width' => '30px',
     ],
-//    [
-//        'class'=>'\kartik\grid\DataColumn',
-//        'attribute'=>'icode',
-//    ],
     [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'icode',
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'drug_name',
         'header' => 'รายการยา',
-        'value' => function($model) {
-            return $model->drugitems->name . ' ' . $model->drugitems->strength . ' ' . $model->drugitems->units;
-        }
     ],
+//    [
+//        'class' => '\kartik\grid\DataColumn',
+//        'attribute' => 'icode',
+//        'header' => 'รายการยา',
+//        'value' => function($model) {
+//            return $model->drugitems->name . ' ' . $model->drugitems->strength . ' ' . $model->drugitems->units;
+//        }
+//    ],
 //    [
 //        'class'=>'\kartik\grid\DataColumn',
 //        'header'=>'หน่วย',
@@ -42,11 +43,16 @@ return [
 //             return $model->drugitems->strength;
 //         }
 //    ],
-    [
-        'class' => '\kartik\grid\DataColumn',
-        'attribute' => 'druguse',
-        'header' => 'วิธีใช้',
-        'format' => 'raw',        
+       [
+        'class'=>'\kartik\grid\DataColumn',
+        'attribute' =>'usage_line1',   
+        'header'=>'วิธีใช้',         
+    ],         
+//    [
+//        'class' => '\kartik\grid\DataColumn',
+//        'attribute' => 'druguse',        
+//        'header' => 'วิธีใช้',
+//        'format' => 'raw',        
 //        'editableOptions' => [   
 //            
 //            'inputType' => \kartik\editable\Editable::INPUT_SELECT2,
@@ -65,15 +71,15 @@ return [
 //                ]
 //            ]
 //        ],
-        'value' => function($model) {
-            $models = CDrugusage::find()->where(['drugusage' => $model->druguse])->one();
-            if ($model->druguse != '') {
-                return $models->code;
-            } else {
-                return '-';
-            }
-        }
-    ],
+//        'value' => function($model) {
+//            $models = CDrugusage::find()->where(['drugusage' => $model->druguse])->one();
+//            if ($model->druguse != '') {
+//                return $models->code;
+//            } else {
+//                return '-';
+//            }
+//        }
+//    ],
     [        
         'class' => '\kartik\grid\DataColumn',
         'header' => 'จำนวนจ่าย',

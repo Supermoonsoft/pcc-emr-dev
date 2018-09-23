@@ -44,11 +44,12 @@ class PccMedication extends \yii\db\ActiveRecord
             [['date_service', 'time_service', 'data_json'], 'safe'],
             [['vn'], 'string', 'max' => 12],
             [['hn'], 'string', 'max' => 9],
-            [['an'], 'string', 'max' => 50],
-            [['icode'], 'string', 'max' => 24],
+            [['an', 'unit'], 'string', 'max' => 50],
+            [['icode', 'tmt24_code'], 'string', 'max' => 24],
+            [['druguse'], 'string', 'max' => 200],
             [['provider_code'], 'string', 'max' => 5],
             [['provider_name'], 'string', 'max' => 100],
-            [['druguse'], 'string', 'max' => 200],
+            [['usage_line1', 'usage_line2', 'usage_line3', 'drug_name'], 'string', 'max' => 255],
             [['id'], 'unique'],
         ];
     }
@@ -66,14 +67,20 @@ class PccMedication extends \yii\db\ActiveRecord
             'icode' => 'รหัสรายการ',
             'qty' => 'จำนวนจ่าย',
             'unitprice' => 'ราคาขาย/หน่วย',
+            'druguse' => 'วิธีใช้',
             'costprice' => 'ราคาทุน/หน่วย',
             'totalprice' => 'รวมราคาขาย',
             'provider_code' => 'Provider Code',
-            'druguse' => 'วิธีใช้',
             'provider_name' => 'Provider Name',
             'date_service' => 'Date Service',
             'time_service' => 'Time Service',
             'data_json' => 'Data Json',
+            'unit' => 'Unit',
+            'tmt24_code' => 'Tmt24 Code',
+            'usage_line1' => 'วิธีใช้ 1',
+            'usage_line2' => 'วิธีใช้ 2',
+            'usage_line3' => 'วิธีใช้ 3',
+            'drug_name' => 'Drug Name',
         ];
     }
 

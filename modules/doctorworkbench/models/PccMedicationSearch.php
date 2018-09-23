@@ -18,7 +18,7 @@ class PccMedicationSearch extends PccMedication
     public function rules()
     {
         return [
-            [['id', 'vn', 'hn', 'an', 'icode', 'provider_code', 'provider_name', 'druguse','date_service', 'time_service', 'data_json'], 'safe'],
+            [['id', 'vn', 'hn', 'an', 'icode', 'druguse', 'provider_code', 'provider_name', 'date_service', 'time_service', 'data_json', 'unit', 'tmt24_code', 'usage_line1', 'usage_line2', 'usage_line3', 'drug_name'], 'safe'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
         ];
     }
@@ -69,10 +69,16 @@ class PccMedicationSearch extends PccMedication
             ->andFilterWhere(['like', 'hn', $this->hn])
             ->andFilterWhere(['like', 'an', $this->an])
             ->andFilterWhere(['like', 'icode', $this->icode])
+            ->andFilterWhere(['like', 'druguse', $this->druguse])
             ->andFilterWhere(['like', 'provider_code', $this->provider_code])
             ->andFilterWhere(['like', 'provider_name', $this->provider_name])
-            ->andFilterWhere(['like', 'druguse', $this->druguse])    
-            ->andFilterWhere(['like', 'data_json', $this->data_json]);
+            ->andFilterWhere(['like', 'data_json', $this->data_json])
+            ->andFilterWhere(['like', 'unit', $this->unit])
+            ->andFilterWhere(['like', 'tmt24_code', $this->tmt24_code])
+            ->andFilterWhere(['like', 'usage_line1', $this->usage_line1])
+            ->andFilterWhere(['like', 'usage_line2', $this->usage_line2])
+            ->andFilterWhere(['like', 'usage_line3', $this->usage_line3])
+            ->andFilterWhere(['like', 'drug_name', $this->drug_name]);
 
         return $dataProvider;
     }
