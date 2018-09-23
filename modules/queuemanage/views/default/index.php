@@ -15,7 +15,7 @@ DataTableAsset::register($this);
     <div class="panel-heading">
         <div class="panel-title">
             <i class="fa fa-clock-o" aria-hidden="true"></i> ผู้ป่วยรอส่งเข้าพบแพทย์ 
-            <object align='right'><a class="btn btn-pink">ทั้งหมด</a></object>
+            <object align='right'><a class="btn btn-lbrown">ทั้งหมด</a></object>
         </div>
     </div>
     <div class="panel-body">
@@ -28,14 +28,15 @@ DataTableAsset::register($this);
         <div style="margin-bottom: 3px">
             <?php
             $array = [
+                '0' => '-- เลือก --',
                 '1' => 'ห้องตรวจ-1',
                 '2' => 'ห้องตรวจ-2',
                 '3' => 'ห้องตรวจ-3'
             ];
-            echo Html::dropDownList('room', '', $array, ['prompt' => '--- เลือกห้อง ---', 'class' => 'form-control form-control-inline'])
+            echo Html::dropDownList('room', '0', $array, ['class' => 'form-control form-control-inline','id'=>'room'])
             ?>
 
-            <button id='btn_add_q' type="submit" class="btn btn-blue"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
+            <button id='btn_add_q' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
             <a class="btn btn-light-green pull-right" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า</a>        
         </div>
 

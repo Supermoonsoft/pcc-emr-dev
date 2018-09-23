@@ -29,14 +29,14 @@ class DefaultController extends Controller {
         $sql = " update pcc_visit SET current_station = 'A0' WHERE pcc_vn  =  '$pcc_vn' ";
         DbHelper::execute('db', $sql);
         PatientHelper::removeCurrentPatient();
-        return $this->redirect(['/doctorworkbench']);
+        return $this->redirect(['/doctorworkbench/order']);
     }
     public function actionExitCurrentPatient(){
         $pcc_vn = PatientHelper::getCurrentVn();
         $sql = " update pcc_visit SET current_station = 'A2' WHERE pcc_vn  =  '$pcc_vn' ";
         DbHelper::execute('db', $sql);
         PatientHelper::removeCurrentPatient();
-        return $this->redirect(['/doctorworkbench']);
+        return $this->redirect(['/doctorworkbench/order']);
     }
 
 }

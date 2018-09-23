@@ -532,3 +532,39 @@
 .text-black {
     color: #2d2d2d;
 }
+
+/*tehnn*/
+.btn-primary {
+    color: #f8f8f8 !important;
+    background-color: #2095F2 !important;
+    border-color: #1a80d1 !important;
+}
+.btn-primary:hover {
+    color: #fff !important;
+    background-color: #1a80d1 !important;
+    border-color: #1a80d1 !important;
+}
+
+.btn-success {
+    color: #f8f8f8 !important;
+    background-color: #4BAE4F !important;
+    border-color: #449d47 !important;
+}
+.btn-success:hover {
+    color: #fff !important;
+    background-color: #449d47 !important;
+    border-color: #449d47 !important;
+}
+
+.btn-info {
+    color: #f8f8f8 !important;
+    background-color: #9B26AF !important;
+    border-color: #89219b !important;
+}
+.btn-info:hover {
+    color: #fff !important;
+    background-color: #89219b !important;
+    border-color: #89219b !important;
+}
+
+/*end tehn*/
