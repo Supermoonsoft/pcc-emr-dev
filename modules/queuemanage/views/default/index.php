@@ -7,13 +7,15 @@ use kartik\helpers\Html;
 
 DataTableAsset::register($this);
 ?>
+<?= MessageHelper::Note(" แสดง Lab detailview ขวามือ เมื่อคลิก/hover ที่ คนไข้ ,คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>       
+
 <div class="panel panel-info">
 
 
     <div class="panel-heading">
         <div class="panel-title">
             <i class="fa fa-clock-o" aria-hidden="true"></i> ผู้ป่วยรอส่งเข้าพบแพทย์ 
-            <object align='right'><a class="btn btn-success">ทั้งหมด</a></object>
+            <object align='right'><a class="btn btn-pink">ทั้งหมด</a></object>
         </div>
     </div>
     <div class="panel-body">
@@ -21,22 +23,20 @@ DataTableAsset::register($this);
         ActiveForm::begin([
         ]);
         ?>
-        <?= MessageHelper::Note(" แสดง Lab detailview ขวามือ เมื่อคลิก/hover ที่ คนไข้ ") ?>       
-        <?= MessageHelper::Note(" คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>
-        <?= MessageHelper::Note("ลง SCREEN /VST / CC /PE /PI ก่อนเข้าพบแพทย์ที่นี่??? (กรณีไม่ลงที่ JHCIS)") ?>
+
+
         <div style="margin-bottom: 3px">
             <?php
             $array = [
-                '1'=>'ห้องตรวจ-1',
-                '2'=>'ห้องตรวจ-2',
-                '3'=>'ห้องตรวจ-3'
+                '1' => 'ห้องตรวจ-1',
+                '2' => 'ห้องตรวจ-2',
+                '3' => 'ห้องตรวจ-3'
             ];
-            echo Html::dropDownList('room', '', $array, ['prompt'=>'--- เลือกห้อง ---','class'=>'form-control form-control-inline'])
-            
+            echo Html::dropDownList('room', '', $array, ['prompt' => '--- เลือกห้อง ---', 'class' => 'form-control form-control-inline'])
             ?>
-            
-            <button id='btn_add_q' type="submit" class="btn btn-info"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
-            <a class="btn btn-danger pull-right" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า</a>        
+
+            <button id='btn_add_q' type="submit" class="btn btn-blue"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
+            <a class="btn btn-light-green pull-right" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า</a>        
         </div>
 
         <div class="row">
@@ -85,10 +85,9 @@ DataTableAsset::register($this);
     </div>
 </div>
 <pre>
-<?php
-
-$this->registerJs($this->render('script.js'));
-?>
+    <?php
+    $this->registerJs($this->render('script.js'));
+    ?>
 </pre>
 
 
