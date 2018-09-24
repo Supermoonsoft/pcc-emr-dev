@@ -26,7 +26,7 @@ $module = \Yii::$app->controller->module->id;
                 </li>
                 
                 <li>
-                    <a class="<?= $module == 'stock' ? 'on-active' : 'non-active' ?>" title="PCC-STOCK" href="<?= Url::to(['/stock']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>
+                    <a class="<?= $module == 'stock' ? 'on-active' : 'non-active' ?>" title="PCC-STOCK" href="<?= Url::to(['/stock/pcc-service-medication/dispen']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>
                 </li>
                 <li>
                     <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fa fa-dollar" aria-hidden="true"></i> งานบัญชี</a>

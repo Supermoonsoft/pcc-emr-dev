@@ -3,10 +3,13 @@
 namespace app\modules\report\controllers;
 
 use yii\web\Controller;
+use Yii;
+use app\modules\stock\models\PccServiceMedication;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
 
-/**
- * Default controller for the `report` module
- */
 class DefaultController extends Controller
 {
     /**
@@ -16,5 +19,10 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         return $this->render('index');
+    }
+    public function actionNextDispen() {
+        return $this->render('next-dispen',[
+            'pagination' => FALSE
+        ]);
     }
 }
