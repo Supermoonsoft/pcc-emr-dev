@@ -124,7 +124,7 @@ $hn = PatientHelper::getCurrentHn();
                                         <?= Html::a('Login', ['/user/security/login']) ?>
                                     <?php else: ?>
 
-                                        <?= Html::a(\Yii::$app->user->identity->username, ['/site/about']) ?>
+                                        <?= Html::a(\Yii::$app->user->identity->username.':'.Yii::$app->user->identity->name, ['/site/about']) ?>
                                     <?php endif; ?>
                                 </div>
                             </h4>
