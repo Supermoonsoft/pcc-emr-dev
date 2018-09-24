@@ -41,9 +41,9 @@ li.dropdown:hover > .dropdown-menu {
 .text-center{
     text-align: center;
 }
-.form-group {
+/* .form-group {
     margin-bottom: -20px;
-}
+} */
 
 </style>
   <!-- start panel -->

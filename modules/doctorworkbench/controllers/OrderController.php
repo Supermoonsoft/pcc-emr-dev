@@ -16,6 +16,10 @@ use app\modules\lab\models\PreorderlabSeach;
     
 use app\modules\emr\models\PccService;
 use app\modules\emr\models\PccServiceSearch;
+use app\modules\chiefcomplaint\models\Pccservicecc;
+use app\modules\chiefcomplaint\models\PccserviceccSearch;
+use app\modules\treatment\models\Treatmentplan;
+use app\modules\treatment\models\TreatmentplanSearch;
     
 use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
@@ -109,11 +113,28 @@ class OrderController extends \yii\web\Controller
     }
         
     public function actionTreatmmentPlan(){
-        return $this->render('treatmment_plan');
+        $model = new Treatmentplan();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('treatmment_plan', [
+            'model' => $model,
+        ]);
     }
 
     public function actionCc(){
-        return $this->render('cc');
+        $model = new Pccservicecc();
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
+        return $this->render('cc', [
+            'model' => $model,
+        ]);
+
     }
 
         public function actionIcd10List($q = null, $id = null){

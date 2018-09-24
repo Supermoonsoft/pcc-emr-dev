@@ -11,7 +11,6 @@
 'cc' => 'active'
 
 ]);?>
-
-<h1>CC</h1>
+<?=$this->render('@app/modules/chiefcomplaint/views/pccservicecc/create',['model' => $model,]);?>
 
 <?=$this->render('../default/panel_foot');?>

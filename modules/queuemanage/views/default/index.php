@@ -36,8 +36,8 @@ DataTableAsset::register($this);
             //     '2' => 'ห้องตรวจ-2',
             //     '3' => 'ห้องตรวจ-3'
             // ];
-            $array = ArrayHelper::map(CDoctorRoom::find()->all(),'id','room_title');
-            echo Html::dropDownList('room', '0',$array, ['class' => 'form-control form-control-inline', 'id' => 'room'])
+            $array = ArrayHelper::map(CDoctorRoom::find()->orderBy('id ASC')->all(),'id','room_title');
+            echo Html::dropDownList('room', '0',$array, ['class' => 'form-control form-control-inline', 'id' => 'room','prompt'=>'เลือกห้องตรวจ'])
             ?>
 
             <button id='btn_add_q' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>

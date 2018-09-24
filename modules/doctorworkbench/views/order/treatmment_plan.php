@@ -11,5 +11,6 @@
 'cc' => ''
 
 ]);?>
-<h1 class="text-center">Treatmment Plan</h1>
+<?=$this->render('@app/modules/treatment/views/treatmentplan/create',['model' => $model,]);?>
+
 <?=$this->render('../default/panel_foot');?>

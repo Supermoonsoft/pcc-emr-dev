@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Json;
-use kartik\widgets\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 use app\components\PatientHelper;
 use kartik\select2\Select2;
@@ -299,17 +299,13 @@ $this->registerJS($js);
         <button class="btn btn-primary" id="btn-clear"> Clear </button>
     </div>
     </div></div>
-   
+   <hr>
 <!--- BUTTON LINK --->
 
 <div class="pccservicecc-form">
 
     <?php Pjax::begin(); ?>
-    <?php $form = ActiveForm::begin([
-        //'type' => ActiveForm::TYPE_HORIZONTAL,
-        'id' => 'nurse-cc-form',
-        'formConfig' => ['labelSpan' => 2, 'deviceSize' => ActiveForm::SIZE_SMALL]
-    ]); 
+    <?php $form = ActiveForm::begin(); 
     
     ?>
     <div class="row"> <div class="col-md-3">
@@ -337,7 +333,7 @@ $this->registerJS($js);
 
 
     <div class="row"> <div class="col-md-12">
-        <?= $form->field($model, 'cc_text')->textarea(['id'=>'cc_text','class'=>'cctext','rows' => 6]) ?>
+        <?= $form->field($model, 'cc_text')->textarea(['id'=>'cc_text','class'=>'form-control cctext','rows' => 6]) ?>
     </div> 
     </div><!--- END ROW--->
 

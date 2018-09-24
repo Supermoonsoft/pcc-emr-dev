@@ -3,7 +3,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Json;
-use kartik\widgets\ActiveForm;
+use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 use yii\bootstrap\Modal;
@@ -140,7 +140,7 @@ $this->registerJS($js);
         <button class="btn btn-primary" id="btn-clear"> Clear </button>
     </div>
     </div></div>
-   
+   <hr>
 <!--- BUTTON LINK --->
 
 <div class="treatmentplan-form">
@@ -150,7 +150,7 @@ $this->registerJS($js);
     
     ?>
     <div class="row"> <div class="col-md-12">
-        <?= $form->field($model, 'plan_text')->textarea(['id'=>'plan_text','class'=>'cctext','rows' => 6]) ?>
+        <?= $form->field($model, 'plan_text')->textarea(['id'=>'plan_text','class'=>'form-control cctext','rows' => 6]) ?>
     </div> 
     </div><!--- END ROW--->
 
