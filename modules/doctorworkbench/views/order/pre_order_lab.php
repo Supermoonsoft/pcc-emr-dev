@@ -7,7 +7,9 @@
 'procedure' => '',
 'pre_order_lab' =>'active',
 'apointment' => '',
-'treatmment_plan' => ''
+'treatmment_plan' => '',
+'cc' => ''
+
 ]);?>
 
 <?php

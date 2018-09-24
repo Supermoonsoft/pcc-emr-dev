@@ -9,7 +9,8 @@ $this->render('../default/panel_top', [
               'procedure' => '',
               'pre_order_lab' => '',
               'apointment' => 'active',
-              'treatmment_plan' => ''
+              'treatmment_plan' => '',
+              'cc' => ''
               ]);
 ?>
 <?php

@@ -38,7 +38,7 @@ DataTableAsset::register($this);
             ?>
 
             <button id='btn_add_q' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
-            <a class="btn btn-light-green pull-right" href="#"><i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า</a>        
+             <?=Html::a('<i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า',['/queuemanage/room'], ['class' => 'btn btn-light-green pull-right'])?>
         </div>
 
         <div class="row">
@@ -86,7 +86,22 @@ DataTableAsset::register($this);
                         </div>                        
                     </div>
                     <div class="panel-body">
-                        <div id="lab-view"></div>
+                        <!-- <div id="lab-view"></div> -->
+
+                        <table class="table">
+                        <thead>
+                        <tr>
+                        <th>ลำดับ</th>
+                        <th>รายการ</th>
+                        <th>ผล</th>
+                        <th>มาตรฐาน</th>
+                        </tr>
+                        </thead>
+                        <tbody id="lab-view">
+    
+                    </tbody>
+                </table>
+                        
                     </div>
 
                 </div>

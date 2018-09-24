@@ -112,6 +112,10 @@ class OrderController extends \yii\web\Controller
         return $this->render('treatmment_plan');
     }
 
+    public function actionCc(){
+        return $this->render('cc');
+    }
+
         public function actionIcd10List($q = null, $id = null){
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; //กำหนดการแสดงผลข้อมูลแบบ json
             $out = ['results'=>['diagcode'=>'','text'=>'']];

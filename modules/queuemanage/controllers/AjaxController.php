@@ -24,4 +24,13 @@ class AjaxController extends Controller {
         return $raw;
     }
 
+    public function actionLabView($cid=null){
+    //$array[] = ['cid'=>$cid];
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    $sql = " SELECT t.lab_name,t.lab_result,t.standard_result from pcc_lab t LIMIT 10 ";
+    $raw = DbHelper::queryAll('db', $sql);
+
+    return $this->renderAjax('../default/lab_view',['raw' => $raw]);
+    }
+
 }

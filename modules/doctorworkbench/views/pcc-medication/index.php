@@ -18,7 +18,9 @@ $this->render('../default/panel_top', [
     'procedure' => '',
     'pre_order_lab' => '',
     'apointment' => '',
-    'treatmment_plan' => ''
+    'treatmment_plan' => '',
+    'cc' => ''
+
 ]);
 ?>
 <?php echo $this->render('./create', ['model' => $model]); ?>

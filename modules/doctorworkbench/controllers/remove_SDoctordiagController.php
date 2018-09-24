@@ -1,18 +1,18 @@
 <?php
 
-namespace app\modules\lab\controllers;
+namespace app\modules\doctorworkbench\controllers;
 
 use Yii;
-use app\modules\lab\models\Preorderlab;
-use app\modules\lab\models\PreorderlabSeach;
+use app\modules\doctorworkbench\models\SDoctordiag;
+use app\modules\doctorworkbench\models\SDoctordiagSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PreorderlabController implements the CRUD actions for Preorderlab model.
+ * SDoctordiagController implements the CRUD actions for SDoctordiag model.
  */
-class PreorderlabController extends Controller
+class SDoctordiagController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -30,12 +30,12 @@ class PreorderlabController extends Controller
     }
 
     /**
-     * Lists all Preorderlab models.
+     * Lists all SDoctordiag models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PreorderlabSeach();
+        $searchModel = new SDoctordiagSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class PreorderlabController extends Controller
     }
 
     /**
-     * Displays a single Preorderlab model.
+     * Displays a single SDoctordiag model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,13 +58,13 @@ class PreorderlabController extends Controller
     }
 
     /**
-     * Creates a new Preorderlab model.
+     * Creates a new SDoctordiag model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Preorderlab();
+        $model = new SDoctordiag();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -76,7 +76,7 @@ class PreorderlabController extends Controller
     }
 
     /**
-     * Updates an existing Preorderlab model.
+     * Updates an existing SDoctordiag model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -96,7 +96,7 @@ class PreorderlabController extends Controller
     }
 
     /**
-     * Deletes an existing Preorderlab model.
+     * Deletes an existing SDoctordiag model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -110,15 +110,15 @@ class PreorderlabController extends Controller
     }
 
     /**
-     * Finds the Preorderlab model based on its primary key value.
+     * Finds the SDoctordiag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return Preorderlab the loaded model
+     * @return SDoctordiag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Preorderlab::findOne($id)) !== null) {
+        if (($model = SDoctordiag::findOne($id)) !== null) {
             return $model;
         }
 

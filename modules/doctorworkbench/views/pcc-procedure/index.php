@@ -22,7 +22,9 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 'procedure' => 'active',
 'pre_order_lab' =>'',
 'apointment' => '',
-'treatmment_plan' => ''
+'treatmment_plan' => '',
+'cc' => ''
+
 ]);?>
 
 <?php  echo $this->render('./create',['model' => $model]);?>

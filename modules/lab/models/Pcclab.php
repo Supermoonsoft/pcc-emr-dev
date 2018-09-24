@@ -5,32 +5,32 @@ namespace app\modules\lab\models;
 use Yii;
 
 /**
- * This is the model class for table "pcc_service_preorderlab".
+ * This is the model class for table "pcc_lab".
  *
  * @property string $id
- * @property string $pcc_vn อ้างอิงตาราง pcc_visit
- * @property array $data_json
- * @property string $pcc_start_service_datetime
- * @property string $pcc_end_service_datetime
- * @property string $data1
- * @property string $data2
- * @property string $hoscode
+ * @property string $hn
+ * @property string $vn
+ * @property string $provider_code
+ * @property string $provider_name
+ * @property string $date_service
+ * @property string $time_service
  * @property string $lab_code
  * @property string $lab_name
- * @property string $lab_standard_result
+ * @property string $standard_result
  * @property string $lab_request_at
  * @property string $lab_result_at
+ * @property array $data_json
+ * @property string $last_update
  * @property string $lab_result
- * @property string $lab_code_moph
  */
-class Preorderlab extends \yii\db\ActiveRecord
+class Pcclab extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'pcc_service_preorderlab';
+        return 'pcc_lab';
     }
 
     /**
@@ -39,11 +39,15 @@ class Preorderlab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service'], 'required'],
             [['id'], 'string'],
-            [['data_json', 'pcc_start_service_datetime', 'pcc_end_service_datetime'], 'safe'],
-            [['pcc_vn'], 'string', 'max' => 12],
-            [['data1', 'data2', 'lab_code', 'lab_name', 'lab_standard_result', 'lab_request_at', 'lab_result_at', 'lab_result', 'lab_code_moph'], 'string', 'max' => 255],
-            [['hoscode'], 'string', 'max' => 5],
+            [['date_service', 'time_service', 'lab_request_at', 'lab_result_at', 'data_json', 'last_update'], 'safe'],
+            [['hn'], 'string', 'max' => 9],
+            [['vn'], 'string', 'max' => 12],
+            [['provider_code'], 'string', 'max' => 5],
+            [['provider_name', 'lab_name'], 'string', 'max' => 255],
+            [['lab_code', 'standard_result', 'lab_result'], 'string', 'max' => 100],
+            [['id'], 'unique'],
         ];
     }
 
@@ -54,20 +58,20 @@ class Preorderlab extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'pcc_vn' => 'Pcc Vn',
-            'data_json' => 'Data Json',
-            'pcc_start_service_datetime' => 'Pcc Start Service Datetime',
-            'pcc_end_service_datetime' => 'Pcc End Service Datetime',
-            'data1' => 'Data1',
-            'data2' => 'Data2',
-            'hoscode' => 'Hoscode',
+            'hn' => 'Hn',
+            'vn' => 'Vn',
+            'provider_code' => 'Provider Code',
+            'provider_name' => 'Provider Name',
+            'date_service' => 'Date Service',
+            'time_service' => 'Time Service',
             'lab_code' => 'Lab Code',
             'lab_name' => 'Lab Name',
-            'lab_standard_result' => 'Lab Standard Result',
+            'standard_result' => 'Standard Result',
             'lab_request_at' => 'Lab Request At',
             'lab_result_at' => 'Lab Result At',
+            'data_json' => 'Data Json',
+            'last_update' => 'Last Update',
             'lab_result' => 'Lab Result',
-            'lab_code_moph' => 'Lab Code Moph',
         ];
     }
 

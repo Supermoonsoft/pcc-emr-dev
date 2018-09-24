@@ -34,11 +34,11 @@ $('.tr-vn').click(function () {
     $(this).css("background-color", "orange");
     $('#lab-view').html('Loading...');
     let cid = $(this).data('cid');
-    let uri = 'index.php?r=queuemanage/ajax/lab&cid=' + cid;
+    let uri = 'index.php?r=queuemanage/ajax/lab-view&cid=' + cid;
     $.get(uri, function (data) {
-        $('#lab-view').html(JSON.stringify(data))
-        console.log(data);
-        
+     //  $('#lab-view').html(JSON.stringify(data))
+      // console.log(data);
+      $('#lab-view').html(data);
     });
     
 });

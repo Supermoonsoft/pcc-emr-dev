@@ -29,7 +29,9 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
 'procedure' => '',
 'pre_order_lab' =>'',
 'apointment' => '',
-'treatmment_plan' => ''
+'treatmment_plan' => '',
+'cc' => ''
+
 ]);?>
 <h1 class="text-center">ORDER</h1>
 <?=$this->render('../default/panel_foot');?>

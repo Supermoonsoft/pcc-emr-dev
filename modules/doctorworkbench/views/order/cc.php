@@ -7,9 +7,11 @@
 'procedure' => '',
 'pre_order_lab' =>'',
 'apointment' => '',
-'treatmment_plan' => 'active',
-'cc' => ''
+'treatmment_plan' => '',
+'cc' => 'active'
 
 ]);?>
-<h1 class="text-center">Treatmment Plan</h1>
+
+<h1>CC</h1>
+
 <?=$this->render('../default/panel_foot');?>
