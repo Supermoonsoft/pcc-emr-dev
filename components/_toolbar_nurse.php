@@ -15,7 +15,7 @@ $module = \Yii::$app->controller->module->id;
                     <a class="<?= $module == 'queuemanage' ? 'on-active' : 'non-active' ?>" title="Queue Manage" href="<?= Url::to(['/queuemanage']) ?>"><i class="fa fa-child" aria-hidden="true"></i> QUEUE</a>
                 </li> 
                 <li>
-                    <a class="<?= $module == 'doctorworkbench' ? 'on-active' : 'non-active' ?>" title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/pcc-diagnosis']) ?>"><i class="fa fa-stethoscope"></i> ORDER</a>
+                    <a class="<?= $module == 'doctorworkbench' ? 'on-active' : 'non-active' ?>" title="Doctor-Order/Today" href="<?= Url::to(['/doctorworkbench/order']) ?>"><i class="fa fa-stethoscope"></i> ORDER</a>
                 </li>
                
                 <li>

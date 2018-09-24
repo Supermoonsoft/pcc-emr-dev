@@ -29,15 +29,23 @@ class OrderController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $modelPccDiagnosis = new PccDiagnosis();
-        $searchModelPccDiagnosis = new PccDiagnosisSearch();
-        $dataProviderPccDiagnosis = $searchModelPccDiagnosis->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'modelPccDiagnosis' => $modelPccDiagnosis,
-            'searchModelPccDiagnosis' => $searchModelPccDiagnosis,
-            'dataProviderPccDiagnosis' => $dataProviderPccDiagnosis,
-        ]);
+        $searchModel = new PccDiagnosisSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new PccDiagnosis(); 
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+               return   $this->renderAjax('index',[
+                     'searchModel' => $searchModel,
+                     'dataProvider' => $dataProvider,
+                     'model' => $model
+                     ]);
+             } else {
+                 return $this->render('index', [
+                     'searchModel' => $searchModel,
+                     'dataProvider' => $dataProvider,
+                     'model' => $model
+                 ]);
+             }
     }
 
     public function actionProcedure(){

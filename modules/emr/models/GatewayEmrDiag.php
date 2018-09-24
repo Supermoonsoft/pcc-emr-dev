@@ -5,29 +5,30 @@ namespace app\modules\emr\models;
 use Yii;
 
 /**
- * This is the model class for table "pcc_diagnosis".
+ * This is the model class for table "gateway_emr_diag".
  *
  * @property string $id
- * @property string $hn
- * @property string $vn
  * @property string $provider_code
  * @property string $provider_name
- * @property string $date_service
- * @property string $time_service
+ * @property string $hn
+ * @property string $vn
+ * @property string $an
+ * @property string $date_visit
+ * @property string $time_visit
  * @property string $icd_code
  * @property string $icd_name
  * @property string $diag_type
  * @property array $data_json
  * @property string $last_update
  */
-class PccDiagnosis extends \yii\db\ActiveRecord
+class GatewayEmrDiag extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'pcc_diagnosis';
+        return 'gateway_emr_diag';
     }
 
     /**
@@ -36,16 +37,15 @@ class PccDiagnosis extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn'], 'required'],
+            [['id', 'provider_code', 'provider_name'], 'required'],
             [['id'], 'string'],
-            [['date_service', 'time_service', 'data_json', 'last_update'], 'safe'],
-            [['hn'], 'string', 'max' => 9],
-            [['vn'], 'string', 'max' => 12],
+            [['date_visit', 'time_visit', 'data_json', 'last_update'], 'safe'],
             [['provider_code'], 'string', 'max' => 5],
-            [['provider_name'], 'string', 'max' => 100],
-            [['icd_code'], 'string', 'max' => 50],
+            [['provider_name', 'icd_code'], 'string', 'max' => 100],
+            [['hn'], 'string', 'max' => 10],
+            [['vn', 'an'], 'string', 'max' => 12],
             [['icd_name'], 'string', 'max' => 255],
-            [['diag_type'], 'string', 'max' => 10],
+            [['diag_type'], 'string', 'max' => 2],
             [['id'], 'unique'],
         ];
     }
@@ -57,14 +57,15 @@ class PccDiagnosis extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'hn' => 'Hn',
-            'vn' => 'Vn',
             'provider_code' => 'Provider Code',
             'provider_name' => 'Provider Name',
-            'date_service' => 'Date Service',
-            'time_service' => 'Time Service',
-            'icd_code' => 'รหัส',
-            'icd_name' => 'รายการ',
+            'hn' => 'Hn',
+            'vn' => 'Vn',
+            'an' => 'An',
+            'date_visit' => 'Date Visit',
+            'time_visit' => 'Time Visit',
+            'icd_code' => 'Icd Code',
+            'icd_name' => 'Icd Name',
             'diag_type' => 'Diag Type',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',

@@ -5,12 +5,12 @@ namespace app\modules\emr\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\emr\models\PccDiagnosis;
+use app\modules\emr\models\GatewayEmrDiag;
 
 /**
- * PccDiagnosisSearch represents the model behind the search form of `app\modules\emr\models\PccDiagnosis`.
+ * GatewayEmrDiagSearch represents the model behind the search form of `app\modules\emr\models\GatewayEmrDiag`.
  */
-class PccDiagnosisSearch extends PccDiagnosis
+class GatewayEmrDiagSearch extends GatewayEmrDiag
 {
     /**
      * {@inheritdoc}
@@ -18,7 +18,7 @@ class PccDiagnosisSearch extends PccDiagnosis
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'icd_code', 'icd_name', 'diag_type', 'data_json', 'last_update'], 'safe'],
+            [['id', 'provider_code', 'provider_name', 'hn', 'vn', 'an', 'date_visit', 'time_visit', 'icd_code', 'icd_name', 'diag_type', 'data_json', 'last_update'], 'safe'],
         ];
     }
 
@@ -38,9 +38,9 @@ class PccDiagnosisSearch extends PccDiagnosis
      *
      * @return ActiveDataProvider
      */
-    public function search($params,$vn,$provider_code)
+    public function search($params)
     {
-        $query = PccDiagnosis::find()->where(['vn' => $vn, 'provider_code' => $provider_code]);
+        $query = GatewayEmrDiag::find();
 
         // add conditions that should always apply here
 
@@ -58,16 +58,17 @@ class PccDiagnosisSearch extends PccDiagnosis
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'date_service' => $this->date_service,
-            'time_service' => $this->time_service,
+            'date_visit' => $this->date_visit,
+            'time_visit' => $this->time_visit,
             'last_update' => $this->last_update,
         ]);
 
         $query->andFilterWhere(['ilike', 'id', $this->id])
-            ->andFilterWhere(['ilike', 'hn', $this->hn])
-            ->andFilterWhere(['ilike', 'vn', $this->vn])
             ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
             ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['ilike', 'hn', $this->hn])
+            ->andFilterWhere(['ilike', 'vn', $this->vn])
+            ->andFilterWhere(['ilike', 'an', $this->an])
             ->andFilterWhere(['ilike', 'icd_code', $this->icd_code])
             ->andFilterWhere(['ilike', 'icd_name', $this->icd_name])
             ->andFilterWhere(['ilike', 'diag_type', $this->diag_type])

@@ -74,16 +74,16 @@ use yii\helpers\Url;
                  'collapseIcon'=> '<i class="fa fa-sort-desc"></i>'
             ],
             [
-                'attribute' => 'date_service',
+                'attribute' => 'date_visit',
                 'value' => function ($model, $key, $index, $widget) {
                     if ($model->cc == '' && $model->pe == '' && $model->pi == '' && $model->pulse == '' && $model->bpd == '') {
                         $color = '#FF4081';
                     } else {
                         $color = '#4DB6AC';
                     }
-                    $tyear = Yii::$app->formatter->asDate($model->date_service, 'yyyy') + 543;
+                    $tyear = Yii::$app->formatter->asDate($model->date_visit, 'yyyy') + 543;
                     return "<span class='badge' style='background-color: {$color};color:{$color}'>.</span>  <code style='color: black;font-size:16px;' >" .
-                            Yii::$app->formatter->asDate($model->date_service, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
+                            Yii::$app->formatter->asDate($model->date_visit, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
                 },
                 'filterType' => GridView::FILTER_COLOR,
                 'filterWidgetOptions' => [

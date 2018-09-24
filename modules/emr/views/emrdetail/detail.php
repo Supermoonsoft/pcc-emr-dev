@@ -1,14 +1,18 @@
 <?php
 
-use app\modules\emr\models\PccService;
-use app\modules\emr\models\PccDiagnosis;
-use app\modules\emr\models\PccDiagnosisSearch;
+use app\modules\emr\models\GatewayEmrVisit;
+//use app\modules\emr\models\PccDiagnosis;
+//use app\modules\emr\models\PccDiagnosisSearch;
+
+use app\modules\emr\models\GatewayEmrDiag;
+use app\modules\emr\models\GatewayEmrDiagSearch;
+
 use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
-$model = PccService::findOne($id);
+$model = GatewayEmrVisit::findOne($id);
 //$modelDiag = PccDiagnosis::find()->where(['vn' => $vn, 'provider_code' => $provider_code]);
- $searchModel = new PccDiagnosisSearch();
+ $searchModel = new GatewayEmrDiagSearch();
 $dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$provider_code);
 ?>
 <div class="col-sm-6">
@@ -23,6 +27,7 @@ $dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$pr
         <div class="panel-body">
             <?=
             DetailView::widget([
+                
                 'model' => $model,
                 'attributes' => [
                     [
@@ -99,6 +104,7 @@ $dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$pr
                 'dataProvider' => $dataProviderDiag,
                 //'filterModel' => $searchModel,
                 //'showPageSummary'=>true,
+                'striped'=>true,
                 'pjax' => true,
                 'pjaxSettings' => [
                     'neverTimeout' => true,
