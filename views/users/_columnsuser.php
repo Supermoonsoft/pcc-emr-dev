@@ -3,14 +3,14 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 return [
-    [
-        'class' => 'kartik\grid\CheckboxColumn',
-        'width' => '20px',
-    ],
-    [
-        'class' => 'kartik\grid\SerialColumn',
-        'width' => '30px',
-    ],
+//    [
+//        'class' => 'kartik\grid\CheckboxColumn',
+//        'width' => '20px',
+//    ],
+//    [
+//        'class' => 'kartik\grid\SerialColumn',
+//        'width' => '30px',
+//    ],
         // [
         // 'class'=>'\kartik\grid\DataColumn',
         // 'attribute'=>'id',
@@ -18,6 +18,9 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'username',
+        'label'=>'รหัสผู้ใช้งาน',
+        'hAlign'=>'center',
+        'vAlign'=>'middle',
     ],
      [
         'class' => '\kartik\grid\DataColumn',
@@ -130,7 +133,7 @@ return [
     [
         'class' => '\kartik\grid\DataColumn',
         'attribute' => 'role',
-        'header'=>'ระดับผู้ใช้งาน',
+        'label'=>'ระดับผู้ใช้งาน',
         'value' => function($model) {
             if ($model->role == 10) {
                 return 'Admin';

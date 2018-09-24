@@ -10,7 +10,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
 public $cc;
     public static function tableName()
     {
-        return 'pcc_diagnosis';
+        return 'pcc_service_diagnosis';
     }
 
     /**

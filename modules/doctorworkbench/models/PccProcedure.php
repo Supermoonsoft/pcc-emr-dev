@@ -32,7 +32,7 @@ class PccProcedure extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pcc_procedure';
+        return 'pcc_service_procedure';
     }
 
     /**
