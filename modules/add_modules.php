@@ -22,6 +22,8 @@ $modules['user'] = [
     'cost' => 12,
     'admins' => ['admin']]; // inam
 $modules['rbac'] = ['class' => 'dektrium\rbac\RbacWebModule']; //inam
+$modules['chiefcomplaint'] = ['class' => 'app\modules\chiefcomplaint\Chiefcomplaint'];//pond 
+$modules['treatment'] = ['class' => 'app\modules\treatment\Treatment'];//pond
 
 return $modules;
 

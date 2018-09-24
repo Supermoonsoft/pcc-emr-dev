@@ -12,13 +12,13 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
 <style>
 .total-price{
-    border-top: 3px solid #007bff;
+    border-top: 3px solid #9b25af;
     box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
     height: 56px;
-    width: 324px;
+    width: 158%;
     margin-top: 9px;
     background-color: #eee;
-    color: #017bfe; 
+    color: #9b25af; 
 }
 .total-price > p{
     font-size: 36px;

@@ -4,6 +4,8 @@ use app\components\MessageHelper;
 use app\assets\DataTableAsset;
 use yii\widgets\ActiveForm;
 use kartik\helpers\Html;
+use yii\helpers\ArrayHelper;
+use app\modules\queuemanage\models\CDoctorRoom;
 
 DataTableAsset::register($this);
 ?>
@@ -28,13 +30,14 @@ DataTableAsset::register($this);
 
         <div style="margin-bottom: 3px">
             <?php
-            $array = [
-                '0' => '-- เลือก --',
-                '1' => 'ห้องตรวจ-1',
-                '2' => 'ห้องตรวจ-2',
-                '3' => 'ห้องตรวจ-3'
-            ];
-            echo Html::dropDownList('room', '0', $array, ['class' => 'form-control form-control-inline', 'id' => 'room'])
+            // $array = [
+            //     '0' => '-- เลือก --',
+            //     '1' => 'ห้องตรวจ-1',
+            //     '2' => 'ห้องตรวจ-2',
+            //     '3' => 'ห้องตรวจ-3'
+            // ];
+            $array = ArrayHelper::map(CDoctorRoom::find()->all(),'id','room_title');
+            echo Html::dropDownList('room', '0',$array, ['class' => 'form-control form-control-inline', 'id' => 'room'])
             ?>
 
             <button id='btn_add_q' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
