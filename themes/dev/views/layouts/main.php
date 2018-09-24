@@ -125,10 +125,25 @@ $hn = PatientHelper::getCurrentHn();
                             <h4>
                                 <div id='user-display'>
                                     <?php if (\Yii::$app->user->isGuest): ?>
+
                                         <?= Html::a('Login', ['/user/security/login']) ?>
                                     <?php else: ?>
+                                        <li class="">
+                                            <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="color: white">                                            
+                                                <?php echo Yii::$app->user->identity->username.':'.Yii::$app->user->identity->name; ?>
+                                                <span class=" fa fa-angle-down"></span>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-usermenu pull-right">
 
-                                        <?= Html::a(\Yii::$app->user->identity->username, ['/site/about']) ?>
+                                                <li>
+                                                    <?php echo Html::a('ข้อมูลส่วนตัว <i class="fa fa-user pull-right"></i>', yii\helpers\Url::to(['/users/indexuser']), ['data-method' => 'post']) ?>
+                                                </li>
+                                                <li>
+                                                    <?php echo Html::a('ออกจากระบบ <i class="fa fa-sign-out pull-right"></i>', yii\helpers\Url::to(['/site/logout']), ['data-method' => 'post']) ?>
+                                                </li>
+                                            </ul>
+                                        </li>
+
                                     <?php endif; ?>
                                 </div>
                             </h4>
