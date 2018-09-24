@@ -35,7 +35,7 @@ $hn = PatientHelper::getCurrentHn();
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="./img/medico.ico" type="image/x-icon"/>
         <link rel="shortcut icon" href="./img/medico.ico" type="image/x-icon"/>
-        
+
         <style>
             #user-display > a:link {
                 color: white;
@@ -54,6 +54,10 @@ $hn = PatientHelper::getCurrentHn();
             /* selected link */
             #user-display > a:active {
                 color: whitesmoke;
+            }
+
+            .breadcrumb > li + li:before {
+                content: "|" !important;
             }
         </style>
         <?= Html::csrfMetaTags() ?>
@@ -121,10 +125,10 @@ $hn = PatientHelper::getCurrentHn();
                             <h4>
                                 <div id='user-display'>
                                     <?php if (\Yii::$app->user->isGuest): ?>
-                                        <?= Html::a('Login', ['/user/security/login']) ?>
+                                        <?= Html::a('Login', ['/site/login']) ?>
                                     <?php else: ?>
 
-                                        <?= Html::a(\Yii::$app->user->identity->username.':'.Yii::$app->user->identity->name, ['/site/about']) ?>
+                                        <?= Html::a(\Yii::$app->user->identity->username, ['/site/about']) ?>
                                     <?php endif; ?>
                                 </div>
                             </h4>
@@ -148,6 +152,7 @@ $hn = PatientHelper::getCurrentHn();
 
             <?=
             Breadcrumbs::widget([
+                'homeLink' => FALSE,
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ])
             ?>
