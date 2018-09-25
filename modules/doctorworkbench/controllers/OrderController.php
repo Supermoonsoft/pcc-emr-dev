@@ -24,7 +24,9 @@ use app\modules\emr\models\GatewayEmrVisit;
 use app\modules\emr\models\GatewayEmrVisitSearch;
     
 use yii\web\Controller;
-use app\modules\appointment\models\PccAppoinmentShow;
+    use app\modules\appointment\models\PccAppoinmentShow;
+    use app\modules\appointment\models\GatewayEmrAppointment;
+    use app\modules\appointment\models\PccPatient;
 
 
 class OrderController extends \yii\web\Controller
