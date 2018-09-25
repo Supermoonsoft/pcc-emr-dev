@@ -45,7 +45,7 @@ return [
 //    ],
        [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute' =>'usage_line1',   
+        'attribute' =>'druguse',     
         'header'=>'วิธีใช้',         
     ],         
 //    [

@@ -11,6 +11,8 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use app\modules\doctorworkbench\models\CDrugitems;
+use app\modules\doctorworkbench\models\CDrugusage;
+
 
 
 class PccMedicationController extends Controller
@@ -158,5 +160,21 @@ class PccMedicationController extends Controller
         $id = $request->post( 'id' ); // รับค่า id ของ pcc_medication ที่ถูกส่งมา
         return PccMedication::findOne(['id' => $id])->icode; // ส่งค่า icode ไปที่ select2 
 
+    }
+
+    public function actionUpdateMed(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $request = Yii::$app->request;
+         $keys = $request->post( 'id' ); // คา่ ID ที่ส่งมา
+        $value = $request->post( 'value' ); // ค่า input value
+        $drug_use = CDrugusage::findOne(['drugusage' => $value['druguse']]); // ค้นหา id drugusage
+        foreach ( $keys as $id ) { // loop ข้อมูล ID
+            $model = PccMedication::findOne(['id' => $id]); // ค้นหาแถวตาม PSK
+            $model->icode  = $value['icode']; // แก้ไขค่า icode รายการยา
+            $model->druguse  = $drug_use->drugusage;  // แก้ไข วิธีใช้
+            $model->qty  = $value['qty']; // แก้ไข จำนวน
+            $model->save();  // บันทึก
+        }
+        return ['forceReload'=>'#crud-medication']; // reload gridview  เพื่อ update  ข้อมูล
     }
 }
