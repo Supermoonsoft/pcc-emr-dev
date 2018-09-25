@@ -7,6 +7,8 @@ use johnitvn\ajaxcrud\CrudAsset;
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
 CrudAsset::register($this);
+$this->registerJS($this->render('../../dist/js/medication.js'));
+
 ?>
 <?=
 $this->render('../default/panel_top', [
@@ -31,11 +33,11 @@ $this->render('../default/panel_top', [
 <?php // Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['class' => 'pull-right','id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']);// show modal ?> 
 </div>
 
-<div class="pcc-diagnosis-index" style="margin-top:7px;">
+<div class="pcc-medication-index" style="margin-top:7px;">
     <div id="ajaxCrudDatatable">
         <?=
         GridView::widget([
-            'id' => 'crud-datatable',
+            'id' => 'crud-medication',
             'dataProvider' => $dataProvider,
             'pjax' => true,
             'columns' => require(__DIR__ . '/_columns.php'),
@@ -79,7 +81,7 @@ $js = <<< JS
 // });
 
  $("#btn-delete").click(function(){
-    var keys = $("#crud-datatable").yiiGridView("getSelectedRows");
+    var keys = $("#crud-medication").yiiGridView("getSelectedRows");
     //console.log(keys);
     var url = 'index.php?r=doctorworkbench/pcc-medication/bulk-delete'
     if(keys.length>0){

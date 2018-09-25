@@ -151,4 +151,12 @@ class PccMedicationController extends Controller
         //Yii::$app->response->format = Response::FORMAT_JSON;
         return $this->renderAjax('print_med');
     }
+
+    public function actionSelectMed(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $request = Yii::$app->request;
+        $id = $request->post( 'id' ); // รับค่า id ของ pcc_medication ที่ถูกส่งมา
+        return PccMedication::findOne(['id' => $id])->icode; // ส่งค่า icode ไปที่ select2 
+
+    }
 }
