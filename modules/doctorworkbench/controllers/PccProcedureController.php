@@ -41,20 +41,13 @@ class PccProcedureController extends Controller
         $searchModel = new PccProcedureSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new PccProcedure();  
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-               return   $this->renderAjax('index',[
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                     ]);
-             } else {
-                 return $this->render('index', [
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                 ]);
-             }
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+
+        ]);
     }
 
 

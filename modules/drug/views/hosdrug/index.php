@@ -38,7 +38,7 @@ use app\components\loading\ShowLoading;
              [
                 'class' => 'yii\grid\CheckboxColumn',
                 'checkboxOptions' => function($model) {
-                    return ['value' => $model->id, 'data' => ['key' => $model->id]];
+                    return ['value' => $model->id, 'datadrug' => ['key' => $model->id]];
                 },
                 'header' => false,
             ],

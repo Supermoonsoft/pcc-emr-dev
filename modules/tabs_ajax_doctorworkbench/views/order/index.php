@@ -4,7 +4,7 @@ use kartik\tabs\TabsX;
 use yii\helpers\Url;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
-$content = $this->render('@app/modules/doctorworkbench/views/pcc-diagnosis/index',[
+$content = $this->render('../pcc-diagnosis/index',[
     'searchModel' => $searchModel,
     'dataProvider' => $dataProvider,
     'model' => $model

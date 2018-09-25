@@ -8,6 +8,9 @@ use app\modules\lab\models\HoslabSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
+use yii\helpers\Json;
 
 
 class HoslabController extends Controller
@@ -26,19 +29,28 @@ class HoslabController extends Controller
     }
 
 
-    public function actionIndex($cid=NULL)
+    public function actionIndex()
     {
 
-        $searchModel = new HoslabSearch($cid);
+        $searchModel = new HoslabSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'cid'=>$cid
-        ]);
-    }
+        $model = new Hoslab(); 
 
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+               return   $this->renderAjax('index',[
+                     'searchModel' => $searchModel,
+                     'dataProvider' => $dataProvider,
+                     'model' => $model
+                     ]);
+             } else {
+                return $this->renderAjax('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'model' => $model
+                ]);
+            }
+    }
 
     public function actionView($id)
     {

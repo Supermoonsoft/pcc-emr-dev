@@ -291,11 +291,11 @@ $this->registerJS($js);
     <div class="row"><div class="col-md-12">
     <div class="form-group button-box-shadow ">
     <b>CC Template : </b> 
-        <button class="btn btn-info" data-toggle="modal" data-target =".bd-popup1-modal-lg"> อาการ </button>
-        <button class="btn btn-info" data-toggle="modal" data-target =".bd-popup2-modal-lg"> ให้คำปรึกษา </button>
-        <button class="btn btn-info" data-toggle="modal" data-target =".bd-popup3-modal-lg"> ติดตามอาการ </button>
-        <button class="btn btn-info" data-toggle="modal" data-target =".bd-popup4-modal-lg"> ตรวจสุขภาพ </button>
-        <button class="btn btn-info" data-toggle="modal" data-target =".bd-popup5-modal-lg"> แพทย์ </button>
+        <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup1-modal-lg"> อาการ </button>
+        <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup2-modal-lg"> ให้คำปรึกษา </button>
+        <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup3-modal-lg"> ติดตามอาการ </button>
+        <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup4-modal-lg"> ตรวจสุขภาพ </button>
+        <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup5-modal-lg"> แพทย์ </button>
         <button class="btn btn-primary" id="btn-clear"> Clear </button>
     </div>
     </div></div>

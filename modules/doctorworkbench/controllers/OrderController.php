@@ -20,6 +20,8 @@ use app\modules\chiefcomplaint\models\Pccservicecc;
 use app\modules\chiefcomplaint\models\PccserviceccSearch;
 use app\modules\treatment\models\Treatmentplan;
 use app\modules\treatment\models\TreatmentplanSearch;
+use app\modules\emr\models\GatewayEmrVisit;
+use app\modules\emr\models\GatewayEmrVisitSearch;
     
 use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
@@ -29,23 +31,15 @@ class OrderController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $searchModel = new PccDiagnosisSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new PccDiagnosis(); 
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-               return   $this->renderAjax('index',[
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                     ]);
-             } else {
-                 return $this->render('index', [
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                 ]);
-             }
+        $modelPccDiagnosis = new PccDiagnosis();
+        $searchModelPccDiagnosis = new PccDiagnosisSearch();
+        $dataProviderPccDiagnosis = $searchModelPccDiagnosis->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'modelPccDiagnosis' => $modelPccDiagnosis,
+            'searchModelPccDiagnosis' => $searchModelPccDiagnosis,
+            'dataProviderPccDiagnosis' => $dataProviderPccDiagnosis,
+        ]);
     }
 
     public function actionProcedure(){
@@ -76,7 +70,7 @@ class OrderController extends \yii\web\Controller
     }
     public function actionEmr($cid=NULL){
         
-        $searchModel = new PccServiceSearch($cid);
+        $searchModel = new GatewayEmrVisitSearch($cid);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('emr',[
                              'searchModel' => $searchModel,

@@ -2,13 +2,7 @@
 <?php
 use kartik\tabs\TabsX;
 use yii\helpers\Url;
-use kartik\widgets\Select2;
-use yii\web\JsExpression;
-$content = $this->render('@app/modules/doctorworkbench/views/pcc-diagnosis/index',[
-    'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-])
+$content = 'xxxx';
 ?>
 
 <h1>demo-order/index</h1>
@@ -38,52 +32,43 @@ li.dropdown:hover > .dropdown-menu {
 
 </style>
 
+
 <?php
 echo TabsX::widget([
     'items' => [
         [
             'label' => 'EMR',
-            'linkOptions' => ['data-url' => Url::to(['/emr/emrdetail/index'])],
+            'linkOptions' => ['data-url' => Url::to(['tabs1'])],
+            'active' => true,
+            'content' => $content, // $content is your initial tab content to show on load (you can use renderPartial or whatever to generate this in the view)
             'options' => ['id' => 'tabs1'],
             'encode'=>true,
             'encodeLabels'=>true
         ],
         [
             'label' => 'Lab History',
-            'linkOptions' => ['data-url' => Url::to(['/lab/hoslab/index'])],
+            'linkOptions' => ['data-url' => Url::to(['tabs2'])],
             'options' => ['id' => 'tabs2'],
-        ],
-        [
-            'label' => 'Drug History',
-            'linkOptions' => ['data-url' => Url::to(['/drug/hosdrug/index'])],
-            'options' => ['id' => 'tabs2'],
-        ],
-        [
-            'label' => 'CC',
-            'linkOptions' => ['data-url' => Url::to(['/chiefcomplaint/pccservicecc/create'])],
-            'options' => ['id' => 'cc'],
         ],
         [
             'label' => 'Diganosis',
-            'active' => true,
-            // 'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-diagnosis'])],
-            'content' => $content,
-            'options' => ['id' => 'diagnosis'],
+            'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-diagnosis'])],
+            'options' => ['id' => 'tabs3'],
         ],
         [
             'label' => 'Medication',
-           'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-medication'])],
-            'options' => ['id' => 'medication'],
+            'linkOptions' => ['data-url' => Url::to(['tabs3'])],
+            'options' => ['id' => 'tabs3'],
         ],
         [
             'label' => 'Procedure',
-           'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-procedure'])],
-            'options' => ['id' => 'procedure'],
+            'linkOptions' => ['data-url' => Url::to(['tabs3'])],
+            'options' => ['id' => 'tabs3'],
         ],
         [
             'label' => 'Pre-Order Lab',
-            'linkOptions' => ['data-url' => Url::to(['/chiefcomplaint/pccservicecc/create'])],
-            'options' => ['id' => 'pre-order-lab'],
+            'linkOptions' => ['data-url' => Url::to(['tabs3'])],
+            'options' => ['id' => 'tabs3'],
         ],
         [
             'label' => 'Appointment',
@@ -92,14 +77,13 @@ echo TabsX::widget([
         ],
         [
             'label' => 'Treatmment Plan',
-            'linkOptions' => ['data-url' => Url::to(['/treatment/treatmentplan/create'])],
-            'options' => ['id' => 'treatment'],
+            'linkOptions' => ['data-url' => Url::to(['tabs3'])],
+            'options' => ['id' => 'tabs3'],
         ],
     ],
     'position' => TabsX::POS_ABOVE,
     'encodeLabels' => false,
     'bordered' => true,
-    'encodeLabels'=>false,
     'pluginOptions' => [
         'enableCache' => true,
     ],

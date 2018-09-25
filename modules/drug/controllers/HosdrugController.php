@@ -8,6 +8,9 @@ use app\modules\drug\models\HosdrugSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
+use yii\helpers\Json;
 
 /**
  * HosdrugController implements the CRUD actions for Hosdrug model.
@@ -33,16 +36,26 @@ class HosdrugController extends Controller
      * Lists all Hosdrug models.
      * @return mixed
      */
-    public function actionIndex($cid=NULL)
+    public function actionIndex()
     {
-        $searchModel = new HosdrugSearch($cid);
+        $searchModel = new HosdrugSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $model = new Hosdrug(); 
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'cid'=>$cid
-        ]);
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+               return   $this->renderAjax('index',[
+                     'searchModel' => $searchModel,
+                     'dataProvider' => $dataProvider,
+                     'model' => $model
+                     ]);
+             } else {
+                return $this->renderAjax('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'model' => $model
+                ]);
+            }
     }
 
     /**

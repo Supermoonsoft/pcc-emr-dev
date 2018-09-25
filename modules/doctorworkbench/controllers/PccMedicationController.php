@@ -36,20 +36,12 @@ class PccMedicationController extends Controller
         $searchModel = new PccMedicationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new PccMedication();  
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-               return   $this->renderAjax('index',[
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                     ]);
-             } else {
-                 return $this->render('index', [
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                 ]);
-             }
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+        ]);
     }
 
     public function actionView($id)

@@ -8,7 +8,9 @@ use app\modules\chiefcomplaint\models\PccserviceccSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use \yii\web\Response;
+use yii\helpers\Html;
+use yii\helpers\Json;
 /**
  * PccserviceccController implements the CRUD actions for Pccservicecc model.
  */
@@ -64,17 +66,20 @@ class PccserviceccController extends Controller
      */
     public function actionCreate()
     {
+        $request = Yii::$app->request;
         $model = new Pccservicecc();
-
+        Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->renderAjax(['update', 'id' => $model->id]);
+            //return ['forceReload'=>'#pccservicecc-create'];
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
 
+    
     /**
      * Updates an existing Pccservicecc model.
      * If update is successful, the browser will be redirected to the 'view' page.

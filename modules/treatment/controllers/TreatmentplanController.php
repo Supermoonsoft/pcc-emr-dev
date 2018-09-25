@@ -8,7 +8,9 @@ use app\modules\treatment\models\TreatmentplanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use \yii\web\Response;
+use yii\helpers\Html;
+use yii\helpers\Json;
 /**
  * treatmentplanController implements the CRUD actions for treatmentplan model.
  */
@@ -64,13 +66,14 @@ class TreatmentplanController extends Controller
      */
     public function actionCreate()
     {
+        $request = Yii::$app->request;
         $model = new Treatmentplan();
-
+        Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->renderAjax(['update', 'id' => $model->id]);
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

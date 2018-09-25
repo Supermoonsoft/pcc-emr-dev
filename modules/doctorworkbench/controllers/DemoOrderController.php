@@ -18,46 +18,22 @@ class DemoOrderController extends \yii\web\Controller
 {
     public function actionIndex()
     {
-        $searchModel = new PccDiagnosisSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new PccDiagnosis(); 
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-               return   $this->renderAjax('index',[
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                     ]);
-             } else {
-                 return $this->render('index', [
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                 ]);
-             }
+        return $this->render('index');
     }
 
    
     public function actionTabs1($tab=null) {
+    //    Yii::$app->response->format = Response::FORMAT_JSON;
     $searchModel = new PccDiagnosisSearch();
     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new PccDiagnosis();  
-        if (Yii::$app->request->isAjax) {
-       Yii::$app->response->format = Response::FORMAT_JSON;
-          return   $this->renderPatail('tabs1',[
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model
-                ]);
-           // return Json::encode($html);
-        } else {
-            return $this->render('tabs1', [
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
-                'model' => $model
+
+        $html = $this->renderAjax('tabs1',[
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model
             ]);
-        }
-       
+        return Json::encode($html);
     }
     public function actionTabs2($tab=null) {
         $html = $this->renderPartial('tabs2');

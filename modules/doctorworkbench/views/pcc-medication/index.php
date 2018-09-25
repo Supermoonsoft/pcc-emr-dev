@@ -8,7 +8,21 @@ use johnitvn\ajaxcrud\BulkButtonWidget;
 
 CrudAsset::register($this);
 ?>
+<?=
+$this->render('../default/panel_top', [
+    'emr' => '',
+    'lab' => '',
+    'drug' => '',
+    'diagnosis' => '',
+    'medication' => 'active',
+    'procedure' => '',
+    'pre_order_lab' => '',
+    'apointment' => '',
+    'treatmment_plan' => '',
+    'cc' => ''
 
+]);
+?>
 <?php echo $this->render('./create', ['model' => $model]); ?>
 
 <div style="margin-top:15px;">
@@ -17,11 +31,11 @@ CrudAsset::register($this);
 <?php // Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['class' => 'pull-right','id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']);// show modal ?> 
 </div>
 
-<div class="pcc-medication-index" style="margin-top:7px;">
+<div class="pcc-diagnosis-index" style="margin-top:7px;">
     <div id="ajaxCrudDatatable">
         <?=
         GridView::widget([
-            'id' => 'crud-medication',
+            'id' => 'crud-datatable',
             'dataProvider' => $dataProvider,
             'pjax' => true,
             'columns' => require(__DIR__ . '/_columns.php'),
@@ -57,7 +71,7 @@ Modal::begin([
 ])
 ?>
 <?php Modal::end(); ?>
-
+<?= $this->render('../default/panel_foot'); ?>
 <?php
 $js = <<< JS
 // $('#icode').on('select2:select', function (e) {

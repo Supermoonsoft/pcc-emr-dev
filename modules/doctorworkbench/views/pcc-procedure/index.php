@@ -13,13 +13,27 @@ CrudAsset::register($this);
 $this->registerJS($this->render('../../dist/js/script.js'));
 ?>
 
+<?=$this->render('../default/panel_top',[
+'emr' => '',
+'lab' => '',
+'drug' => '',
+'diagnosis' => '',
+'medication' => '',
+'procedure' => 'active',
+'pre_order_lab' =>'',
+'apointment' => '',
+'treatmment_plan' => '',
+'cc' => ''
+
+]);?>
+
 <?php  echo $this->render('./create',['model' => $model]);?>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
 
-<div class="pcc-procedure-index">
+<div class="pcc-diagnosis-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
-            'id'=>'crud-procedure',
+            'id'=>'crud-datatable',
             'dataProvider' => $dataProvider,
             'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '-'],
             'pjax'=>true,
@@ -38,6 +52,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
     "footer"=>"",
 ])?>
 <?php Modal::end(); ?>
+<?=$this->render('../default/panel_foot');?>
 <?php
 $js = <<< JS
  $("#btn-delete").click(function(){

@@ -1,107 +1,37 @@
-
 <?php
-use kartik\tabs\TabsX;
-use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use yii\bootstrap\ActiveForm;
+use phpnt\ICheck\ICheck;
+use kartik\datecontrol\DateControl;
+use app\components\PatientHelper;
+use app\components\MessageHelper;
+use app\components\loading\ShowLoading;
+use unclead\multipleinput\MultipleInput;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
-$content = $this->render('../pcc-diagnosis/index',[
-    'searchModel' => $searchModel,
-    'dataProvider' => $dataProvider,
-    'model' => $model
-])
+use kartik\tabs\TabsX;
+use yii\helpers\Url;
+
+
+// use Model
+use app\modules\doctorworkbench\models\CIcd10tm;
+
+$url = \yii\helpers\Url::to(['order/icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
+$prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
 ?>
+<?=$this->render('../default/panel_top',[
+'emr' => '',
+'lab' => '',
+'drug' => '',
+'diagnosis' => '',
+'medication' => '',
+'procedure' => '',
+'pre_order_lab' =>'',
+'apointment' => '',
+'treatmment_plan' => '',
+'cc' => ''
 
-<style>
-.navbar-default .navbar-nav > li.dropdown:hover > a, 
-.navbar-default .navbar-nav > li.dropdown:hover > a:hover,
-.navbar-default .navbar-nav > li.dropdown:hover > a:focus {
-    background-color: rgb(231, 231, 231);
-    color: rgb(85, 85, 85);
-}
-li.dropdown:hover > .dropdown-menu {
-    display: block;
-	background-color: #eee;
-}
-.nav-tabs > li {
-    background-color: #c7c7c7c7;
-}
-.nav-tabs > li > a {
-    color:#353535;
-}
-
-</style>
-
-<?php
-echo TabsX::widget([
-    'items' => [
-        [
-            'label' => 'EMR',
-            'linkOptions' => ['data-url' => Url::to(['/emr/emrdetail/index'])],
-            'options' => ['id' => 'tabs1'],
-            'encode'=>true,
-            'encodeLabels'=>true
-        ],
-        [
-            'label' => 'Lab History',
-            'linkOptions' => ['data-url' => Url::to(['/lab/hoslab/index'])],
-            'options' => ['id' => 'tabs2'],
-        ],
-        [
-            'label' => 'Drug History',
-            'linkOptions' => ['data-url' => Url::to(['/drug/hosdrug/index'])],
-            'options' => ['id' => 'tabs2'],
-        ],
-        [
-            'label' => 'CC',
-            'linkOptions' => ['data-url' => Url::to(['/chiefcomplaint/pccservicecc/create'])],
-            'options' => ['id' => 'cc'],
-        ],
-        [
-            'label' => 'Diganosis',
-            'active' => true,
-            // 'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-diagnosis'])],
-            'content' => $content,
-            'options' => ['id' => 'diagnosis'],
-        ],
-        [
-            'label' => 'Medication',
-           'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-medication'])],
-            'options' => ['id' => 'medication'],
-        ],
-        [
-            'label' => 'Procedure',
-           'linkOptions' => ['data-url' => Url::to(['/doctorworkbench/pcc-procedure'])],
-            'options' => ['id' => 'procedure'],
-        ],
-        [
-            'label' => 'Pre-Order Lab',
-            'linkOptions' => ['data-url' => Url::to(['/chiefcomplaint/pccservicecc/create'])],
-            'options' => ['id' => 'pre-order-lab'],
-        ],
-        [
-            'label' => 'Appointment',
-            'linkOptions' => ['data-url' => Url::to(['tabs3'])],
-            'options' => ['id' => 'tabs3'],
-        ],
-        [
-            'label' => 'Treatmment Plan',
-            'linkOptions' => ['data-url' => Url::to(['/treatment/treatmentplan/create'])],
-            'options' => ['id' => 'treatment'],
-        ],
-    ],
-    'position' => TabsX::POS_ABOVE,
-    'encodeLabels' => false,
-    'bordered' => true,
-    'encodeLabels'=>false,
-    'pluginOptions' => [
-        'enableCache' => true,
-    ],
-    'pluginEvents' => [
-        'tabsX.success' => 'function() {
-            $("[data-krajee-select2]").each(function(data) {
-               // this.select2({});
-                console.log(data)
-            })
-        }',
-    ]
-]) ?>
+]);?>
+<h1 class="text-center">ORDER</h1>
+<?=$this->render('../default/panel_foot');?>
