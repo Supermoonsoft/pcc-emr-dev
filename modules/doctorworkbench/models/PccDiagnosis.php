@@ -21,7 +21,7 @@ public $cc;
         return [
             [['hn', 'vn', 'icd_code', 'diag_type'], 'required'],
             [['id'], 'string'],
-            [['date_service', 'time_service', 'data_json', 'last_update','cc'], 'safe'],
+            [['date_service', 'time_service', 'data_json', 'last_update','cc','cid','pcc_vn'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn'], 'string', 'max' => 12],
             [['provider_code'], 'string', 'max' => 5],
@@ -51,7 +51,9 @@ public $cc;
             'diag_type' => 'Diag Type',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
-            'cc' => 'cc'
+            'cc' => 'cc',
+            'cid' => 'เลขบัตรประชาชน',
+            'pcc_vn' => 'PCC_VN'
         ];
     }
 

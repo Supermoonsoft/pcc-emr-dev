@@ -18,7 +18,7 @@ class PccDiagnosisSearch extends PccDiagnosis
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'icd_code', 'icd_name', 'diag_type', 'data_json', 'last_update'], 'safe'],
+            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'icd_code', 'icd_name', 'diag_type', 'data_json', 'last_update','cid','pcc_vn'], 'safe'],
         ];
     }
 
@@ -58,6 +58,8 @@ class PccDiagnosisSearch extends PccDiagnosis
             'date_service' => $this->date_service,
             'time_service' => $this->time_service,
             'last_update' => $this->last_update,
+            'cid' => $this->cid,
+            'pcc_vn' => $this->pcc_vn,
         ]);
 
         $query->andFilterWhere(['like', 'id', $this->id])

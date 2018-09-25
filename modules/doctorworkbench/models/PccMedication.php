@@ -41,7 +41,7 @@ class PccMedication extends \yii\db\ActiveRecord
             [['vn', 'hn', 'icode','qty'], 'required'],
             [['id'], 'string'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
-            [['date_service', 'time_service', 'data_json'], 'safe'],
+            [['date_service', 'time_service', 'data_json','cid','pcc_vn'], 'safe'],
             [['vn'], 'string', 'max' => 12],
             [['hn'], 'string', 'max' => 9],
             [['an', 'unit'], 'string', 'max' => 50],
@@ -81,6 +81,8 @@ class PccMedication extends \yii\db\ActiveRecord
             'usage_line2' => 'วิธีใช้ 2',
             'usage_line3' => 'วิธีใช้ 3',
             'drug_name' => 'Drug Name',
+            'cid' => 'เลขบัตรประชาชน',
+            'pcc_vn' => 'PCC_VN'
         ];
     }
 
