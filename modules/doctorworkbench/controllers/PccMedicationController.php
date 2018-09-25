@@ -12,7 +12,7 @@ use \yii\web\Response;
 use yii\helpers\Html;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
-
+use app\modules\doctorworkbench\models\GatewayCDrugItems;
 
 
 class PccMedicationController extends Controller
@@ -73,9 +73,11 @@ class PccMedicationController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         
         if ($model->load($request->post())) {
-            $drug = CDrugitems::find()->where(['icode' => $model->icode])->one();
-            $model->druguse = $drug->drugusage;
+            $drug = GatewayCDrugItems::find()->where(['icode' => $model->icode])->one();
+           //$model->druguse = $drug->drugusage;
             $model->unitprice = $drug->unitprice;
+            $model->tmt24_code = $drug->tmt24_code;
+            $model->drug_name = $drug->drug_name.' '.$drug->unit;	
             $model->totalprice =  $model->qty * $drug->unitprice;
             $model->save(false);
             return [

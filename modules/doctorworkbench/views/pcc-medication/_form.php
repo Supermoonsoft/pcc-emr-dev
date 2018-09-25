@@ -6,6 +6,8 @@ use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
+use app\modules\doctorworkbench\models\GatewayCDrugItems;
+use app\modules\doctorworkbench\models\GatewayCDrugdose;
 $this->registerJS($this->render('../../dist/js/script.js'));
 
 ?>
@@ -43,10 +45,9 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <?php
             echo $form->field($model, 'icode')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(CDrugitems::find()->all(), 'icode', function($model, $defaultValue) {
-                            return $model->name. ' ' .$model->strength. ' ' .$model->units;
-                        }),
-                    'options' => ['id' => 'icode', 'placeholder' => 'รายการยา ...'],
+                'data' => ArrayHelper::map(GatewayCDrugItems::find()->all(), 'icode', function($model, $defaultValue) {
+                            return $model->drug_name.' '.$model->unit;
+                        }),                    'options' => ['id' => 'icode', 'placeholder' => 'รายการยา ...'],
                     'pluginOptions' => [
                         'allowClear' => true
                 ],
@@ -56,7 +57,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <?= $form->field($model, 'druguse')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(CDrugusage::find()->all(), 'drugusage', function($model, $defaultValue) {
+               'data' => ArrayHelper::map(CDrugusage::find()->all(), 'shortlist', function($model, $defaultValue) {
                             return $model->code;
                         }),
                     'options' => ['id' => 'druguse', 'placeholder' => 'วิธีใช้ ...'],

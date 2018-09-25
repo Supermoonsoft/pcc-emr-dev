@@ -10,7 +10,7 @@ $('body').on('beforeSubmit', '#form', function () {
          data: form.serialize(),
          success: function (response) {
               console.log('Success');
-             $.pjax.reload({container: "#crud-datatable-pjax"});
+             $.pjax.reload({container: "#crud-medication"});
             //  $('#icd_code').val(null).trigger('change');
             $("#form")[0].reset();
             totalPrice($('#hn').val(),$('#vn').val());
