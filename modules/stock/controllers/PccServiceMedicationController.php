@@ -46,8 +46,13 @@ class PccServiceMedicationController extends Controller {
     }
 
     public function actionDispen() {
-        return $this->render('dispen',[
-            'pagination' => FALSE
+        $date1 = \Yii::$app->request->post('date1');
+        $date2 = \Yii::$app->request->post('date2');
+        $today = date('Y-m-d');
+
+        return $this->render('dispen', [
+                    'date1' => empty($date1) ? $today : $date1,
+                    'date2' => empty($date2) ? $today : $date2,
         ]);
     }
 
