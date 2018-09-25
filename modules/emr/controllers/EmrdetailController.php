@@ -3,8 +3,8 @@
 namespace app\modules\emr\controllers;
 
 use Yii;
-use app\modules\emr\models\PccService;
-use app\modules\emr\models\PccServiceSearch;
+use app\modules\emr\models\GatewayEmrVisit;
+use app\modules\emr\models\GatewayEmrVisitSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,13 +35,25 @@ class EmrdetailController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PccServiceSearch();
+        $searchModel = new GatewayEmrVisitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        
+        if (Yii::$app->request->isAjax) {
+            //Yii::$app->response->format = Response::FORMAT_JSON;
+            return   $this->renderAjax('index',[
+                                       'searchModel' => $searchModel,
+                                       'dataProvider' => $dataProvider,
+                                       
+                                       ]);
+        } else {
+            return $this->renderAjax('index', [
+                                 'searchModel' => $searchModel,
+                                 'dataProvider' => $dataProvider,
+                                 
+                                 ]);
+        }
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+      
     }
 
     /**
