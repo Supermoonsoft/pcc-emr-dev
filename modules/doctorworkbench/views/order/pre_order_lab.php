@@ -8,7 +8,9 @@
 'pre_order_lab' =>'active',
 'apointment' => '',
 'treatmment_plan' => '',
-'cc' => ''
+'cc' => '',
+'pi' => '',
+              'pe' => ''
 
 ]);?>
 

@@ -65,7 +65,7 @@ JS;
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 <?= $form->field($model, 'procedure_code')->widget(Select2::className(), [
                     'initValueText'=>$prefix,//กำหนดค่าเริ่มต้น
-                    'theme' => Select2::THEME_DEFAULT,
+                    // 'theme' => Select2::THEME_DEFAULT,
                     'options'=>['id' => 'procedure_code','placeholder'=>'Select Procedure...'],
                     'pluginOptions' => [
                         'allowClear' => true,

@@ -177,6 +177,6 @@ class PccMedicationController extends Controller
             $model->qty  = $value['qty']; // แก้ไข จำนวน
             $model->save();  // บันทึก
         }
-        return ['forceReload'=>'#crud-medication']; // reload gridview  เพื่อ update  ข้อมูล
+        return ['forceReload'=>'#crud-medication-pjax']; // reload gridview  เพื่อ update  ข้อมูล
     }
 }

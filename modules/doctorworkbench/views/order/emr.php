@@ -8,7 +8,9 @@
                  'pre_order_lab' =>'',
                  'apointment' => '',
                  'treatmment_plan' => '',
-                 'cc' => ''
+                 'cc' => '',
+                 'pi' => '',
+              'pe' => ''
                  ]);?>
 <?php
     echo $this->render('@app/modules/emr/views/emrdetail/index',[

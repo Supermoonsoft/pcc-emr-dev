@@ -24,9 +24,7 @@ use app\modules\emr\models\GatewayEmrVisit;
 use app\modules\emr\models\GatewayEmrVisitSearch;
     
 use yii\web\Controller;
-    use app\modules\appointment\models\PccAppoinmentShow;
-    use app\modules\appointment\models\GatewayEmrAppointment;
-    use app\modules\appointment\models\PccPatient;
+use app\modules\appointment\models\PccAppoinmentShow;
 
 
 class OrderController extends \yii\web\Controller
@@ -48,7 +46,7 @@ class OrderController extends \yii\web\Controller
         return $this->render('procedure');
     }
     
-    public function actionAppointment() {
+    public function actionAppointment(){
         $events = PccAppoinmentShow::find()->all();
         
         
@@ -65,25 +63,11 @@ class OrderController extends \yii\web\Controller
             $masker[] = $event;
         }
         
-        //--- table --
-        $query = GatewayEmrAppointment::find()
-        ->select(["gateway_emr_appointment.provider_name","p.hn","date_visit","time_visit","appoint_date","appoint_detail","p.cid","clinic"])
-        ->leftJoin("pcc_patient p","p.hn = gateway_emr_appointment.hn")
-        ->where(["p.cid" => '3200700311770']);
-        $dataProvider = new yii\data\ActiveDataProvider([
-                                                        'query' => $query,
-                                                        'pagination' => [
-                                                        'pageSize' => 10,
-                                                        ],
-                                                        ]);
-        
-        
-        return $this->render('appointment', [
+        return $this->render('appointment',[
                              'events' => $masker,
-                             'dataProvider' => $dataProvider
                              ]);
+        
     }
-
     public function actionEmr($cid=NULL){
         
         $searchModel = new GatewayEmrVisitSearch($cid);
@@ -153,6 +137,15 @@ class OrderController extends \yii\web\Controller
             'model' => $model,
         ]);
 
+    }
+
+    public function actionPi(){
+        return $this->render('pi');
+    }
+
+    
+    public function actionPe(){
+        return $this->render('pe');
     }
 
         public function actionIcd10List($q = null, $id = null){

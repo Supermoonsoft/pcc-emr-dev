@@ -8,7 +8,9 @@
 'pre_order_lab' =>'',
 'apointment' => '',
 'treatmment_plan' => '',
-'cc' => 'active'
+'cc' => 'active',
+'pi' => '',
+              'pe' => ''
 
 ]);?>
 <?=$this->render('@app/modules/chiefcomplaint/views/pccservicecc/create',['model' => $model,]);?>

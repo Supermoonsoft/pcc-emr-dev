@@ -27,7 +27,7 @@ return [
         'vAlign' => 'middle',
         'header' => 'ประเภท',
         'value' => function($model){
-            return $model->diagtype->nhso_code.'-'.$model->diagtype->name1;
+          //  return $model->diagtype->nhso_code.'-'.$model->diagtype->name1;
         }
         // 'pageSummary' => true,
         // 'class' => 'kartik\grid\EditableColumn',

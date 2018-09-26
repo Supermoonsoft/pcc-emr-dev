@@ -4,14 +4,14 @@
 'drug' => '',
 'diagnosis' => '',
 'medication' => '',
-'procedure' => 'active',
+'procedure' => '',
 'pre_order_lab' =>'',
 'apointment' => '',
 'treatmment_plan' => '',
 'cc' => '',
-'pi' => '',
-              'pe' => ''
+'pi' => 'active',
+'pe' => ''
 
 ]);?>
-<h1 class="text-center">Procedure</h1>
+<h1 class="text-center">PI</h1>
 <?=$this->render('../default/panel_foot');?>

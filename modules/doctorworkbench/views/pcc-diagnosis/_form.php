@@ -56,17 +56,17 @@ JS;
 <div class="pcc-diagnosis-form">
 <?php 
     $form = ActiveForm::begin([
-        'id' => 'form',
+        'id' => 'form-diagnosis',
         'action' => ['create'],
-        'options' => [
-            'data-pjax' => 1
-        ],
+        // 'options' => [
+        //     'data-pjax' => 1
+        // ],
     ]); 
     ?>
     <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false);?>
     <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
 
-<div class="row" style="margin-bottom:20px;">
+<div class="row">
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
     <?php 
     
@@ -98,7 +98,7 @@ JS;
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 <?= $form->field($model, 'icd_code')->widget(Select2::className(), [
                     'initValueText'=>$prefix,//กำหนดค่าเริ่มต้น
-                    'theme' => Select2::THEME_DEFAULT,
+                    // 'theme' => Select2::THEME_DEFAULT,/
                     'options'=>['id' => 'icd_code','placeholder'=>'Select ICD10...'],
                     'pluginOptions' => [
                         'allowClear' => true,
@@ -131,3 +131,13 @@ JS;
     </div>
     <?php ActiveForm::end(); ?>
 </div>
+
+<?php
+$js = <<< JS
+// $(document).ready(function() { 
+    // $("#icd_code").select2({dropdownCssClass : 'bigdrop'}); 
+// });
+
+JS;
+$this->registerJS($js);
+?>

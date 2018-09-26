@@ -13,6 +13,31 @@ CrudAsset::register($this);
 $this->registerJS($this->render('../../dist/js/script.js'));
 ?>
 
+<?php
+// กำหนด laypout ของ Gridvire เอง
+$layout = <<< HTML
+<div class="panel panel-info">
+      <div class="panel-heading">
+            <h3 class="panel-title">Procedure List</h3>
+      </div>
+      <div class="panel-body">
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    {pager}
+    </div>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <div class="pull-right">
+        {toggleData}
+        {export}
+        </div>
+     </div>
+    </div>
+<div class="clearfix"></div>
+{items}
+</div>
+</div>
+HTML;
+?>
 <?=$this->render('../default/panel_top',[
 'emr' => '',
 'lab' => '',
@@ -23,7 +48,9 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 'pre_order_lab' =>'',
 'apointment' => '',
 'treatmment_plan' => '',
-'cc' => ''
+'cc' => '',
+'pi' => '',
+              'pe' => ''
 
 ]);?>
 
@@ -32,17 +59,42 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
 <div class="pcc-diagnosis-index">
     <div id="ajaxCrudDatatable">
-        <?=GridView::widget([
-            'id'=>'crud-datatable',
+    <?=
+        GridView::widget([
+            'id' => 'crud-procedure',
             'dataProvider' => $dataProvider,
-            'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '-'],
-            'pjax'=>true,
-            'columns' => require(__DIR__.'/_columns.php'),        
+            'pjax' => true,
+            'columns' => require(__DIR__ . '/_columns.php'),
+            'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
+            'showPageSummary' => true,
             'striped' => true,
             'condensed' => true,
-            'responsive' => true,  
-            'summary'=>false,       
-        ])?>
+            'responsive' => true,
+            'summary' => false,
+            'layout' => $layout,
+            'replaceTags' => [
+                '{custom}' => function($widget) {
+                    if ($widget->panel === true) {
+                        return '';
+                    } else {
+                        return '';
+                    }
+                }
+            ],
+            'pager' => [
+                'options'=>['class'=>'pagination'], 
+                'prevPageLabel' => 'Previous', 
+                'nextPageLabel' => 'Next',
+                'firstPageLabel'=>'First',
+                'lastPageLabel'=>'Last',
+                'nextPageCssClass'=>'next',
+                'prevPageCssClass'=>'prev',
+                'firstPageCssClass'=>'first',
+                'lastPageCssClass'=>'last',
+                'maxButtonCount'=>10,
+        ],        
+        ])
+        ?>
     </div>
 </div>
 

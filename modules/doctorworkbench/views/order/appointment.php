@@ -10,15 +10,17 @@ $this->render('../default/panel_top', [
               'pre_order_lab' => '',
               'apointment' => 'active',
               'treatmment_plan' => '',
-              'cc' => ''
+              'cc' => '',
+              'pi' => '',
+              'pe' => ''
               ]);
 ?>
 <?php
     
     echo $this->render('@app/modules/appointment/views/default/index', [
-                       'events' => $events,
+                       'events' => $events
                        //'searchModel' => $searchModel,
-                       'dataProvider' => $dataProvider,
+                       //'dataProvider' => $dataProvider,
                        //'cid' => $cid
                        ]);
     ?>

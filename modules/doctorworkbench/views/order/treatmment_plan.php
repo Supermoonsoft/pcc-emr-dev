@@ -8,7 +8,9 @@
 'pre_order_lab' =>'',
 'apointment' => '',
 'treatmment_plan' => 'active',
-'cc' => ''
+'cc' => '',
+'pi' => '',
+              'pe' => ''
 
 ]);?>
 <?=$this->render('@app/modules/treatment/views/treatmentplan/create',['model' => $model,]);?>

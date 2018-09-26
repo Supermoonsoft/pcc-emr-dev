@@ -20,9 +20,6 @@ return [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'drug_name',
         'header' => 'รายการยา',
-        'value' => function($model){
-            return $model->drug_name;
-        }
     ],
 //    [
 //        'class' => '\kartik\grid\DataColumn',
@@ -48,7 +45,7 @@ return [
 //    ],
        [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute' =>'usage_line1',   
+        'attribute' =>'druguse',   
         'header'=>'วิธีใช้',         
     ],         
 //    [
