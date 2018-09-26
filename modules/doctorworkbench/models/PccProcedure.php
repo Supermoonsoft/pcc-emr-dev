@@ -41,15 +41,16 @@ class PccProcedure extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id','procedure_code'], 'required'],
+            //[['id','procedure_code'], 'required'],
             [['id'], 'string'],
-            [['date_service', 'time_service', 'start_date', 'start_time', 'end_date', 'end_time', 'data_json', 'last_update'], 'safe'],
+            [['date_service', 'time_service', 'start_date', 'start_time', 'end_date', 'end_time', 'data_json', 'last_update', 'pcc_vn','cid'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn'], 'string', 'max' => 12],
-            [['provider_code'], 'string', 'max' => 5],
+            [['provider_code', 'hoscode'], 'string', 'max' => 5],
             [['provider_name', 'procedure_name', 'doctor'], 'string', 'max' => 255],
             [['procedure_code'], 'string', 'max' => 100],
             [['procedure_price'], 'string', 'max' => 10],
+            //[['cid'], 'string', 'max' => 13],
             [['id'], 'unique'],
         ];
     }
@@ -68,7 +69,7 @@ class PccProcedure extends \yii\db\ActiveRecord
             'date_service' => 'Date Service',
             'time_service' => 'Time Service',
             'procedure_code' => 'Procedure Code',
-            'procedure_name' => 'หัตถการ',
+            'procedure_name' => 'Procedure Name',
             'start_date' => 'Start Date',
             'start_time' => 'Start Time',
             'end_date' => 'End Date',
@@ -77,6 +78,9 @@ class PccProcedure extends \yii\db\ActiveRecord
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
             'doctor' => 'Doctor',
+            'hoscode' => 'Hoscode',
+            'cid' => 'เลขบัตรประชาชน',
+            'pcc_vn' => 'Pcc Vn',
         ];
     }
 

@@ -63,7 +63,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <?= $form->field($model, 'druguse')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(CDrugusage::find()->all(), 'drugusage', function($model, $defaultValue) {
+                'data' => ArrayHelper::map(CDrugusage::find()->all(), 'shortlist', function($model, $defaultValue) {
                             return $model->shortlist;
                         }),
                     'options' => [

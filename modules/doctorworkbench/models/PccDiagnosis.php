@@ -23,12 +23,13 @@ public $cc;
             [['id'], 'string'],
             [['date_service', 'time_service', 'data_json', 'last_update','cc','cid','pcc_vn'], 'safe'],
             [['hn'], 'string', 'max' => 9],
-            [['vn'], 'string', 'max' => 12],
-            [['provider_code'], 'string', 'max' => 5],
+            [['vn', 'pcc_vn'], 'string', 'max' => 12],
+            [['provider_code', 'hoscode'], 'string', 'max' => 5],
             [['provider_name'], 'string', 'max' => 100],
             [['icd_code'], 'string', 'max' => 50],
             [['icd_name'], 'string', 'max' => 255],
-            [['diag_type'], 'string', 'max' => 1],
+            [['diag_type'], 'string', 'max' => 10],
+            [['cid'], 'string', 'max' => 13],
             [['id'], 'unique'],
         ];
     }
@@ -51,9 +52,10 @@ public $cc;
             'diag_type' => 'Diag Type',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
-            'cc' => 'cc',
-            'cid' => 'เลขบัตรประชาชน',
-            'pcc_vn' => 'PCC_VN'
+            'cc' => 'cc',           
+            'pcc_vn' => 'PCC_VN',
+            'hoscode' => 'Hoscode',
+            'cid' => 'เลขบัตรประชาชน',            
         ];
     }
 

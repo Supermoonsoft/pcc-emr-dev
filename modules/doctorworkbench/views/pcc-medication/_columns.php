@@ -48,7 +48,8 @@ return [
 //    ],
        [
         'class'=>'\kartik\grid\DataColumn',
-        'attribute' =>'usage_line1',   
+        //'attribute' =>'usage_line1',  
+        'attribute' =>'druguse',     
         'header'=>'วิธีใช้',         
     ],         
 //    [
@@ -88,6 +89,7 @@ return [
         'header' => 'จำนวนจ่าย',
         'pageSummary' => 'มูลค่ารวม',
         'attribute' => 'qty',
+        'width' => '100px',
 //        'class' => 'kartik\grid\EditableColumn',
 //        'editableOptions' => [
 //            'formOptions' => [
@@ -105,6 +107,7 @@ return [
         'header' => 'รวมราคา',
         'format' => ['decimal', 2],
         'pageSummary' => true,
+        'width' => '180px',
         'value' => function($model) {
             $total = $model->qty * $model->unitprice;
             return $total;

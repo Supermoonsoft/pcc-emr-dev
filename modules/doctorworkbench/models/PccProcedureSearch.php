@@ -18,7 +18,7 @@ class PccProcedureSearch extends PccProcedure
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'procedure_code', 'procedure_name', 'start_date', 'start_time', 'end_date', 'end_time', 'procedure_price', 'data_json', 'last_update', 'doctor'], 'safe'],
+            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'procedure_code', 'procedure_name', 'start_date', 'start_time', 'end_date', 'end_time', 'procedure_price', 'data_json', 'last_update', 'doctor', 'hoscode', 'cid', 'pcc_vn'], 'safe'],
         ];
     }
 
@@ -64,16 +64,21 @@ class PccProcedureSearch extends PccProcedure
             'last_update' => $this->last_update,
         ]);
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'hn', $this->hn])
-            ->andFilterWhere(['like', 'vn', $this->vn])
-            ->andFilterWhere(['like', 'provider_code', $this->provider_code])
-            ->andFilterWhere(['like', 'provider_name', $this->provider_name])
-            ->andFilterWhere(['like', 'procedure_code', $this->procedure_code])
-            ->andFilterWhere(['like', 'procedure_name', $this->procedure_name])
-            ->andFilterWhere(['like', 'procedure_price', $this->procedure_price])
-            ->andFilterWhere(['like', 'data_json', $this->data_json])
-            ->andFilterWhere(['like', 'doctor', $this->doctor]);
+        $query->andFilterWhere(['ilike', 'id', $this->id])
+            ->andFilterWhere(['ilike', 'hn', $this->hn])
+            ->andFilterWhere(['ilike', 'vn', $this->vn])
+            ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
+            ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['ilike', 'procedure_code', $this->procedure_code])
+            ->andFilterWhere(['ilike', 'procedure_name', $this->procedure_name])
+            ->andFilterWhere(['ilike', 'procedure_price', $this->procedure_price])
+            ->andFilterWhere(['ilike', 'data_json', $this->data_json])
+            ->andFilterWhere(['ilike', 'doctor', $this->doctor])
+            ->andFilterWhere(['ilike', 'hoscode', $this->hoscode])
+            ->andFilterWhere(['ilike', 'cid', $this->cid])
+            ->andFilterWhere(['ilike', 'pcc_vn', $this->pcc_vn]);
+
+        return $dataProvider;
 
         return $dataProvider;
     }

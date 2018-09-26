@@ -1,7 +1,7 @@
 <?php
 
 namespace app\modules\doctorworkbench\models;
-
+use app\modules\doctorworkbench\models\GatewayCDrugItems;
 use Yii;
 
 /**
@@ -38,11 +38,11 @@ class PccMedication extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['vn', 'hn', 'icode','qty'], 'required'],
+            [['vn', 'hn', 'icode'], 'required'],
             [['id'], 'string'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
-            [['date_service', 'time_service', 'data_json','cid','pcc_vn'], 'safe'],
-            [['vn'], 'string', 'max' => 12],
+            [['date_service', 'time_service', 'data_json', 'hoscode','cid'], 'safe'],
+            [['vn', 'pcc_vn'], 'string', 'max' => 12],
             [['hn'], 'string', 'max' => 9],
             [['an', 'unit'], 'string', 'max' => 50],
             [['icode', 'tmt24_code'], 'string', 'max' => 24],
@@ -50,6 +50,7 @@ class PccMedication extends \yii\db\ActiveRecord
             [['provider_code'], 'string', 'max' => 5],
             [['provider_name'], 'string', 'max' => 100],
             [['usage_line1', 'usage_line2', 'usage_line3', 'drug_name'], 'string', 'max' => 255],
+            //[['cid'], 'string', 'max' => 13],
             [['id'], 'unique'],
         ];
     }
@@ -81,12 +82,13 @@ class PccMedication extends \yii\db\ActiveRecord
             'usage_line2' => 'วิธีใช้ 2',
             'usage_line3' => 'วิธีใช้ 3',
             'drug_name' => 'Drug Name',
+            'hospcode' => 'Hospcode',
             'cid' => 'เลขบัตรประชาชน',
-            'pcc_vn' => 'PCC_VN'
+            'pcc_vn' => 'pcc vn',
         ];
     }
 
     public  function getDrugitems(){
-        return @$this->hasOne(CDrugitems::className(), ['icode' => 'icode']);
+        return @$this->hasOne(GatewayCDrugItems::className(), ['icode' => 'icode']);
     }
 }
