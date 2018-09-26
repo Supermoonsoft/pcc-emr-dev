@@ -48,7 +48,11 @@ function (data, params) {
 }
 JS;
 ?>
-
+<style>
+.select2-container--krajee .select2-selection--multiple {
+    min-height: 123px;
+}
+</style>
 <div class="pcc-diagnosis-form">
 <?php 
     $form = ActiveForm::begin([
@@ -64,8 +68,29 @@ JS;
 
 <div class="row" style="margin-bottom:20px;">
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-    <?=$form->field($model,'cc')->textArea(['cols'=> 5])->label(false);?>
-        
+    <?php 
+    
+    $data = [
+        "red" => "red",
+        "green" => "green",
+        "blue" => "blue",
+        "orange" => "orange",
+        "white" => "white",
+        "black" => "black",
+        "purple" => "purple",
+        "cyan" => "cyan",
+        "teal" => "teal"
+    ];
+    ?>
+    <?= $form->field($model, 'cc')->widget(Select2::className(), [
+    'data' => $data,
+    'options' => ['placeholder' => 'Select ...', 'multiple' => true],
+    'pluginOptions' => [
+        'tags' => true,
+        'tokenSeparators' => [',', ' '],
+        'maximumInputLength' => 50
+    ],
+])->label('Diagtext');?>
     </div>
 </div>
 
