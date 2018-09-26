@@ -7,11 +7,34 @@ use app\components\DbHelper;
 use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-//echo ShowLoading::widget();
+echo ShowLoading::widget();
 ?>
 <?php
 $this->registerJs('
+$("#btn-add").click(function(){
+    var id_case = $("#gridview-id").yiiGridView("getSelectedRows");
 
+    console.log(id_case);
+
+    if(id_case.length > 0){
+        $.ajax({
+            url: "'.Url::to(['/lab/pcclab/addgroup']).'",
+            dataType: "text",
+            type: "post",
+            contentType: "application/x-www-form-urlencoded",
+            data: $(this).serialize(),
+            success: function( data, textStatus, jQxhr ){
+                alert(data);
+                swal("ส่งทีละหลายรายการ...");
+            },
+            error: function( jqXhr, textStatus, errorThrown ){
+                console.log( errorThrown );
+                swal("ส่งทีละหลายรายการ...");
+            }
+        });
+
+    }
+  });
 ')
 
 ?>
@@ -20,7 +43,8 @@ $this->registerJs('
         <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
             
-            <?= Html::a('<button id="btn-add" onClick='.new JsExpression($alert).' class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>', ['/doctorworkbench/order/pre-order-lab']) ?>
+            <?php // Html::a('<button id="btn-add" onClick='.new JsExpression($alert).' class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>', ['/doctorworkbench/order/pre-order-lab']) ?>
+            <button id="btn-add" class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
         </div>
 
     <?php Pjax::begin(); ?>
@@ -36,13 +60,18 @@ $this->registerJs('
             'id' => 'gridview-id'
         ],
         'striped'=>true,
-        'hover'=>true,       
+        'hover'=>true, 
+		'panel' => [ 'befor' => 'Lab History'],
+        'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'], 
+        'rowOptions' => function ($model, $key, $index, $grid) { //สามารถกำหนด data-key ใหม่ (ปกติจะใช้ PK)
+            return ['data' => ['key' => $model->id]];
+        }, 
         'columns' => [
             
             [
-                'attribute'=>'hos_date_visit', 
+                'attribute'=>'date_visit', 
                 'value'=>function ($model, $key, $index, $widget) { 
-                    return $model->date_service.' (รพ.แม่ข่าย)';
+                    return $model->date_visit.' (รพ.แม่ข่าย)';
                 },
                 'filter'=>false,
                 'group'=>true,  // enable grouping,
@@ -70,10 +99,10 @@ $this->registerJs('
                 },
             ],
             [
-                'attribute'=>'lab_result_at',
-                'options' => ['id' => 'lab_result_at'],
+                'attribute'=>'lab_result_date',
+                'options' => ['id' => 'lab_result_date'],
                 'value'=>function ($model, $key, $index, $widget) { 
-                    return $model->lab_result_at;
+                    return $model->lab_result_date;
                 },
             ],
             [

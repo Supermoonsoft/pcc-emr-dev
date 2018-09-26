@@ -137,7 +137,7 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
 
 // ====> การลบข้อมูลที่เลือก
  $("#btn-delete").click(function(){
-    var keys = $("#crud-datatable-pjax").yiiGridView("getSelectedRows");
+    var keys = $("#crud-diagnosis").yiiGridView("getSelectedRows");
     //console.log(keys);
     var url = 'index.php?r=doctorworkbench/pcc-diagnosis/bulk-delete'
     if(keys.length>0){
@@ -146,7 +146,7 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
             method:'post',
             data:{pks:keys.join()},
             success: function(){
-             $.pjax.reload({container: "#crud-datatable-pjax"});
+             $.pjax.reload({container: "#crud-diagnosis-pjax"});
             }
         });
     }

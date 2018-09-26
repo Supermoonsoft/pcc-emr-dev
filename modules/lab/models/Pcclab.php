@@ -5,23 +5,27 @@ namespace app\modules\lab\models;
 use Yii;
 
 /**
- * This is the model class for table "pcc_lab".
+ * This is the model class for table "gateway_emr_lab".
  *
  * @property string $id
+ * @property string $hospcode
+ * @property string $hospname
  * @property string $hn
  * @property string $vn
- * @property string $provider_code
- * @property string $provider_name
- * @property string $date_service
- * @property string $time_service
+ * @property string $an
+ * @property string $date_visit
+ * @property string $time_visit
  * @property string $lab_code
  * @property string $lab_name
+ * @property string $lab_result
  * @property string $standard_result
- * @property string $lab_request_at
- * @property string $lab_result_at
+ * @property string $lab_request_date
+ * @property string $lab_result_date
+ * @property string $lab_price
  * @property array $data_json
  * @property string $last_update
- * @property string $lab_result
+ * @property string $cid
+ * @property string $provider
  */
 class Pcclab extends \yii\db\ActiveRecord
 {
@@ -30,7 +34,7 @@ class Pcclab extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'pcc_lab';
+        return 'gateway_emr_lab';
     }
 
     /**
@@ -39,14 +43,15 @@ class Pcclab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service'], 'required'],
+            [['id', 'hospcode', 'hospname', 'hn'], 'required'],
             [['id'], 'string'],
-            [['date_service', 'time_service', 'lab_request_at', 'lab_result_at', 'data_json', 'last_update'], 'safe'],
-            [['hn'], 'string', 'max' => 9],
-            [['vn'], 'string', 'max' => 12],
-            [['provider_code'], 'string', 'max' => 5],
-            [['provider_name', 'lab_name'], 'string', 'max' => 255],
-            [['lab_code', 'standard_result', 'lab_result'], 'string', 'max' => 100],
+            [['date_visit', 'time_visit', 'lab_request_date', 'lab_result_date', 'data_json', 'last_update'], 'safe'],
+            [['lab_price'], 'number'],
+            [['hospcode'], 'string', 'max' => 5],
+            [['hospname', 'lab_code', 'lab_name', 'lab_result', 'standard_result'], 'string', 'max' => 100],
+            [['hn'], 'string', 'max' => 10],
+            [['vn', 'an'], 'string', 'max' => 12],
+            [['cid', 'provider'], 'string', 'max' => 13],
             [['id'], 'unique'],
         ];
     }
@@ -58,20 +63,24 @@ class Pcclab extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'hospcode' => 'Hospcode',
+            'hospname' => 'Hospname',
             'hn' => 'Hn',
             'vn' => 'Vn',
-            'provider_code' => 'Provider Code',
-            'provider_name' => 'Provider Name',
-            'date_service' => 'Date Service',
-            'time_service' => 'Time Service',
-            'lab_code' => 'Lab Code',
-            'lab_name' => 'Lab Name',
-            'standard_result' => 'Standard Result',
-            'lab_request_at' => 'Lab Request At',
-            'lab_result_at' => 'Lab Result At',
+            'an' => 'An',
+            'date_visit' => 'วันที่รับบริการ',
+            'time_visit' => 'เวลารับบริการ',
+            'lab_code' => 'รหัสแล๊ป',
+            'lab_name' => 'รายการแล๊ป',
+            'lab_result' => 'ผลแล๊ป',
+            'standard_result' => 'ค่ามาตราฐาน',
+            'lab_request_date' => 'วันที่สั่งแล๊ป',
+            'lab_result_date' => 'วันที่รายงานผล',
+            'lab_price' => 'ราคาแล๊ป',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
-            'lab_result' => 'Lab Result',
+            'cid' => 'Cid',
+            'provider' => 'Provider',
         ];
     }
 
@@ -97,4 +106,5 @@ class Pcclab extends \yii\db\ActiveRecord
         }
         return parent::afterFind();
     }
+    
 }

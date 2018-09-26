@@ -18,7 +18,8 @@ class PcclabSeach extends Pcclab
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'lab_code', 'lab_name', 'standard_result', 'lab_request_at', 'lab_result_at', 'data_json', 'last_update', 'lab_result'], 'safe'],
+            [['id', 'hospcode', 'hospname', 'hn', 'vn', 'an', 'date_visit', 'time_visit', 'lab_code', 'lab_name', 'lab_result', 'standard_result', 'lab_request_date', 'lab_result_date', 'data_json', 'last_update', 'cid', 'provider'], 'safe'],
+            [['lab_price'], 'number'],
         ];
     }
 
@@ -40,7 +41,7 @@ class PcclabSeach extends Pcclab
      */
     public function search($params)
     {
-        $query = Pcclab::find()->where(['hn' => '1190'])->OrderBy(['date_service'=>SORT_DESC,]);
+        $query = Pcclab::find()->where(['hn' => '37'])->OrderBy(['date_visit'=>SORT_DESC,]);
 
         // add conditions that should always apply here
 
@@ -58,23 +59,27 @@ class PcclabSeach extends Pcclab
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'date_service' => $this->date_service,
-            'time_service' => $this->time_service,
-            'lab_request_at' => $this->lab_request_at,
-            'lab_result_at' => $this->lab_result_at,
+            'date_visit' => $this->date_visit,
+            'time_visit' => $this->time_visit,
+            'lab_request_date' => $this->lab_request_date,
+            'lab_result_date' => $this->lab_result_date,
+            'lab_price' => $this->lab_price,
             'last_update' => $this->last_update,
         ]);
 
         $query->andFilterWhere(['ilike', 'id', $this->id])
+            ->andFilterWhere(['ilike', 'hospcode', $this->hospcode])
+            ->andFilterWhere(['ilike', 'hospname', $this->hospname])
             ->andFilterWhere(['ilike', 'hn', $this->hn])
             ->andFilterWhere(['ilike', 'vn', $this->vn])
-            ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
-            ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['ilike', 'an', $this->an])
             ->andFilterWhere(['ilike', 'lab_code', $this->lab_code])
             ->andFilterWhere(['ilike', 'lab_name', $this->lab_name])
+            ->andFilterWhere(['ilike', 'lab_result', $this->lab_result])
             ->andFilterWhere(['ilike', 'standard_result', $this->standard_result])
             ->andFilterWhere(['ilike', 'data_json', $this->data_json])
-            ->andFilterWhere(['ilike', 'lab_result', $this->lab_result]);
+            ->andFilterWhere(['ilike', 'cid', $this->cid])
+            ->andFilterWhere(['ilike', 'provider', $this->provider]);
 
         return $dataProvider;
     }
