@@ -5,53 +5,33 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use app\components\DbHelper;
 use yii\web\JsExpression;
-use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-echo ShowLoading::widget();
-?>
-<?php
-// $this->registerJs('
-// $("#btn-add").click(function(){
-//     var id_case = $("#gridview-id").yiiGridView("getSelectedRows");
+use app\components\loading\ShowLoading;
+//use app\components\PatientHelper;
+//use app\components\MessageHelper;
+//$hn = PatientHelper::getCurrentHn();
+//$vn = PatientHelper::getCurrentVn();
+//$Sdate = PatientHelper::getDateVisitByVn($vn);
+//$Stime = PatientHelper::getTimeVisitByVn($vn);
 
-//     console.log(id_case);
-
-//     if(id_case.length > 0){
-//         $.ajax({
-//             url: "'.Url::to(['/lab/pcclab/addgroup']).'",
-//             dataType: "JSON",
-//             type: "POST",
-//            // contentType: "application/x-www-form-urlencoded",
-//             //data: $(this).serialize(),
-//             // success: function( data, textStatus, jQxhr ){
-//             //     alert(data);
-                
-//             // },
-//             data:{id:id_case},
-//             success: function(response){
-//                 console.log(response);
-//             }
-//             error: function( jqXhr, textStatus, errorThrown ){
-//                 console.log( errorThrown );
-//             }
-//         });
-
-//     }
-//   });
-// ')
-
-
+//$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
+//echo ShowLoading::widget();
 ?>
 <div class="hoslab-index">
+    <?php Pjax::begin(); ?>
+    <?=Html::beginForm(['/lab/pcclab/preorder'],'post');?>
 
-        <div style="margin-bottom: 3px">
+    <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
             
             <?php // Html::a('<button id="btn-add" onClick='.new JsExpression($alert).' class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>', ['/doctorworkbench/order/pre-order-lab']) ?>
-            <button id="btn-add" class="btn btn-info"  ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
+            
+            <?=  Html::submitButton('<i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab',
+                                    [//'onClick'=>new JsExpression($alert),
+                                    'data-confirm' => 'ส่งทีละหลายรายการ ไปยัง PreOrder Lab',
+                                    'class'=>'btn btn-info']); ?>
         </div>
 
-    <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -65,7 +45,9 @@ echo ShowLoading::widget();
         ],
         'striped'=>true,
         'hover'=>true, 
-		'panel' => [ 'befor' => 'Lab History'],
+        //'panel' => [ 'befor' => 'Lab History'],
+        'panel'=>['type'=>'primary', 'heading'=>'Lab History'],
+        'toolbar' =>  ['{toggleData}',],
         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'], 
         'rowOptions' => function ($model, $key, $index, $grid) { //สามารถกำหนด data-key ใหม่ (ปกติจะใช้ PK)
             return ['data' => ['key' => $model->id]];
@@ -90,9 +72,6 @@ echo ShowLoading::widget();
             ],*/
             [
                 'class' => 'yii\grid\CheckboxColumn',
-                'checkboxOptions' => function($model) {
-                    return ['value' => $model->id, 'data' => ['key' => $model->id]];
-                },
                 'header' => false,
             ],
             [
@@ -130,6 +109,8 @@ echo ShowLoading::widget();
 
         ],
     ]); ?>
+
+    <?= Html::endForm();?> 
     <?php Pjax::end(); ?>
 
 </div>

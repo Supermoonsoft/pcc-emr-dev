@@ -16,8 +16,7 @@ $vn = PatientHelper::getCurrentVn();
 
 //$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
 
-$this->title = 'Preorderlabs';
-$this->params['breadcrumbs'][] = $this->title;
+
 
 CrudAsset::register($this);
 

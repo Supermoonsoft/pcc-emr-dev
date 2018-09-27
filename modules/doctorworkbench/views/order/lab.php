@@ -14,9 +14,11 @@
 
 ]);?>
 <?php
+
    echo $this->render('@app/modules/lab/views/pcclab/index',[
     'searchModel' => $searchModel,
     'dataProvider' => $dataProvider,
 ]);
+
 ?>
 <?=$this->render('../default/panel_foot');?>

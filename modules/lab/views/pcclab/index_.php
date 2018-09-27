@@ -26,23 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'hn',
-            'vn',
-            'provider_code',
-            'provider_name',
+            //'id',
+            //'hn',
+            //'vn',
+            //'provider_code',
+            //'provider_name',
             //'date_service',
             //'time_service',
-            //'lab_code',
-            //'lab_name',
-            //'standard_result',
+            'lab_code',
+            'lab_name',
+            'standard_result',
             //'lab_request_at',
-            //'lab_result_at',
+            'lab_result_date',
             //'data_json',
             //'last_update',
             //'lab_result',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
