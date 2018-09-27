@@ -25,7 +25,7 @@ CrudAsset::register($this);
 <div class="preorderlab-index">
     <div id="ajaxCrudDatatable">
         <?=GridView::widget([
-            'id'=>'crud-datatable',
+            'id'=>'crud-datatable-preorderlab',
             'dataProvider' => $dataProvider,
             'filterModel' => $searchModel,
             'pjax'=>true,

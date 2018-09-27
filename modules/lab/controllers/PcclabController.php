@@ -6,6 +6,7 @@ use Yii;
 use app\modules\lab\models\Pcclab;
 use app\modules\lab\models\PcclabSearch;
 use app\modules\lab\models\Preorderlab;
+use app\modules\lab\models\PreorderlabSearch;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -135,44 +136,36 @@ class PcclabController extends Controller
             foreach($selection as $id){
                 $model = Pcclab::findOne((String)$id);//make a typecasting
                 $preorder = new Preorderlab(); 
-                    /*
-                    $preorder->pcc_vn = $model->vn;
-                    $preorder->pcc_start_service_datetime = $model->date_visit;
-                    $preorder->pcc_end_service_datetime = $model->time_;
-                    */
+
                     $preorder->hospcode = $model->hospcode;
                     $preorder->lab_code = $model->lab_code;
                     $preorder->lab_name = $model->lab_name;
                     $preorder->lab_request_date = date('Y-m-d');
                     $preorder->standard_result = $model->standard_result;
                     $preorder->lab_price = $model->lab_price;
-                    /*
-            'pcc_vn' => 'Pcc Vn',
-            'data_json' => 'Data Json',
-            'pcc_start_service_datetime' => 'Pcc Start Service Datetime',
-            'pcc_end_service_datetime' => 'Pcc End Service Datetime',
-            'data1' => 'Data1',
-            'data2' => 'Data2',
-            'hospcode' => 'Hospcode',
-            'lab_code' => 'Lab Code',
-            'lab_name' => 'Lab Name',
-            'lab_request_date' => 'Lab Request Date',
-            'lab_result_date' => 'Lab Result Date',
-            'lab_result' => 'Lab Result',
-            'standard_result' => 'Standard Result',
-            'lab_price' => 'Lab Price',
-                     */
+
                 $preorder->save(false);
                 // or delete
             }
             
+            $searchModel = new PreorderlabSearch();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
             $model = new Preorderlab(); 
-            Yii::$app->response->format = Response::FORMAT_JSON;
-                return   $this->renderAjax('/doctorworkbench/order/pre-order-lab',[
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                    'model' => $model
-                    ]);
+    
+            if (Yii::$app->request->isAjax) {
+                Yii::$app->response->format = Response::FORMAT_JSON;
+                   return   $this->renderAjax('../../../doctorworkbench/order/pre-order-lab',[
+                         'searchModel' => $searchModel,
+                         'dataProvider' => $dataProvider,
+                         'model' => $model
+                         ]);
+                 } else {
+                    $searchModel = new PcclabSearch();
+                    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+                    $model = new Pcclab(); 
+
+                    return $this->redirect('index.php?r=doctorworkbench/order/lab');
+                }
             
      }
 

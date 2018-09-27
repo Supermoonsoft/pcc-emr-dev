@@ -3,6 +3,7 @@
 namespace app\modules\lab\controllers;
 
 use Yii;
+use app\modules\lab\models\Pcclab;
 use app\modules\lab\models\Preorderlab;
 use app\modules\lab\models\PreorderlabSeach;
 use yii\web\Controller;
@@ -10,6 +11,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use yii\helpers\Json;
 
 /**
  * PreorderlabController implements the CRUD actions for Preorderlab model.
@@ -253,13 +255,54 @@ class PreorderlabController extends Controller
        
     }
 
-    /**
-     * Finds the Preorderlab model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $id
-     * @return Preorderlab the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionPreorder(){
+        $action=Yii::$app->request->post('action');
+        $selection=(array)Yii::$app->request->post('selection');//typecasting
+
+            foreach($selection as $id){
+                $model = Pcclab::findOne((String)$id);//make a typecasting
+                $preorder = new Preorderlab(); 
+                    /*
+                    $preorder->pcc_vn = $model->vn;
+                    $preorder->pcc_start_service_datetime = $model->date_visit;
+                    $preorder->pcc_end_service_datetime = $model->time_;
+                    */
+                    $preorder->hospcode = $model->hospcode;
+                    $preorder->lab_code = $model->lab_code;
+                    $preorder->lab_name = $model->lab_name;
+                    $preorder->lab_request_date = date('Y-m-d');
+                    $preorder->standard_result = $model->standard_result;
+                    $preorder->lab_price = $model->lab_price;
+
+                $preorder->save(false);
+                // or delete
+            }
+            $model = new Preorderlab();
+            $searchModel = new PreorderlabSeach();
+            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            /*
+        if (Yii::$app->request->isAjax) {
+
+            //$model = new Preorderlab();
+            
+               return   $this->renderAjax('index',[
+                     'searchModel' => $searchModel,
+                     'dataProvider' => $dataProvider,
+                     'model' => $model
+                     ]);
+             } else {
+                return $this->renderAjax('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'model' => $model
+                ]);
+            }
+            */
+            return ['forceReload'=>'#crud-datatable-preorderlab'];
+            
+     }
+
     protected function findModel($id)
     {
         if (($model = Preorderlab::findOne($id)) !== null) {
