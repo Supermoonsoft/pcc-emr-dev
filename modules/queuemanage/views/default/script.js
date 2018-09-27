@@ -4,23 +4,16 @@ $('#grid-view-data-table .table').DataTable();
 // จัดคิว
 var n = 0;
 $('.chk_pt').click(function (e) {
+    var pccvn = e.target.value;
     if (e.target.checked) {
         n = n + 1;
-        // console.log($(this).val(), Date.now());
-    $.ajax({
-        type: "post",
-        url:'index.php?r=queuemanage/ajax/q-order',
-        data:{
-            pccvn:$(this).val(),
-            send_time:Date.now()
-        },
-        dataType: "json",
-        success: function(response){
-         console.log(response);
-        }
-    });
+        $('#input'+pccvn+'').val(n); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
+        $('#'+pccvn+'').html(n); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
+
     } else {
         n = n - 1;
+        $('#input'+pccvn+'').val(''); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
+        $('#'+pccvn+'').html(''); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
     }
 });
 $('#form-add-q').submit(function (e) {

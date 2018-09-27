@@ -6,9 +6,15 @@ use kartik\grid\GridView;
 use johnitvn\ajaxcrud\CrudAsset; 
 use johnitvn\ajaxcrud\BulkButtonWidget;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\lab\models\PreorderlabSeach */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+use app\components\loading\ShowLoading;
+use app\components\PatientHelper;
+use app\components\MessageHelper;
+$hn = PatientHelper::getCurrentHn();
+$vn = PatientHelper::getCurrentVn();
+//$Sdate = PatientHelper::getDateVisitByVn($vn);
+//$Stime = PatientHelper::getTimeVisitByVn($vn);
+
+//$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
 
 $this->title = 'Preorderlabs';
 $this->params['breadcrumbs'][] = $this->title;

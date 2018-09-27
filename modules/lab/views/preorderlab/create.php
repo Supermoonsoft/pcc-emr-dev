@@ -1,10 +1,15 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\loading\ShowLoading;
+use app\components\PatientHelper;
+use app\components\MessageHelper;
+$hn = PatientHelper::getCurrentHn();
+$vn = PatientHelper::getCurrentVn();
+//$Sdate = PatientHelper::getDateVisitByVn($vn);
+//$Stime = PatientHelper::getTimeVisitByVn($vn);
 
-
-/* @var $this yii\web\View */
-/* @var $model app\modules\lab\models\Preorderlab */
+//$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
 
 ?>
 <div class="preorderlab-create">

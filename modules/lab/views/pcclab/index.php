@@ -5,17 +5,17 @@ use kartik\grid\GridView;
 use yii\widgets\Pjax;
 use app\components\DbHelper;
 use yii\web\JsExpression;
-use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-use app\components\PatientHelper;
-use app\components\MessageHelper;
-$hn = PatientHelper::getCurrentHn();
-$vn = PatientHelper::getCurrentVn();
+use app\components\loading\ShowLoading;
+//use app\components\PatientHelper;
+//use app\components\MessageHelper;
+//$hn = PatientHelper::getCurrentHn();
+//$vn = PatientHelper::getCurrentVn();
 //$Sdate = PatientHelper::getDateVisitByVn($vn);
 //$Stime = PatientHelper::getTimeVisitByVn($vn);
 
 //$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
-echo ShowLoading::widget();
+//echo ShowLoading::widget();
 ?>
 <div class="hoslab-index">
     <?php Pjax::begin(); ?>
@@ -45,7 +45,9 @@ echo ShowLoading::widget();
         ],
         'striped'=>true,
         'hover'=>true, 
-		'panel' => [ 'befor' => 'Lab History'],
+        //'panel' => [ 'befor' => 'Lab History'],
+        'panel'=>['type'=>'primary', 'heading'=>'Lab History'],
+        'toolbar' =>  ['{toggleData}',],
         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'], 
         'rowOptions' => function ($model, $key, $index, $grid) { //สามารถกำหนด data-key ใหม่ (ปกติจะใช้ PK)
             return ['data' => ['key' => $model->id]];
