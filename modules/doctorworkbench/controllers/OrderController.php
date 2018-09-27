@@ -9,9 +9,11 @@ use app\modules\doctorworkbench\models\PccDiagnosis;
 use app\modules\doctorworkbench\models\PccDiagnosisSearch;
 use app\modules\lab\models\Hoslab;
 use app\modules\lab\models\HoslabSearch;
+use app\modules\lab\models\Pcclab;
+use app\modules\lab\models\PcclabSearch;
+use app\modules\lab\models\Preorderlab;
 use app\modules\drug\models\Hosdrug;
 use app\modules\drug\models\HosdrugSearch;
-use app\modules\lab\models\Preorderlab;
 use app\modules\lab\models\PreorderlabSeach;
     
 use app\modules\emr\models\PccService;
@@ -93,13 +95,24 @@ class OrderController extends \yii\web\Controller
 
     public function actionLab($cid=NULL)
     {
-        $searchModel = new HoslabSearch($cid);
+        $searchModel = new PcclabSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        return $this->render('lab',[
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-            'cid'=>$cid
-        ]);
+        $model = new Pcclab(); 
+
+        if (Yii::$app->request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+               return   $this->renderAjax('lab',[
+                     'searchModel' => $searchModel,
+                     'dataProvider' => $dataProvider,
+                     'model' => $model
+                     ]);
+             } else {
+                return $this->renderAjax('lab', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+                    'model' => $model
+                ]);
+            }
     }
 
     public function actionDrug($cid =NULL){

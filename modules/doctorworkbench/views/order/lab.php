@@ -14,10 +14,9 @@
 
 ]);?>
 <?php
-   echo $this->render('@app/modules/lab/views/hoslab/index',[
+   echo $this->render('@app/modules/lab/views/pcclab/index',[
     'searchModel' => $searchModel,
     'dataProvider' => $dataProvider,
-    'cid'=>$cid
 ]);
 ?>
 <?=$this->render('../default/panel_foot');?>
