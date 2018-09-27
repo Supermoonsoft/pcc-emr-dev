@@ -13,7 +13,7 @@ use Yii;
  * @property string $nurse_send_date
  * @property string $nurse_send_time
  * @property string $call_status
- * @property int $ordernumber ลำดับ
+ * @property int $order_number ลำดับ
  * @property string $cid
  */
 class PccDoctorRoomQueue extends \yii\db\ActiveRecord
@@ -32,10 +32,10 @@ class PccDoctorRoomQueue extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            // [['id'], 'required'],
             [['id'], 'string'],
-            [['room_id', 'ordernumber'], 'default', 'value' => null],
-            [['room_id', 'ordernumber'], 'integer'],
+            [['room_id', 'order_number'], 'default', 'value' => null],
+            [['room_id', 'order_number'], 'integer'],
             [['nurse_send_date', 'nurse_send_time'], 'safe'],
             [['pcc_vn', 'cid'], 'string', 'max' => 15],
             [['call_status'], 'string', 'max' => 255],
@@ -55,7 +55,7 @@ class PccDoctorRoomQueue extends \yii\db\ActiveRecord
             'nurse_send_date' => 'Nurse Send Date',
             'nurse_send_time' => 'Nurse Send Time',
             'call_status' => 'Call Status',
-            'ordernumber' => 'ลำดับ',
+            'order_number' => 'ลำดับ',
             'cid' => 'Cid',
         ];
     }

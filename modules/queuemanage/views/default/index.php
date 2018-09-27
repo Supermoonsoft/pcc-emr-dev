@@ -23,7 +23,9 @@ DataTableAsset::register($this);
     <div class="panel-body">
         <?php
         ActiveForm::begin([
-            'id' => 'form-add-q'
+            'id' => 'form-add-q',
+            'action' => ['default/save'],
+            'method' => 'post'
         ]);
         ?>
 
@@ -59,20 +61,20 @@ DataTableAsset::register($this);
                                     <td>
                                         <input class="chk_pt" type="checkbox" name="pt[]" value="<?= $value['pcc_vn'] ?>" />
                                     </td>
-
                                     <td><?= $value['hn'] ?></td>
                                     <td data-num=2 >
-                                    <input type="hidden" name="num" value="" id="input<?=$value['pcc_vn']?>"/>
+                                    <input type="hidden" name="num[]" value="" id="input<?=$value['pcc_vn']?>"/>
+                                    <input type="hidden" name="sendtime[]" value="" id="time<?=$value['pcc_vn']?>"/>
+                                    <input type="hidden" name="cid[]" value="<?= $value['cid'] ?>"/>
+                                    
                                     <div  id="<?=$value['pcc_vn']?>" class="send_no"></div>
+                                    <div id="time<?=$value['pcc_vn']?>"></div>
                                     </td>
                                     <td><?= $value['visit_date_begin'] . ' ' . $value['visit_time_begin'] ?></td>                                    
                                     <td><?= $value['fullname'] ?></td>
 
                                 </tr>                                
                             <?php endforeach; ?>
-
-
-
                         </tbody>
 
                     </table>

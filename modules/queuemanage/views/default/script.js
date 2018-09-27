@@ -1,6 +1,25 @@
 //ทำ datatable
 $('#grid-view-data-table .table').DataTable();
 
+
+// Time
+
+// function addZero(i) {
+//     if (i < 10) {
+//         i = "0" + i;
+//     }
+//     return i;
+// } 
+// var d = new Date();
+// var x = document.getElementById("demo");
+// var h = addZero(d.getHours());
+// var m = addZero(d.getMinutes());
+// var s = addZero(d.getSeconds());
+
+// var clickTime = h + ":" + m + ":" + s;
+
+
+
 // จัดคิว
 var n = 0;
 $('.chk_pt').click(function (e) {
@@ -9,11 +28,19 @@ $('.chk_pt').click(function (e) {
         n = n + 1;
         $('#input'+pccvn+'').val(n); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
         $('#'+pccvn+'').html(n); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
-
+       let uri = 'index.php?r=queuemanage/ajax/get-time';
+    $.get(uri, function (data) {
+       $('#time'+pccvn+'').val(data);
+        console.log(n);
+    });
     } else {
         n = n - 1;
         $('#input'+pccvn+'').val(''); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
         $('#'+pccvn+'').html(''); // นำตัวแปร n ไปแสดงในตาราง ตาม selector id
+       $('#time'+pccvn+'').val('');
+       console.log(n);
+
+
     }
 });
 $('#form-add-q').submit(function (e) {
@@ -23,6 +50,7 @@ $('#form-add-q').submit(function (e) {
         swal("คำสั่งไม่ถูกต้อง!");
         e.preventDefault();
     }
+
 });
 
 
@@ -49,4 +77,8 @@ $('.tr-vn').click(function () {
 
     
 });
+
+function getTime(){
+    
+}
 

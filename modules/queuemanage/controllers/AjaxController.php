@@ -35,7 +35,11 @@ class AjaxController extends Controller {
     return $this->renderAjax('../default/lab_view',['raw' => $raw]);
     }
 
-
+public function actionGetTime(){
+    \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+    $time = time();
+    return  Yii::$app->formatter->asDateTime($time, 'php:H:i:s');
+}
 
     public function actionQOrder(){
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -92,6 +96,8 @@ class AjaxController extends Controller {
 
 //  return $check;
 }
+
+
 
 
     }

@@ -2,9 +2,11 @@
 
 namespace app\modules\queuemanage\controllers;
 
+use yii;
 use yii\web\Controller;
 use app\components\DbHelper;
 use yii\data\SqlDataProvider;
+use app\modules\queuemanage\models\PccDoctorRoomQueue;
 
 /**
  * Default controller for the `queuemanage` module
@@ -19,15 +21,7 @@ class DefaultController extends Controller {
        
         $vn = [];
         $sql_update ='';
-        if (\Yii::$app->request->isPost) {
-            $pt = \Yii::$app->request->post('pt');
-            foreach ($pt as $p) {
-                $vn[] = "'" . $p . "'";
-            }
-            $vn = implode(',', $vn);
-            $sql_update = "update pcc_visit SET current_station = 'A1' WHERE pcc_vn IN  ($vn) ";
-            DbHelper::execute('db', $sql_update);
-        }
+        
         $date1 = date('Y-m-d');
         $date2 = date('Y-m-d');
         $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
@@ -38,36 +32,44 @@ WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
 AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
         $raw = DbHelper::queryAll('db', $sql);
 
-
-
-            // $count = Yii::$app->db->createCommand('
-            // SELECT COUNT(*) FROM post WHERE status=:status
-            // ', [':status' => 1])->queryScalar();
-
-            $dataProvider = new SqlDataProvider([
-            'sql' => $sql,
-            // 'params' => [':status' => 1],
-            // 'totalCount' => $count,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-            'sort' => [
-                'attributes' => [
-                    'title',
-                    'view_count',
-                    'created_at',
-                ],
-            ],
-            ]);
-
-// returns an array of data rows
-// $models = $provider->getModels();
-
         return $this->render('index', [
                     'raw' => $raw,
                     'data' => $sql_update,
-                    'dataProvider' => $dataProvider
         ]);
     }
+                
 
+public function actionSave(){
+    if (\Yii::$app->request->isPost) {
+        $pt = \Yii::$app->request->post('pt');
+        foreach ($pt as $p) {
+            $vn[] = "'" . $p . "'";
+        }
+        $vn = implode(',', $vn);
+        $sql_update = "update pcc_visit SET current_station = 'A1' WHERE pcc_vn IN  ($vn) ";
+        DbHelper::execute('db', $sql_update);
+
+        $num =  Yii::$app->request->post('num');
+        $room =  Yii::$app->request->post('room');
+        $sendtime =  Yii::$app->request->post('sendtime');
+        $cid =  Yii::$app->request->post('cid');
+        $i = 0;
+        foreach ($pt as $p):
+            $model = new PccDoctorRoomQueue();
+            $n = $i++;
+            $model->order_number = $num[$n];
+            $model->pcc_vn = $p;
+            $model->room_id = $room;
+            $model->nurse_send_date = Date('Y-m-d');
+            $model->nurse_send_time = $sendtime[$n];
+            $model->cid = $cid[$n];
+            $model->save();
+        endforeach;
+
+        return $this->redirect(['/queuemanage']);
+    }else{
+        return $this->redirect(['/queuemanage']);
+
+}
+}
 }
