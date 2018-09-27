@@ -24,7 +24,7 @@ $pt_count = count($pt_q);
 DevAsset::register($this);
 \yii\bootstrap\BootstrapAsset::register($this);
 
-$hn = PatientHelper::getCurrentHn();
+$cid = PatientHelper::getCurrentCid();
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -130,7 +130,7 @@ $hn = PatientHelper::getCurrentHn();
                                     <?php else: ?>
                                         <li class="">
                                             <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false" style="color: white">                                            
-                                                <?php echo Yii::$app->user->identity->username.':'.Yii::$app->user->identity->name; ?>
+                                                <?php echo Yii::$app->user->identity->username . ':' . Yii::$app->user->identity->name; ?>
                                                 <span class=" fa fa-angle-down"></span>
                                             </a>
                                             <ul class="dropdown-menu dropdown-usermenu pull-right">
@@ -207,7 +207,11 @@ $hn = PatientHelper::getCurrentHn();
 
                     <div class="modal-body">
                         <?php foreach ($pt_q as $key => $value): ?>
-                            <h4><a href="<?= Url::to(['/setsession', 'pcc_vn' => $value['pcc_vn']]) ?>" data-confirm="ตรวจรักษา <?= $value['fullname'] ?>" ><?= $value['fullname'] ?></a></h4>
+                            <?php if(!empty($cid)):  ?>
+                            <h4><a href="<?= Url::to(['/setsession', 'pcc_vn' => $value['pcc_vn']]) ?>" data-confirm="แทนที่คนปัจุบัน" ><?= $value['fullname'] ?></a></h4>
+                            <?php else: ?>
+                            <h4><a href="<?= Url::to(['/setsession', 'pcc_vn' => $value['pcc_vn']]) ?>"  ><?= $value['fullname'] ?></a></h4>
+                            <?php endif; ?>
                         <?php endforeach; ?>
 
 

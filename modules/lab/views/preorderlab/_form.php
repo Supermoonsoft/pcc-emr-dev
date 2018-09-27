@@ -1,41 +1,57 @@
 <?php
-
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use wbraganca\dynamicform\DynamicFormWidget;
-use yii\widgets\Pjax;
-use app\components\DbHelper;
-use yii\web\JsExpression;
-use app\components\loading\ShowLoading;
-use yii\helpers\Url;
+
+/* @var $this yii\web\View */
+/* @var $model app\modules\lab\models\Preorderlab */
+/* @var $form yii\widgets\ActiveForm */
 ?>
-<?php
-$this->registerJs('')
-?>
+
 <div class="preorderlab-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'dynamic-form']); ?>
-            <div class="row">
-                <div class="col-sm-3">
-                    <?= $form->field($model, "request_at")->textInput(['type' => 'date']) ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($model, "lab_name_hos")->textInput(['maxlength' => true]) ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($model, "result_at")->textInput(['tyep' => 'date']) ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($model, "hos_result")->textInput(['maxlength' => true]) ?>
-                </div>
-            </div><!-- .row -->
+    <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->field($model, 'id')->textInput() ?>
 
+    <?= $form->field($model, 'pcc_vn')->textInput(['maxlength' => true]) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
+    <?= $form->field($model, 'data_json')->textInput() ?>
+
+    <?= $form->field($model, 'pcc_start_service_datetime')->textInput() ?>
+
+    <?= $form->field($model, 'pcc_end_service_datetime')->textInput() ?>
+
+    <?= $form->field($model, 'data1')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'data2')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'hospcode')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'lab_code')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'lab_name')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'lab_request_date')->textInput() ?>
+
+    <?= $form->field($model, 'lab_result_date')->textInput() ?>
+
+    <?= $form->field($model, 'lab_result')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'standard_result')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'lab_price')->textInput() ?>
+
+    <?= $form->field($model, 'lab_code_moph')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'last_update')->textInput() ?>
+
+  
+	<?php if (!Yii::$app->request->isAjax){ ?>
+	  	<div class="form-group">
+	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+	    </div>
+	<?php } ?>
 
     <?php ActiveForm::end(); ?>
-
+    
 </div>

@@ -4,7 +4,9 @@ namespace app\modules\lab\controllers;
 
 use Yii;
 use app\modules\lab\models\Pcclab;
-use app\modules\lab\models\PcclabSeach;
+use app\modules\lab\models\PcclabSearch;
+use app\modules\lab\models\Preorderlab;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -38,7 +40,7 @@ class PcclabController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PcclabSeach();
+        $searchModel = new PcclabSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Pcclab(); 
 
@@ -105,46 +107,16 @@ class PcclabController extends Controller
 
     public function actionAddgroup()
     {
-
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            $post = Yii:: $app->request->post();
-            $data = [];
-            if (Yii::$app->request->isAjax) {
-                // do your data processing here
-         
-                // set response data
-                if (success) {
-                    $data = ['sucess' => true, /* rest of the data */];
-                }
-                else {
-                    $data = ['success' => false, 'error' => 'Some error message'];
-                }
-                return $this->renderAjax('index',['data'=> $data]);
-            }
+           //  Yii::$app->response->format = Response::FORMAT_JSON;
+            // $post = Yii:: $app->request->post();
+            // if (Yii::$app->request->isAjax) {
+            //    // return $this->renderAjax('addgroup');
+            //    return 'success';
+            // }
+           // return 'hello';
         
     }
 
-    public function beforeAction($action) 
-    { 
-        $this->enableCsrfValidation = false; 
-        return parent::beforeAction($action); 
-    }
-
-
-public function parseRequest($manager, $request, $add_post = true, $add_files = true) {
-    $result = parent::parseRequest($manager, $request);
-    if($result !== false) {
-        list($route, $params) = $result;
-        if($add_post    === true) {
-            $params = array_merge($params,$_POST);
-        }
-        if($add_files   === true) {
-            $params = array_merge($params,$_FILES);
-        }
-        return [$route, $params];
-    }
-    return false;
-}
 
     protected function findModel($id)
     {
@@ -155,60 +127,62 @@ public function parseRequest($manager, $request, $add_post = true, $add_files = 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 
-    public function actionPreorderlab()
-    {
-        $searchModel = new PcclabSeach();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new Pcclab(); 
 
-        if (Yii::$app->request->isAjax) {
+    public function actionPreorder(){
+        $action=Yii::$app->request->post('action');
+        $selection=(array)Yii::$app->request->post('selection');//typecasting
+
+            foreach($selection as $id){
+                $model = Pcclab::findOne((String)$id);//make a typecasting
+                $preorder = new Preorderlab(); 
+                    /*
+                    $preorder->pcc_vn = $model->vn;
+                    $preorder->pcc_start_service_datetime = $model->date_visit;
+                    $preorder->pcc_end_service_datetime = $model->time_;
+                    */
+                    $preorder->hospcode = $model->hospcode;
+                    $preorder->lab_code = $model->lab_code;
+                    $preorder->lab_name = $model->lab_name;
+                    $preorder->lab_request_date = date('Y-m-d');
+                    $preorder->standard_result = $model->standard_result;
+                    $preorder->lab_price = $model->lab_price;
+                    /*
+            'pcc_vn' => 'Pcc Vn',
+            'data_json' => 'Data Json',
+            'pcc_start_service_datetime' => 'Pcc Start Service Datetime',
+            'pcc_end_service_datetime' => 'Pcc End Service Datetime',
+            'data1' => 'Data1',
+            'data2' => 'Data2',
+            'hospcode' => 'Hospcode',
+            'lab_code' => 'Lab Code',
+            'lab_name' => 'Lab Name',
+            'lab_request_date' => 'Lab Request Date',
+            'lab_result_date' => 'Lab Result Date',
+            'lab_result' => 'Lab Result',
+            'standard_result' => 'Standard Result',
+            'lab_price' => 'Lab Price',
+                     */
+                $preorder->save(false);
+                // or delete
+            }
+            
+            $model = new Preorderlab(); 
             Yii::$app->response->format = Response::FORMAT_JSON;
-               return   $this->renderAjax('/lab/preorderlab/index',[
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                     ]);
-             } else {
-                return $this->renderAjax('/lab/preorderlab/index', [
+                return   $this->renderAjax('/doctorworkbench/order/pre-order-lab',[
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'model' => $model
-                ]);
-            }
-    }
+                    ]);
+            
+     }
 
-    public function actionAddgroup_()
-    {
 
-        //$id_cases = explode(',', Yii::$app->request->post('id_case'));//typecasting
+    public function actionTest(){
+          Yii::$app->response->format = Response::FORMAT_JSON;
+          $request = Yii::$app->request;
+          $data = Yii::$app->request->get('key');
+          //return $data;
+        return  $this->render('test',['data'=>$data]);
         
-        //$id_cases = explode(',',["7175c4d3-a64a-44d2-9ed7-58aadbd92a33", "0b42a15a-3a17-4413-b939-018a765f306b", "ce267365-ba40-47ba-b6cc-64a40b6c2714"]);
-
-        //$lab_name = Yii::$app->request->post('lab_name');
-        //$message ='';
-        //$group_number = Yii::$app->request->post('group_number');
-        //print_r($selection);
-        //foreach($id_cases as $id){
-            //echo $id;
-        //    $message .= '[Id :'.$id.',';
-        //    $pcclab = Pcclab::find()->where(['id' => $id])->all();//->andWhere('group_name '. new Expression('IS NULL'))
-        //    foreach($pcclab as $im){
-                
-                //echo $im->finance->charge->name.'<br />';
-        //        $ims = Pcclab::findOne(['id' => $im->id]);
-        //        $ims->labname = $labname;
-        //        $message .= 'Labname :'.$ims->labname.',';//test
-                /*if($ims->save()){
-                    //echo 'y';
-                }else{
-                    //echo 'n';
-                }
-                */
-        //    }
-        //    $message .= '],';
-        //}
-
-        //Yii::$app->session->setFlash('success', 'บันทึกรอบการย้อมเรียบร้อยแล้ว');
-        return $this->redirect(['addgroup']);
     }
 }

@@ -1,18 +1,17 @@
 <?php
 
 use yii\helpers\Html;
+use app\components\PatientHelper;
+use app\components\MessageHelper;
+$hn = PatientHelper::getCurrentHn();
+$vn = PatientHelper::getCurrentVn();
+//$Sdate = PatientHelper::getDateVisitByVn($vn);
+//$Stime = PatientHelper::getTimeVisitByVn($vn);
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\lab\models\Pcclab */
-
-$this->title = 'Update Pcclab: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pcclabs', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
+echo ShowLoading::widget();
 ?>
 <div class="pcclab-update">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,

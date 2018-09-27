@@ -1,3 +1,3 @@
 
 HELLO
-<?php   $data ; ?>
+<?php   //$data ; ?>

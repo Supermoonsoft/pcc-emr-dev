@@ -7,31 +7,51 @@ use app\components\DbHelper;
 use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-use app\components\PatientHelper;
-use app\components\MessageHelper;
-$hn = PatientHelper::getCurrentHn();
-$vn = PatientHelper::getCurrentVn();
-//$Sdate = PatientHelper::getDateVisitByVn($vn);
-//$Stime = PatientHelper::getTimeVisitByVn($vn);
-
-//$this->params['pt_title'] = PatientHelper::getPatientTitleByHn($hn);
 echo ShowLoading::widget();
 ?>
-<div class="hoslab-index">
-    <?php Pjax::begin(); ?>
-    <?=Html::beginForm(['/lab/pcclab/preorder'],'post');?>
+<?php
+// $this->registerJs('
+// $("#btn-add").click(function(){
+//     var id_case = $("#gridview-id").yiiGridView("getSelectedRows");
 
-    <div style="margin-bottom: 3px">
+//     console.log(id_case);
+
+//     if(id_case.length > 0){
+//         $.ajax({
+//             url: "'.Url::to(['/lab/pcclab/addgroup']).'",
+//             dataType: "JSON",
+//             type: "POST",
+//            // contentType: "application/x-www-form-urlencoded",
+//             //data: $(this).serialize(),
+//             // success: function( data, textStatus, jQxhr ){
+//             //     alert(data);
+                
+//             // },
+//             data:{id:id_case},
+//             success: function(response){
+//                 console.log(response);
+//             }
+//             error: function( jqXhr, textStatus, errorThrown ){
+//                 console.log( errorThrown );
+//             }
+//         });
+
+//     }
+//   });
+// ')
+
+
+?>
+<div class="hoslab-index">
+
+        <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
             
             <?php // Html::a('<button id="btn-add" onClick='.new JsExpression($alert).' class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>', ['/doctorworkbench/order/pre-order-lab']) ?>
-            
-            <?=  Html::submitButton('<i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab',
-                                    [//'onClick'=>new JsExpression($alert),
-                                    'data-confirm' => 'ส่งทีละหลายรายการ ไปยัง PreOrder Lab',
-                                    'class'=>'btn btn-info']); ?>
+            <button id="btn-add" class="btn btn-info"  ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
         </div>
 
+    <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
@@ -70,6 +90,9 @@ echo ShowLoading::widget();
             ],*/
             [
                 'class' => 'yii\grid\CheckboxColumn',
+                'checkboxOptions' => function($model) {
+                    return ['value' => $model->id, 'data' => ['key' => $model->id]];
+                },
                 'header' => false,
             ],
             [
@@ -107,8 +130,6 @@ echo ShowLoading::widget();
 
         ],
     ]); ?>
-
-    <?= Html::endForm();?> 
     <?php Pjax::end(); ?>
 
 </div>

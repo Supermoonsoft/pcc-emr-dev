@@ -8,6 +8,8 @@ use app\modules\lab\models\PreorderlabSeach;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use \yii\web\Response;
+use yii\helpers\Html;
 
 /**
  * PreorderlabController implements the CRUD actions for Preorderlab model.
@@ -15,7 +17,7 @@ use yii\filters\VerbFilter;
 class PreorderlabController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function behaviors()
     {
@@ -23,7 +25,8 @@ class PreorderlabController extends Controller
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    'delete' => ['POST'],
+                    'delete' => ['post'],
+                    'bulk-delete' => ['post'],
                 ],
             ],
         ];
@@ -34,7 +37,7 @@ class PreorderlabController extends Controller
      * @return mixed
      */
     public function actionIndex()
-    {
+    {    
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -44,69 +47,210 @@ class PreorderlabController extends Controller
         ]);
     }
 
+
     /**
      * Displays a single Preorderlab model.
      * @param string $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+    {   
+        $request = Yii::$app->request;
+        if($request->isAjax){
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return [
+                    'title'=> "Preorderlab #".$id,
+                    'content'=>$this->renderAjax('view', [
+                        'model' => $this->findModel($id),
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                ];    
+        }else{
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        }
     }
 
     /**
      * Creates a new Preorderlab model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
+     * For ajax request will return json object
+     * and for non-ajax request if creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Preorderlab();
+        $request = Yii::$app->request;
+        $model = new Preorderlab();  
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Create new Preorderlab",
+                    'content'=>$this->renderAjax('create', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
+                ];         
+            }else if($model->load($request->post()) && $model->save()){
+                return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Create new Preorderlab",
+                    'content'=>'<span class="text-success">Create Preorderlab success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+        
+                ];         
+            }else{           
+                return [
+                    'title'=> "Create new Preorderlab",
+                    'content'=>$this->renderAjax('create', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
+                ];         
+            }
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('create', [
+                    'model' => $model,
+                ]);
+            }
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+       
     }
 
     /**
      * Updates an existing Preorderlab model.
-     * If update is successful, the browser will be redirected to the 'view' page.
+     * For ajax request will return json object
+     * and for non-ajax request if update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $request = Yii::$app->request;
+        $model = $this->findModel($id);       
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Update Preorderlab #".$id,
+                    'content'=>$this->renderAjax('update', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                ];         
+            }else if($model->load($request->post()) && $model->save()){
+                return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Preorderlab #".$id,
+                    'content'=>$this->renderAjax('view', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
+                ];    
+            }else{
+                 return [
+                    'title'=> "Update Preorderlab #".$id,
+                    'content'=>$this->renderAjax('update', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+                ];        
+            }
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
+            }
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
-     * Deletes an existing Preorderlab model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Delete an existing Preorderlab model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
     {
+        $request = Yii::$app->request;
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+
+
+    }
+
+     /**
+     * Delete multiple existing Preorderlab model.
+     * For ajax request will return json object
+     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
+     * @param string $id
+     * @return mixed
+     */
+    public function actionBulkDelete()
+    {        
+        $request = Yii::$app->request;
+        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
+        foreach ( $pks as $pk ) {
+            $model = $this->findModel($pk);
+            $model->delete();
+        }
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+       
     }
 
     /**
@@ -120,8 +264,8 @@ class PreorderlabController extends Controller
     {
         if (($model = Preorderlab::findOne($id)) !== null) {
             return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

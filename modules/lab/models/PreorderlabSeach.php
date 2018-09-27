@@ -8,22 +8,23 @@ use yii\data\ActiveDataProvider;
 use app\modules\lab\models\Preorderlab;
 
 /**
- * PreorderlabSeach represents the model behind the search form of `app\modules\lab\models\Preorderlab`.
+ * PreorderlabSeach represents the model behind the search form about `app\modules\lab\models\Preorderlab`.
  */
 class PreorderlabSeach extends Preorderlab
 {
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'pcc_vn', 'data_json', 'pcc_start_service_datetime', 'pcc_end_service_datetime', 'data1', 'data2', 'hoscode', 'lab_code', 'lab_name', 'lab_standard_result', 'lab_request_at', 'lab_result_at', 'lab_result', 'lab_code_moph'], 'safe'],
+            [['id', 'pcc_vn', 'data_json', 'pcc_start_service_datetime', 'pcc_end_service_datetime', 'data1', 'data2', 'hospcode', 'lab_code', 'lab_name', 'lab_request_date', 'lab_result_date', 'lab_result', 'standard_result', 'lab_code_moph', 'last_update'], 'safe'],
+            [['lab_price'], 'number'],
         ];
     }
 
     /**
-     * {@inheritdoc}
+     * @inheritdoc
      */
     public function scenarios()
     {
@@ -42,8 +43,6 @@ class PreorderlabSeach extends Preorderlab
     {
         $query = Preorderlab::find();
 
-        // add conditions that should always apply here
-
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -56,25 +55,26 @@ class PreorderlabSeach extends Preorderlab
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'pcc_start_service_datetime' => $this->pcc_start_service_datetime,
             'pcc_end_service_datetime' => $this->pcc_end_service_datetime,
+            'lab_request_date' => $this->lab_request_date,
+            'lab_result_date' => $this->lab_result_date,
+            'lab_price' => $this->lab_price,
+            'last_update' => $this->last_update,
         ]);
 
-        $query->andFilterWhere(['ilike', 'id', $this->id])
-            ->andFilterWhere(['ilike', 'pcc_vn', $this->pcc_vn])
-            ->andFilterWhere(['ilike', 'data_json', $this->data_json])
-            ->andFilterWhere(['ilike', 'data1', $this->data1])
-            ->andFilterWhere(['ilike', 'data2', $this->data2])
-            ->andFilterWhere(['ilike', 'hoscode', $this->hoscode])
-            ->andFilterWhere(['ilike', 'lab_code', $this->lab_code])
-            ->andFilterWhere(['ilike', 'lab_name', $this->lab_name])
-            ->andFilterWhere(['ilike', 'lab_standard_result', $this->lab_standard_result])
-            ->andFilterWhere(['ilike', 'lab_request_at', $this->lab_request_at])
-            ->andFilterWhere(['ilike', 'lab_result_at', $this->lab_result_at])
-            ->andFilterWhere(['ilike', 'lab_result', $this->lab_result])
-            ->andFilterWhere(['ilike', 'lab_code_moph', $this->lab_code_moph]);
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'pcc_vn', $this->pcc_vn])
+            ->andFilterWhere(['like', 'data_json', $this->data_json])
+            ->andFilterWhere(['like', 'data1', $this->data1])
+            ->andFilterWhere(['like', 'data2', $this->data2])
+            ->andFilterWhere(['like', 'hospcode', $this->hospcode])
+            ->andFilterWhere(['like', 'lab_code', $this->lab_code])
+            ->andFilterWhere(['like', 'lab_name', $this->lab_name])
+            ->andFilterWhere(['like', 'lab_result', $this->lab_result])
+            ->andFilterWhere(['like', 'standard_result', $this->standard_result])
+            ->andFilterWhere(['like', 'lab_code_moph', $this->lab_code_moph]);
 
         return $dataProvider;
     }
