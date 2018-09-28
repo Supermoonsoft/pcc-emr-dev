@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "gateway_emr_visit".
  *
  * @property string $id
- * @property string $provider_code
- * @property string $provider_name
+ * @property string $hospcode
+ * @property string $hospname
  * @property string $hn
  * @property string $vn
  * @property string $date_visit
@@ -51,12 +51,12 @@ class GatewayEmrVisit extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'provider_code', 'provider_name'], 'required'],
+            [['id', 'hospcode', 'hospname'], 'required'],
             [['id'], 'string'],
             [['date_visit', 'time_visit', 'data_json', 'last_update'], 'safe'],
             [['cost', 'sele_price', 'sum_price'], 'number'],
-            [['provider_code'], 'string', 'max' => 5],
-            [['provider_name', 'staff'], 'string', 'max' => 100],
+            [['hospcode'], 'string', 'max' => 5],
+            [['hospname', 'staff'], 'string', 'max' => 100],
             [['hn', 'bpd', 'bps', 'temperature', 'pulse', 'rr', 'weight', 'height', 'o2sat'], 'string', 'max' => 10],
             [['vn', 'an'], 'string', 'max' => 12],
             [['cc', 'pe', 'pi', 'department'], 'string', 'max' => 255],
@@ -72,19 +72,19 @@ class GatewayEmrVisit extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'provider_code' => 'Provider Code',
-            'provider_name' => 'Provider Name',
+            'hospcode' => 'Hospcode',
+            'hospname' => 'Hospname',
             'hn' => 'Hn',
             'vn' => 'Vn',
-        'date_visit' => 'วันที่รับบริการ ----- สถานที่รับบริการ',
+            'date_visit' => 'วันที่รับบริการ ----- สถานที่รับบริการ',
             'time_visit' => 'Time Visit',
-            'cc' => 'Cc',
-            'pe' => 'Pe',
-            'pi' => 'Pi',
-            'bpd' => 'Bpd',
+            'cc' => 'CC',
+            'pe' => 'PE',
+            'pi' => 'PI',
+            'bpd' => 'BP',
             'bps' => 'Bps',
             'temperature' => 'Temperature',
-            'pulse' => 'Pulse',
+            'pulse' => 'Vital Sign',
             'rr' => 'Rr',
             'weight' => 'Weight',
             'height' => 'Height',

@@ -13,7 +13,7 @@ use kartik\grid\GridView;
 $model = GatewayEmrVisit::findOne($id);
 //$modelDiag = PccDiagnosis::find()->where(['vn' => $vn, 'provider_code' => $provider_code]);
  $searchModel = new GatewayEmrDiagSearch();
-$dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$provider_code);
+$dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$hospcode);
 ?>
 <div class="col-sm-6">
     <div class="panel panel-success">

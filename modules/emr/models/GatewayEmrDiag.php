@@ -8,8 +8,8 @@ use Yii;
  * This is the model class for table "gateway_emr_diag".
  *
  * @property string $id
- * @property string $provider_code
- * @property string $provider_name
+ * @property string $hospcode
+ * @property string $hospname
  * @property string $hn
  * @property string $vn
  * @property string $an
@@ -20,6 +20,8 @@ use Yii;
  * @property string $diag_type
  * @property array $data_json
  * @property string $last_update
+ * @property string $cid
+ * @property string $provider
  */
 class GatewayEmrDiag extends \yii\db\ActiveRecord
 {
@@ -37,15 +39,16 @@ class GatewayEmrDiag extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'provider_code', 'provider_name'], 'required'],
+            [['id'], 'required'],
             [['id'], 'string'],
             [['date_visit', 'time_visit', 'data_json', 'last_update'], 'safe'],
-            [['provider_code'], 'string', 'max' => 5],
-            [['provider_name', 'icd_code'], 'string', 'max' => 100],
+            [['hospcode'], 'string', 'max' => 5],
+            [['hospname', 'icd_code'], 'string', 'max' => 100],
             [['hn'], 'string', 'max' => 10],
             [['vn', 'an'], 'string', 'max' => 12],
             [['icd_name'], 'string', 'max' => 255],
             [['diag_type'], 'string', 'max' => 2],
+            [['cid', 'provider'], 'string', 'max' => 13],
             [['id'], 'unique'],
         ];
     }
@@ -57,8 +60,8 @@ class GatewayEmrDiag extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'provider_code' => 'Provider Code',
-            'provider_name' => 'Provider Name',
+            'hospcode' => 'Hospcode',
+            'hospname' => 'Hospname',
             'hn' => 'Hn',
             'vn' => 'Vn',
             'an' => 'An',
@@ -69,6 +72,8 @@ class GatewayEmrDiag extends \yii\db\ActiveRecord
             'diag_type' => 'Diag Type',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
+            'cid' => 'Cid',
+            'provider' => 'Provider',
         ];
     }
 }

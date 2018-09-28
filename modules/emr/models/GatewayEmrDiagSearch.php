@@ -18,7 +18,7 @@ class GatewayEmrDiagSearch extends GatewayEmrDiag
     public function rules()
     {
         return [
-            [['id', 'provider_code', 'provider_name', 'hn', 'vn', 'an', 'date_visit', 'time_visit', 'icd_code', 'icd_name', 'diag_type', 'data_json', 'last_update'], 'safe'],
+            [['id', 'hospcode', 'hospname', 'hn', 'vn', 'an', 'date_visit', 'time_visit', 'icd_code', 'icd_name', 'diag_type', 'data_json', 'last_update', 'cid', 'provider'], 'safe'],
         ];
     }
 
@@ -64,15 +64,17 @@ class GatewayEmrDiagSearch extends GatewayEmrDiag
         ]);
 
         $query->andFilterWhere(['ilike', 'id', $this->id])
-            ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
-            ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['ilike', 'hospcode', $this->hospcode])
+            ->andFilterWhere(['ilike', 'hospname', $this->hospname])
             ->andFilterWhere(['ilike', 'hn', $this->hn])
             ->andFilterWhere(['ilike', 'vn', $this->vn])
             ->andFilterWhere(['ilike', 'an', $this->an])
             ->andFilterWhere(['ilike', 'icd_code', $this->icd_code])
             ->andFilterWhere(['ilike', 'icd_name', $this->icd_name])
             ->andFilterWhere(['ilike', 'diag_type', $this->diag_type])
-            ->andFilterWhere(['ilike', 'data_json', $this->data_json]);
+            ->andFilterWhere(['ilike', 'data_json', $this->data_json])
+            ->andFilterWhere(['ilike', 'cid', $this->cid])
+            ->andFilterWhere(['ilike', 'provider', $this->provider]);
 
         return $dataProvider;
     }

@@ -18,7 +18,7 @@ class GatewayEmrVisitSearch extends GatewayEmrVisit
     public function rules()
     {
         return [
-            [['id', 'provider_code', 'provider_name', 'hn', 'vn', 'date_visit', 'time_visit', 'cc', 'pe', 'pi', 'bpd', 'bps', 'temperature', 'pulse', 'rr', 'weight', 'height', 'o2sat', 'department', 'staff', 'save_by', 'data_json', 'last_update', 'an'], 'safe'],
+            [['id', 'hospcode', 'hospname', 'hn', 'vn', 'date_visit', 'time_visit', 'cc', 'pe', 'pi', 'bpd', 'bps', 'temperature', 'pulse', 'rr', 'weight', 'height', 'o2sat', 'department', 'staff', 'save_by', 'data_json', 'last_update', 'an'], 'safe'],
             [['cost', 'sele_price', 'sum_price'], 'number'],
         ];
     }
@@ -41,8 +41,7 @@ class GatewayEmrVisitSearch extends GatewayEmrVisit
      */
     public function search($params)
     {
-       // $query = GatewayEmrVisit::find();
-        $query = GatewayEmrVisit::find()->where(['hn'=>'13165'])->OrderBy(['date_visit'=>SORT_DESC,]);
+        $query = GatewayEmrVisit::find();
 
         // add conditions that should always apply here
 
@@ -69,8 +68,8 @@ class GatewayEmrVisitSearch extends GatewayEmrVisit
         ]);
 
         $query->andFilterWhere(['ilike', 'id', $this->id])
-            ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
-            ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['ilike', 'hospcode', $this->hospcode])
+            ->andFilterWhere(['ilike', 'hospname', $this->hospname])
             ->andFilterWhere(['ilike', 'hn', $this->hn])
             ->andFilterWhere(['ilike', 'vn', $this->vn])
             ->andFilterWhere(['ilike', 'cc', $this->cc])

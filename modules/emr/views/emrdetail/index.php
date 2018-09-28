@@ -66,7 +66,7 @@ use yii\helpers\Url;
 //                            ['provider_code' => $model->provider_code,
 //                             'vn'=>$model->vn]);
                     //return Yii::$app->controller->renderPartial('_detail_orden_pago' ['ordenPagoModel' => $ordenPagoModel]);
-                    return $this->render('../emrdetail/detail', ['id' => $model->id, 'vn' => $model->vn, 'provider_code' => $model->provider_code]);
+                    return $this->render('../emrdetail/detail', ['id' => $model->id, 'vn' => $model->vn, 'hospcode' => $model->hospcode]);
                 },
                 'headerOptions' => ['class' => 'kartik-sheet-style'],
                 'expandOneOnly' => true,
@@ -83,7 +83,7 @@ use yii\helpers\Url;
                     }
                     $tyear = Yii::$app->formatter->asDate($model->date_visit, 'yyyy') + 543;
                     return "<span class='badge' style='background-color: {$color};color:{$color}'>.</span>  <code style='color: black;font-size:16px;' >" .
-                            Yii::$app->formatter->asDate($model->date_visit, 'dd/MM/') . $tyear . ' ----- ' . $model->provider_name . '</code>';
+                            Yii::$app->formatter->asDate($model->date_visit, 'dd/MM/') . $tyear . ' ----- ' . $model->hospname . '</code>';
                 },
                 'filterType' => GridView::FILTER_COLOR,
                 'filterWidgetOptions' => [
