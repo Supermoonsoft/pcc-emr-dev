@@ -31,6 +31,9 @@ $module = \Yii::$app->controller->module->id;
                 <li>
                     <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fa fa-dollar" aria-hidden="true"></i> งานบัญชี</a>
                 </li>
+                <li>
+                    <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fa fa-filter" aria-hidden="true"></i> คัดกรอง</a>
+                </li>
             </ul>
 
         </div>
