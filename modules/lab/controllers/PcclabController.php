@@ -45,20 +45,8 @@ class PcclabController extends Controller
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $model = new Pcclab(); 
 
-        if (Yii::$app->request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-               return   $this->renderAjax('index',[
-                     'searchModel' => $searchModel,
-                     'dataProvider' => $dataProvider,
-                     'model' => $model
-                     ]);
-             } else {
-                return $this->renderAjax('index', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-                    'model' => $model
-                ]);
-            }
+       
+            
     }
 
 
