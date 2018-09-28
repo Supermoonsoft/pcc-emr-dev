@@ -41,7 +41,7 @@ class GatewayEmrVisitSearch extends GatewayEmrVisit
      */
     public function search($params)
     {
-        $query = GatewayEmrVisit::find();
+        $query = GatewayEmrVisit::find()->where(['hn'=>'13165'])->OrderBy(['date_visit'=>SORT_DESC,]);
 
         // add conditions that should always apply here
 
