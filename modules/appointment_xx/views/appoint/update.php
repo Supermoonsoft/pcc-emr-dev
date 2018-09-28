@@ -3,14 +3,14 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\appointment\models\PccAppointment */
+/* @var $model app\modules\appointment\models\GatewayEmrAppointment */
 
-$this->title = 'Update Pcc Appointment: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pcc Appointments', 'url' => ['index']];
+$this->title = 'Update Gateway Emr Appointment: ' . $model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Gateway Emr Appointments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
-<div class="pcc-appointment-update">
+<div class="gateway-emr-appointment-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
 

@@ -47,8 +47,7 @@ class OrderController extends \yii\web\Controller
     public function actionProcedure(){
         return $this->render('procedure');
     }
-    
-    public function actionAppointment(){
+    public function actionAppointment() {
         $events = PccAppoinmentShow::find()->all();
         
         
@@ -58,17 +57,49 @@ class OrderController extends \yii\web\Controller
             
             $event = new \yii2fullcalendar\models\Event();
             $event->id = $eve->id;
-            $event->title = $text;
-            $event->start = $eve->vstdate;
-            $event->end = $eve->vstdate;
+            $event->title = '';
+            $event->start = $eve->startdate;
+            $event->end = $eve->enddate;
             $event->backgroundColor = $eve->color;
             $masker[] = $event;
         }
         
-        return $this->render('appointment',[
-                             'events' => $masker,
-                             ]);
+        //--- table --
+        /*$query = GatewayEmrAppointment::find()
+         ->select(["gateway_emr_appointment.hospname","p.hn","date_visit","time_visit","appoint_date","appoint_detail","p.cid","clinic"])
+         ->leftJoin("pcc_patient p","p.hn = gateway_emr_appointment.hn")
+         ->where(["p.cid" => '3200700311770']);*/
+        $sql="SELECT * FROM (
+        SELECT a.hospcode,a.hospname,a.hn,a.vn,a.date_visit,a.clinic,a.appoint_date,a.appoint_detail,a.appoint_doctor
+        FROM gateway_emr_appointment  a
+        LEFT JOIN gateway_emr_patient p ON p.hn=a.hn
+        where p.cid='3200700311770'
+        UNION ALL
+        SELECT a.hospcode,a.hospname,a.hn,a.vn,a.date_service,a.clinic,a.appoint_date,a.detail,'' AS doctor
+        FROM pcc_appointment a
+        LEFT JOIN pcc_patient p ON p.hn = a.hn
+        where p.cid='3200700311770') AS t1
+        ORDER BY date_visit DESC";
+        $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
+        $dataProvider = new \yii\data\ArrayDataProvider([
+                                                        'allModels'=>$rawData,
+                                                        'pagination'=>[
+                                                        'pageSize'=>20
+                                                        ]
+                                                        ]);
         
+        /*$dataProvider = new yii\data\ActiveDataProvider([
+         'query' => $query,
+         'pagination' => [
+         'pageSize' => 10,
+         ],
+         ]);*/
+        
+        
+        return $this->render('appointment', [
+                             'events' => $masker,
+                             'dataProvider' => $dataProvider
+                             ]);
     }
     public function actionEmr($cid=NULL){
         
@@ -107,7 +138,7 @@ class OrderController extends \yii\web\Controller
                      'model' => $model
                      ]);
              } else {
-                return $this->renderAjax('lab', [
+                return $this->render('lab', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
                     'model' => $model

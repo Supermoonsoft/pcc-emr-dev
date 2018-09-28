@@ -2,21 +2,22 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
-
+use yii\widgets\Pjax;
 /* @var $this yii\web\View */
-/* @var $searchModel app\modules\appointment\models\PccAppointmentSearch */
+/* @var $searchModel app\modules\appointment\models\GatewayEmrAppointmentSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pcc Appointments';
+$this->title = 'Gateway Emr Appointments';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pcc-appointment-index">
+<div class="gateway-emr-appointment-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
+    <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Pcc Appointment', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Gateway Emr Appointment', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -26,20 +27,22 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'hn',
-            'vn',
             'provider_code',
             'provider_name',
-            //'date_service',
-            //'time_service',
+            'hn',
+            'vn',
+            //'an',
+            //'date_visit',
+            //'time_visit',
             //'clinic',
             //'appoint_date',
             //'appoint_time',
-            //'detail',
+            //'appoint_detail',
             //'data_json',
             //'last_update',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
+    <?php Pjax::end(); ?>
 </div>

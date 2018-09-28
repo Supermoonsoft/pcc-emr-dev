@@ -2,8 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use kartik\widgets\Select2;
-use yii\helpers\ArrayHelper;
+
 /* @var $this yii\web\View */
 /* @var $model app\modules\appointment\models\GatewayEmrAppointment */
 /* @var $form yii\widgets\ActiveForm */
@@ -14,17 +13,21 @@ use yii\helpers\ArrayHelper;
     <?php $form = ActiveForm::begin(); ?>
 
 
-    <?= $form->field($model, 'hospcode')->hiddenInput(['value' => NULL])->label(FALSE) ?>
-    <?= $form->field($model, 'hospname')->hiddenInput(['value' => NULL])->label(FALSE) ?>
+    <?= $form->field($model, 'id')->hiddenInput(['value' => NULL])->label(FALSE) ?>
+    <?= $form->field($model, 'provider_code')->hiddenInput(['value' => NULL])->label(FALSE) ?>
+    <?= $form->field($model, 'provider_name')->hiddenInput(['value' => NULL])->label(FALSE) ?>
     <?= $form->field($model, 'hn')->hiddenInput(['value' => NULL])->label(FALSE) ?>
     <?= $form->field($model, 'vn')->hiddenInput(['value' => NULL])->label(FALSE) ?>
+    <?= $form->field($model, 'an')->hiddenInput(['value' => NULL])->label(FALSE) ?>
     <?= $form->field($model, 'date_visit')->hiddenInput(['value' => date('Y-m-d')])->label(FALSE) ?>
     <?= $form->field($model, 'time_visit')->hiddenInput(['value' => date('H:m:s')])->label(FALSE) ?>
+    <?= $form->field($model, 'data_json')->hiddenInput(['value' => NULL])->label(FALSE) ?>
+    <?= $form->field($model, 'last_update')->hiddenInput(['value' => NULL])->label(FALSE) ?>
 
     <div style="margin:20px">
         <div class="row">
             <div class="col-md-12">
-                <?= $form->field($model, 'appoint_date')->textInput(['value'=>$date]) ?>
+                <?= $form->field($model, 'appoint_date')->textInput() ?>
             </div>
         </div>
 
@@ -35,31 +38,17 @@ use yii\helpers\ArrayHelper;
         </div>
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
-                <?=
-                        $form->field($model, 'clinic')->widget(Select2::className(), [
-                            'data' =>
-                            ArrayHelper::map(app\modules\appointment\models\CClinic::find()->all(), 'code', 'name'),
-                            'options' => [
-                                'placeholder' => '<--กรุณาเลือก-->',
-                                'value' => '',
-                            //'onchange' => 'alert (this.value)',
-                            ],
-                            'pluginOptions' =>
-                                [
-                                'allowClear' => true
-                            ],
-                        ]);
-                        ?>
+                <?= $form->field($model, 'clinic')->textInput() ?>
             </div>
         </div>
         <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
-                <?= $form->field($model, 'detail')->textarea(['rows'=>5]) ?>
+                <?= $form->field($model, 'appoint_detail')->textInput() ?>
             </div>
         </div>
          <div class="row" style="margin-top: 10px">
             <div class="col-md-12">
-                <?php //$form->field($model, 'appoint_doctor')->textInput() ?>
+                <?= $form->field($model, 'appoint_doctor')->textInput() ?>
             </div>
         </div>
 

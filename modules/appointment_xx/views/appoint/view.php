@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\appointment\models\PccAppointment */
+/* @var $model app\modules\appointment\models\GatewayEmrAppointment */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Pcc Appointments', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Gateway Emr Appointments', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="pcc-appointment-view">
+<div class="gateway-emr-appointment-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,16 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'hn',
-            'vn',
             'provider_code',
             'provider_name',
-            'date_service',
-            'time_service',
+            'hn',
+            'vn',
+            'an',
+            'date_visit',
+            'time_visit',
             'clinic',
             'appoint_date',
             'appoint_time',
-            'detail',
+            'appoint_detail',
             'data_json',
             'last_update',
         ],

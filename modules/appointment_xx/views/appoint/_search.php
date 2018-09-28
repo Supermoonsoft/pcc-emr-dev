@@ -4,30 +4,35 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\appointment\models\PccAppointmentSearch */
+/* @var $model app\modules\appointment\models\GatewayEmrAppointmentSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="pcc-appointment-search">
+<div class="gateway-emr-appointment-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
+        'options' => [
+            'data-pjax' => 1
+        ],
     ]); ?>
 
     <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'hn') ?>
-
-    <?= $form->field($model, 'vn') ?>
 
     <?= $form->field($model, 'provider_code') ?>
 
     <?= $form->field($model, 'provider_name') ?>
 
-    <?php // echo $form->field($model, 'date_service') ?>
+    <?= $form->field($model, 'hn') ?>
 
-    <?php // echo $form->field($model, 'time_service') ?>
+    <?= $form->field($model, 'vn') ?>
+
+    <?php // echo $form->field($model, 'an') ?>
+
+    <?php // echo $form->field($model, 'date_visit') ?>
+
+    <?php // echo $form->field($model, 'time_visit') ?>
 
     <?php // echo $form->field($model, 'clinic') ?>
 
@@ -35,7 +40,7 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'appoint_time') ?>
 
-    <?php // echo $form->field($model, 'detail') ?>
+    <?php // echo $form->field($model, 'appoint_detail') ?>
 
     <?php // echo $form->field($model, 'data_json') ?>
 

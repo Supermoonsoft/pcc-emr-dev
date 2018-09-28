@@ -3,14 +3,14 @@
 namespace app\modules\appointment\controllers;
 
 use Yii;
-use app\modules\appointment\models\PccAppointment;
-use app\modules\appointment\models\PccAppointmentSearch;
+use app\modules\appointment\models\GatewayEmrAppointment;
+use app\modules\appointment\models\GatewayEmrAppointmentSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * AppointController implements the CRUD actions for PccAppointment model.
+ * AppointController implements the CRUD actions for GatewayEmrAppointment model.
  */
 class AppointController extends Controller
 {
@@ -30,12 +30,12 @@ class AppointController extends Controller
     }
 
     /**
-     * Lists all PccAppointment models.
+     * Lists all GatewayEmrAppointment models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new PccAppointmentSearch();
+        $searchModel = new GatewayEmrAppointmentSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -45,7 +45,7 @@ class AppointController extends Controller
     }
 
     /**
-     * Displays a single PccAppointment model.
+     * Displays a single GatewayEmrAppointment model.
      * @param string $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -58,32 +58,25 @@ class AppointController extends Controller
     }
 
     /**
-     * Creates a new PccAppointment model.
+     * Creates a new GatewayEmrAppointment model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($date=Null)
+    public function actionCreate()
     {
-        $connection = Yii::$app->db;
-        $model = new PccAppointment();
-        
+        $model = new GatewayEmrAppointment();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            $datals = $connection->createCommand("INSERT INTO pcc_appoinment_show (startdate,enddate,color,oapp_id)
-                                                    VALUES ('$model->appoint_date','$model->appoint_date','#005662','$model->id')")->execute();
-            
-            return $this->redirect(['/doctorworkbench/order/appointment']);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->renderAjax('create', [
             'model' => $model,
-            'date'=>$date
         ]);
     }
 
     /**
-     * Updates an existing PccAppointment model.
+     * Updates an existing GatewayEmrAppointment model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param string $id
      * @return mixed
@@ -103,7 +96,7 @@ class AppointController extends Controller
     }
 
     /**
-     * Deletes an existing PccAppointment model.
+     * Deletes an existing GatewayEmrAppointment model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param string $id
      * @return mixed
@@ -117,15 +110,15 @@ class AppointController extends Controller
     }
 
     /**
-     * Finds the PccAppointment model based on its primary key value.
+     * Finds the GatewayEmrAppointment model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param string $id
-     * @return PccAppointment the loaded model
+     * @return GatewayEmrAppointment the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = PccAppointment::findOne($id)) !== null) {
+        if (($model = GatewayEmrAppointment::findOne($id)) !== null) {
             return $model;
         }
 

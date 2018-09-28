@@ -18,9 +18,9 @@ $this->render('../default/panel_top', [
 <?php
     
     echo $this->render('@app/modules/appointment/views/default/index', [
-                       'events' => $events
+                       'events' => $events,
                        //'searchModel' => $searchModel,
-                       //'dataProvider' => $dataProvider,
+                       'dataProvider' => $dataProvider,
                        //'cid' => $cid
                        ]);
     ?>
