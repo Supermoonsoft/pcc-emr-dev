@@ -104,31 +104,44 @@ $('body').on('beforeSubmit', '#form-procedure', function () {
          url: form.attr('action'),
          type: 'post',
          data: form.serialize(),
-         success: function (response) {
+         beforeSend: function() {
+ 
+    },
+    success: function (response) {
             $.pjax.reload({container: response.forceReload});
-           $(form)[0].reset();
+            $(form)[0].reset();
             console.log(response);
-         }
+         },
     });
     return false;
 });
 
 
  $("#btn-delete").click(function(){
-    var keys = $("#crud-datatable").yiiGridView("getSelectedRows");
+    var keys = $("#crud-procedure").yiiGridView("getSelectedRows");
     //console.log(keys);
-    var url = 'index.php?r=doctorworkbench/pcc-diagnosis/bulk-delete'
+    var url = 'index.php?r=doctorworkbench/pcc-procedure/bulk-delete'
     if(keys.length>0){
         $.ajax({
             url:url,
             method:'post',
             data:{pks:keys.join()},
             success: function(){
-             $.pjax.reload({container: "#crud-datatable-pjax"});
+            $.pjax.reload({container:"#crud-procedure-pjax"});
             }
         });
     }
   });
+
+
+$('#crud-procedure-pjax').on('pjax:complete', function() {
+    $('#procedure_code').select2('open');
+})
+
+    $('#procedure_code').select2('change',function(){
+
+    });
+
 JS;
 $this->registerJS($js);
 ?>

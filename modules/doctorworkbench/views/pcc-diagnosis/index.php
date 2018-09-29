@@ -105,8 +105,8 @@ HTML;
 <?php
 $js = <<< JS
 // ======>  บันทึกข้อมูล 
+var form = $("#form-diagnosis");
 $('body').on('beforeSubmit', '#form-diagnosis', function () {
-    var form = $("#form-diagnosis");
     // return false if form still have some validation errors
     if (form.find('.has-error').length) {
          return false;
@@ -117,9 +117,6 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
          data: form.serialize(),
          success: function (response) {
             $.pjax.reload({container: response.forceReload});
-             $('#icd_code').val(null).trigger('change');
-           $("#form-diagnosis")[0].reset();
-            totalPrice($('#hn').val(),$('#vn').val());
             console.log(response);
          }
     });
@@ -143,7 +140,13 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
     }
   });
 
+$('#crud-diagnosis-pjax').on('pjax:complete', function() {
+   $('#cc').val(null).trigger('change');
+   $(form)[0].reset();
+//    .val(null).trigger('change');
+    // totalPrice($('#cid').val());
 
+})
 
 //   $('#cc').on("change", function(e) {
 //     var isNew = $(this).find('[data-select2-tag="true"]');

@@ -54,11 +54,14 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                     'options' => [
                         'id' => 'icode',
                          'placeholder' => 'รายการยา ...',
-                         
+                        // 'onchange' => 'alert (this.value)'                         
                         ],
                     'pluginOptions' => [
                         'allowClear' => true
                 ],
+                'pluginEvents' => [
+                    "select2:select" => "function() { $('#druguse').select2('open'); }",
+                 ]
             ])->label('รายการยา');
             ?>
         </div>
@@ -73,9 +76,10 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                         'placeholder' => 'วิธีใช้ ...',
                         // 'onchange' => 'alert (this.value)'
                     ],
-                    'pluginOptions' => [
-                        'allowClear' => true
-                ],
+                    'pluginOptions' => ['allowClear' => true],
+                'pluginEvents' => [
+                    "select2:select" => "function() { $('#qty').focus(); }",
+                 ]
             ]);
             ?> 
         </div>

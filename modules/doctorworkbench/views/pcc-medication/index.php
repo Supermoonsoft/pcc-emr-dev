@@ -110,8 +110,8 @@ Modal::end();
 <?php
 $js = <<< JS
 // ======>  บันทึกข้อมูล 
+var form = $("#form-medication");
 $('body').on('beforeSubmit', '#form-medication', function () {
-    var form = $("#form-medication");
     // return false if form still have some validation errors
     if (form.find('.has-error').length) {
          return false;
@@ -122,9 +122,7 @@ $('body').on('beforeSubmit', '#form-medication', function () {
          data: form.serialize(),
          success: function (response) {
              $.pjax.reload({container: response.forceReload});
-            //  $('#icd_code').val(null).trigger('change');
-            $(form)[0].reset();
-            totalPrice($('#cid').val());
+            // $('#icode').val(null);
          }
     });
     return false;
@@ -157,6 +155,13 @@ $('body').on('beforeSubmit', '#form-medication', function () {
     });
 });
 
+$('#crud-medication-pjax').on('pjax:complete', function() {
+   // $('#icode').val(null).trigger('change');
+   $(form)[0].reset();
+    $('#icode').val(null).select2('open');
+    totalPrice($('#cid').val());
+
+})
 
 JS;
 $this->registerJS($js);

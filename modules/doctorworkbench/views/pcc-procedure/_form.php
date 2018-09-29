@@ -79,20 +79,18 @@ JS;
                             'dataType' => 'json',
                             'data' => new JsExpression('function(params) { return {q:params.term}; }')
                         ],
-                        // 'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-                        // 'templateResult' => new JsExpression('function(city) { return city.text; }'),
-                        // 'templateSelection' => new JsExpression('function (city) { return city.text; }'),
-                
                         'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
                         'templateResult' => new JsExpression('formatRepo'),
-                        // 'templateSelection' => new JsExpression('formatRepoSelection'),
                     ],
+                    'pluginEvents' => [
+                        "select2:select" => "function() { $('#btn-save').focus(); }",
+                     ]
                 ])->label(false);
                 ?>
             </div>
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
        
-        <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success']) ?>
+        <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
 </div>       
     </div>
     <?php ActiveForm::end(); ?>
