@@ -8,8 +8,8 @@ use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\widgets\Pjax;
 use app\components\PatientHelper;
-
-$this->registerJS($this->render('../../dist/js/script.js'));
+$this->registerJs($this->render('../../dist/js/script.js'));
+$this->registerCss($this->render('../../dist/css/style.css'));
 ?>
 <style>
 .pagination {
@@ -61,10 +61,12 @@ $layout = <<< HTML
 </div>
 HTML;
 ?>
+<fieldset>
+	<legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form</legend> 
 
 <?php  echo $this->render('./create',['model' => $model]);?>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
-
+</fieldset>
         <?=GridView::widget([
             'id'=>'crud-diagnosis',
             'dataProvider' => $dataProvider,

@@ -10,7 +10,6 @@ use app\modules\doctorworkbench\models\CDiagtext;
 
 $url = \yii\helpers\Url::to(['icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
-$this->registerJs($this->render('../../dist/js/script.js'));
 
 $formatJs = <<< 'JS'
 var formatRepo = function (repo) {
@@ -55,6 +54,8 @@ JS;
     min-height: 123px;
 }
 </style>
+
+
 <div class="pcc-diagnosis-form">
 <?php  $form = ActiveForm::begin(['id' => 'form-diagnosis','action' => ['create'],'options' => ['data-pjax' => 1],]); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
@@ -67,7 +68,7 @@ JS;
     <?= $form->field($model, 'cc')->widget(Select2::className(), [
     'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id','text'),
     'options' => [
-        'placeholder' => 'Select ...', 
+        'placeholder' => 'Diagtext', 
         'multiple' => true,
         'id' => 'cc',
         'class' => 'clear',
@@ -77,7 +78,7 @@ JS;
         'allowClear' => true,
         'tokenSeparators' => [',', ' '],
         'maximumInputLength' => 50
-    ],])->label('Diagtext');?>
+    ],])->label(false);?>
     </div>
 </div>
 

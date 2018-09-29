@@ -7,6 +7,8 @@ use yii\web\View;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 $this->registerJs($this->render('../../dist/js/script.js'));
+$this->registerCss($this->render('../../dist/css/style.css'));
+
 ?>
 
 <?php
@@ -49,9 +51,11 @@ HTML;
               'pe' => ''
 
 ]);?>
-
+<fieldset>
+	<legend class="scheduler-border"><i class="fas fa-diagnoses"></i> Procedure Form</legend> 
 <?php  echo $this->render('./create',['model' => $model]);?>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
+</fieldset>
 
     <?=
         GridView::widget([

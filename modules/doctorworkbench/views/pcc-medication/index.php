@@ -5,6 +5,8 @@ use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 $this->registerJS($this->render('../../dist/js/medication.js'));
 $this->registerJS($this->render('../../dist/js/script.js'));
+$this->registerCss($this->render('../../dist/css/style.css'));
+
 ?>
 
 <?php
@@ -50,6 +52,9 @@ $this->render('../default/panel_top', [
 
 ]);
 ?>
+<fieldset>
+	<legend class="scheduler-border"><i class="fas fa-pills"></i> Medication Form</legend> 
+
 <?php echo $this->render('./create', ['model' => $model]); ?>
 
 <div style="margin-top:15px;margin-bottom:10px;">
@@ -57,6 +62,8 @@ $this->render('../default/panel_top', [
 <?= Html::button('<i class="fa fa-edit"></i> แก้ไขที่เลือก', ['class' => 'btn btn-warning pull-eft', 'id' => 'btn-update-select']) ?>
 <?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','http://122.154.235.70/medico/report/',['class' => 'btn btn-info pull-right','target' => '_blank'])?>
 </div>
+</fieldset>
+
 
         <?=
         GridView::widget([
