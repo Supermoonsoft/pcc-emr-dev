@@ -9,7 +9,7 @@ use yii\web\JsExpression;
 use yii\widgets\Pjax;
 use app\components\PatientHelper;
 
-// $this->registerJS($this->render('../../dist/js/script.js'));
+$this->registerJS($this->render('../../dist/js/script.js'));
 ?>
 <style>
 .pagination {
@@ -21,20 +21,20 @@ use app\components\PatientHelper;
 </style>
 
 <?php
-echo $this->render('../default/panel_top',[
-'emr' => '',
-'lab' => '',
-'drug' => '',
-'diagnosis' => 'active',
-'medication' => '',
-'procedure' => '',
-'pre_order_lab' =>'',
-'apointment' => '',
-'treatmment_plan' => '',
-'cc' => '',
-'pi' => '',
-'pe' => ''
-]);?>
+    echo $this->render('../default/panel_top',[
+        'emr' => '',
+        'lab' => '',
+        'drug' => '',
+        'diagnosis' => 'active',
+        'medication' => '',
+        'procedure' => '',
+        'pre_order_lab' =>'',
+        'apointment' => '',
+        'treatmment_plan' => '',
+        'cc' => '',
+        'pi' => '',
+        'pe' => ''
+    ]);?>
 
 <?php
 // กำหนด laypout ของ Gridvire เอง
@@ -62,7 +62,6 @@ $layout = <<< HTML
 HTML;
 ?>
 
-
 <?php  echo $this->render('./create',['model' => $model]);?>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
 
@@ -78,6 +77,11 @@ HTML;
             'summary'=>false,
             'showFooter' => false,
             'layout' => $layout,
+            'rowOptions'=>function($model){
+                if($model->date_service == Date('Y-m-d')){
+                    return ['class' => 'info'];
+                }
+            },
             'replaceTags' => [
                 '{custom}' => function($widget) {
                     if ($widget->panel === true) {
@@ -104,25 +108,6 @@ HTML;
 
 <?php
 $js = <<< JS
-// ======>  บันทึกข้อมูล 
-var form = $("#form-diagnosis");
-$('body').on('beforeSubmit', '#form-diagnosis', function () {
-    // return false if form still have some validation errors
-    if (form.find('.has-error').length) {
-         return false;
-    }
-    $.ajax({
-         url: form.attr('action'),
-         type: 'post',
-         data: form.serialize(),
-         success: function (response) {
-            $.pjax.reload({container: response.forceReload});
-            console.log(response);
-         }
-    });
-    return false;
-});
-
 // ====> การลบข้อมูลที่เลือก
  $("#btn-delete").click(function(){
     var keys = $("#crud-diagnosis").yiiGridView("getSelectedRows");
@@ -139,14 +124,6 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
         });
     }
   });
-
-$('#crud-diagnosis-pjax').on('pjax:complete', function() {
-   $('#cc').val(null).trigger('change');
-   $(form)[0].reset();
-//    .val(null).trigger('change');
-    // totalPrice($('#cid').val());
-
-})
 
 //   $('#cc').on("change", function(e) {
 //     var isNew = $(this).find('[data-select2-tag="true"]');

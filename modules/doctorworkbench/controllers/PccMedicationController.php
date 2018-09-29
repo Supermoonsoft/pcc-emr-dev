@@ -40,7 +40,8 @@ class PccMedicationController extends Controller
         $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccMedicationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where(['cid' => $cid]);        
+        $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_service ASC');
         $model = new PccMedication();  
         $model->cid = $cid;
         $model->pcc_vn = $pcc_vn;

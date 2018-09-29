@@ -8,7 +8,6 @@ use yii\web\View;
 
 $url = \yii\helpers\Url::to(['proced']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
-$this->registerJs($this->render('../../dist/js/script.js'));
 
 $formatJs = <<< 'JS'
 var formatRepo = function (repo) {
@@ -48,15 +47,8 @@ function (data, params) {
 JS;
 ?>
 <div class="pcc-procedure-form">
-<?php 
-    $form = ActiveForm::begin([
-        'id' => 'form-procedure',
-        'action' => ['create'],
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); 
-    ?>
+<?php $form = ActiveForm::begin(['id' => 'form-procedure','action' => ['create'],'options' => ['data-pjax' => 1],]);?>
+   
     <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
@@ -67,7 +59,7 @@ JS;
 <?= $form->field($model, 'procedure_code')->widget(Select2::className(), [
                     'initValueText'=>$prefix,//กำหนดค่าเริ่มต้น
                     // 'theme' => Select2::THEME_DEFAULT,
-                    'options'=>['id' => 'procedure_code','placeholder'=>'Select Procedure...'],
+                    'options'=>['id' => 'procedure_code','placeholder'=>'Select Procedure...','class' => 'fires'],
                     'pluginOptions' => [
                         'allowClear' => true,
                         'minimumInputLength' => 1,

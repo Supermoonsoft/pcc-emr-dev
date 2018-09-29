@@ -18,6 +18,8 @@ use app\modules\doctorworkbench\models\CIcd10tm;
 $url = \yii\helpers\Url::to(['order/icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
 ?>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
 <style>
 .navbar-default .navbar-nav > li.dropdown:hover > a, 
 .navbar-default .navbar-nav > li.dropdown:hover > a:hover,
@@ -58,18 +60,18 @@ li.dropdown:hover > .dropdown-menu {
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<!-- tabs -->
   <ul class="nav nav-tabs">
-  <li class="<?=$emr;?>"><?=Html::a('EMR', ['/doctorworkbench/order/emr'])?></li>    
-  <li class="<?=$lab;?>"><?=Html::a('Lab History', ['/doctorworkbench/order/lab'])?></li> 
-  <li class="<?=$drug;?>"><?=Html::a('Drug History', ['/doctorworkbench/order/drug'])?></li>  
-  <li class="<?=$cc;?>"><?=Html::a('CC', ['/doctorworkbench/order/cc'])?></li>    
+  <li class="<?=$emr;?>"><?=Html::a('<i class="far fa-hospital"></i> EMR', ['/doctorworkbench/order/emr'])?></li>    
+  <li class="<?=$lab;?>"><?=Html::a('<i class="fas fa-flask"></i> Lab History', ['/doctorworkbench/order/lab'])?></li> 
+  <li class="<?=$drug;?>"><?=Html::a('<i class="fas fa-prescription"></i> Drug History', ['/doctorworkbench/order/drug'])?></li>  
+  <li class="<?=$cc;?>"><?=Html::a('<i class="fas fa-universal-access"></i> CC', ['/doctorworkbench/order/cc'])?></li>    
   <li class="<?=$pi;?>"><?=Html::a('PI', ['/doctorworkbench/order/pi'])?></li>    
   <li class="<?=$pe;?>"><?=Html::a('PE', ['/doctorworkbench/order/pe'])?></li>    
-    <li class="<?=$diagnosis;?>"><?=Html::a('Diganosis', ['/doctorworkbench/pcc-diagnosis'])?></li>
-    <li class="<?=$medication;?>"><?=Html::a('Medication', ['/doctorworkbench/pcc-medication'])?></li>
-    <li class="<?=$procedure;?>"><?=Html::a('Procedure', ['/doctorworkbench/pcc-procedure'])?></li>
-    <li class="<?=$pre_order_lab;?>"><?=Html::a('Pre-Order Lab', ['/doctorworkbench/order/pre-order-lab'])?></li>
-    <li class="<?=$apointment;?>"><?=Html::a('Appointment', ['/doctorworkbench/order/appointment'])?></li>
-    <li class="<?=$treatmment_plan;?>"><?=Html::a('Treatment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    
+    <li class="<?=$diagnosis;?>"><?=Html::a('<i class="fas fa-user-md"></i> Diganosis', ['/doctorworkbench/pcc-diagnosis'])?></li>
+    <li class="<?=$medication;?>"><?=Html::a('<i class="fas fa-pills"></i> Medication', ['/doctorworkbench/pcc-medication'])?></li>
+    <li class="<?=$procedure;?>"><?=Html::a('<i class="fas fa-diagnoses"></i> Procedure', ['/doctorworkbench/pcc-procedure'])?></li>
+    <li class="<?=$pre_order_lab;?>"><?=Html::a('<i class="fas fa-vial"></i> Pre-Order Lab', ['/doctorworkbench/order/pre-order-lab'])?></li>
+    <li class="<?=$apointment;?>"><?=Html::a('<i class="far fa-calendar-check"></i> Appointment', ['/doctorworkbench/order/appointment'])?></li>
+    <li class="<?=$treatmment_plan;?>"><?=Html::a('<i class="far fa-paper-plane"></i> Treatment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    
   
   </ul>
 

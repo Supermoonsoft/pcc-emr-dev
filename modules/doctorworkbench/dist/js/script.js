@@ -1,6 +1,6 @@
-$('body').on('beforeSubmit', '#form', function () {
-    var form = $("#form");
-    // return false if form still have some validation errors
+// ======>  บันทึกข้อมูล 
+$('body').on('beforeSubmit', 'form', function () {
+var form = $(this);
     if (form.find('.has-error').length) {
          return false;
     }
@@ -9,16 +9,21 @@ $('body').on('beforeSubmit', '#form', function () {
          type: 'post',
          data: form.serialize(),
          success: function (response) {
-              console.log('Success');
-             $.pjax.reload({container: "#crud-medication"});
-            //  $('#icd_code').val(null).trigger('change');
-            $("#form")[0].reset();
-            totalPrice($('#hn').val(),$('#vn').val());
+            $.pjax.reload({container: response.forceReload});
+            $(response.forceReload).on('pjax:complete', function() {
+                $('.clear').val(null).trigger('change');
+                $('.fires').val(null).select2('open');
+                totalPrice($('#cid').val());
+               $(form)[0].reset();
+             })
+
          }
     });
     return false;
 });
 
+
+// รวมราคาค่ายา
 function totalPrice(cid){
     $.ajax({
       type: "get",
@@ -26,15 +31,11 @@ function totalPrice(cid){
       data:{cid:cid},
       dataType: "json",
       success: function (response) {
-          console.log(response);
-        //   $('#totalprice').html(response);
-
           const formatter = new Intl.NumberFormat('th', {
            // style: 'currency',
            // currency: 'USD',
             minimumFractionDigits: 2
           })
-
           $('#totalprice').html(formatter.format(response));
       }
   });

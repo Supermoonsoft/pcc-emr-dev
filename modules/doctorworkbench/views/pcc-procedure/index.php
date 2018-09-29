@@ -6,6 +6,7 @@ use kartik\grid\GridView;
 use yii\web\View;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
+$this->registerJs($this->render('../../dist/js/script.js'));
 ?>
 
 <?php
@@ -65,6 +66,11 @@ HTML;
             'responsive' => true,
             'summary' => false,
             'layout' => $layout,
+            'rowOptions'=>function($model){
+                if($model->date_service == Date('Y-m-d')){
+                    return ['class' => 'info'];
+                }
+            },
             'replaceTags' => [
                 '{custom}' => function($widget) {
                     if ($widget->panel === true) {
@@ -92,31 +98,6 @@ HTML;
 <?=$this->render('../default/panel_foot');?>
 <?php
 $js = <<< JS
-
-// ======>  บันทึกข้อมูล 
-$('body').on('beforeSubmit', '#form-procedure', function () {
-    var form = $("#form-procedure");
-    // return false if form still have some validation errors
-    if (form.find('.has-error').length) {
-         return false;
-    }
-    $.ajax({
-         url: form.attr('action'),
-         type: 'post',
-         data: form.serialize(),
-         beforeSend: function() {
- 
-    },
-    success: function (response) {
-            $.pjax.reload({container: response.forceReload});
-            $(form)[0].reset();
-            console.log(response);
-         },
-    });
-    return false;
-});
-
-
  $("#btn-delete").click(function(){
     var keys = $("#crud-procedure").yiiGridView("getSelectedRows");
     //console.log(keys);
@@ -126,21 +107,12 @@ $('body').on('beforeSubmit', '#form-procedure', function () {
             url:url,
             method:'post',
             data:{pks:keys.join()},
-            success: function(){
-            $.pjax.reload({container:"#crud-procedure-pjax"});
+            success: function(response){
+            $.pjax.reload({container:response.forceReload});
             }
         });
     }
   });
-
-
-$('#crud-procedure-pjax').on('pjax:complete', function() {
-    $('#procedure_code').select2('open');
-})
-
-    $('#procedure_code').select2('change',function(){
-
-    });
 
 JS;
 $this->registerJS($js);

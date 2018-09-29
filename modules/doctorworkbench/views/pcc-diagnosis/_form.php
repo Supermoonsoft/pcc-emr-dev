@@ -56,15 +56,7 @@ JS;
 }
 </style>
 <div class="pcc-diagnosis-form">
-<?php 
-    $form = ActiveForm::begin([
-        'id' => 'form-diagnosis',
-        'action' => ['create'],
-        'options' => [
-            'data-pjax' => 1
-        ],
-    ]); 
-    ?>
+<?php  $form = ActiveForm::begin(['id' => 'form-diagnosis','action' => ['create'],'options' => ['data-pjax' => 1],]); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
@@ -77,15 +69,15 @@ JS;
     'options' => [
         'placeholder' => 'Select ...', 
         'multiple' => true,
-        'id' => 'cc'],
+        'id' => 'cc',
+        'class' => 'clear',
+    ],
     'pluginOptions' => [
         'tags' => true,
         'allowClear' => true,
         'tokenSeparators' => [',', ' '],
         'maximumInputLength' => 50
-    ],
-   
-])->label('Diagtext');?>
+    ],])->label('Diagtext');?>
     </div>
 </div>
 
@@ -118,19 +110,7 @@ JS;
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
        
         <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
-    
-   
 </div>       
     </div>
     <?php ActiveForm::end(); ?>
 </div>
-
-<?php
-$js = <<< JS
-// $(document).ready(function() { 
-    // $("#icd_code").select2({dropdownCssClass : 'bigdrop'}); 
-// });
-
-JS;
-$this->registerJS($js);
-?>

@@ -44,6 +44,7 @@ class PccProcedureController extends Controller
         $searchModel = new PccProcedureSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);  
+        $dataProvider->query->orderBy('date_service ASC');
         $model = new PccProcedure(); 
         $model->cid = $cid;
         $model->pcc_vn = $pcc_vn; 
@@ -122,7 +123,7 @@ class PccProcedureController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            return ['forceClose'=>true,'forceReload'=>'#crud-procedure-pjax'];
         }else{
             /*
             *   Process for non-ajax request
@@ -154,7 +155,7 @@ class PccProcedureController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            return ['forceClose'=>true,'forceReload'=>'#crud-procedure-pjax'];
         }else{
             /*
             *   Process for non-ajax request

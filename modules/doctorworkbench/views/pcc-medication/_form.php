@@ -8,7 +8,6 @@ use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
 use app\modules\doctorworkbench\models\GatewayCDrugdose;
-
 $this->registerJS($this->render('../../dist/js/script.js'));
 
 ?>
@@ -30,15 +29,8 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
 </style>
 <div class="pcc-medication-form">
-    <?php
-    $form = ActiveForm::begin([
-                'id' => 'form-medication',
-                'action' => ['create'],
-                'options' => [
-                    'data-pjax' => 1
-                ],
-    ]);
-    ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-medication','action' => ['create'],'options' => ['data-pjax' => 1],]);?>
+    
     <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
@@ -54,6 +46,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                     'options' => [
                         'id' => 'icode',
                          'placeholder' => 'รายการยา ...',
+                         'class' => 'fires'
                         // 'onchange' => 'alert (this.value)'                         
                         ],
                     'pluginOptions' => [
@@ -74,7 +67,6 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                     'options' => [
                         'id' => 'druguse', 
                         'placeholder' => 'วิธีใช้ ...',
-                        // 'onchange' => 'alert (this.value)'
                     ],
                     'pluginOptions' => ['allowClear' => true],
                 'pluginEvents' => [
@@ -104,9 +96,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 $js = <<< JS
 $(function(){
 totalPrice($('#cid').val());
-
 });
-
 JS;
 $this->registerJS($js);
 ?>

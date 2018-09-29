@@ -46,9 +46,9 @@ class PccDiagnosisController extends Controller
         $cid = PatientHelper::getCurrentCid();
         $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccDiagnosisSearch();
-    //    $searchModel->query
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_service ASC');
         $model = new PccDiagnosis(); 
         $model->cid = $cid;
         $model->pcc_vn = $pcc_vn;
@@ -71,10 +71,9 @@ class PccDiagnosisController extends Controller
             if ($model->cc == "") {
                 $model->cc = NULL;
               }else {$model->cc = json_encode($model->cc);}
+            //   $model->date_service = Date('Y-m-d');
          $model->save(false);
          return ['forceReload'=>'#crud-diagnosis-pjax'];
-
-
         } else {
             return $this->render('create', [
                 'model' => $model,

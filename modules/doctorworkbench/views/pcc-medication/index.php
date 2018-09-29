@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
 $this->registerJS($this->render('../../dist/js/medication.js'));
-
+$this->registerJS($this->render('../../dist/js/script.js'));
 ?>
 
 <?php
@@ -46,7 +46,7 @@ $this->render('../default/panel_top', [
     'treatmment_plan' => '',
     'cc' => '',
     'pi' => '',
-              'pe' => ''
+     'pe' => ''
 
 ]);
 ?>
@@ -56,7 +56,6 @@ $this->render('../default/panel_top', [
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger pull-eft', 'id' => 'btn-delete','style' => 'margin-right: 5px;']) ?>
 <?= Html::button('<i class="fa fa-edit"></i> แก้ไขที่เลือก', ['class' => 'btn btn-warning pull-eft', 'id' => 'btn-update-select']) ?>
 <?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','http://122.154.235.70/medico/report/',['class' => 'btn btn-info pull-right','target' => '_blank'])?>
-<?php // Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['class' => 'pull-right','id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']);// show modal ?> 
 </div>
 
         <?=
@@ -72,6 +71,11 @@ $this->render('../default/panel_top', [
             'responsive' => true,
             'summary' => false,
             'layout' => $layout,
+            'rowOptions'=>function($model){
+                if($model->date_service == Date('Y-m-d')){
+                    return ['class' => 'info'];
+                }
+            },
             'replaceTags' => [
                 '{custom}' => function($widget) {
                     if ($widget->panel === true) {
@@ -95,43 +99,13 @@ $this->render('../default/panel_top', [
         ],        
         ])
         ?>
-<?php       
-Modal::begin([
-        'header' => '<h4>Print</h4>',
-        'id'     => 'modelprint',
-        'size'   => 'model-lg',
-]);
-
-echo "<div id='modelContent'></div>";
-Modal::end();
-?>
-
 <?= $this->render('../default/panel_foot'); ?>
 <?php
 $js = <<< JS
-// ======>  บันทึกข้อมูล 
-var form = $("#form-medication");
-$('body').on('beforeSubmit', '#form-medication', function () {
-    // return false if form still have some validation errors
-    if (form.find('.has-error').length) {
-         return false;
-    }
-    $.ajax({
-         url: form.attr('action'),
-         type: 'post',
-         data: form.serialize(),
-         success: function (response) {
-             $.pjax.reload({container: response.forceReload});
-            // $('#icode').val(null);
-         }
-    });
-    return false;
-});
 
 // ====> การลบข้อมูลที่เลือก
  $("#btn-delete").click(function(){
     var keys = $("#crud-medication").yiiGridView("getSelectedRows");
-    //console.log(keys);
     var url = 'index.php?r=doctorworkbench/pcc-medication/bulk-delete'
     if(keys.length>0){
         $.ajax({
@@ -141,28 +115,9 @@ $('body').on('beforeSubmit', '#form-medication', function () {
             success: function(){
              $.pjax.reload({container: "#crud-medication-pjax"});
             }
-        });
-        
+        }); 
     }
   });   
-  
-
-  $(function(){
-    $('#modelButton').click(function(){
-        $('#modelprint').modal('show')
-            .find('#modelContent')
-            .load($(this).attr('value'));
-    });
-});
-
-$('#crud-medication-pjax').on('pjax:complete', function() {
-   // $('#icode').val(null).trigger('change');
-   $(form)[0].reset();
-    $('#icode').val(null).select2('open');
-    totalPrice($('#cid').val());
-
-})
-
 JS;
 $this->registerJS($js);
 ?>
