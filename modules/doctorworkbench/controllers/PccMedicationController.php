@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
+use app\components\PatientHelper;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
@@ -35,9 +36,14 @@ class PccMedicationController extends Controller
 
     public function actionIndex()
     {    
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccMedicationSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);        
         $model = new PccMedication();  
+        $model->cid = $cid;
+        $model->pcc_vn = $pcc_vn;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -81,7 +87,7 @@ class PccMedicationController extends Controller
             $model->totalprice =  $model->qty * $drug->unitprice;
             $model->save(false);
             return [
-                'forceReload'=>'#crud-datatable-pjax'];
+                'forceReload'=>'#crud-medication-pjax'];
 
         } else {
             return $this->render('create', [
@@ -145,8 +151,8 @@ class PccMedicationController extends Controller
         }
     }
 // รวมราคายา
-    public function actionSumPrice($hn=null,$vn=null){
-    return PccMedication::find()->where(['hn' => $hn,'vn' => $vn])->sum('totalprice');
+    public function actionSumPrice($cid=null){
+    return PccMedication::find()->where(['cid' => $cid])->sum('totalprice');
     }
 
     // ปรินสติกเกอร์ยา

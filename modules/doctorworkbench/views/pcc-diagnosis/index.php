@@ -3,13 +3,12 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
-use johnitvn\ajaxcrud\CrudAsset; 
-use johnitvn\ajaxcrud\BulkButtonWidget;
 use yii\web\View;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\widgets\Pjax;
-CrudAsset::register($this);
+use app\components\PatientHelper;
+
 // $this->registerJS($this->render('../../dist/js/script.js'));
 ?>
 <style>
@@ -20,6 +19,7 @@ CrudAsset::register($this);
     border-radius: 4px;
 }
 </style>
+
 <?php
 echo $this->render('../default/panel_top',[
 'emr' => '',
@@ -33,7 +33,7 @@ echo $this->render('../default/panel_top',[
 'treatmment_plan' => '',
 'cc' => '',
 'pi' => '',
-              'pe' => ''
+'pe' => ''
 ]);?>
 
 <?php
@@ -65,8 +65,7 @@ HTML;
 
 <?php  echo $this->render('./create',['model' => $model]);?>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
-<div class="pcc-diagnosis-index">
-    <div id="ajaxCrudDatatable">
+
         <?=GridView::widget([
             'id'=>'crud-diagnosis',
             'dataProvider' => $dataProvider,
@@ -101,15 +100,6 @@ HTML;
                 'maxButtonCount'=>10,
         ],       
         ])?>
-    </div>
-</div>
-
-
-<?php Modal::begin([
-    "id"=>"ajaxCrudModal",
-    "footer"=>"",
-])?>
-<?php Modal::end(); ?>
 <?php echo $this->render('../default/panel_foot');?>
 
 <?php
@@ -126,10 +116,11 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
          type: 'post',
          data: form.serialize(),
          success: function (response) {
-             $.pjax.reload({container: "#crud-diagnosis-pjax"});
-            //  $('#icd_code').val(null).trigger('change');
-            $("#form-diagnosis")[0].reset();
+            $.pjax.reload({container: response.forceReload});
+             $('#icd_code').val(null).trigger('change');
+           $("#form-diagnosis")[0].reset();
             totalPrice($('#hn').val(),$('#vn').val());
+            console.log(response);
          }
     });
     return false;
@@ -151,6 +142,28 @@ $('body').on('beforeSubmit', '#form-diagnosis', function () {
         });
     }
   });
+
+
+
+//   $('#cc').on("change", function(e) {
+//     var isNew = $(this).find('[data-select2-tag="true"]');
+//     if(isNew.length && $.inArray(isNew.val(), $(this).val()) !== -1){
+//       //  isNew.replaceWith('<option selected value="' + isNew.val() + '">' + isNew.val() + '</option>');
+//       //  $('#console').append('<code>New tag: {"' + isNew.val() + '":"' + isNew.val() + '"}</code><br>');
+// //    alert();
+//    $.ajax({
+//     //    url: Url::to(['c-diagtext/create-from-diag']),
+//       url: 'index.php?r=doctorworkbench/c-diagtext/create-from-diag',
+//        methot:'get',
+//        dataType:'json',
+//        data: {text:isNew.val()},
+//        success: function(){
+//            console.log('success');
+//        }
+//    });
+   
+//     }
+// });
 
 JS;
 $this->registerJS($js);

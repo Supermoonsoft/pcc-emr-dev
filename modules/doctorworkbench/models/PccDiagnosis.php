@@ -7,7 +7,6 @@ use Yii;
 
 class PccDiagnosis extends \yii\db\ActiveRecord
 {
-public $cc;
     public static function tableName()
     {
         return 'pcc_service_diagnosis';
@@ -19,7 +18,7 @@ public $cc;
     public function rules()
     {
         return [
-            [['hn', 'vn', 'icd_code', 'diag_type'], 'required'],
+            [['icd_code', 'diag_type'], 'required'],
             [['id'], 'string'],
             [['date_service', 'time_service', 'data_json', 'last_update','cc','cid','pcc_vn'], 'safe'],
             [['hn'], 'string', 'max' => 9],

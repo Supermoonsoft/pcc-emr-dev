@@ -42,7 +42,7 @@ class PccProcedure extends \yii\db\ActiveRecord
     {
         return [
             //[['id','procedure_code'], 'required'],
-            [['id'], 'string'],
+            //[['id'], 'string'],
             [['date_service', 'time_service', 'start_date', 'start_time', 'end_date', 'end_time', 'data_json', 'last_update', 'pcc_vn','cid'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn'], 'string', 'max' => 12],

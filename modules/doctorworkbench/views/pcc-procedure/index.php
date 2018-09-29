@@ -3,14 +3,9 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
-use johnitvn\ajaxcrud\CrudAsset; 
-use johnitvn\ajaxcrud\BulkButtonWidget;
 use yii\web\View;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
-
-CrudAsset::register($this);
-$this->registerJS($this->render('../../dist/js/script.js'));
 ?>
 
 <?php
@@ -57,8 +52,6 @@ HTML;
 <?php  echo $this->render('./create',['model' => $model]);?>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
 
-<div class="pcc-diagnosis-index">
-    <div id="ajaxCrudDatatable">
     <?=
         GridView::widget([
             'id' => 'crud-procedure',
@@ -95,18 +88,32 @@ HTML;
         ],        
         ])
         ?>
-    </div>
-</div>
 
-
-<?php Modal::begin([
-    "id"=>"ajaxCrudModal",
-    "footer"=>"",
-])?>
-<?php Modal::end(); ?>
 <?=$this->render('../default/panel_foot');?>
 <?php
 $js = <<< JS
+
+// ======>  บันทึกข้อมูล 
+$('body').on('beforeSubmit', '#form-procedure', function () {
+    var form = $("#form-procedure");
+    // return false if form still have some validation errors
+    if (form.find('.has-error').length) {
+         return false;
+    }
+    $.ajax({
+         url: form.attr('action'),
+         type: 'post',
+         data: form.serialize(),
+         success: function (response) {
+            $.pjax.reload({container: response.forceReload});
+           $(form)[0].reset();
+            console.log(response);
+         }
+    });
+    return false;
+});
+
+
  $("#btn-delete").click(function(){
     var keys = $("#crud-datatable").yiiGridView("getSelectedRows");
     //console.log(keys);

@@ -39,8 +39,10 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                 ],
     ]);
     ?>
-<?= $form->field($model, 'hn')->hiddenInput(['value' => '0000001','id'=>'hn' ])->label(false); ?>
-<?= $form->field($model, 'vn')->hiddenInput(['value' => '8888444', 'id' => 'vn'])->label(false); ?>
+    <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'cid')->hiddenInput(['id' => 'cid'])->label(false);?>
 
     <div class="row">
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
@@ -97,7 +99,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 <?php
 $js = <<< JS
 $(function(){
-totalPrice($('#hn').val(),$('#vn').val());
+totalPrice($('#cid').val());
 
 });
 

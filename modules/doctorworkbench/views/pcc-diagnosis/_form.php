@@ -5,6 +5,8 @@ use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\web\View;
+use yii\helpers\ArrayHelper;
+use app\modules\doctorworkbench\models\CDiagtext;
 
 $url = \yii\helpers\Url::to(['icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
@@ -58,33 +60,21 @@ JS;
     $form = ActiveForm::begin([
         'id' => 'form-diagnosis',
         'action' => ['create'],
-        // 'options' => [
-        //     'data-pjax' => 1
-        // ],
+        'options' => [
+            'data-pjax' => 1
+        ],
     ]); 
     ?>
-    <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false);?>
-    <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
+    <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'cid')->hiddenInput()->label(false);?>
 
 <div class="row">
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
-    <?php 
-    
-    $data = [
-        "red" => "red",
-        "green" => "green",
-        "blue" => "blue",
-        "orange" => "orange",
-        "white" => "white",
-        "black" => "black",
-        "purple" => "purple",
-        "cyan" => "cyan",
-        "teal" => "teal"
-    ];
-    ?>
     <?= $form->field($model, 'cc')->widget(Select2::className(), [
-    'data' => $data,
-    'options' => ['placeholder' => 'Select ...', 'multiple' => true],
+    'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id','text'),
+    'options' => ['placeholder' => 'Select ...', 'multiple' => true,'id' => 'cc'],
     'pluginOptions' => [
         'tags' => true,
         'tokenSeparators' => [',', ' '],

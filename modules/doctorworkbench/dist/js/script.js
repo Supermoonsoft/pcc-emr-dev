@@ -19,11 +19,11 @@ $('body').on('beforeSubmit', '#form', function () {
     return false;
 });
 
-function totalPrice(hn,vn){
+function totalPrice(cid){
     $.ajax({
       type: "get",
       url: "index.php?r=doctorworkbench/pcc-medication/sum-price",
-      data:{hn:hn,vn:vn},
+      data:{cid:cid},
       dataType: "json",
       success: function (response) {
           console.log(response);

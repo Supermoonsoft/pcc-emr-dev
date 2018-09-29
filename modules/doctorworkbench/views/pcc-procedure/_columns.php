@@ -13,7 +13,11 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'procedure_name',
+        'value' => function($model){
+            return $model->proced->title_th;
+        }
     ],
+
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'doctor',

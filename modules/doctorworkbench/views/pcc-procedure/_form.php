@@ -47,19 +47,20 @@ function (data, params) {
 }
 JS;
 ?>
-<br>
 <div class="pcc-procedure-form">
 <?php 
     $form = ActiveForm::begin([
-        'id' => 'form',
+        'id' => 'form-procedure',
         'action' => ['create'],
         'options' => [
             'data-pjax' => 1
         ],
     ]); 
     ?>
-    <?= $form->field($model, 'hn')->hiddenInput(['value' => 0000001])->label(false);?>
-    <?= $form->field($model, 'vn')->hiddenInput(['value' => 8888444])->label(false);?>
+    <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
+    <?= $form->field($model, 'cid')->hiddenInput()->label(false);?>
 
     <div class="row">
         <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">

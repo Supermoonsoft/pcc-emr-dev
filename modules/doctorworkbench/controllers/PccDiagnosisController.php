@@ -11,7 +11,8 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\helpers\Json;
-
+use app\components\PatientHelper;
+use app\modules\doctorworkbench\models\CDiagtext;
 use app\modules\doctorworkbench\models\CIcd10tm;
 
 
@@ -42,13 +43,20 @@ class PccDiagnosisController extends Controller
      */
     public function actionIndex()
     {    
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccDiagnosisSearch();
+    //    $searchModel->query
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
         $model = new PccDiagnosis(); 
+        $model->cid = $cid;
+        $model->pcc_vn = $pcc_vn;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'model' => $model
+            'model' => $model,
+            
         ]);
     }
 
@@ -60,20 +68,22 @@ class PccDiagnosisController extends Controller
         if ($model->load($request->post())) {
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
             $model->diag_type = 2;
-            $model->save(false);
-            return ['forceReload'=>'#crud-datatable-pjax'];
+            if ($model->cc == "") {
+                $model->cc = NULL;
+              }else {$model->cc = json_encode($model->cc);}
+         $model->save(false);
+         return ['forceReload'=>'#crud-diagnosis-pjax'];
+
 
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
-            // $html = $this->renderAjax('create', [
-            //         'model' => $model,
-            //     ]);
-            // return Json::encode($html);
-          
         }
-       
+    }
+
+    private function DiagText($cc){
+
     }
 
     public function actionDelete($id)

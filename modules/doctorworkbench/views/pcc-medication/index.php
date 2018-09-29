@@ -3,10 +3,6 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\Modal;
 use kartik\grid\GridView;
-use johnitvn\ajaxcrud\CrudAsset;
-use johnitvn\ajaxcrud\BulkButtonWidget;
-
-CrudAsset::register($this);
 $this->registerJS($this->render('../../dist/js/medication.js'));
 
 ?>
@@ -63,8 +59,6 @@ $this->render('../default/panel_top', [
 <?php // Html::button('<i class="fa fa-print"></i> พิมพ์สติกเกอร์ยา', ['class' => 'pull-right','id' => 'modelButton', 'value' => \yii\helpers\Url::to(['print-med']), 'class' => 'btn btn-success']);// show modal ?> 
 </div>
 
-<div class="pcc-medication-index">
-    <div id="ajaxCrudDatatable">
         <?=
         GridView::widget([
             'id' => 'crud-medication',
@@ -101,10 +95,7 @@ $this->render('../default/panel_top', [
         ],        
         ])
         ?>
-    </div>
-</div>
-<?php
-            
+<?php       
 Modal::begin([
         'header' => '<h4>Print</h4>',
         'id'     => 'modelprint',
@@ -112,19 +103,9 @@ Modal::begin([
 ]);
 
 echo "<div id='modelContent'></div>";
-
 Modal::end();
 ?>
 
-
-
-<?php
-Modal::begin([
-    "id" => "ajaxCrudModal",
-    "footer" => "",
-])
-?>
-<?php Modal::end(); ?>
 <?= $this->render('../default/panel_foot'); ?>
 <?php
 $js = <<< JS
@@ -140,10 +121,10 @@ $('body').on('beforeSubmit', '#form-medication', function () {
          type: 'post',
          data: form.serialize(),
          success: function (response) {
-             $.pjax.reload({container: "#crud-medication-pjax"});
+             $.pjax.reload({container: response.forceReload});
             //  $('#icd_code').val(null).trigger('change');
-            $("#form-medication")[0].reset();
-            totalPrice($('#hn').val(),$('#vn').val());
+            $(form)[0].reset();
+            totalPrice($('#cid').val());
          }
     });
     return false;

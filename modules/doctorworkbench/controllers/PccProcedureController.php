@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use \yii\web\Response;
+use app\components\PatientHelper;
 use yii\helpers\Html;
 
 /**
@@ -38,9 +39,14 @@ class PccProcedureController extends Controller
      */
     public function actionIndex()
     {    
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccProcedureSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $model = new PccProcedure();  
+        $dataProvider->query->where(['cid' => $cid]);  
+        $model = new PccProcedure(); 
+        $model->cid = $cid;
+        $model->pcc_vn = $pcc_vn; 
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -92,43 +98,10 @@ class PccProcedureController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new PccProcedure",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
         
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new PccProcedure",
-                    'content'=>'<span class="text-success">Create PccProcedure success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new PccProcedure",
-                    'content'=>$this->renderAjax('create', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
+            if($model->load($request->post()) && $model->save()){
+                return ['forceReload'=>'#crud-procedure-pjax'];         
+            }else {
                 return $this->render('create', [
                     'model' => $model,
                 ]);
