@@ -29,6 +29,8 @@ use Yii;
  * @property string $usage_line3 วิธีใช้ 3
  * @property string $drug_name
  * @property string $hoscode
+ * @property string $cid เลขบัตรประชาชน
+ * @property string $pcc_vn pcc vn
  */
 class PccServiceMedication extends \yii\db\ActiveRecord
 {
@@ -50,7 +52,7 @@ class PccServiceMedication extends \yii\db\ActiveRecord
             [['id'], 'string'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
             [['date_service', 'time_service', 'data_json'], 'safe'],
-            [['vn'], 'string', 'max' => 12],
+            [['vn', 'pcc_vn'], 'string', 'max' => 12],
             [['hn'], 'string', 'max' => 9],
             [['an', 'unit'], 'string', 'max' => 50],
             [['icode', 'tmt24_code'], 'string', 'max' => 24],
@@ -58,6 +60,7 @@ class PccServiceMedication extends \yii\db\ActiveRecord
             [['provider_code', 'hoscode'], 'string', 'max' => 5],
             [['provider_name'], 'string', 'max' => 100],
             [['usage_line1', 'usage_line2', 'usage_line3', 'drug_name'], 'string', 'max' => 255],
+            [['cid'], 'string', 'max' => 13],
             [['id'], 'unique'],
         ];
     }
@@ -90,6 +93,8 @@ class PccServiceMedication extends \yii\db\ActiveRecord
             'usage_line3' => 'วิธีใช้ 3',
             'drug_name' => 'Drug Name',
             'hoscode' => 'Hoscode',
+            'cid' => 'เลขบัตรประชาชน',
+            'pcc_vn' => 'pcc vn',
         ];
     }
 }

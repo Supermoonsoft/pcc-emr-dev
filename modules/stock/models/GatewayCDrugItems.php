@@ -20,6 +20,7 @@ use Yii;
  * @property string $tmt24_code
  * @property string $costprice
  * @property string $unitprice
+ * @property string $drugtype
  */
 class GatewayCDrugItems extends \yii\db\ActiveRecord
 {
@@ -37,13 +38,13 @@ class GatewayCDrugItems extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'hospcode', 'hospname'], 'required'],
+            [['id', 'hospcode'], 'required'],
             [['id'], 'string'],
             [['costprice', 'unitprice'], 'number'],
             [['hospcode'], 'string', 'max' => 5],
             [['hospname', 'icode', 'usage_line1', 'usage_line2', 'usage_line3'], 'string', 'max' => 100],
             [['drug_name'], 'string', 'max' => 255],
-            [['qty'], 'string', 'max' => 10],
+            [['qty', 'drugtype'], 'string', 'max' => 10],
             [['unit'], 'string', 'max' => 50],
             [['tmt24_code'], 'string', 'max' => 24],
             [['id'], 'unique'],
@@ -69,6 +70,7 @@ class GatewayCDrugItems extends \yii\db\ActiveRecord
             'tmt24_code' => 'Tmt24 Code',
             'costprice' => 'Costprice',
             'unitprice' => 'Unitprice',
+            'drugtype' => 'Drugtype',
         ];
     }
 }

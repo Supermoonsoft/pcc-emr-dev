@@ -8,23 +8,23 @@ use yii\data\ActiveDataProvider;
 use app\modules\stock\models\PccServiceMedication;
 
 /**
- * PccServiceMedicationSearch represents the model behind the search form about `app\modules\stock\models\PccServiceMedication`.
+ * PccServiceMedicationSearch represents the model behind the search form of `app\modules\stock\models\PccServiceMedication`.
  */
 class PccServiceMedicationSearch extends PccServiceMedication
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'vn', 'hn', 'an', 'icode', 'druguse', 'provider_code', 'provider_name', 'date_service', 'time_service', 'data_json', 'unit', 'tmt24_code', 'usage_line1', 'usage_line2', 'usage_line3', 'drug_name', 'hoscode'], 'safe'],
+            [['id', 'vn', 'hn', 'an', 'icode', 'druguse', 'provider_code', 'provider_name', 'date_service', 'time_service', 'data_json', 'unit', 'tmt24_code', 'usage_line1', 'usage_line2', 'usage_line3', 'drug_name', 'hoscode', 'cid', 'pcc_vn'], 'safe'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
         ];
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -43,6 +43,8 @@ class PccServiceMedicationSearch extends PccServiceMedication
     {
         $query = PccServiceMedication::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -55,6 +57,7 @@ class PccServiceMedicationSearch extends PccServiceMedication
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'qty' => $this->qty,
             'unitprice' => $this->unitprice,
@@ -64,22 +67,24 @@ class PccServiceMedicationSearch extends PccServiceMedication
             'time_service' => $this->time_service,
         ]);
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'vn', $this->vn])
-            ->andFilterWhere(['like', 'hn', $this->hn])
-            ->andFilterWhere(['like', 'an', $this->an])
-            ->andFilterWhere(['like', 'icode', $this->icode])
-            ->andFilterWhere(['like', 'druguse', $this->druguse])
-            ->andFilterWhere(['like', 'provider_code', $this->provider_code])
-            ->andFilterWhere(['like', 'provider_name', $this->provider_name])
-            ->andFilterWhere(['like', 'data_json', $this->data_json])
-            ->andFilterWhere(['like', 'unit', $this->unit])
-            ->andFilterWhere(['like', 'tmt24_code', $this->tmt24_code])
-            ->andFilterWhere(['like', 'usage_line1', $this->usage_line1])
-            ->andFilterWhere(['like', 'usage_line2', $this->usage_line2])
-            ->andFilterWhere(['like', 'usage_line3', $this->usage_line3])
-            ->andFilterWhere(['like', 'drug_name', $this->drug_name])
-            ->andFilterWhere(['like', 'hoscode', $this->hoscode]);
+        $query->andFilterWhere(['ilike', 'id', $this->id])
+            ->andFilterWhere(['ilike', 'vn', $this->vn])
+            ->andFilterWhere(['ilike', 'hn', $this->hn])
+            ->andFilterWhere(['ilike', 'an', $this->an])
+            ->andFilterWhere(['ilike', 'icode', $this->icode])
+            ->andFilterWhere(['ilike', 'druguse', $this->druguse])
+            ->andFilterWhere(['ilike', 'provider_code', $this->provider_code])
+            ->andFilterWhere(['ilike', 'provider_name', $this->provider_name])
+            ->andFilterWhere(['ilike', 'data_json', $this->data_json])
+            ->andFilterWhere(['ilike', 'unit', $this->unit])
+            ->andFilterWhere(['ilike', 'tmt24_code', $this->tmt24_code])
+            ->andFilterWhere(['ilike', 'usage_line1', $this->usage_line1])
+            ->andFilterWhere(['ilike', 'usage_line2', $this->usage_line2])
+            ->andFilterWhere(['ilike', 'usage_line3', $this->usage_line3])
+            ->andFilterWhere(['ilike', 'drug_name', $this->drug_name])
+            ->andFilterWhere(['ilike', 'hoscode', $this->hoscode])
+            ->andFilterWhere(['ilike', 'cid', $this->cid])
+            ->andFilterWhere(['ilike', 'pcc_vn', $this->pcc_vn]);
 
         return $dataProvider;
     }

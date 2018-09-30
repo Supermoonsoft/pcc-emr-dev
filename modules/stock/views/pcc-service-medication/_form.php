@@ -1,4 +1,5 @@
 <?php
+
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -55,13 +56,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'hoscode')->textInput(['maxlength' => true]) ?>
 
-  
-	<?php if (!Yii::$app->request->isAjax){ ?>
-	  	<div class="form-group">
-	        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-	    </div>
-	<?php } ?>
+    <?= $form->field($model, 'cid')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'pcc_vn')->textInput(['maxlength' => true]) ?>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
-    
+
 </div>
