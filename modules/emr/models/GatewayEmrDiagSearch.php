@@ -38,9 +38,9 @@ class GatewayEmrDiagSearch extends GatewayEmrDiag
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params,$vn,$hospcode)
     {
-        $query = GatewayEmrDiag::find();
+        $query = GatewayEmrDiag::find()->where(['vn'=>$vn,'hospcode'=>$hospcode]);
 
         // add conditions that should always apply here
 
