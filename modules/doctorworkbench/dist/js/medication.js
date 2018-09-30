@@ -15,8 +15,12 @@ $(function(){
          },
          dataType: "json",
          success: function (response) {
-            // console.log(response);
-             $.pjax.reload({container: "#crud-medication"});
+            $.pjax.reload({container: response.forceReload});
+            $(response.forceReload).on('pjax:complete', function() {
+                totalPrice($('#cid').val());
+                $('#icode').val(null).trigger('change');
+               $('#form-medication')[0].reset();
+             })
 
          }
      });
