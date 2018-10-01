@@ -118,7 +118,7 @@ $cid = PatientHelper::getCurrentCid();
                     <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
                         <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i><span class="badge badge-light"></span></a></li>
 
-                        <li style="padding-right: 30px;"><a data-toggle="modal" data-target="#myModal2"><i class="fa fa-user-o"  style="font-size:20px;color:white;"></i><span class="badge badge-light"><?= $pt_count ?></span></a></li>
+                        <li style="padding-right: 30px;"><a data-toggle="modal" data-target="#myModal2"><i class="fa fa-user"  style="font-size:20px;color:white;"></i><span class="badge badge-light"><?= $pt_count ?></span></a></li>
 
                         <li><img src="img\profile.png" height="40px" class="img-circle" style="padding-top: 6px;" /></li>
                         <li  style="padding-top: 5px;padding-left: 5px;">
