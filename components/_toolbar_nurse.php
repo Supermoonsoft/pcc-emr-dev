@@ -32,7 +32,7 @@ $module = \Yii::$app->controller->module->id;
                     <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fa fa-dollar" aria-hidden="true"></i> งานบัญชี</a>
                 </li>
                 <li>
-                    <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fa fa-filter" aria-hidden="true"></i> คัดกรอง</a>
+                    <a class="<?= $module == 'questionare' ? 'on-active' : 'non-active' ?>" title="ประเมินคัดกรอง" href="<?= Url::to(['/questionare/default/index']) ?>"><i class="fa fa-filter" aria-hidden="true"></i> ประเมินคัดกรอง</a>
                 </li>
             </ul>
 

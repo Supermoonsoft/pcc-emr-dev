@@ -25,6 +25,7 @@ $modules['rbac'] = ['class' => 'dektrium\rbac\RbacWebModule']; //inam
 $modules['chiefcomplaint'] = ['class' => 'app\modules\chiefcomplaint\Chiefcomplaint'];//pond 
 $modules['treatment'] = ['class' => 'app\modules\treatment\Treatment'];//pond
 $modules['appointment'] = ['class' => 'app\modules\appointment\Appointment'];//pond
+$modules['questionare'] = ['class' => 'app\modules\questionare\Questionare'];//inam
 
 return $modules;
 
