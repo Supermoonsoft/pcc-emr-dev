@@ -65,7 +65,6 @@ HTML;
 	<legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form</legend> 
 
 <?php  echo $this->render('./create',['model' => $model]);?>
-<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
 </fieldset>
         <?=GridView::widget([
             'id'=>'crud-diagnosis',

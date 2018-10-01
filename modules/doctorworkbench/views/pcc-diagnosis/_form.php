@@ -57,13 +57,14 @@ JS;
 
 
 <div class="pcc-diagnosis-form">
+
+<div class="row">
 <?php  $form = ActiveForm::begin(['id' => 'form-diagnosis','action' => ['create'],'options' => ['data-pjax' => 1],]); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'vn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'cid')->hiddenInput()->label(false);?>
 
-<div class="row">
     <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
     <?= $form->field($model, 'cc')->widget(Select2::className(), [
     'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id','text'),
@@ -108,10 +109,16 @@ JS;
                 ])->label(false);
                 ?>
             </div>
-            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="width: 50px;">
        
         <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
-</div>       
+</div>  
+<?php ActiveForm::end(); ?>
+
+<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>    
+</div>
+
+
     </div>
-    <?php ActiveForm::end(); ?>
 </div>

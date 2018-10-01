@@ -4,12 +4,24 @@ use app\components\MessageHelper;
 use app\assets\DataTableAsset;
 use yii\widgets\ActiveForm;
 use kartik\helpers\Html;
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use yii\widgets\Pjax;
 use app\modules\queuemanage\models\CDoctorRoom;
 
 DataTableAsset::register($this);
 ?>
 <?= MessageHelper::Note(" คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>       
+<?php
+
+// echo Html::a('<span class="glyphicon glyphicon-trash"></span> ลบ', false, [
+//     'class' => 'pjax-delete-link',
+//     'load_url' => ['/queuemanage'],
+//     'pjax-container' => 'q_pjax',
+//     'title' => 'ลบ'
+// ]);
+?>
+<?php Pjax::begin(['id' => 'q_pjax']); ?>
 
 <div class="panel panel-info">
 
@@ -17,7 +29,20 @@ DataTableAsset::register($this);
     <div class="panel-heading">
         <div class="panel-title">
             <i class="fa fa-clock-o" aria-hidden="true"></i> ผู้ป่วยรอส่งเข้าพบแพทย์ 
-            <object align='right'><a class="btn btn-lbrown">ทั้งหมด</a></object>
+            <!-- <object align='right'><a class="btn btn-lbrown">ทั้งหมด</a></object> -->
+            <object align='right'>
+            <?= Html::a('ทั้งหมด', 
+                ['/queuemanage'], [
+                'class' => 'btn btn-lbrown',
+                'data-method' => 'POST',
+                'data-params' => [
+                    'param1' => 1,
+                    'param2' => 2,
+                ],
+            ]) ?>
+            </object>
+       
+       
         </div>
     </div>
     <div class="panel-body">
@@ -50,6 +75,7 @@ DataTableAsset::register($this);
                                 <th>Hn</th>
                                 <th >ลำดับส่ง</th>
                                 <th >เวลามา</th>                                
+                                <th >วันนัด</th>                                
                                 <th>ชื่อ นามสกุล</th>
 
                             </tr>
@@ -71,6 +97,7 @@ DataTableAsset::register($this);
                                     <div id="time<?=$value['pcc_vn']?>"></div>
                                     </td>
                                     <td><?= $value['visit_date_begin'] . ' ' . $value['visit_time_begin'] ?></td>                                    
+                                    <td></td>
                                     <td><?= $value['fullname'] ?></td>
 
                                 </tr>                                
@@ -115,10 +142,9 @@ DataTableAsset::register($this);
 
     </div>
 </div>
+<?php Pjax::end(); ?>
 
 <?php
 $this->registerJs($this->render('script.js'));
 ?>
-
-
 
