@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\modules\lab\models\Pcclab;
 
 /**
- * PcclabSearch represents the model behind the search form of `app\modules\lab\models\Pcclab`.
+ * PcclabSeach represents the model behind the search form of `app\modules\lab\models\Pcclab`.
  */
 class PcclabSearch extends Pcclab
 {
@@ -41,7 +41,7 @@ class PcclabSearch extends Pcclab
      */
     public function search($params)
     {
-        $query = Pcclab::find();
+        $query = Pcclab::find()->where(['hn' => '37'])->OrderBy(['date_visit'=>SORT_DESC,]);
 
         // add conditions that should always apply here
 

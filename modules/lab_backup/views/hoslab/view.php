@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\lab\models\Preorderlab */
+/* @var $model app\modules\lab\models\Hoslab */
 
 $this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Preorderlabs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Hoslabs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="preorderlab-view">
+<div class="hoslab-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
@@ -29,22 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'pcc_vn',
-            'data_json',
-            'pcc_start_service_datetime',
-            'pcc_end_service_datetime',
-            'data1',
-            'data2',
-            'hospcode',
-            'lab_code',
-            'lab_name',
-            'lab_request_date',
-            'lab_result_date',
-            'lab_result',
-            'standard_result',
-            'lab_price',
+            'cid',
+            'hos_hn',
+            'hos_vn',
+            'hos_date_visit',
+            'lab_code_hos',
             'lab_code_moph',
-            'last_update',
+            'lab_name_hos',
+            'request_at',
+            'result_at',
+            'data_json',
+            'lab_name_moph',
         ],
     ]) ?>
 

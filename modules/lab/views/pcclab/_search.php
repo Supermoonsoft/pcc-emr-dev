@@ -4,11 +4,11 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\lab\models\PreorderlabSearch */
+/* @var $model app\modules\lab\models\PcclabSearch */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="preorderlab-search">
+<div class="pcclab-search">
 
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
@@ -20,37 +20,41 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?= $form->field($model, 'pcc_vn') ?>
+    <?= $form->field($model, 'hospcode') ?>
 
-    <?= $form->field($model, 'data_json') ?>
+    <?= $form->field($model, 'hospname') ?>
 
-    <?= $form->field($model, 'pcc_start_service_datetime') ?>
+    <?= $form->field($model, 'hn') ?>
 
-    <?= $form->field($model, 'pcc_end_service_datetime') ?>
+    <?= $form->field($model, 'vn') ?>
 
-    <?php // echo $form->field($model, 'data1') ?>
+    <?php // echo $form->field($model, 'an') ?>
 
-    <?php // echo $form->field($model, 'data2') ?>
+    <?php // echo $form->field($model, 'date_visit') ?>
 
-    <?php // echo $form->field($model, 'hospcode') ?>
+    <?php // echo $form->field($model, 'time_visit') ?>
 
     <?php // echo $form->field($model, 'lab_code') ?>
 
     <?php // echo $form->field($model, 'lab_name') ?>
 
-    <?php // echo $form->field($model, 'lab_request_date') ?>
-
-    <?php // echo $form->field($model, 'lab_result_date') ?>
-
     <?php // echo $form->field($model, 'lab_result') ?>
 
     <?php // echo $form->field($model, 'standard_result') ?>
 
+    <?php // echo $form->field($model, 'lab_request_date') ?>
+
+    <?php // echo $form->field($model, 'lab_result_date') ?>
+
     <?php // echo $form->field($model, 'lab_price') ?>
 
-    <?php // echo $form->field($model, 'lab_code_moph') ?>
+    <?php // echo $form->field($model, 'data_json') ?>
 
     <?php // echo $form->field($model, 'last_update') ?>
+
+    <?php // echo $form->field($model, 'cid') ?>
+
+    <?php // echo $form->field($model, 'provider') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

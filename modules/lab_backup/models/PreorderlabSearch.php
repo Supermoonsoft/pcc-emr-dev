@@ -8,7 +8,7 @@ use yii\data\ActiveDataProvider;
 use app\modules\lab\models\Preorderlab;
 
 /**
- * PreorderlabSearch represents the model behind the search form about `app\modules\lab\models\Preorderlab`.
+ * PreorderlabSeach represents the model behind the search form about `app\modules\lab\models\Preorderlab`.
  */
 class PreorderlabSearch extends Preorderlab
 {
@@ -41,7 +41,7 @@ class PreorderlabSearch extends Preorderlab
      */
     public function search($params)
     {
-        $query = Preorderlab::find()->where(['pcc_vn' => '1']);//tester
+        $query = Preorderlab::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

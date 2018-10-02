@@ -68,19 +68,43 @@ class Pcclab extends \yii\db\ActiveRecord
             'hn' => 'Hn',
             'vn' => 'Vn',
             'an' => 'An',
-            'date_visit' => 'Date Visit',
-            'time_visit' => 'Time Visit',
-            'lab_code' => 'Lab Code',
-            'lab_name' => 'Lab Name',
-            'lab_result' => 'Lab Result',
-            'standard_result' => 'Standard Result',
-            'lab_request_date' => 'Lab Request Date',
-            'lab_result_date' => 'Lab Result Date',
-            'lab_price' => 'Lab Price',
+            'date_visit' => 'วันที่รับบริการ',
+            'time_visit' => 'เวลารับบริการ',
+            'lab_code' => 'รหัสแล๊ป',
+            'lab_name' => 'รายการแล๊ป',
+            'lab_result' => 'ผลแล๊ป',
+            'standard_result' => 'ค่ามาตราฐาน',
+            'lab_request_date' => 'วันที่สั่งแล๊ป',
+            'lab_result_date' => 'วันที่รายงานผล',
+            'lab_price' => 'ราคาแล๊ป',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
             'cid' => 'Cid',
             'provider' => 'Provider',
         ];
     }
+
+    public function afterFind()
+    {
+        foreach($this->attributes as $column_name => $value){
+            if(preg_match('/(\d{4}-\d{2}-\d{2})/', $value)){ //ถ้ามีค่าในรูปแบบ 2016-05-20 13:30:45
+
+                if($value == '0000-00-00'){ //ถ้าไม่มีข้อมูล
+                    $this->setAttribute($column_name, null); //กำหนดให้เป็นค่าว่าง
+                }else{
+                    $date_and_time = explode('.', $value);
+                    $date_time = explode(' ', $date_and_time[0]); //แยกวันและเวลา
+
+                    $ymd = explode('-', $date_time[0]);//แยก ปี-เดือน-วัน
+                    $year = (int) $ymd[0];//กำหนดให้เป็น int เพื่อการคำนวณ
+                    $year = $year + 543;// นำปี +543
+                    $result = $ymd[2] . '/' . $ymd[1] . '/' . $year ;//ได้รูปแบบ วัน/เดือน/ปี ชั่วโมง:นาที:วินาทีี
+                    $this->setAttribute($column_name, $result);//กำหนดค่าใหม่
+                }
+            }
+
+        }
+        return parent::afterFind();
+    }
+    
 }
