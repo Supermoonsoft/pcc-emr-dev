@@ -2,12 +2,12 @@
 
 use yii\helpers\Html;
 use kartik\grid\GridView;
-use yii\widgets\Pjax;
-use app\components\DbHelper;
-use yii\web\JsExpression;
-use app\components\loading\ShowLoading;
+//use yii\widgets\Pjax;
+//use app\components\DbHelper;
+//use yii\web\JsExpression;
+//use app\components\loading\ShowLoading;
 use yii\helpers\Url;
-echo ShowLoading::widget();
+//echo ShowLoading::widget();
 ?>
 <?php
 // $this->registerJs('
