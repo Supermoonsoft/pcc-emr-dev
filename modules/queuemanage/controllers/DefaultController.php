@@ -21,20 +21,31 @@ class DefaultController extends Controller {
        
         $vn = [];
         $sql_update ='';
+        if(Yii::$app->request->post('param')){
+            $param = 1;
+        $current = "";
+
+        }else{
+            $param = 0;
+        $current = "AND t.current_station = 'A0'";
+
+        }
         
         $date1 = date('Y-m-d');
         $date2 = date('Y-m-d');
         $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
-,concat(p.prename,p.fname,' ',p.lname) fullname
-from pcc_visit t 
-LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
-WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
+        ,concat(p.prename,p.fname,' ',p.lname) fullname
+        from pcc_visit t 
+        LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
+        WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
+        $current order by t.visit_date_begin asc,t.visit_time_begin asc";
         $raw = DbHelper::queryAll('db', $sql);
+        
 
         return $this->render('index', [
                     'raw' => $raw,
                     'data' => $sql_update,
+                    'param' => $param
         ]);
     }
                 

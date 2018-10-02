@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use kartik\color\ColorInput;
 /* @var $this yii\web\View */
 /* @var $model app\modules\appointment\models\Cclinic */
 /* @var $form yii\widgets\ActiveForm */
@@ -33,7 +33,10 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="row" >
             <div class="col-md-12">
-                <?= $form->field($model, 'color')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'color')->widget(ColorInput::classname(),[
+                   'options'=>['placeholder'=>'select color....','value' => '#e91e63'],
+                    'size'=>'sm',
+                ]) ?>
             </div>
         </div>
 

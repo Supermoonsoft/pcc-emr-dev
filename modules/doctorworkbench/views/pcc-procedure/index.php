@@ -8,6 +8,9 @@ use kartik\widgets\Select2;
 use yii\web\JsExpression;
 $this->registerJs($this->render('../../dist/js/script.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
+$this->title = 'Procedure';
+$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
+$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 

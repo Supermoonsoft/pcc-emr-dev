@@ -189,4 +189,18 @@ class PccMedicationController extends Controller
         }
         return ['forceReload'=>'#crud-medication-pjax']; // reload gridview  เพื่อ update  ข้อมูล
     }
+public function actionEditable() {
+        if (Yii::$app->request->post('hasEditable')) {
+            \Yii::$app->response->format = Response::FORMAT_JSON;
+            $id = Yii::$app->request->post('editableKey');
+            $data = PccMedication::findOne($id);
+            $posted = current($_POST['PccMedication']);
+            $post['PccMedication'] = $posted;
+            if ($data->load($post)) {
+                $data->save();
+                //$value = $_POST['PccMedication'];
+                return ['output' => '', 'message' => ''];
+            }
+        }
+    }
 }

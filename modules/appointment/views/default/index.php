@@ -5,6 +5,8 @@ use yii\bootstrap\Modal;
 use yii\helpers\Html;
 ?>
 
+
+
 <?php
 Modal::begin([
     'header' => '<h4><บันทึกการนัด</h4>',
@@ -30,6 +32,13 @@ Modal::begin([
 echo "<div id='modalSetting'></div>";
 Modal::end();
 ?>
+
+<?php
+    $this->title = 'Appointment';
+    $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/order/appointment/']];
+    $this->params['breadcrumbs'][] = $this->title;
+    
+    ?>
 
 <div class="col-md-6 box-shadow" >
     <div style="margin-top: 0px;margin-bottom: 10px">

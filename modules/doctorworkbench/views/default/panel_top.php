@@ -17,6 +17,8 @@ use app\modules\doctorworkbench\models\CIcd10tm;
 
 $url = \yii\helpers\Url::to(['order/icd10-list']);//กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name;//กำหนดค่าเริ่มต้น
+
+
 ?>
 <style>
 .navbar-default .navbar-nav > li.dropdown:hover > a, 
@@ -48,12 +50,7 @@ li.dropdown:hover > .dropdown-menu {
 </style>
   <!-- start panel -->
 
- 
-<div class="panel panel-info">
-	<div class="panel-heading">
-		<div class="panel-title"><li class="fa fa-stethoscope"></li> Doctor Order Today</div>
-	</div>
-	<div class="panel-body">
+
 <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<!-- tabs -->

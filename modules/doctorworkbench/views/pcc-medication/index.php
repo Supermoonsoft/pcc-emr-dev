@@ -7,6 +7,10 @@ $this->registerJS($this->render('../../dist/js/medication.js'));
 $this->registerJS($this->render('../../dist/js/script.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
 
+$this->title = 'Midecation';
+$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 
 <?php

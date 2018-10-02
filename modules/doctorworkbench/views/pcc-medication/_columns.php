@@ -46,60 +46,59 @@ return [
 //             return $model->drugitems->strength;
 //         }
 //    ],
-       [
-        'class'=>'\kartik\grid\DataColumn',
-        //'attribute' =>'usage_line1',  
-        'attribute' =>'druguse',     
-        'header'=>'วิธีใช้',         
-    ],         
-//    [
-//        'class' => '\kartik\grid\DataColumn',
-//        'attribute' => 'druguse',        
-//        'header' => 'วิธีใช้',
-//        'format' => 'raw',        
-//        'editableOptions' => [   
-//            
-//            'inputType' => \kartik\editable\Editable::INPUT_SELECT2,
-//            'formOptions' => [ 
-//                'action' => \yii\helpers\Url::to(['/doctorworkbench/pcc-medication/editable']),
-//                'method' => 'post'
-//            ],
-//            'valueIfNull' => '-',
-//            'submitButton' => ['class' => 'btn btn-primary', 'icon' => '<i class="glyphicon glyphicon-ok"></i>'],
-//            'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
-//            'options' => [
-//                'data' => ArrayHelper::map(CDrugusage::find()->all(), 'drugusage', 'code'),
-//                'options' => [
-//                    'placeholder' => 'Please select...',
-//                    'multiple' => false,
-//                ]
-//            ]
-//        ],
-//        'value' => function($model) {
-//            $models = CDrugusage::find()->where(['drugusage' => $model->druguse])->one();
-//            if ($model->druguse != '') {
-//                return $models->code;
-//            } else {
-//                return '-';
-//            }
-//        }
-//    ],
-    [        
-        'class' => '\kartik\grid\DataColumn',
+//       [
+//        'class'=>'\kartik\grid\DataColumn',
+//        //'attribute' =>'usage_line1',  
+//        'attribute' =>'druguse',     
+//        'header'=>'วิธีใช้',         
+//    ],         
+[
+        'class' => 'kartik\grid\EditableColumn',
+        'attribute' => 'druguse',
+        'refreshGrid' => true,
+        'editableOptions' => [
+            'inputType' => \kartik\editable\Editable::INPUT_SELECT2,
+            'formOptions' => [
+                'action' => \yii\helpers\Url::to(['/doctorworkbench/pcc-medication/editable']),
+                'method' => 'post'
+            ],
+            'valueIfNull' => '-',
+            'submitButton' => ['class' => 'btn btn-primary', 'icon' => '<i class="glyphicon glyphicon-ok"></i>'],
+            'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
+            'options' => [
+                'data' => ArrayHelper::map(CDrugusage::find()->all(), 'shortlist', 'shortlist'),
+                'options' => [
+                    'placeholder' => 'Please select...',
+                    'multiple' => false,
+                ]
+            ]
+        ],
+        'contentOptions' => ['class' => 'pjax-load'],
+        'value' => function($model) {
+            $models = CDrugusage::find()->where(['shortlist' => $model->druguse])->one();
+            if ($model->druguse != '') {
+                return $models->shortlist;
+            } else {
+                return '-';
+            }
+        }
+    ],
+   [
+        'class' => 'kartik\grid\EditableColumn',
         'header' => 'จำนวนจ่าย',
         'pageSummary' => 'มูลค่ารวม',
         'attribute' => 'qty',
-        'width' => '100px',
-//        'class' => 'kartik\grid\EditableColumn',
-//        'editableOptions' => [
-//            'formOptions' => [
-//                'action' => \yii\helpers\Url::to(['/doctorworkbench/pcc-medication/editable']),
-//                'method' => 'post'
-//            ],
-//            'valueIfNull' => '-',
-//            'submitButton' => ['class' => 'btn btn-primary', 'icon' => '<i class="glyphicon glyphicon-ok"></i>'],
-//            'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
-//        ],
+        'width' => '100px',        
+        'editableOptions' => [
+            'inputType' => \kartik\editable\Editable::INPUT_TEXT,
+            'formOptions' => [
+                'action' => \yii\helpers\Url::to(['/doctorworkbench/pcc-medication/editable']),
+                'method' => 'post'
+            ],
+            'valueIfNull' => '-',
+            'submitButton' => ['class' => 'btn btn-primary', 'icon' => '<i class="glyphicon glyphicon-ok"></i>'],
+            'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
+        ],
     ],
     [
         'class' => '\kartik\grid\DataColumn',

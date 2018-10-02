@@ -13,6 +13,13 @@ use yii\helpers\Url;
 
 //echo ShowLoading::widget();
 ?>
+<?php
+    $this->title = 'EMR';
+    $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/order/emr/']];
+    $this->params['breadcrumbs'][] = $this->title;
+    
+    ?>
+
 <div class="hoslab-index">
 
     <div style="margin-bottom: 3px">

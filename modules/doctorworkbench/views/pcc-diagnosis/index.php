@@ -10,6 +10,11 @@ use yii\widgets\Pjax;
 use app\components\PatientHelper;
 $this->registerJs($this->render('../../dist/js/script.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
+
+$this->title = 'Diagnosis';
+$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
+$this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <style>
 .pagination {
