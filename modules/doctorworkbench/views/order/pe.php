@@ -13,5 +13,5 @@
 'pe' => 'active'
 
 ]);?>
-<h1 class="text-center">PE</h1>
+<?=$this->render('@app/modules/chiefcomplaint/views/pccservicepe/create',['model' => $model]);?>
 <?=$this->render('../default/panel_foot');?>

@@ -24,6 +24,10 @@ use app\modules\treatment\models\Treatmentplan;
 use app\modules\treatment\models\TreatmentplanSearch;
 use app\modules\emr\models\GatewayEmrVisit;
 use app\modules\emr\models\GatewayEmrVisitSearch;
+use app\modules\chiefcomplaint\models\Pccservicepi;
+use app\modules\chiefcomplaint\models\PccservicepiSearch;
+use app\modules\chiefcomplaint\models\Pccservicepe;
+use app\modules\chiefcomplaint\models\PccservicepeSearch;
     
 use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
@@ -183,13 +187,115 @@ class OrderController extends \yii\web\Controller
 
     }
 
-    public function actionPi(){
-        return $this->render('pi');
+    public function actionPi()
+    {
+        $request = Yii::$app->request;
+        $model = new Pccservicepi();  
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Create new Pccservicepi",
+                    'content'=>$this->renderAjax('pi', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
+                ];         
+            }else if($model->load($request->post()) && $model->save()){
+                return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Create new Pccservicepi",
+                    'content'=>'<span class="text-success">Create Pccservicepi success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+        
+                ];         
+            }else{           
+                return [
+                    'title'=> "Create new Pccservicepi",
+                    'content'=>$this->renderAjax('pi', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
+                ];         
+            }
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+          return $this->render('pi', [
+                    'model' => $model,
+                ]);
+            }
+        }
+       
     }
 
     
-    public function actionPe(){
-        return $this->render('pe');
+    public function actionPe()
+    {
+        $request = Yii::$app->request;
+        $model = new Pccservicepe();  
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            if($request->isGet){
+                return [
+                    'title'=> "Create new Pccservicepe",
+                    'content'=>$this->renderAjax('pe', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
+                ];         
+            }else if($model->load($request->post()) && $model->save()){
+                return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> "Create new Pccservicepe",
+                    'content'=>'<span class="text-success">Create Pccservicepe success</span>',
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
+        
+                ];         
+            }else{           
+                return [
+                    'title'=> "Create new Pccservicepe",
+                    'content'=>$this->renderAjax('pe', [
+                        'model' => $model,
+                    ]),
+                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
+                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
+        
+                ];         
+            }
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            if ($model->load($request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            } else {
+                return $this->render('pe', [
+                    'model' => $model,
+                ]);
+            }
+        }
+       
     }
 
         public function actionIcd10List($q = null, $id = null){

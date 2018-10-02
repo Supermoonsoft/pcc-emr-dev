@@ -13,5 +13,5 @@
 'pe' => ''
 
 ]);?>
-<h1 class="text-center">PI</h1>
+<?=$this->render('@app/modules/chiefcomplaint/views/pccservicepi/create', ['model' => $model]);?>
 <?=$this->render('../default/panel_foot');?>

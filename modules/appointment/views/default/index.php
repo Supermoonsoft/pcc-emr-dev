@@ -7,7 +7,7 @@ use yii\helpers\Html;
 
 <?php
 Modal::begin([
-    'header' => '<h4>บันทึกการนัด</h4>',
+    'header' => '<h4><บันทึกการนัด</h4>',
     'id' => 'modal',
     'options' => [
         'tabindex' => FALSE
@@ -18,8 +18,21 @@ echo "<div id='modalContent'></div>";
 Modal::end();
 ?>
 
+<?php
+Modal::begin([
+    'header' => '<h4><i class="fa fa-cog"></i> ตั้งค่าคลินิก</h4>',
+    'id' => 'modalSetting',
+    'options' => [
+        'tabindex' => FALSE
+    ],
+    'size' => 'modal-md'
+]);
+echo "<div id='modalSetting'></div>";
+Modal::end();
+?>
+
 <div class="col-md-6 box-shadow" >
-    <div style="margin-top: 10px;margin-bottom: 10px">
+    <div style="margin-top: 0px;margin-bottom: 10px">
         <?php
         echo \yii2fullcalendar\yii2fullcalendar::widget(array(
             'events' => $events,
@@ -33,15 +46,18 @@ Modal::end();
     </div>
 </div>
 
-<div class="col-md-5 col-md-offset-1 box-shadow">
+<div class="col-md-6 box-shadow">
 
-    <div class="row">
-    <div class="form-group button-box-shadow ">
-    <b>ประวัติการนัดหมาย </b> 
-       
+    <div class="row" style="background-color: #1de9b6; height: 40px; ">
+        <div class="col-md-6" style="margin-top: 10px;">
+            <b style="color: #000063;font-size: 18px;">ประวัติการนัดหมาย </b> 
+
+        </div>
+        <div class="col-md-6" style="text-align: right;margin-top: 4px;">
+            <button class="btn-set info" id="btnsetting"><i class="fa fa-cog"></i> ตั้งค่า</button>
+        </div>
     </div>
-    </div>
-    <div class="row" style="margin : 20px;margin-top: 30px">
+    <div class="row" style="margin-left : 10px;margin-top: 30px;margin-right: 10px">
         <?=
         GridView::widget([
             'dataProvider' => $dataProvider,
@@ -55,31 +71,30 @@ Modal::end();
             'hover' => true,
             'columns' => [
                 ['class' => 'kartik\grid\SerialColumn'],
-                [ 
-                    'attribute'=>'hospname',
-                    'label'=>'สถานที่รับบริการ'
+                [
+                    'attribute' => 'hospname',
+                    'label' => 'สถานที่รับบริการ'
                 ],
-                 [ 
-                    'attribute'=>'date_visit',
-                    'label'=>'วันที่รับบริการ'
+                [
+                    'attribute' => 'date_visit',
+                    'label' => 'วันที่รับบริการ'
                 ],
-                 [ 
-                    'attribute'=>'appoint_date',
-                    'label'=>'วันนัด'
+                [
+                    'attribute' => 'appoint_date',
+                    'label' => 'วันนัด'
                 ],
-                 [ 
-                    'attribute'=>'clinic',
-                    'label'=>'คลินิก'
+                [
+                    'attribute' => 'clinic',
+                    'label' => 'คลินิก'
                 ],
-                 [ 
-                    'attribute'=>'appoint_doctor',
-                    'label'=>'แพทย์ผู้นัด'
+                [
+                    'attribute' => 'appoint_doctor',
+                    'label' => 'แพทย์ผู้นัด'
                 ],
-                 [ 
-                    'attribute'=>'appoint_detail',
-                    'label'=>'รายละเอียด'
+                [
+                    'attribute' => 'appoint_detail',
+                    'label' => 'รายละเอียด'
                 ],
-               
             ],
         ]);
         ?>
@@ -146,6 +161,16 @@ $script = <<< JS
       
         
    });
+        
+   $('#btnsetting').click(function() {
+      var date = '';
+        $.get('index.php?r=appointment/clinic/create',{'date':date,'type':1},function(data){
+            $('#modalSetting').modal('show')
+            .find('#modalSetting')
+            .html(data);
+        
+         });
+   });
 
    
 JS;
@@ -184,6 +209,65 @@ $this->registerCss("
        -moz-border-radius: 8px;
             border-radius: 8px;
     }
+.btn-set {
+    border: 2px solid black;
+    background-color: #1de9b6;
+    color: #000063;
+    padding: 4px 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width:70px;
+    border-radius: 5px;
+}
+
+.info {
+    border-color: #000063;
+    color: #000063
+}
+.info:hover {
+    background: #000063;
+    color: white;
+}
+
+.fc-prev-button  {
+    border-color: #000063;
+    color: #000063
+}
+.fc-prev-button:hover {
+    background: #000063;
+    color: white;
+}
+.fc-next-button  {
+    border-color: #000063;
+    color: #000063
+}
+.fc-next-button:hover {
+    background: #000063;
+    color: white;
+}
+
+.fc-month-button  {
+    border-color: #000063;
+    color: #000063
+}
+.fc-month-button:hover {
+    background: #000063;
+    color: white;
+}
+
+.fc-header-toolbar {
+   background-color: #1de9b6;
+   color: #000063
+}
+.fc-agendaWeek-button  {
+    border-color: #000063;
+    color: #000063
+}
+.fc-agendaWeek-button:hover {
+    background: #000063;
+    color: white;
+}
+
 
 .btn-pop-info {
     margin:5px;

@@ -10,8 +10,8 @@ use Yii;
  * @property string $id
  * @property string $hn
  * @property string $vn
- * @property string $provider_code
- * @property string $provider_name
+ * @property string $hospcode
+ * @property string $hospname
  * @property string $date_service
  * @property string $time_service
  * @property string $clinic
@@ -37,13 +37,14 @@ class PccAppointment extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            //[['id', 'hn', 'vn'], 'required'],
             [['id'], 'string'],
-            [['hn', 'vn'], 'required'],
             [['date_service', 'time_service', 'appoint_date', 'appoint_time', 'data_json', 'last_update'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn'], 'string', 'max' => 12],
-            [['provider_code'], 'string', 'max' => 5],
-            [['provider_name', 'clinic', 'detail'], 'string', 'max' => 255],
+            [['hospcode'], 'string', 'max' => 5],
+            [['hospname', 'clinic', 'detail'], 'string', 'max' => 255],
+            [['id'], 'unique'],
         ];
     }
 
@@ -56,14 +57,14 @@ class PccAppointment extends \yii\db\ActiveRecord
             'id' => 'ID',
             'hn' => 'Hn',
             'vn' => 'Vn',
-            'provider_code' => 'Provider Code',
-            'provider_name' => 'Provider Name',
+            'hospcode' => 'Hospcode',
+            'hospname' => 'Hospname',
             'date_service' => 'Date Service',
             'time_service' => 'Time Service',
-            'clinic' => 'Clinic',
-            'appoint_date' => 'Appoint Date',
-            'appoint_time' => 'Appoint Time',
-            'detail' => 'Detail',
+            'clinic' => 'คลินิก',
+            'appoint_date' => 'วันที่นัด',
+            'appoint_time' => 'เวลานัด',
+            'detail' => 'รายละเอียด',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
         ];

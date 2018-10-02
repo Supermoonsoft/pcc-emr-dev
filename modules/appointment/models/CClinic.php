@@ -11,6 +11,7 @@ use Yii;
  * @property string $code
  * @property string $name
  * @property bool $is_active
+ * @property string $color
  */
 class CClinic extends \yii\db\ActiveRecord
 {
@@ -28,11 +29,11 @@ class CClinic extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            [['code','name','color'], 'required'],
             [['id'], 'string'],
             [['is_active'], 'boolean'],
             [['code'], 'string', 'max' => 4],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'color'], 'string', 'max' => 255],
             [['id'], 'unique'],
         ];
     }
@@ -44,9 +45,10 @@ class CClinic extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'code' => 'Code',
-            'name' => 'Name',
-            'is_active' => 'Is Active',
+            'code' => 'รหัสคลินิก',
+            'name' => 'ชื่อคลินิก',
+            'is_active' => 'สถานะ',
+            'color' => 'Color',
         ];
     }
 }
