@@ -34,9 +34,7 @@ Modal::end();
 ?>
 
 <?php
-    $this->title = 'Appointment';
-    $this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/order/appointment/']];
-    $this->params['breadcrumbs'][] = $this->title;
+   
     
     ?>
 
