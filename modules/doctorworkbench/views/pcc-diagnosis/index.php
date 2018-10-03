@@ -11,9 +11,9 @@ use app\components\PatientHelper;
 $this->registerJs($this->render('../../dist/js/script.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
 
-$this->title = 'Diagnosis';
-$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = 'Diagnosis';
+//$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
+//$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <style>
@@ -82,7 +82,7 @@ HTML;
             'responsive' => true,  
             'summary'=>false,
             'showFooter' => false,
-            'layout' => $layout,
+            //'layout' => $layout,
             'rowOptions'=>function($model){
                 if($model->date_service == Date('Y-m-d')){
                     return ['class' => 'info'];

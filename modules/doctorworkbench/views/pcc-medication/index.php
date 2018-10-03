@@ -7,9 +7,9 @@ $this->registerJS($this->render('../../dist/js/medication.js'));
 $this->registerJS($this->render('../../dist/js/script.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
 
-$this->title = 'Midecation';
-$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
-$this->params['breadcrumbs'][] = $this->title;
+//$this->title = 'Midecation';
+//$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
+//$this->params['breadcrumbs'][] = $this->title;
 
 ?>
 
@@ -81,7 +81,7 @@ $this->render('../default/panel_top', [
             'condensed' => true,
             'responsive' => true,
             'summary' => false,
-            'layout' => $layout,
+            //'layout' => $layout,
             'rowOptions'=>function($model){
                 if($model->date_service == Date('Y-m-d')){
                     return ['class' => 'info'];
