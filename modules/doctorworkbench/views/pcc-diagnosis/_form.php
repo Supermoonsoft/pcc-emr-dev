@@ -65,7 +65,7 @@ JS;
     <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false);?>
     <?= $form->field($model, 'cid')->hiddenInput()->label(false);?>
 
-    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+   <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
     <?= $form->field($model, 'cc')->widget(Select2::className(), [
     'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id','text'),
     'options' => [
@@ -81,11 +81,9 @@ JS;
         'maximumInputLength' => 50
     ],])->label(false);?>
     </div>
-</div>
 
-    <div class="row">
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-<?= $form->field($model, 'icd_code')->widget(Select2::className(), [
+     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+     <?= $form->field($model, 'icd_code')->widget(Select2::className(), [
                     'initValueText'=>$prefix,//กำหนดค่าเริ่มต้น
                     // 'theme' => Select2::THEME_DEFAULT,/
                     'options'=>['id' => 'icd_code','placeholder'=>'Select ICD10...'],
@@ -108,17 +106,10 @@ JS;
                      ]
                 ])->label(false);
                 ?>
-            </div>
-            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="width: 50px;">
-       
         <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
-</div>  
+        <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:0px;']) ?>    
+
+     </div>
+</div>
 <?php ActiveForm::end(); ?>
 
-<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>    
-</div>
-
-
-    </div>
-</div>
