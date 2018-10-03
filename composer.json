@@ -31,13 +31,15 @@
         "kartik-v/yii2-tabs-x": "*",
         "unclead/yii2-multiple-input": "~2.0",
         "johnitvn/yii2-ajaxcrud": "*",
-        "kartik-v/yii2-editable": "@dev",
         "philippfrenzel/yii2fullcalendar": "*",
         "dixonsatit/yii2-thai-year-formatter": "*",
         "dektrium/yii2-user": "^0.9.14",
         "dektrium/yii2-rbac": "1.0.0-alpha@dev",
         "mdmsoft/yii2-admin": "~2.0",
-        "kartik-v/yii2-widget-colorinput": "*"
+        "kartik-v/yii2-widget-colorinput": "*",
+        "kartik-v/yii2-krajee-base": "dev-master",
+        "kartik-v/yii2-widget-activeform": "dev-master",
+        "kartik-v/yii2-editable": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
