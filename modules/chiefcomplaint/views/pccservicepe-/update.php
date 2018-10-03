@@ -2,14 +2,11 @@
 
 use yii\helpers\Html;
 
-
 /* @var $this yii\web\View */
 /* @var $model app\modules\chiefcomplaint\models\Pccservicepe */
-
-$this->title = 'Create Pccservicepe';
-
 ?>
-<div class="pccservicepe-create">
+<div class="pccservicepe-update">
+
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>

@@ -8,12 +8,12 @@ use yii\data\ActiveDataProvider;
 use app\modules\chiefcomplaint\models\Pccservicepe;
 
 /**
- * PccservicepeSearch represents the model behind the search form about `app\modules\chiefcomplaint\models\Pccservicepe`.
+ * PccservicepeSearch represents the model behind the search form of `app\modules\chiefcomplaint\models\Pccservicepe`.
  */
 class PccservicepeSearch extends Pccservicepe
 {
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function rules()
     {
@@ -23,7 +23,7 @@ class PccservicepeSearch extends Pccservicepe
     }
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     public function scenarios()
     {
@@ -42,6 +42,8 @@ class PccservicepeSearch extends Pccservicepe
     {
         $query = Pccservicepe::find();
 
+        // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
@@ -54,18 +56,19 @@ class PccservicepeSearch extends Pccservicepe
             return $dataProvider;
         }
 
+        // grid filtering conditions
         $query->andFilterWhere([
             'pcc_start_service_datetime' => $this->pcc_start_service_datetime,
             'pcc_end_service_datetime' => $this->pcc_end_service_datetime,
         ]);
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'pcc_vn', $this->pcc_vn])
-            ->andFilterWhere(['like', 'data_json', $this->data_json])
-            ->andFilterWhere(['like', 'data1', $this->data1])
-            ->andFilterWhere(['like', 'data2', $this->data2])
-            ->andFilterWhere(['like', 'hospcode', $this->hospcode])
-            ->andFilterWhere(['like', 'pe_text', $this->pe_text]);
+        $query->andFilterWhere(['ilike', 'id', $this->id])
+            ->andFilterWhere(['ilike', 'pcc_vn', $this->pcc_vn])
+            ->andFilterWhere(['ilike', 'data_json', $this->data_json])
+            ->andFilterWhere(['ilike', 'data1', $this->data1])
+            ->andFilterWhere(['ilike', 'data2', $this->data2])
+            ->andFilterWhere(['ilike', 'hospcode', $this->hospcode])
+            ->andFilterWhere(['ilike', 'pe_text', $this->pe_text]);
 
         return $dataProvider;
     }

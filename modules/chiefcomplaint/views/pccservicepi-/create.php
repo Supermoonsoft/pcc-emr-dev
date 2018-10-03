@@ -4,14 +4,11 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\chiefcomplaint\models\Pccservicepe */
-
-$this->title = 'Create Pccservicepe';
+/* @var $model app\modules\chiefcomplaint\models\Pccservicepi */
 
 ?>
-<div class="pccservicepe-create">
+<div class="pccservicepi-create">
     <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
 </div>

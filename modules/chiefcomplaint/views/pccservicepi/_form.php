@@ -22,12 +22,7 @@ $this->registerJs('
 
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-md-4">
-            <div id="froala-editor">
-                <img id="edit" class="fr-fil fr-dib" src="../modules/chiefcomplaint/assets/body.jpg"/>  
-            </div>
-        </div>
-        <div class="col-md-8">
+        <div class="col-md-12">
         <?= $form->field($model, 'pi_text')->textarea(['rows' => 6]) ?>
 
             <div class="form-group">
@@ -35,9 +30,8 @@ $this->registerJs('
             </div>
         </div>
 
-
+</div>
     <?php ActiveForm::end(); ?>
 
 </div>
-<?php
 
