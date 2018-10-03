@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d92b22c95d581e5fd7da9de63abbf7fb",
+    "content-hash": "b9a912edf63afa8edf85c7eb86f7b557",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -38,29 +38,6 @@
             },
             "require": {
                 "bower-asset/jquery": ">=1.9.1,<4.0"
-            },
-            "type": "bower-asset",
-            "license": [
-                "MIT"
-            ]
-        },
-        {
-            "name": "bower-asset/bootstrap3-dialog",
-            "version": "v1.35.4",
-            "source": {
-                "type": "git",
-                "url": "git@github.com:nakupanda/bootstrap3-dialog.git",
-                "reference": "3dd11d586f78de75356af418907ec6e3b347377c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nakupanda/bootstrap3-dialog/zipball/3dd11d586f78de75356af418907ec6e3b347377c",
-                "reference": "3dd11d586f78de75356af418907ec6e3b347377c",
-                "shasum": null
-            },
-            "require": {
-                "bower-asset/bootstrap": ">=3.1.0",
-                "bower-asset/jquery": ">=1.9.0"
             },
             "type": "bower-asset",
             "license": [
@@ -997,21 +974,20 @@
         },
         {
             "name": "kartik-v/yii2-dialog",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-dialog.git",
-                "reference": "ae6de7328251b084de7f1a66bac1f7c6279c9ad1"
+                "reference": "6afae03a4d9f7b99ddc173d2a29dd6e3cc1c56cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-dialog/zipball/ae6de7328251b084de7f1a66bac1f7c6279c9ad1",
-                "reference": "ae6de7328251b084de7f1a66bac1f7c6279c9ad1",
+                "url": "https://api.github.com/repos/kartik-v/yii2-dialog/zipball/6afae03a4d9f7b99ddc173d2a29dd6e3cc1c56cb",
+                "reference": "6afae03a4d9f7b99ddc173d2a29dd6e3cc1c56cb",
                 "shasum": ""
             },
             "require": {
-                "bower-asset/bootstrap3-dialog": "~1.34",
-                "kartik-v/yii2-krajee-base": "~1.7"
+                "kartik-v/yii2-krajee-base": "~1.9"
             },
             "type": "yii2-extension",
             "extra": {
@@ -1021,7 +997,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "kartik\\dialog\\": ""
+                    "kartik\\dialog\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1045,7 +1021,7 @@
                 "modal",
                 "yii2"
             ],
-            "time": "2017-11-06T16:04:54+00:00"
+            "time": "2018-09-06T19:34:03+00:00"
         },
         {
             "name": "kartik-v/yii2-editable",
@@ -1106,17 +1082,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-grid.git",
-                "reference": "0e6ff6cbb68c96453b0806ee9c7ffb08cd8c7b08"
+                "reference": "b437e9f4a4c01a507d98e6c3a55cf3d7f4cc20bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/0e6ff6cbb68c96453b0806ee9c7ffb08cd8c7b08",
-                "reference": "0e6ff6cbb68c96453b0806ee9c7ffb08cd8c7b08",
+                "url": "https://api.github.com/repos/kartik-v/yii2-grid/zipball/b437e9f4a4c01a507d98e6c3a55cf3d7f4cc20bc",
+                "reference": "b437e9f4a4c01a507d98e6c3a55cf3d7f4cc20bc",
                 "shasum": ""
             },
             "require": {
                 "kartik-v/yii2-dialog": "~1.0",
-                "kartik-v/yii2-krajee-base": "~1.7"
+                "kartik-v/yii2-krajee-base": ">=1.9.8"
             },
             "suggest": {
                 "kartik-v/yii2-mpdf": "For exporting grids to PDF"
@@ -1124,7 +1100,7 @@
             "type": "yii2-extension",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1.x-dev"
+                    "dev-master": "3.2.x-dev"
                 }
             },
             "autoload": {
@@ -1151,7 +1127,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-09-03T10:39:32+00:00"
+            "time": "2018-10-01T08:36:37+00:00"
         },
         {
             "name": "kartik-v/yii2-helpers",
@@ -1990,16 +1966,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "1adea55921ac706fd1bf3105c83b62833cea90ca"
+                "reference": "0df692c8772c2b53406ae705492c8401ea6501d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/1adea55921ac706fd1bf3105c83b62833cea90ca",
-                "reference": "1adea55921ac706fd1bf3105c83b62833cea90ca",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/0df692c8772c2b53406ae705492c8401ea6501d6",
+                "reference": "0df692c8772c2b53406ae705492c8401ea6501d6",
                 "shasum": ""
             },
             "require": {
-                "kartik-v/yii2-krajee-base": "~1.9"
+                "kartik-v/yii2-krajee-base": ">=1.9"
             },
             "type": "yii2-extension",
             "extra": {
@@ -2035,7 +2011,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2018-08-18T05:15:24+00:00"
+            "time": "2018-10-03T07:09:03+00:00"
         },
         {
             "name": "kartik-v/yii2-widget-sidenav",
@@ -6064,13 +6040,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "kartik-v/yii2-widget-select2": 20,
-        "kartik-v/yii2-widget-datepicker": 20,
-        "kartik-v/yii2-grid": 20,
         "dektrium/yii2-rbac": 20,
         "kartik-v/yii2-krajee-base": 20,
         "kartik-v/yii2-widget-activeform": 20,
-        "kartik-v/yii2-editable": 20
+        "kartik-v/yii2-editable": 20,
+        "kartik-v/yii2-grid": 20,
+        "kartik-v/yii2-widget-select2": 20,
+        "kartik-v/yii2-widget-datepicker": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
