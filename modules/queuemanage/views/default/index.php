@@ -67,7 +67,7 @@ $send = 0;
         </div>
 
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div id="grid-view-data-table" class="grid-view">
                     <table class="table  table-bordered">
                         <thead>
@@ -108,7 +108,7 @@ $send = 0;
                     </table>
                 </div>
             </div>
-            <div class="col-lg-5">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <div class="panel-title">

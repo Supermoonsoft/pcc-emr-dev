@@ -11,7 +11,7 @@ class PatientHelper extends Component {
         $vn = self::getCurrentVn();
         $sql = " SELECT p.hn,concat(p.prename,p.fname,' ',p.lname) fullname
 from pcc_visit t 
-LEFT JOIN pcc_patient  p ON p.cid = t.person_cid
+LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
 WHERE t.pcc_vn = '$vn'";
         $pt = DbHelper::queryOne('db', $sql);
 

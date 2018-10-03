@@ -30,7 +30,7 @@ use app\components\DbHelper;
       <div class="panel-body">
             
             <div class="row">
-            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <div style="margin-bottom: 3px">
             <?php
             $array = ArrayHelper::map(CDoctorRoom::find()->orderBy('id ASC')->all(),'id','room_title');
@@ -80,7 +80,7 @@ use app\components\DbHelper;
         ])?>
                     </div>
 
-                <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="panel panel-info">
                     <div class="panel-heading">
                         <div class="panel-title">
