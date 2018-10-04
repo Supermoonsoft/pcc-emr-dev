@@ -22,17 +22,23 @@ $module = \Yii::$app->controller->module->id;
                     <a class="<?= $module == 'printout' ? 'on-active' : 'non-active' ?>" title="Print-Out" href="<?= Url::to(['/printout']) ?>"><i class="fa fa-print"></i> PRINT</a>
                 </li>
                 <li>
-                    <a class="<?= $module == 'report' ? 'on-active' : 'non-active' ?>" title="Report" href="<?= Url::to(['/report']) ?>"><i class="fa fa-file-o" aria-hidden="true"></i> REPORT</a>
+                    <a class="<?= $module == 'report' ? 'on-active' : 'non-active' ?>" title="Report" href="<?= Url::to(['/report']) ?>"><i class="fas fa-clipboard-list"></i> REPORT</a>
                 </li>
                 
                 <li>
                     <a class="<?= $module == 'stock' ? 'on-active' : 'non-active' ?>" title="PCC-STOCK" href="<?= Url::to(['/stock/pcc-service-medication/dispen']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>
                 </li>
                 <li>
-                    <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fa fa-dollar" aria-hidden="true"></i> งานบัญชี</a>
+                    <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fas fa-dollar-sign"></i> ACOUNTING</a>
+                </li>
+				<li>
+                    <a  href="#"><i class="fas fa-book"></i> E-DOC</a>
                 </li>
                 <li>
-                    <a class="<?= $module == 'questionare' ? 'on-active' : 'non-active' ?>" title="ประเมินคัดกรอง" href="<?= Url::to(['/questionare/default/index']) ?>"><i class="fa fa-filter" aria-hidden="true"></i> ประเมินคัดกรอง</a>
+                    <a href="#"><i class="fas fa-notes-medical"></i> E-FORM</a>
+                </li>
+                <li>
+                    <a class="<?= $module == 'questionare' ? 'on-active' : 'non-active' ?>" title="ประเมินคัดกรอง" href="<?= Url::to(['/questionare/default/index']) ?>"><i class="fa fa-filter" aria-hidden="true"></i> QUESTIONNAIRE</a>
                 </li>
             </ul>
 
