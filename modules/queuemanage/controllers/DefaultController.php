@@ -7,6 +7,7 @@ use yii\web\Controller;
 use app\components\DbHelper;
 use yii\data\SqlDataProvider;
 use yii\data\ActiveDataProvider;
+use yii\helpers\Json;
 use app\modules\queuemanage\models\PccDoctorRoomQueue;
 use app\modules\queuemanage\models\PccVisit;
 use app\modules\queuemanage\models\PccVisitSearch;
@@ -98,7 +99,12 @@ public function actionViewAll(){
     }
 
     if($searchModel->visit_department){
-        $department = "AND t.visit_department = '$searchModel->visit_department'";
+        foreach($searchModel->visit_department as $d){
+            $dep_id[] = "'" . $d . "'";
+                }
+            $dep = implode(',', $dep_id);
+            $department = 'AND t.visit_department IN('.$dep.')';
+        
     }else{
         $department = "";
     }
@@ -108,7 +114,7 @@ public function actionViewAll(){
     from pcc_visit t 
     LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
     WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-     $department order by t.visit_date_begin asc,t.visit_time_begin asc";
+    $department order by t.visit_date_begin asc,t.visit_time_begin asc";
     $raw = DbHelper::queryAll('db', $sql);
 
     $sql_count = "SELECT count(*) from pcc_visit t 

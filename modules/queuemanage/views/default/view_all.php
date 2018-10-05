@@ -2,7 +2,9 @@
 use yii\helpers\Html;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
+use yii\helpers\Json;
 ?>
+
 <?php Pjax::begin(); ?>
 <div class="panel panel-info">
     <div class="panel-heading">
