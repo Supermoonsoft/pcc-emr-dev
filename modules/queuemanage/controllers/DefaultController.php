@@ -84,6 +84,7 @@ public function actionSave(){
 }
 
 public function actionViewAll(){
+    // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
     $searchModel = new PccVisitSearch();
     $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
@@ -95,19 +96,24 @@ public function actionViewAll(){
     $date1 = date('Y-m-d');
     $date2 = date('Y-m-d');
     }
+
+    if($searchModel->visit_department){
+        $department = "AND t.visit_department = '$searchModel->visit_department'";
+    }else{
+        $department = "";
+    }
     
     $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
     ,concat(p.prename,p.fname,' ',p.lname) fullname,AGE(p.birthday) as age,t.visit_department
     from pcc_visit t 
     LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
     WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-    AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
+     $department order by t.visit_date_begin asc,t.visit_time_begin asc";
     $raw = DbHelper::queryAll('db', $sql);
 
     $sql_count = "SELECT count(*) from pcc_visit t 
     LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
-    WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-    AND t.current_station = 'A0'";
+    WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'";
     $count = DbHelper::queryScalar('db', $sql_count);
 
 
