@@ -26,8 +26,9 @@ use app\components\loading\ShowLoading;
         'columns' => [
             [
                 'attribute'=>'date_service', 
+                'format'=>'raw',
                 'value'=>function ($model, $key, $index, $widget) { 
-                    return $model->date_service.' (รพ.แม่ข่าย)';
+                    return Html::checkbox('checked').' '.$model->date_visit.' (รพ.แม่ข่าย)';
                 },
                 'filter'=>false,
                 'group'=>true,  // enable grouping,
@@ -37,17 +38,14 @@ use app\components\loading\ShowLoading;
             ],
              [
                 'class' => 'yii\grid\CheckboxColumn',
-                'checkboxOptions' => function($model) {
-                    return ['value' => $model->id, 'data' => ['key' => $model->id]];
-                },
                 'header' => false,
             ],
             'drug_name',
             [
-                'attribute'=>'druguse',
-                'options' => ['id' => 'druguse'],
+                'attribute'=>'usage_line1',
+                'options' => ['id' => 'usage_line1'],
                 'value'=>function ($model, $key, $index, $widget) { 
-                    $message = $model->druguse.' '.$model->usage_line1;
+                    $message = $model->usage_line1;
                     return  $message;
                 },
                 'width'=>'400px',

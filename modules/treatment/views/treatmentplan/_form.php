@@ -140,7 +140,7 @@ $this->registerJS($js);
         <button class="btn btn-primary" id="btn-clear"> Clear </button>
     </div>
     </div></div>
-   <hr>
+   
 <!--- BUTTON LINK --->
 
 <div class="treatmentplan-form">

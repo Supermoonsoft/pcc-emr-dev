@@ -47,11 +47,15 @@ $this->title = 'Pcclabs';
             return ['data' => ['key' => $model->id]];
         }, 
         'columns' => [
-            
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'header' => false,
+            ],
             [
                 'attribute'=>'date_visit', 
+                'format'=>'raw',
                 'value'=>function ($model, $key, $index, $widget) { 
-                    return $model->date_visit.' (รพ.แม่ข่าย)';
+                    return Html::checkbox('checked').' '.$model->date_visit.' (รพ.แม่ข่าย)';
                 },
                 'filter'=>false,
                 'group'=>true,  // enable grouping,
@@ -64,10 +68,6 @@ $this->title = 'Pcclabs';
                 'header' => false,
                 
             ],*/
-            [
-                'class' => 'yii\grid\CheckboxColumn',
-                'header' => false,
-            ],
             [
                 'attribute'=>'lab_name',
                 'options' => ['id' => 'lab_name'],

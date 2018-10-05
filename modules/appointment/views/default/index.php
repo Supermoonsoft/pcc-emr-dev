@@ -80,27 +80,75 @@ Modal::end();
                 ['class' => 'kartik\grid\SerialColumn'],
                 [
                     'attribute' => 'hospname',
-                    'label' => 'สถานที่รับบริการ'
+                    'label' => 'สถานที่รับบริการ',
+                    'value'=> function ($model,$key,$index,$widget){
+                        if($model['hospname']==''){
+                            return '';
+                            
+                        }else{
+                            return $model['hospname'];
+                        }
+                    }
                 ],
                 [
                     'attribute' => 'date_visit',
-                    'label' => 'วันที่รับบริการ'
+                    'label' => 'วันที่รับบริการ',
+                    'value'=> function ($model,$key,$index,$widget){
+                        if($model['date_visit']==''){
+                            return '';
+                            
+                        }else{
+                            return $model['date_visit'];
+                        }
+                    }
                 ],
                 [
                     'attribute' => 'appoint_date',
-                    'label' => 'วันนัด'
+                    'label' => 'วันนัด',
+                    'value'=> function ($model,$key,$index,$widget){
+                        if($model['appoint_date']==''){
+                            return '-';
+                            
+                        }else{
+                            return $model['appoint_date'];
+                        }
+                    }
                 ],
                 [
                     'attribute' => 'clinic',
-                    'label' => 'คลินิก'
+                    'label' => 'คลินิก',
+                    'value'=> function ($model,$key,$index,$widget){
+                        if($model['clinic']==''){
+                            return '-';
+                            
+                        }else{
+                            return $model['clinic'];
+                        }
+                    }
                 ],
                 [
                     'attribute' => 'appoint_doctor',
-                    'label' => 'แพทย์ผู้นัด'
+                    'label' => 'แพทย์ผู้นัด',
+                    'value'=> function ($model,$key,$index,$widget){
+                        if($model['appoint_doctor']==''){
+                            return '-';
+                            
+                        }else{
+                            return $model['appoint_doctor'];
+                        }
+                    }
                 ],
                 [
                     'attribute' => 'appoint_detail',
-                    'label' => 'รายละเอียด'
+                    'label' => 'รายละเอียด',
+                    'value'=> function ($model,$key,$index,$widget){
+                        if($model['appoint_detail']==''){
+                            return '-';
+                            
+                        }else{
+                            return $model['appoint_detail'];
+                        }
+                    }
                 ],
             ],
         ]);
