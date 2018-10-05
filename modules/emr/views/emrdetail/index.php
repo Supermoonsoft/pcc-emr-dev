@@ -78,7 +78,7 @@ use yii\helpers\Url;
                 'headerOptions' => ['class' => 'kartik-sheet-style'],
                 'expandOneOnly' => true,
                 'expandIcon' => '<i class="fa fa-plus"></i>',
-                 'collapseIcon'=> '<i class="fa fa-sort-desc"></i>'
+                 'collapseIcon'=> '<i class="fa fa-angle-down"></i>'
             ],
             [
                 'attribute' => 'date_visit',
