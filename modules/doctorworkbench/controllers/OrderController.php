@@ -28,6 +28,8 @@ use app\modules\chiefcomplaint\models\Pccservicepi;
 use app\modules\chiefcomplaint\models\PccservicepiSearch;
 use app\modules\chiefcomplaint\models\Pccservicepe;
 use app\modules\chiefcomplaint\models\PccservicepeSearch;
+use app\modules\drug\models\Pccmed;
+use app\modules\drug\models\PccmedSearch;
     
 use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
@@ -150,14 +152,13 @@ class OrderController extends \yii\web\Controller
             }
     }
 
-    public function actionDrug($cid =NULL){
-        $searchModel = new HosdrugSearch($cid);
+    public function actionDrug(){
+        $searchModel = new PccmedSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('drug', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'cid'=>$cid
         ]);
 
     }

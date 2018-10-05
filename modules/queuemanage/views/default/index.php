@@ -3,7 +3,7 @@
 use app\components\MessageHelper;
 use app\assets\DataTableAsset;
 use yii\widgets\ActiveForm;
-use kartik\helpers\Html;
+use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
@@ -11,9 +11,8 @@ use app\modules\queuemanage\models\CDoctorRoom;
 
 DataTableAsset::register($this);
 ?>
-<?= MessageHelper::Note(" คลิกแล้วเรียกลำดับ ตัวเลขลำดับส่งเข้าตรวจเปลี่ยนตามคลิก ก่อน/หลัง ") ?>       
 
-<?php Pjax::begin(['id' => 'q_pjax']); ?>
+
 <?php
 if($param == 0){
 $btn_text = 'ทั้งหมด';
@@ -21,19 +20,17 @@ $send = 1;
 }else{
 $btn_text = 'ยังไม่ส่งตรวจ';
 $send = 0;
-
 }
 ?>
 <div class="panel panel-info">
-
-
     <div class="panel-heading">
         <div class="panel-title">
             <i class="fa fa-clock-o" aria-hidden="true"></i> ผู้ป่วยรอส่งเข้าพบแพทย์ 
             <!-- <object align='right'><a class="btn btn-lbrown">ทั้งหมด</a></object> -->
-            <object align='right'>
+            <object align='right' style="margin-top: -5px;">
             <?= Html::a($btn_text, 
-                ['/queuemanage'], [
+                // ['/queuemanage/pcc-visit'], [
+                ['/queuemanage/default/view-all'], [
                 'class' => 'btn btn-lbrown',
                 'data-method' => 'POST',
                 'data-params' => [
@@ -46,6 +43,8 @@ $send = 0;
         </div>
     </div>
     <div class="panel-body">
+<?php if($param == 0):?>
+
         <?php
         ActiveForm::begin([
             'id' => 'form-add-q',
@@ -53,8 +52,6 @@ $send = 0;
             'method' => 'post'
         ]);
         ?>
-
-
         <div style="margin-bottom: 3px">
             <?php
             $array = ArrayHelper::map(CDoctorRoom::find()->orderBy('id ASC')->all(),'id','room_title');
@@ -140,10 +137,14 @@ $send = 0;
             </div>
         </div>
         <?php ActiveForm::end(); ?>      
+        <?php else:?>
+<?=$this->render('./view_all',['raw' => $raw,]);?>
+        <?php endif;?>
+
+
 
     </div>
 </div>
-<?php Pjax::end(); ?>
 
 <?php
 $this->registerJs($this->render('script.js'));

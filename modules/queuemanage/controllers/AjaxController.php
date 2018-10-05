@@ -6,6 +6,7 @@ use yii\web\Controller;
 use app\components\DbHelper;
 use app\modules\queuemanage\models\PccVisit;
 use app\modules\queuemanage\models\PccDoctorRoomQueue;
+use app\modules\queuemanage\models\GatewayEmrLab;
 
 /**
  * Default controller for the `queuemanage` module
@@ -29,10 +30,12 @@ class AjaxController extends Controller {
     public function actionLabView($cid=null){
     //$array[] = ['cid'=>$cid];
     \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-    $sql = " SELECT t.lab_name,t.lab_result,t.standard_result from pcc_lab t LIMIT 10 ";
-    $raw = DbHelper::queryAll('db', $sql);
+    // $sql = " SELECT t.lab_name,t.lab_result,t.standard_result from pcc_lab t LIMIT 10 ";
+    // $raw = DbHelper::queryAll('db', $sql);
 
-    return $this->renderAjax('../default/lab_view',['raw' => $raw]);
+    $model = GatewayEmrLab::find()->where(['cid' => $cid])->all();
+
+    return $this->renderAjax('../default/lab_view',['model' => $model]);
     }
 
 public function actionGetTime(){

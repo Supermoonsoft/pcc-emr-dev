@@ -14,10 +14,9 @@
 
 ]);?>
 <?php
-   echo $this->render('@app/modules/drug/views/hosdrug/index',[
+   echo $this->render('@app/modules/drug/views/pccmed/index',[
     'searchModel' => $searchModel,
     'dataProvider' => $dataProvider,
-    'cid'=>$cid
 ]);
 ?>
 <?=$this->render('../default/panel_foot');?>

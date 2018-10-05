@@ -6,7 +6,11 @@ use yii;
 use yii\web\Controller;
 use app\components\DbHelper;
 use yii\data\SqlDataProvider;
+use yii\data\ActiveDataProvider;
 use app\modules\queuemanage\models\PccDoctorRoomQueue;
+use app\modules\queuemanage\models\PccVisit;
+use app\modules\queuemanage\models\PccVisitSearch;
+
 
 /**
  * Default controller for the `queuemanage` module
@@ -23,12 +27,8 @@ class DefaultController extends Controller {
         $sql_update ='';
         if(Yii::$app->request->post('param')){
             $param = 1;
-        $current = "";
-
         }else{
             $param = 0;
-        $current = "AND t.current_station = 'A0'";
-
         }
         
         $date1 = date('Y-m-d');
@@ -38,7 +38,7 @@ class DefaultController extends Controller {
         from pcc_visit t 
         LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
         WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-        $current order by t.visit_date_begin asc,t.visit_time_begin asc";
+        AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
         $raw = DbHelper::queryAll('db', $sql);
         
 
@@ -48,7 +48,6 @@ class DefaultController extends Controller {
                     'param' => $param
         ]);
     }
-                
 
 public function actionSave(){
     if (\Yii::$app->request->isPost) {
@@ -82,5 +81,56 @@ public function actionSave(){
         return $this->redirect(['/queuemanage']);
 
 }
+}
+
+public function actionViewAll(){
+
+    $searchModel = new PccVisitSearch();
+    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+    if($searchModel->date1){
+        $date1 = $searchModel->date1;
+        $date2 = $searchModel->date2;
+    }else{
+    $date1 = date('Y-m-d');
+    $date2 = date('Y-m-d');
+    }
+    
+    $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
+    ,concat(p.prename,p.fname,' ',p.lname) fullname,AGE(p.birthday) as age,t.visit_department
+    from pcc_visit t 
+    LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
+    WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
+    AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
+    $raw = DbHelper::queryAll('db', $sql);
+
+    $sql_count = "SELECT count(*) from pcc_visit t 
+    LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
+    WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
+    AND t.current_station = 'A0'";
+    $count = DbHelper::queryScalar('db', $sql_count);
+
+
+    $dataProvider = new SqlDataProvider([
+    'sql' => $sql,
+    // 'params' => [':status' => 1],
+    'totalCount' => $count,
+    'pagination' => [
+        'pageSize' => 10,
+    ],
+    'sort' => [
+        'attributes' => [
+            'title',
+            'view_count',
+            'created_at',
+        ],
+    ],
+]);
+
+    return $this->render('view_all', [
+              'dataProvider' => $dataProvider,
+              'searchModel' => $searchModel,
+              'count' => $count
+    ]);
 }
 }

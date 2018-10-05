@@ -25,9 +25,8 @@ use Yii;
  */
 class PccVisit extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
+   public $date1;
+   public $date2;
     public static function tableName()
     {
         return 'pcc_visit';
@@ -40,7 +39,7 @@ class PccVisit extends \yii\db\ActiveRecord
     {
         return [
             [['pcc_vn', 'person_cid', 'visit_date_begin'], 'required'],
-            [['visit_date_begin', 'visit_time_begin', 'visit_date_end', 'visit_time_end', 'data_json'], 'safe'],
+            [['visit_date_begin', 'visit_time_begin', 'visit_date_end', 'visit_time_end', 'data_json','date1','date2'], 'safe'],
             [['pcc_vn'], 'string', 'max' => 12],
             [['jhcis_vn', 'person_cid', 'jhcis_hn', 'hos_hn', 'visit_type', 'visit_department', 'visit_queue_code', 'current_station', 'admit_number'], 'string', 'max' => 255],
             [['pcc_vn'], 'unique'],
@@ -70,4 +69,12 @@ class PccVisit extends \yii\db\ActiveRecord
             'data_json' => 'Data Json',
         ];
     }
+
+    public function getPatient()
+    {
+        return $this->hasMany(GatewayEmrLab::className(), ['cid' => 'person_cid']);
+    }
+
+
+
 }
