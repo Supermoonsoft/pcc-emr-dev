@@ -67,7 +67,7 @@ class PccDiagnosisController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($request->post())) {
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
-            $model->diag_type = 2;
+            //$model->diag_type = 2;
             if ($model->cc == "") {
                 $model->cc = NULL;
               }else {$model->cc = json_encode($model->cc);}

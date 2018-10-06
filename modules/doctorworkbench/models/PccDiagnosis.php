@@ -58,7 +58,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
         ];
     }
 
-    public  function getDiagtype(){
+    public  function getDiagtype1(){
         return $this->hasOne(CDiagtype::className(), ['diagtype' => 'diag_type']);
     }
 }

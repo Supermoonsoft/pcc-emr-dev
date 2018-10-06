@@ -66,11 +66,9 @@ $layout = <<< HTML
 </div>
 HTML;
 ?>
-<fieldset>
-	<legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form</legend> 
 
 <?php  echo $this->render('./create',['model' => $model]);?>
-</fieldset>
+<br>
         <?=GridView::widget([
             'id'=>'crud-diagnosis',
             'dataProvider' => $dataProvider,
