@@ -21,9 +21,10 @@ DataTableAsset::register($this);
                 <?php ActiveForm::begin(); ?>
                 ระหว่าง <input type="date" name='date1' value="<?= $date1 ?>"/>               
                 ถึง  <input type="date" name='date2'  value="<?= $date2 ?>" max='<?= date('Y-m-d') ?>'/> 
-                <button  type="submit">ตกลง</button> <button type="submit" class="pull-right">Refresh</button>
+                <button  type="submit">ตกลง</button> 
                 <?php ActiveForm::end(); ?>
             </div>
+               <div id="grid-view-data-table" class="grid-view">
                 <table class="table  table-bordered">
                     <thead>
                         <tr>
@@ -61,8 +62,12 @@ DataTableAsset::register($this);
         </div>
     </div>
 </div>
-
-
+</div>
+<?php
+$js = <<< JS
+    $('#grid-view-data-table .table').DataTable();     
+JS;
+$this->registerJs($js);
 
 
 
