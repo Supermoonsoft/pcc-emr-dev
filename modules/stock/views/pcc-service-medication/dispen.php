@@ -12,11 +12,11 @@ DataTableAsset::register($this);
 ?>
 <div class="site-index">
 
-    <div class="panel panel-info">
+   <div class="panel panel-info">
         <div class="panel-heading">
             <div class="panel-title"><i class="glyphicon glyphicon-list" aria-hidden="true"></i> ปริมาณการใช้ยา</div>
         </div>
-        <div class="panel-body">            
+        <div class="panel-body"> 
             <div style="margin-bottom: 3px">
                 <?php ActiveForm::begin(); ?>
                 ระหว่าง <input type="date" name='date1' value="<?= $date1 ?>"/>               
@@ -24,42 +24,46 @@ DataTableAsset::register($this);
                 <button  type="submit">ตกลง</button> <button type="submit" class="pull-right">Refresh</button>
                 <?php ActiveForm::end(); ?>
             </div>
-            <?php
-            $sql = " SELECT tmt24_code,drug_name,sum(qty)as total , unit,unitprice,sum(qty)*unitprice as sumtotal
+                <table class="table  table-bordered">
+                    <thead>
+                        <tr>
+                            <th>#</th>                                
+                            <th>รายการ</th>
+                            <th >รวมจำนวนจ่าย</th>
+                            <th >ราคา</th> 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $i = 1;                        
+                        
+                        $sql = " SELECT tmt24_code,drug_name,sum(qty)as total , unit,unitprice,sum(qty)*unitprice as sumtotal
                 from pcc_service_medication
 		where date_service BETWEEN '$date1' and '$date2'								
                 GROUP BY tmt24_code,drug_name,unit,unitprice
                 ORDER BY drug_name ";
-            $raw = \Yii::$app->db->createCommand($sql)->queryAll();
-            $dataProvider = new ArrayDataProvider([
-                'allModels' => $raw,
-                'pagination' => FALSE
-            ]);
-
-            echo GridView::widget([
-                'id' => 'grid-view-data-table',
-                'dataProvider' => $dataProvider,
-                'layout' => '{items}',
-                'columns' => [
-                    [
-                        'class' => 'yii\grid\SerialColumn',
-                    ],
-                    'drug_name:text:รายการยา',
-                    'total:integer:รวมจำนวนจ่าย',
-                    'sumtotal:integer:ราคา'
-                ],
-            ]);
-            ?>
-
+                        $raw = \Yii::$app->db->createCommand($sql)->queryAll();
+                        $dataProvider = new ArrayDataProvider([
+                            'allModels' => $raw,
+                            'pagination' => FALSE
+                        ]);
+                        ?>
+                        <?php foreach ($raw as $key => $data): ?>
+                            <tr>                         
+                                <td><?= $i++ ?></td>
+                                <td><?= $data['drug_name'] ?></td>                                
+                                <td><?= $data['total']?></td>
+                                <td><?= $data['sumtotal'] ?></td>
+                            </tr>                                
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
         </div>
     </div>
-
-
 </div>
-<?php
-$js = <<< JS
-    $('#grid-view-data-table .table').DataTable();     
-JS;
-$this->registerJs($js);
+
+
+
+
 
 
