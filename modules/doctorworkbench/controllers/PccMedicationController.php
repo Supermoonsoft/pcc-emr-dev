@@ -14,6 +14,7 @@ use app\components\PatientHelper;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
+use app\modules\doctorworkbench\models\GatewayEmrDrug;
 
 
 class PccMedicationController extends Controller
@@ -203,4 +204,34 @@ public function actionEditable() {
             }
         }
     }
+
+
+public function actionReMed(){
+    \Yii::$app->response->format = Response::FORMAT_JSON;
+
+    $request = Yii::$app->request;
+    $pks = explode(',', $request->post( 'id' )); // Array or selected records primary keys
+    foreach ( $pks as $pk ) {
+        $remed = GatewayEmrDrug::find(['id' => $pk])->one();
+        $model = new PccMedication();  
+        $model->vn =  $remed->vn;
+        $model->hn =  $remed->hn;
+        $model->cid =  $remed->cid;
+        $model->icode = $remed->icode;
+        $model->tmt24_code = $remed->tmt24_code;
+        $model->drug_name =  $remed->drug_name.' '.$remed->unit;
+        $model->qty = $remed->qty;
+        $model->druguse = $remed->usage_line1;
+        $model->unitprice = $remed->unitprice;
+        $model->costprice = $remed->costprice;
+        $model->totalprice =  $remed->qty * $remed->unitprice;
+        $model->hospcode = $remed->hospcode;
+       $model->save();
+    }
+    return [
+        'msg' => 'ย้านข้อมูลสำเร็จ'
+    ];
+
+    
+}
 }
