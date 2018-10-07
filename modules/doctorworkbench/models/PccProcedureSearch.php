@@ -18,7 +18,7 @@ class PccProcedureSearch extends PccProcedure
     public function rules()
     {
         return [
-            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'procedure_code', 'procedure_name', 'start_date', 'start_time', 'end_date', 'end_time', 'procedure_price', 'data_json', 'last_update', 'doctor', 'hoscode', 'cid', 'pcc_vn'], 'safe'],
+            [['id', 'hn', 'vn', 'provider_code', 'provider_name', 'date_service', 'time_service', 'procedure_code', 'procedure_name', 'start_date', 'start_time', 'end_date', 'end_time', 'procedure_price', 'data_json', 'last_update', 'doctor', 'hospcode', 'cid', 'pcc_vn'], 'safe'],
         ];
     }
 
@@ -74,7 +74,7 @@ class PccProcedureSearch extends PccProcedure
             ->andFilterWhere(['ilike', 'procedure_price', $this->procedure_price])
             ->andFilterWhere(['ilike', 'data_json', $this->data_json])
             ->andFilterWhere(['ilike', 'doctor', $this->doctor])
-            ->andFilterWhere(['ilike', 'hoscode', $this->hoscode])
+            ->andFilterWhere(['ilike', 'hospcode', $this->hospcode])
             ->andFilterWhere(['ilike', 'cid', $this->cid])
             ->andFilterWhere(['ilike', 'pcc_vn', $this->pcc_vn]);
 

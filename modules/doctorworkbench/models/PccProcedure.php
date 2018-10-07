@@ -46,7 +46,7 @@ class PccProcedure extends \yii\db\ActiveRecord
             [['date_service', 'time_service', 'start_date', 'start_time', 'end_date', 'end_time', 'data_json', 'last_update', 'pcc_vn','cid'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn'], 'string', 'max' => 12],
-            [['provider_code', 'hoscode'], 'string', 'max' => 5],
+            [['provider_code', 'hospcode'], 'string', 'max' => 5],
             [['provider_name', 'procedure_name', 'doctor'], 'string', 'max' => 255],
             [['procedure_code'], 'string', 'max' => 100],
             [['procedure_price'], 'string', 'max' => 10],
@@ -78,7 +78,7 @@ class PccProcedure extends \yii\db\ActiveRecord
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
             'doctor' => 'Doctor',
-            'hoscode' => 'Hoscode',
+            'hospcode' => 'Hospcode',
             'cid' => 'เลขบัตรประชาชน',
             'pcc_vn' => 'Pcc Vn',
         ];

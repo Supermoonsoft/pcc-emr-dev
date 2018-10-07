@@ -18,7 +18,7 @@ class PccMedicationSearch extends PccMedication
     public function rules()
     {
         return [
-            [['id', 'vn', 'hn', 'an', 'icode', 'druguse', 'provider_code', 'provider_name', 'date_service', 'time_service', 'data_json', 'unit', 'tmt24_code', 'usage_line1', 'usage_line2', 'usage_line3', 'drug_name', 'hoscode', 'cid', 'pcc_vn'], 'safe'],
+            [['id', 'vn', 'hn', 'an', 'icode', 'druguse', 'provider_code', 'provider_name', 'date_service', 'time_service', 'data_json', 'unit', 'tmt24_code', 'usage_line1', 'usage_line2', 'usage_line3', 'drug_name', 'hospcode', 'cid', 'pcc_vn'], 'safe'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
         ];
     }
@@ -81,7 +81,7 @@ class PccMedicationSearch extends PccMedication
             ->andFilterWhere(['ilike', 'usage_line2', $this->usage_line2])
             ->andFilterWhere(['ilike', 'usage_line3', $this->usage_line3])
             ->andFilterWhere(['ilike', 'drug_name', $this->drug_name])
-            ->andFilterWhere(['ilike', 'hoscode', $this->hoscode])
+            ->andFilterWhere(['ilike', 'hospcode', $this->hospcode])
             //->andFilterWhere(['ilike', 'cid', $this->cid])
             //->andFilterWhere(['ilike', 'pcc_vn', $this->pcc_vn])
             ;

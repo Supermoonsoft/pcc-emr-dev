@@ -42,7 +42,7 @@ class PccMedication extends \yii\db\ActiveRecord
             [['icode'], 'required'],
             [['id'], 'string'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
-            [['date_service', 'time_service', 'data_json', 'hoscode','cid'], 'safe'],
+            [['date_service', 'time_service', 'data_json', 'hospcode','cid'], 'safe'],
             [['vn', 'pcc_vn'], 'string', 'max' => 12],
             [['hn'], 'string', 'max' => 9],
             [['an', 'unit'], 'string', 'max' => 50],
