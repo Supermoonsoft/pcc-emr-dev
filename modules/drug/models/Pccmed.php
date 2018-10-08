@@ -5,39 +5,38 @@ namespace app\modules\drug\models;
 use Yii;
 
 /**
- * This is the model class for table "gateway_emr_drug".
+ * This is the model class for table "pcc_medication".
  *
  * @property string $id
- * @property string $hospcode
- * @property string $hospname
- * @property string $hn
  * @property string $vn
+ * @property string $hn
  * @property string $an
- * @property string $date_visit
- * @property string $time_visit
- * @property string $drug_name
- * @property string $qty
- * @property string $unit
- * @property string $usage_line1
- * @property string $usage_line2
- * @property string $usage_line3
- * @property string $icode
- * @property string $tmt24_code
- * @property string $unitprice
+ * @property string $icode รหัสรายการ
+ * @property string $qty จำนวนจ่าย
+ * @property string $unitprice ราคาขาย/หน่วย
+ * @property string $druguse วิธีใช้
+ * @property string $costprice ราคาทุน/หน่วย
+ * @property string $totalprice รวมราคาขาย
+ * @property string $provider_code
+ * @property string $provider_name
+ * @property string $date_service
+ * @property string $time_service
  * @property array $data_json
- * @property string $last_update
- * @property string $costprice
- * @property string $cid
- * @property string $provider
+ * @property string $unit
+ * @property string $tmt24_code
+ * @property string $usage_line1 วิธีใช้ 1
+ * @property string $usage_line2 วิธีใช้ 2
+ * @property string $usage_line3 วิธีใช้ 3
+ * @property string $drug_name
  */
-class pccmed extends \yii\db\ActiveRecord
+class Pccmed extends \yii\db\ActiveRecord
 {
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
-        return 'gateway_emr_drug';
+        return 'pcc_medication';
     }
 
     /**
@@ -46,17 +45,18 @@ class pccmed extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'hospcode', 'hn', 'vn'], 'required'],
+            [['id', 'vn', 'hn', 'icode'], 'required'],
             [['id'], 'string'],
-            [['date_visit', 'time_visit', 'data_json', 'last_update'], 'safe'],
-            [['unitprice', 'costprice'], 'number'],
-            [['hospcode'], 'string', 'max' => 5],
-            [['hospname', 'drug_name', 'unit', 'usage_line1', 'usage_line2', 'usage_line3'], 'string', 'max' => 100],
-            [['hn'], 'string', 'max' => 10],
-            [['vn', 'an'], 'string', 'max' => 12],
-            [['qty'], 'string', 'max' => 3],
+            [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
+            [['date_service', 'time_service', 'data_json'], 'safe'],
+            [['vn'], 'string', 'max' => 12],
+            [['hn'], 'string', 'max' => 9],
+            [['an', 'unit'], 'string', 'max' => 50],
             [['icode', 'tmt24_code'], 'string', 'max' => 24],
-            [['cid', 'provider'], 'string', 'max' => 13],
+            [['druguse'], 'string', 'max' => 200],
+            [['provider_code'], 'string', 'max' => 5],
+            [['provider_name'], 'string', 'max' => 100],
+            [['usage_line1', 'usage_line2', 'usage_line3', 'drug_name'], 'string', 'max' => 255],
             [['id'], 'unique'],
         ];
     }
@@ -68,30 +68,28 @@ class pccmed extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'hospcode' => 'Hospcode',
-            'hospname' => 'Hospname',
-            'hn' => 'Hn',
             'vn' => 'Vn',
+            'hn' => 'Hn',
             'an' => 'An',
-            'date_visit' => 'Date Visit',
-            'time_visit' => 'Time Visit',
-            'drug_name' => 'Drug Name',
+            'icode' => 'Icode',
             'qty' => 'Qty',
+            'unitprice' => 'Unitprice',
+            'druguse' => 'Druguse',
+            'costprice' => 'Costprice',
+            'totalprice' => 'Totalprice',
+            'provider_code' => 'Provider Code',
+            'provider_name' => 'Provider Name',
+            'date_service' => 'Date Service',
+            'time_service' => 'Time Service',
+            'data_json' => 'Data Json',
             'unit' => 'Unit',
+            'tmt24_code' => 'Tmt24 Code',
             'usage_line1' => 'Usage Line1',
             'usage_line2' => 'Usage Line2',
             'usage_line3' => 'Usage Line3',
-            'icode' => 'Icode',
-            'tmt24_code' => 'Tmt24 Code',
-            'unitprice' => 'Unitprice',
-            'data_json' => 'Data Json',
-            'last_update' => 'Last Update',
-            'costprice' => 'Costprice',
-            'cid' => 'Cid',
-            'provider' => 'Provider',
+            'drug_name' => 'Drug Name',
         ];
     }
-    
     public function afterFind()
     {
         foreach($this->attributes as $column_name => $value){

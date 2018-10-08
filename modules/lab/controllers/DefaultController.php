@@ -5,7 +5,7 @@ namespace app\modules\lab\controllers;
 use yii\web\Controller;
 
 /**
- * Default controller for the `lab` module
+ * Default controller for the `Lab` module
  */
 class DefaultController extends Controller
 {

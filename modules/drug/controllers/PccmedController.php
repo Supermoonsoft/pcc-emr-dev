@@ -4,7 +4,7 @@ namespace app\modules\drug\controllers;
 
 use Yii;
 use app\modules\drug\models\Pccmed;
-use app\modules\drug\models\PccmedSearch;
+use app\modules\drug\models\PccmedSeach;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -35,7 +35,7 @@ class PccmedController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PccmedSearch();
+        $searchModel = new PccmedSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [

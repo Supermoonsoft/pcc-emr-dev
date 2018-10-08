@@ -5,8 +5,6 @@ namespace app\modules\lab\controllers;
 use Yii;
 use app\modules\lab\models\Pcclab;
 use app\modules\lab\models\PcclabSearch;
-use app\modules\lab\models\Preorderlab;
-use app\modules\lab\models\PreorderlabSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -126,44 +124,4 @@ class PcclabController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-
-    public function actionPreorder(){
-        $action=Yii::$app->request->post('action');
-        $selection=(array)Yii::$app->request->post('selection');//typecasting
-
-            foreach($selection as $id){
-                $model = Pcclab::findOne((String)$id);//make a typecasting
-                $preorder = new Preorderlab(); 
-                    $preorder->pcc_vn = '1';//tester
-                    $preorder->hospcode = $model->hospcode;
-                    $preorder->lab_code = $model->lab_code;
-                    $preorder->lab_name = $model->lab_name;
-                    $preorder->lab_request_date = date('Y-m-d');
-                    $preorder->standard_result = $model->standard_result;
-                    $preorder->lab_price = $model->lab_price;
-
-                $preorder->save(false);
-                // or delete
-            }
-            
-            $searchModel = new PreorderlabSearch();
-            $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-            $model = new Preorderlab(); 
-    
-            if (Yii::$app->request->isAjax) {
-                Yii::$app->response->format = Response::FORMAT_JSON;
-                   return   $this->renderAjax('../../../doctorworkbench/order/pre-order-lab',[
-                         'searchModel' => $searchModel,
-                         'dataProvider' => $dataProvider,
-                         'model' => $model
-                         ]);
-                 } else {
-                    $searchModel = new PcclabSearch();
-                    $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-                    $model = new Pcclab(); 
-
-                    return $this->redirect('index.php?r=doctorworkbench/order/lab');
-                }
-            
-     }
 }

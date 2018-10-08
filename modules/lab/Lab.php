@@ -3,7 +3,7 @@
 namespace app\modules\lab;
 
 /**
- * lab module definition class
+ * Lab module definition class
  */
 class Lab extends \yii\base\Module
 {
