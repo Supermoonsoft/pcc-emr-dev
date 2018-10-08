@@ -10,7 +10,8 @@
 'treatmment_plan' => 'active',
 'cc' => '',
 'pi' => '',
-              'pe' => ''
+'pe' => '',
+'education' => ''
 
 ]);?>
 <?=$this->render('@app/modules/treatment/views/treatmentplan/create',['model' => $model,]);?>

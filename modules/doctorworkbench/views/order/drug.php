@@ -1,3 +1,9 @@
+<?php
+use yii\bootstrap\Modal;
+
+?>
+
+
 
 <?=$this->render('../default/panel_top',[
 'emr' => '',
@@ -11,7 +17,8 @@
 'treatmment_plan' => '',
 'cc' => '',
 'pi' => '',
-              'pe' => ''
+'pe' => '',
+'education' => ''
 
 ]);?>
 <?php
@@ -20,33 +27,56 @@
     'dataProvider' => $dataProvider,
 ]);
 ?>
+
+
 <?=$this->render('../default/panel_foot');?>
 
-
 <?php
-// $js = <<< JS
-// $("input[type='checkbox']").change(function(){
-//     if(this.checked) {
-//     $('.'+$(this).attr('name')+'').prop('checked', true);
-//     }else{
-//         $('.'+$(this).attr('name')+'').prop('checked', false);
-//     }
-// });
+$js = <<< JS
+$('.progress').hide();
+$("input[type='checkbox']").change(function(){
+    if(this.checked) {
+    $('.'+$(this).attr('name')+'').prop('checked', true);
+    }else{
+        $('.'+$(this).attr('name')+'').prop('checked', false);
+    }
+});
 
-// $('#remed').click(function(){
-// var keys = $("#w0").yiiGridView("getSelectedRows");
-// $.ajax({
-//     method:'POST',
-//     dataType:'json',
-//     url:'index.php?r=doctorworkbench/pcc-medication/re-med',
-//     data:{id:keys.join()},
-//     success:function(response) {
-//              swal(response.msg);
+$('#remed').click(function(){
+var keys = $("#w0").yiiGridView("getSelectedRows");
+$('.progress').show();
 
-//             },
+var i = 1;
+$.each(keys, function (index, value) {
+
+$.ajax({
+    method:'POST',
+    dataType:'json',
+    async: true,
+    url:'index.php?r=doctorworkbench/pcc-medication/re-med',
+    data:{id:value,count:keys.length},
+    beforeSend: function(response){
+
+  },
+    success:function(response) {
+       var total = parseInt(keys.length);
+       var n = i++;
+       var p = ((n / total) * 100).toFixed( 0 );
+       $('#p').html(p+'%');
+       $('#p').css('width',p+'%');
+       if(p==100){
+        $('.progress').hide();
+    }
+
+    },
     
-// });
-// });
-// JS;
-// $this->registerJS($js);
+    });
+});
+
+});
+
+
+
+JS;
+$this->registerJS($js);
 ?>

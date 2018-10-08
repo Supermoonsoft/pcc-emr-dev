@@ -38,7 +38,8 @@ $this->registerCss($this->render('../../dist/css/style.css'));
         'treatmment_plan' => '',
         'cc' => '',
         'pi' => '',
-        'pe' => ''
+        'pe' => '',
+        'education' => ''
     ]);?>
 
 <?php

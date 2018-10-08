@@ -75,19 +75,19 @@ return [
              ]
          ],
          'contentOptions' => ['class' => 'pjax-load'],
-     //    'value' => function($model) {
-       //      $models = CDrugusage::find()->where(['shortlist' => $model->druguse])->one();
-      //       if ($model->druguse != '') {
-        //         return $models->shortlist;
-       //      } else {
-         //        return '-';
-     //        }
-   //      }
+         'value' => function($model) {
+             $models = CDrugusage::find()->where(['shortlist' => $model->druguse])->one();
+             if ($model->druguse != '') {
+                 return $models->shortlist;
+             } else {
+                 return '-';
+             }
+         }
      ],
    [
        'class' => 'kartik\grid\EditableColumn',
        //'class'=>'\kartik\grid\DataColumn',
-        'header' => 'จำนวนจ่าย',//
+        'header' => 'จำนวนจ่าย',
         'pageSummary' => 'มูลค่ารวม',
         'attribute' => 'qty',
         'width' => '100px',        

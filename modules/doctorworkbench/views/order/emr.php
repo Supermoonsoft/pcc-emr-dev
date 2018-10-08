@@ -10,7 +10,8 @@
                  'treatmment_plan' => '',
                  'cc' => '',
                  'pi' => '',
-              'pe' => ''
+              'pe' => '',
+              'education' => ''
                  ]);?>
 <?php
     echo $this->render('@app/modules/emr/views/emrdetail/index',[

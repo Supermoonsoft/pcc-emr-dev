@@ -10,7 +10,8 @@
 'treatmment_plan' => '',
 'cc' => '',
 'pi' => '',
-'pe' => 'active'
+'pe' => 'active',
+'education' => ''
 
 ]);?>
 <?=$this->render('@app/modules/chiefcomplaint/views/pccservicepe/create',['model' => $model]);?>

@@ -20,6 +20,7 @@ $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id
 
 
 ?>
+<!-- <link href="https://fonts.googleapis.com/css?family=Kanit:300|Mitr:300" rel="stylesheet"> -->
 <style>
 .navbar-default .navbar-nav > li.dropdown:hover > a, 
 .navbar-default .navbar-nav > li.dropdown:hover > a:hover,
@@ -67,6 +68,7 @@ li.dropdown:hover > .dropdown-menu {
     <li class="<?=$pre_order_lab;?>"><?=Html::a('<i class="fas fa-vial"></i> Pre-Order Lab', ['/doctorworkbench/order/pre-order-lab'])?></li>
     <li class="<?=$apointment;?>"><?=Html::a('<i class="far fa-calendar-check"></i> Appointment', ['/doctorworkbench/order/appointment'])?></li>
     <li class="<?=$treatmment_plan;?>"><?=Html::a('<i class="far fa-paper-plane"></i> Treatment Plan', ['/doctorworkbench/order/treatmment-plan'])?></li>    
+    <li class="<?=$education;?>"><?=Html::a('<i class="fas fa-graduation-cap"></i> Education', ['/doctorworkbench/order/education'])?></li>    
   
   </ul>
 

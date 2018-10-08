@@ -39,10 +39,10 @@ class PccMedication extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['icode'], 'required'],
+            // [['icode'], 'required'],
             [['id'], 'string'],
             [['qty', 'unitprice', 'costprice', 'totalprice'], 'number'],
-            [['date_service', 'time_service', 'data_json', 'hospcode','cid'], 'safe'],
+            [['date_service', 'time_service', 'data_json', 'hospcode','cid','icode'], 'safe'],
             [['vn', 'pcc_vn'], 'string', 'max' => 12],
             [['hn'], 'string', 'max' => 9],
             [['an', 'unit'], 'string', 'max' => 50],

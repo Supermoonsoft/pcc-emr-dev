@@ -10,15 +10,32 @@ use yii\web\View;
 //echo ShowLoading::widget();
 ?>
 <div class="hoslab-index">
-
         <div style="margin-bottom: 3px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
+        
+        <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <button class="btn btn-info" id="remed" onClick=<?php //new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง Medication</button>
+                
+            </div>
+            
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <div class="progress" style=" height: 34px;margin-bottom: -8px;margin-left: -71px;">
+  <div id='p' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+  </div>
+</div>
+            </div>
+            
+        </div>
+        
+        
         </div>
     <?php Pjax::begin(); ?>
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'pjax'=>true,
+        'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '-'],
         'pjaxSettings'=>[
             'neverTimeout'=>true,
         ],
@@ -29,7 +46,7 @@ use yii\web\View;
                 'attribute'=>'date_service', 
                 'format'=>'raw',
                 'value'=>function ($model, $key, $index, $widget) { 
-                  return Html::checkbox('checkbox').' '.$model->date_visit.' (รพ.แม่ข่าย)';
+                  return Html::checkbox($model->vn).' '.$model->date_visit.' (รพ.แม่ข่าย)';
                 },
                 'filter'=>false,
                 'group'=>true,  // enable grouping,

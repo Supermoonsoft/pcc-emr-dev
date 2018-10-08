@@ -211,8 +211,9 @@ public function actionReMed(){
 
     $request = Yii::$app->request;
     $pks = explode(',', $request->post( 'id' )); // Array or selected records primary keys
-    foreach ( $pks as $pk ) {
-        $remed = GatewayEmrDrug::find(['id' => $pk])->one();
+    // foreach ( $pks as $pk ) {
+        $remed = GatewayEmrDrug::find(['id' => $request->post( 'id' )])->one();
+        // $remed = GatewayEmrDrug::find(['id' => $pk])->one();
         $model = new PccMedication();  
         $model->vn =  $remed->vn;
         $model->hn =  $remed->hn;
@@ -227,9 +228,10 @@ public function actionReMed(){
         $model->totalprice =  $remed->qty * $remed->unitprice;
         $model->hospcode = $remed->hospcode;
        $model->save();
-    }
+    // }
     return [
-        'msg' => 'ย้านข้อมูลสำเร็จ'
+        'msg' => 'ย้านข้อมูลสำเร็จ',
+        'count' => count($pks)
     ];
 
     

@@ -52,7 +52,8 @@ $this->render('../default/panel_top', [
     'treatmment_plan' => '',
     'cc' => '',
     'pi' => '',
-     'pe' => ''
+     'pe' => '',
+     'education' => ''
 
 ]);
 ?>
