@@ -83,7 +83,7 @@ class OrderController extends \yii\web\Controller
         UNION ALL
         SELECT a.hospcode,a.hospname,a.hn,a.vn,a.date_service,a.clinic,a.appoint_date,a.detail,'' AS doctor
         FROM pcc_appointment a
-        LEFT JOIN pcc_patient p ON p.hn = a.hn
+        LEFT JOIN gateway_emr_patient p ON p.hn = a.hn
         where p.cid='3200700311770') AS t1
         ORDER BY date_visit DESC";
         $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
