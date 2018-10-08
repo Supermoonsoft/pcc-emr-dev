@@ -224,7 +224,7 @@ public function actionReMed(){
         $model->tmt24_code = $remed->tmt24_code;
         $model->drug_name =  $remed->drug_name.' '.$remed->unit;
         $model->qty = $remed->qty;
-        // $model->druguse = $remed->usage_line1;
+        $model->druguse = $remed->usage_line1;
         $model->unitprice = $remed->unitprice;
         $model->costprice = $remed->costprice;
         $model->totalprice =  $remed->qty * $remed->unitprice;
