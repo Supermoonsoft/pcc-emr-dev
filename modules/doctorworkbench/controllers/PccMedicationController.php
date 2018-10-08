@@ -208,11 +208,13 @@ public function actionEditable() {
 
 public function actionReMed(){
     \Yii::$app->response->format = Response::FORMAT_JSON;
-
+    $cid = PatientHelper::getCurrentCid();
+    $pcc_vn = PatientHelper::getCurrentVn();
     $request = Yii::$app->request;
+    $id = $request->post( 'id' );
     $pks = explode(',', $request->post( 'id' )); // Array or selected records primary keys
     // foreach ( $pks as $pk ) {
-        $remed = GatewayEmrDrug::find(['id' => $request->post( 'id' )])->one();
+        $remed = GatewayEmrDrug::find()->where(['id' => $id])->one();
         // $remed = GatewayEmrDrug::find(['id' => $pk])->one();
         $model = new PccMedication();  
         $model->vn =  $remed->vn;
@@ -222,11 +224,12 @@ public function actionReMed(){
         $model->tmt24_code = $remed->tmt24_code;
         $model->drug_name =  $remed->drug_name.' '.$remed->unit;
         $model->qty = $remed->qty;
-        $model->druguse = $remed->usage_line1;
+        // $model->druguse = $remed->usage_line1;
         $model->unitprice = $remed->unitprice;
         $model->costprice = $remed->costprice;
         $model->totalprice =  $remed->qty * $remed->unitprice;
         $model->hospcode = $remed->hospcode;
+        $model->pcc_vn = $pcc_vn;
        $model->save();
     // }
     return [

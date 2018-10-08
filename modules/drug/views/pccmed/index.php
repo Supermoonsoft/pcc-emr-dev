@@ -29,7 +29,6 @@ use yii\web\View;
             
         </div>
         
-        
         </div>
     <?php Pjax::begin(); ?>
 <?= GridView::widget([
@@ -65,7 +64,14 @@ use yii\web\View;
         
                 }
             ],
-            'drug_name',
+            [
+                'attribute'=>'drug_name',
+                'format' => 'raw',
+                'value' => function($model){
+                    return '<div >'.$model->drug_name.'&nbsp<span style="color:#0399cc" id="'.$model->id.'"></span></div>';
+                }
+            ],
+            // 'drug_name',
             [
                 'attribute'=>'usage_line1',
                 'options' => ['id' => 'usage_line1'],

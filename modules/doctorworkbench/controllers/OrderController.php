@@ -33,6 +33,8 @@ use app\modules\drug\models\PccmedSearch;
     
 use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
+use app\components\PatientHelper;
+
 
 
 class OrderController extends \yii\web\Controller
@@ -153,8 +155,11 @@ class OrderController extends \yii\web\Controller
     }
 
     public function actionDrug(){
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccmedSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
 
         return $this->render('drug', [
             'searchModel' => $searchModel,
