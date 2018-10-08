@@ -44,7 +44,7 @@ $("input[type='checkbox']").change(function(){
 
 $('#remed').click(function(){
 var keys = $("#w0").yiiGridView("getSelectedRows");
-$('.progress').show();
+$('.progress').fadeIn(800);
 
 var i = 1;
 $.each(keys, function (index, value) {
@@ -65,11 +65,9 @@ $.ajax({
        $('#p').html(p+'%');
        $('#p').css('width',p+'%');
        if(p==100){
-        $('.progress').hide();
-    }
-
-    },
-    
+        $('.progress').fadeOut(800);
+            }
+        },
     });
 });
 

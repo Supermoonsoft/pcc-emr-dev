@@ -4,7 +4,6 @@ namespace app\modules\doctorworkbench\controllers;
 
 use yii;
 use yii\helpers\Json;
-use app\components\PatientHelper;
 use app\modules\doctorworkbench\models\CIcd10tm;
 use app\modules\doctorworkbench\models\PccDiagnosis;
 use app\modules\doctorworkbench\models\PccDiagnosisSearch;
@@ -64,7 +63,7 @@ class OrderController extends \yii\web\Controller
             
             $event = new \yii2fullcalendar\models\Event();
             $event->id = $eve->id;
-            $event->title = '';
+            $event->title = $eve->clinic_text;
             $event->start = $eve->startdate;
             $event->end = $eve->enddate;
             $event->backgroundColor = $eve->color;
@@ -84,7 +83,7 @@ class OrderController extends \yii\web\Controller
         UNION ALL
         SELECT a.hospcode,a.hospname,a.hn,a.vn,a.date_service,a.clinic,a.appoint_date,a.detail,'' AS doctor
         FROM pcc_appointment a
-        LEFT JOIN pcc_patient p ON p.hn = a.hn
+        LEFT JOIN gateway_emr_patient p ON p.hn = a.hn
         where p.cid='3200700311770') AS t1
         ORDER BY date_visit DESC";
         $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -154,12 +153,8 @@ class OrderController extends \yii\web\Controller
     }
 
     public function actionDrug(){
-        $cid = PatientHelper::getCurrentCid();
-        $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccmedSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-       // $dataProvider->query->where(['cid' => $cid]);
-        $dataProvider->query->orderBy('date_visit ASC');
 
         return $this->render('drug', [
             'searchModel' => $searchModel,
@@ -192,10 +187,6 @@ class OrderController extends \yii\web\Controller
         ]);
 
     }
-    public function actionEducation(){
-        return $this->render('education');
-    }
-
 
     public function actionPi()
     {

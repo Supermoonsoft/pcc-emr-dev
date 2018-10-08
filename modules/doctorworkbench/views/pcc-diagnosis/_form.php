@@ -59,79 +59,93 @@ JS;
 <div class="pcc-diagnosis-form">
 <fieldset>
 	<legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form</legend> 
-
-    <div class="row">
-        <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => ['create'], 'options' => ['data-pjax' => 1],]); ?>
-        <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => ['create'], 'options' => ['data-pjax' => 1],]); ?>
+    <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'vn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'cid')->hiddenInput()->label(false); ?>
 
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <?=
-            $form->field($model, 'cc')->widget(Select2::className(), [
-                'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
-                'options' => [
-                    'placeholder' => 'Diagtext',
-                    'multiple' => true,
-                    'id' => 'cc',
-                    'class' => 'clear',
-                ],
-                'pluginOptions' => [
-                    'tags' => true,
-                    'allowClear' => true,
-                    'tokenSeparators' => [',', ' '],
-                    'maximumInputLength' => 50
-                ],])->label(false);
-            ?>
-        </div>
-
-        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-            <?=
-            $form->field($model, 'icd_code')->widget(Select2::className(), [
-                'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
-                // 'theme' => Select2::THEME_DEFAULT,/
-                'options' => ['id' => 'icd_code', 'placeholder' => 'Select ICD10...','class' => 'clear'],
-                'pluginOptions' => [
-                    'allowClear' => true,
-                    'minimumInputLength' => 1,
-                    'language' => [
-                        'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
-                    ],
-                    'ajax' => [
-                        'url' => $url,
-                        'dataType' => 'json',
-                        'data' => new JsExpression('function(params) { return {q:params.term}; }')
-                    ],
-                    'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
-                    'templateResult' => new JsExpression('formatRepo'),
-                ],
-                'pluginEvents' => [
-                    "select2:select" => "function() { $('#diag_type').select2('open'); }",
-                ]
-            ])->label(false);
-            ?>
-        </div>
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            <?=
-            $form->field($model, 'diag_type')->widget(Select2::className(), [
-                'data' => ArrayHelper::map(app\modules\doctorworkbench\models\CDiagtype::find()->all(), 'diagtype', function($model, $defaultValue) {
-                            return $model->diagtype . '-' . $model->name1;
-                        }),
-                'options' => [
-                    'placeholder' => 'DiagType...','id' => 'diag_type'],
-                'pluginOptions' => [
-                    'allowClear' => true,
-                ],
-                'pluginEvents' => [
-                    "select2:select" => "function() { $('#btn-save').focus(); }",
-                ]
-            ])->label(false);
-            ?>
-        </div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <?=
+    $form->field($model, 'cc')->widget(Select2::className(), [
+        'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
+        'options' => [
+            'placeholder' => 'Diagtext',
+            'multiple' => true,
+            'id' => 'cc',
+            'class' => 'clear',
+        ],
+        'pluginOptions' => [
+            'tags' => true,
+            'allowClear' => true,
+            'tokenSeparators' => [',', ' '],
+            'maximumInputLength' => 50
+        ],])->label(false);
+    ?>
     </div>
-    </fieldset>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="row">
+
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+    <?=
+    $form->field($model, 'icd_code')->widget(Select2::className(), [
+        'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
+        // 'theme' => Select2::THEME_DEFAULT,/
+        'options' => ['id' => 'icd_code', 'placeholder' => 'Select ICD10...','class' => 'clear'],
+        'pluginOptions' => [
+            'allowClear' => true,
+            'minimumInputLength' => 1,
+            'language' => [
+                'errorLoading' => new JsExpression("function () { return 'Waiting for results...'; }"),
+            ],
+            'ajax' => [
+                'url' => $url,
+                'dataType' => 'json',
+                'data' => new JsExpression('function(params) { return {q:params.term}; }')
+            ],
+            'escapeMarkup' => new JsExpression('function (markup) { return markup; }'),
+            'templateResult' => new JsExpression('formatRepo'),
+        ],
+        'pluginEvents' => [
+            "select2:select" => "function() { $('#diag_type').select2('open'); }",
+        ]
+    ])->label(false);
+    ?>
+    
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            
+      <?=
+    $form->field($model, 'diag_type')->widget(Select2::className(), [
+        'data' => ArrayHelper::map(app\modules\doctorworkbench\models\CDiagtype::find()->all(), 'diagtype', function($model, $defaultValue) {
+                    return $model->diagtype . '-' . $model->name1;
+                }),
+        'options' => [
+            'placeholder' => 'DiagType...','id' => 'diag_type'],
+        'pluginOptions' => [
+            'allowClear' => true,
+        ],
+        'pluginEvents' => [
+            "select2:select" => "function() { $('#btn-save').focus(); }",
+        ]
+    ])->label(false);
+    ?>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+            
+            </div>
+    </div>
+    
+</div>
+
+</div>
+        </div>
+</div>
+
+ 
+    </fieldset>
 <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
 
     </div>

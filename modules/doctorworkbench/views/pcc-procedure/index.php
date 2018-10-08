@@ -51,7 +51,8 @@ HTML;
 'treatmment_plan' => '',
 'cc' => '',
 'pi' => '',
-              'pe' => ''
+'pe' => '',
+'education' => ''
 
 ]);?>
 <fieldset>
