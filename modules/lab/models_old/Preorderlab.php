@@ -46,7 +46,7 @@ class Preorderlab extends \yii\db\ActiveRecord
             [['data_json', 'pcc_start_service_datetime', 'pcc_end_service_datetime', 'lab_request_date', 'lab_result_date', 'last_update','cid'], 'safe'],
             [['lab_price'], 'number'],
             [['pcc_vn'], 'string', 'max' => 12],
-            [['lab_code', 'lab_name', 'lab_result', 'standard_result', 'lab_code_moph'], 'string', 'max' => 255],
+            [['data1', 'data2', 'lab_code', 'lab_name', 'lab_result', 'standard_result', 'lab_code_moph'], 'string', 'max' => 255],
             [['hospcode'], 'string', 'max' => 5],
             [['id'], 'unique'],
         ];
@@ -63,6 +63,8 @@ class Preorderlab extends \yii\db\ActiveRecord
             'data_json' => 'Data Json',
             'pcc_start_service_datetime' => 'Pcc Start Service Datetime',
             'pcc_end_service_datetime' => 'Pcc End Service Datetime',
+            'data1' => 'Data1',
+            'data2' => 'Data2',
             'hospcode' => 'Hospcode',
             'lab_code' => 'Lab Code',
             'lab_name' => 'Lab Name',
@@ -73,7 +75,6 @@ class Preorderlab extends \yii\db\ActiveRecord
             'lab_price' => 'Lab Price',
             'lab_code_moph' => 'Lab Code Moph',
             'last_update' => 'Last Update',
-            'cid' => 'cid'
         ];
     }
     public function afterFind()

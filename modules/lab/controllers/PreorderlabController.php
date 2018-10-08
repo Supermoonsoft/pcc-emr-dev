@@ -5,10 +5,12 @@ namespace app\modules\lab\controllers;
 use Yii;
 use app\modules\lab\models\Preorderlab;
 use app\modules\lab\models\PreorderlabSearch;
+use app\modules\lab\models\Pcclab;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use \yii\web\Response;
+use app\components\PatientHelper;
 /**
  * PreorderlabController implements the CRUD actions for Preorderlab model.
  */
@@ -24,6 +26,7 @@ class PreorderlabController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'bulk-delete' => ['post'],
                 ],
             ],
         ];
@@ -124,4 +127,58 @@ class PreorderlabController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+
+    public function actionBulkDelete()
+    {        
+        $request = Yii::$app->request;
+        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
+        foreach ( $pks as $pk ) {
+            $model = $this->findModel($pk);
+            $model->delete();
+        }
+
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#pre-order-lab-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
+       
+    }
+
+    
+public function actionReLab(){
+    $request = Yii::$app->request;
+    if($request->isPost){
+    \Yii::$app->response->format = Response::FORMAT_JSON;
+    $cid = PatientHelper::getCurrentCid();
+    $pcc_vn = PatientHelper::getCurrentVn();
+    $id = $request->post( 'id' );
+    $pks = explode(',', $request->post( 'id' )); // Array or selected records primary keys
+
+      $order = Pcclab::find()->where(['id' => $id])->one();
+       $model = new Preorderlab();  
+      $model->hn =  $order->hn;
+      $model->vn =  $order->vn;
+      $model->pcc_vn =  $pcc_vn;
+      $model->cid =  $order->cid;
+      $model->hospcode = $order->hospcode;
+      $model->lab_code = $order->lab_code;
+      $model->lab_name = $order->lab_name;
+      $model->lab_request_date = Date('Y-m-d');
+      $model->save(false);
+    }
+    return [
+        'msg' => 'ย้านข้อมูลสำเร็จ',
+        'count' => count($pks)
+    ];
+
+    
+}
 }

@@ -68,6 +68,8 @@ class PreorderlabSeach extends Preorderlab
         $query->andFilterWhere(['like', 'id', $this->id])
             ->andFilterWhere(['like', 'pcc_vn', $this->pcc_vn])
             ->andFilterWhere(['like', 'data_json', $this->data_json])
+            ->andFilterWhere(['like', 'data1', $this->data1])
+            ->andFilterWhere(['like', 'data2', $this->data2])
             ->andFilterWhere(['like', 'hospcode', $this->hospcode])
             ->andFilterWhere(['like', 'lab_code', $this->lab_code])
             ->andFilterWhere(['like', 'lab_name', $this->lab_name])

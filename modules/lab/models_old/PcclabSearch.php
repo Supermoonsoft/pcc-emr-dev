@@ -65,7 +65,6 @@ class PcclabSearch extends Pcclab
             'lab_result_date' => $this->lab_result_date,
             'lab_price' => $this->lab_price,
             'last_update' => $this->last_update,
-            'cid' => $this->cid,
         ]);
 
         $query->andFilterWhere(['ilike', 'id', $this->id])
@@ -79,7 +78,7 @@ class PcclabSearch extends Pcclab
             ->andFilterWhere(['ilike', 'lab_result', $this->lab_result])
             ->andFilterWhere(['ilike', 'standard_result', $this->standard_result])
             ->andFilterWhere(['ilike', 'data_json', $this->data_json])
-            // ->andFilterWhere(['ilike', 'cid', $this->cid])
+            ->andFilterWhere(['ilike', 'cid', $this->cid])
             ->andFilterWhere(['ilike', 'provider', $this->provider]);
 
         return $dataProvider;

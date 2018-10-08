@@ -58,7 +58,11 @@ JS;
 
 <div class="pcc-diagnosis-form">
 <fieldset>
-	<legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form</legend> 
+    <legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form 
+    <button class="btn btn-primary"><i class="fas fa-flask"></i> button-1</button>
+    <button class="btn btn-info"><i class="fas fa-pills"></i> button-2</button>
+    <button class="btn btn-success"><i class="fas fa-diagnoses"></i> button-3</button>
+</legend> 
     <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => ['create'], 'options' => ['data-pjax' => 1],]); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'vn')->hiddenInput()->label(false); ?>
