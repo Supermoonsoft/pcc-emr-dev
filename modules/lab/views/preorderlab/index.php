@@ -6,6 +6,8 @@ use yii\widgets\Pjax;
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\lab\models\PreorderlabSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+$this->registerJS($this->render('@app/modules/doctorworkbench/dist/js/script.js'));
+
 
 $this->title = 'Preorderlabs';
 ?>

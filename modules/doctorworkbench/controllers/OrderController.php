@@ -156,6 +156,7 @@ class OrderController extends VisitController
         $cid = PatientHelper::getCurrentCid();
         $pcc_vn = PatientHelper::getCurrentVn();
         $model = new Preorderlab();
+        $model->lab_request_date = Date('Y-m-d');
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);

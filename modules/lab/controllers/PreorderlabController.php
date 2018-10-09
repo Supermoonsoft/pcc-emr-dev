@@ -68,15 +68,17 @@ class PreorderlabController extends Controller
      */
     public function actionCreate()
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new Preorderlab();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
+        if ($model->load(Yii::$app->request->post())) {
+            $model->cid  = $cid;
+            $model->pcc_vn = $pcc_vn;
+            $model->save();
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        return [
+            'forceReload'=>'#pre-order-lab-pjax'];
     }
 
     /**

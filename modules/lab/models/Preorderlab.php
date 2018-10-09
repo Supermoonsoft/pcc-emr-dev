@@ -41,7 +41,7 @@ class Preorderlab extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id'], 'required'],
+            [['lab_code','lab_request_date'], 'required'],
             [['id'], 'string'],
             [['data_json', 'pcc_start_service_datetime', 'pcc_end_service_datetime', 'lab_request_date', 'lab_result_date', 'last_update','cid'], 'safe'],
             [['lab_price'], 'number'],

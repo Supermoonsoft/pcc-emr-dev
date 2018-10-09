@@ -49,7 +49,7 @@ $this->title = 'Pcclabs';
         'striped'=>true,
         'hover'=>true, 
         //'panel' => [ 'befor' => 'Lab History'],
-        'panel'=>['heading'=>'Lab History'],
+       // 'panel'=>['heading'=>'Lab History'],
         'toolbar' =>  ['{toggleData}',],
         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'], 
         'rowOptions' => function ($model, $key, $index, $grid) { //สามารถกำหนด data-key ใหม่ (ปกติจะใช้ PK)
