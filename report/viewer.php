@@ -13,7 +13,7 @@ if(isset($_GET['vn'])){
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Stimulsoft Reports.PHP - JS Report Viewer</title>
+	<title>Medico PCC EMR</title>
 
 	<!-- Report Office2013 style -->
 	<link href="css/stimulsoft.viewer.office2013.whiteteal.css" rel="stylesheet">

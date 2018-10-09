@@ -68,6 +68,37 @@ $config = [
       ],
      */
     ],
+//    'as access' => [
+//        'class' => 'mdm\admin\components\AccessControl',
+//        'allowActions' => [
+//            //'*',
+//            'site/*',
+//            // 'user/*',
+//             'users/security/login',
+//             //'admin/*',
+//             //'rbac/*',            
+//             'gii/*',
+//             'grid/*',
+//             'doctorworkbench/*',
+//             'queuemanage/*',
+//             'emr/*',
+//             'lab/*',
+//             'queuemanage/*',
+//             'emr/*',
+//             'appointment/*',
+//             'drug/*',
+//             'printout/*',
+//             'questionare/*',
+//             'report/*',
+//             'stock/*',
+//             'treatment/*',
+//             'cc/*',
+//             'chiefcomplaint/*',
+//             'patientexit/*',
+//             'setsession',
+//            // 'gridview/export/download'
+//        ]
+//    ], // inam
     'params' => $params,
 ];
 

@@ -47,6 +47,12 @@ Modal::end();
                 'lang' => 'th',
             //... more options to be defined here!
             ],
+	'clientOptions' => [
+    'header' => [
+
+        'right'=>'agendaWeek,agendaDay,agendaMonth',
+    ],
+  ],
         ));
         ?> 
 
