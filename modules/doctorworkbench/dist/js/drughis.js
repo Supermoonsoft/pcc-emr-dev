@@ -9,6 +9,10 @@ $("input[type='checkbox']").change(function(){ // เมื่อมีการ
 
 $('#remed').click(function(){ // คลิกปุ่ม ส่งรายการเฉพาะที่เลือก ไปยัง Medication
 var keys = $("#w0").yiiGridView("getSelectedRows"); // ดึง data-key ที่มีการ checked เกิดขึ้น
+if(keys.length < 1){
+    swal('เลือกข้อมูล');
+}else{
+
 $('.progress').fadeIn(800); // แสดง progress bar ขึ้นมา
 
 var i = 1;  // ตั้งค่าตัวแปร ลำดับเอาไว้
@@ -38,4 +42,5 @@ $.ajax({ // ส่งค่าไปยัง url เพื่แบันทึ
         },
     });
 });
+}
 });

@@ -22,12 +22,9 @@ $modules['user'] = [
     'confirmWithin' => 21600,
     'cost' => 12,
     'admins' => ['admin']]; // inam
-$modules['rbac'] = ['rbac' => 'dektrium\rbac\RbacWebModule', 
-         'admin' => [
-            'class' => 'mdm\admin\Module',
-            'layout'=>'left-menu'
-        ]]; //inam
 $modules['rbac'] = ['class' => 'dektrium\rbac\RbacWebModule']; //inam
+$modules['admin'] = ['class' => 'mdm\admin\Module',
+                                'layout'=>'left-menu']; //inam
 $modules['chiefcomplaint'] = ['class' => 'app\modules\chiefcomplaint\Chiefcomplaint'];//pond 
 $modules['treatment'] = ['class' => 'app\modules\treatment\Treatment'];//pond
 $modules['appointment'] = ['class' => 'app\modules\appointment\Appointment'];//pond

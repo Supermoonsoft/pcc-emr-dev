@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f24abd1e1b06c693fac373ef11da648d",
+    "content-hash": "53aa0c67707134a22494ebed439c226c",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -2487,16 +2487,16 @@
         },
         {
             "name": "mdmsoft/yii2-admin",
-            "version": "2.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mdmsoft/yii2-admin.git",
-                "reference": "48298cb2891f728ae93e59f75802607f0ed910f5"
+                "reference": "e9cc1d8adc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/48298cb2891f728ae93e59f75802607f0ed910f5",
-                "reference": "48298cb2891f728ae93e59f75802607f0ed910f5",
+                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/e9cc1d8adc",
+                "reference": "e9cc1d8adc",
                 "shasum": ""
             },
             "require": {
@@ -2541,7 +2541,7 @@
                 "rbac",
                 "yii"
             ],
-            "time": "2017-10-04T02:54:53+00:00"
+            "time": "2017-11-18T13:27:11+00:00"
         },
         {
             "name": "mpdf/mpdf",
@@ -6138,7 +6138,14 @@
             "time": "2018-02-19T20:27:10+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "2.8-p1",
+            "alias_normalized": "2.8.0.0-patch1",
+            "version": "9999999-dev",
+            "package": "mdmsoft/yii2-admin"
+        }
+    ],
     "minimum-stability": "stable",
     "stability-flags": {
         "dektrium/yii2-rbac": 20,
@@ -6148,7 +6155,8 @@
         "kartik-v/yii2-grid": 20,
         "kartik-v/yii2-widget-select2": 20,
         "kartik-v/yii2-widget-datepicker": 20,
-        "kartik-v/yii2-datecontrol": 20
+        "kartik-v/yii2-datecontrol": 20,
+        "mdmsoft/yii2-admin": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

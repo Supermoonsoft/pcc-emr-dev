@@ -127,10 +127,29 @@ $js = <<< JS
             data:{pks:keys.join()},
             success: function(){
              $.pjax.reload({container: "#crud-medication-pjax"});
+             totalPriceupdate($('#cid').val());
             }
         }); 
     }
-  });   
+  });  
+  // รวมราคาค่ายา
+function totalPriceupdate(cid){
+    $.ajax({
+      type: "get",
+      url: "index.php?r=doctorworkbench/pcc-medication/sum-price",
+      data:{cid:cid},
+      dataType: "json",
+      success: function (response) {
+          const formatter = new Intl.NumberFormat('th', {
+           // style: 'currency',
+           // currency: 'USD',
+            minimumFractionDigits: 2
+          })
+          $('#totalprice').html(formatter.format(response));
+      }
+  });
+  }
+  
 JS;
 $this->registerJS($js);
 ?>
