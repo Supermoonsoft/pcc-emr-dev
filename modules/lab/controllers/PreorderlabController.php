@@ -44,6 +44,7 @@ class PreorderlabController extends Controller
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+
         ]);
     }
 
@@ -177,8 +178,28 @@ public function actionReLab(){
     return [
         'msg' => 'ย้านข้อมูลสำเร็จ',
         'count' => count($pks)
-    ];
-
-    
+    ];  
 }
+
+public function actionLabList($q = null, $id = null){
+    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; //กำหนดการแสดงผลข้อมูลแบบ json
+    $out = ['results'=>['code'=>'','text'=>'']];
+    if(!is_null($q)){
+        $query = new \yii\db\Query();
+        $query->select('labname_en,labname_th,code as id, labname_en as text')
+                ->from('c_labtest')
+                ->where("code LIKE '%".$q."%'")
+                ->orWhere("labname_en LIKE '%".$q."%'")
+                ->orWhere("labname_th LIKE '%".$q."%'")
+                ->limit(20);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out['results'] = array_values($data);
+    }else if($id>0){
+        $out['results'] = ['code'=>$id, 'text'=>  CLabtest::find($id)->code];
+    }
+    return $out;
+}
+
+
 }

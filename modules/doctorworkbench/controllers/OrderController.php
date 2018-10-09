@@ -121,12 +121,16 @@ class OrderController extends \yii\web\Controller
         
     }
     public function actionPreOrderLab(){
+        
+        $model = new Preorderlab();
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('pre_order_lab', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
+
         ]);
         
 

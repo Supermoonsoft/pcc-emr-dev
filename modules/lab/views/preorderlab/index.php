@@ -9,6 +9,9 @@ use yii\widgets\Pjax;
 
 $this->title = 'Preorderlabs';
 ?>
+ <?= $this->render('_form', [
+        'model' => $model,
+    ]) ?>
 
 <?php
 // กำหนด laypout ของ Gridvire เอง

@@ -19,6 +19,8 @@
    echo $this->render('@app/modules/lab/views/preorderlab/index',[
     'searchModel' => $searchModel,
     'dataProvider' => $dataProvider,
+    'model' => $model
+
 ]);
 ?>
 
