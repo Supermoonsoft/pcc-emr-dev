@@ -14,7 +14,7 @@ use app\modules\lab\models\PcclabSearch;
 use app\modules\lab\models\Preorderlab;
 use app\modules\drug\models\Hosdrug;
 use app\modules\drug\models\HosdrugSearch;
-use app\modules\lab\models\PreorderlabSeach;
+use app\modules\lab\models\PreorderlabSeach; 
     
 use app\modules\emr\models\PccService;
 use app\modules\emr\models\PccServiceSearch;
@@ -191,6 +191,12 @@ class OrderController extends \yii\web\Controller
             'model' => $model,
         ]);
 
+    }
+
+    public function actionEducation(){
+       
+        return $this->render('education', [
+        ]);
     }
 
     public function actionPi()

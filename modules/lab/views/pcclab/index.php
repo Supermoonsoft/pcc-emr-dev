@@ -28,7 +28,7 @@ $this->title = 'Pcclabs';
             
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <div class="progress" style=" height: 34px;margin-bottom: -8px;">
-  <div id='p' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
+  <div id='p' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="padding-top: 8px; font-size: 20px;"></div>
 </div>
             </div>
             

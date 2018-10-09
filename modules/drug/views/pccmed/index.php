@@ -8,6 +8,7 @@ use yii\web\JsExpression;
 use app\components\loading\ShowLoading;
 use yii\web\View;
 //echo ShowLoading::widget();
+
 ?>
 <div class="hoslab-index">
         <div style="margin-bottom: 3px">
@@ -17,12 +18,12 @@ use yii\web\View;
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
             <button class="btn btn-info" id="remed" onClick=<?php //new JsExpression($alert)?>><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง Medication</button>
                 
-            </div>
-            
+            </div>    
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
             <div class="progress" style=" height: 34px;margin-bottom: -8px;margin-left: -71px;">
   <div id='p' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
-  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="padding-top: 8px; font-size: 20px;">
+  100
   </div>
 </div>
             </div>
@@ -30,10 +31,10 @@ use yii\web\View;
         </div>
         
         </div>
-    <?php Pjax::begin(); ?>
+
 <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'pjax'=>true,
+        'pjax'=>false,
         'formatter' => ['class' => 'yii\i18n\Formatter','nullDisplay' => '-'],
         'pjaxSettings'=>[
             'neverTimeout'=>true,
@@ -86,8 +87,6 @@ use yii\web\View;
 
         ],
     ]); ?>
-    
-    <?php Pjax::end(); ?>
 
 </div>
 
