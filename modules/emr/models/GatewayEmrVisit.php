@@ -29,7 +29,6 @@ use Yii;
  * @property string $cost
  * @property string $sele_price
  * @property string $sum_price
- * @property string $staff
  * @property string $save_by
  * @property array $data_json
  * @property string $last_update
@@ -56,7 +55,7 @@ class GatewayEmrVisit extends \yii\db\ActiveRecord
             [['date_visit', 'time_visit', 'data_json', 'last_update'], 'safe'],
             [['cost', 'sele_price', 'sum_price'], 'number'],
             [['hospcode'], 'string', 'max' => 5],
-            [['hospname', 'staff'], 'string', 'max' => 100],
+            [['hospname'], 'string', 'max' => 100],
             [['hn', 'bpd', 'bps', 'temperature', 'pulse', 'rr', 'weight', 'height', 'o2sat'], 'string', 'max' => 10],
             [['vn', 'an'], 'string', 'max' => 12],
             [['cc', 'pe', 'pi', 'department'], 'string', 'max' => 255],
@@ -93,7 +92,6 @@ class GatewayEmrVisit extends \yii\db\ActiveRecord
             'cost' => 'Cost',
             'sele_price' => 'Sele Price',
             'sum_price' => 'Sum Price',
-            'staff' => 'Staff',
             'save_by' => 'Save By',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',

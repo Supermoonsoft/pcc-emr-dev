@@ -18,7 +18,7 @@ class GatewayEmrVisitSearch extends GatewayEmrVisit
     public function rules()
     {
         return [
-            [['id', 'hospcode', 'hospname', 'hn', 'vn', 'date_visit', 'time_visit', 'cc', 'pe', 'pi', 'bpd', 'bps', 'temperature', 'pulse', 'rr', 'weight', 'height', 'o2sat', 'department', 'staff', 'save_by', 'data_json', 'last_update', 'an'], 'safe'],
+            [['id', 'hospcode', 'hospname', 'hn', 'vn', 'date_visit', 'time_visit', 'cc', 'pe', 'pi', 'bpd', 'bps', 'temperature', 'pulse', 'rr', 'weight', 'height', 'o2sat', 'department','save_by', 'data_json', 'last_update', 'an'], 'safe'],
             [['cost', 'sele_price', 'sum_price'], 'number'],
         ];
     }
@@ -84,7 +84,6 @@ class GatewayEmrVisitSearch extends GatewayEmrVisit
             ->andFilterWhere(['ilike', 'height', $this->height])
             ->andFilterWhere(['ilike', 'o2sat', $this->o2sat])
             ->andFilterWhere(['ilike', 'department', $this->department])
-            ->andFilterWhere(['ilike', 'staff', $this->staff])
             ->andFilterWhere(['ilike', 'save_by', $this->save_by])
             ->andFilterWhere(['ilike', 'data_json', $this->data_json])
             ->andFilterWhere(['ilike', 'an', $this->an]);
