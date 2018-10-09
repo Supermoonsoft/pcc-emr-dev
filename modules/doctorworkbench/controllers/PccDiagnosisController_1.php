@@ -15,21 +15,17 @@ use yii\helpers\Json;
 use app\components\PatientHelper;
 use app\modules\doctorworkbench\models\CDiagtext;
 use app\modules\doctorworkbench\models\CIcd10tm;
-use app\components\VisitController;
 
-/**
- * PccDiagnosisController implements the CRUD actions for PccDiagnosis model.
- */
-class PccDiagnosisController extends VisitController
+
+class PccDiagnosisController extends Controller
 {
 
-    
     public function behaviors()
     {
         return [
             'access' => [
                 'class' => AccessControl::className(),
-               'only' => ['index','create','delete','bulk-delete','icd10-list'],
+                'only' => ['index','create','delete','bulk-delete','icd10-list'],
                 'rules' => [
                     [
                         'actions' => ['index','create','delete','bulk-delete','icd10-list'],
@@ -41,7 +37,6 @@ class PccDiagnosisController extends VisitController
 
         ];
     }
-    
     public function actionIndex()
     {    
         $cid = PatientHelper::getCurrentCid();

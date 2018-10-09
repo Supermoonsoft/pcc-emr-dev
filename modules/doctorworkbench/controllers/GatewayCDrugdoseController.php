@@ -3,6 +3,7 @@
 namespace app\modules\doctorworkbench\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\modules\doctorworkbench\models\GatewayCDrugdose;
 use app\modules\doctorworkbench\models\GatewayCDrugdoseSearch;
 use yii\web\Controller;
@@ -22,11 +23,15 @@ class GatewayCDrugdoseController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','view','create','update','delete','bulk-delete'],
+                'rules' => [
+                    [
+                        'actions' => ['index','view','create','update','delete','bulk-delete'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

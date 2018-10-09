@@ -3,6 +3,7 @@
 namespace app\modules\doctorworkbench\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\modules\doctorworkbench\models\PccMedication;
 use app\modules\doctorworkbench\models\PccMedicationSearch;
 use yii\web\Controller;
@@ -15,21 +16,26 @@ use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
 use app\modules\doctorworkbench\models\GatewayEmrDrug;
+use app\components\VisitController;
 
-
-class PccMedicationController extends Controller
+class PccMedicationController extends VisitController
 {
-    /**
-     * @inheritdoc
-     */
+
+    
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
+             'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','view','create','delete','bulk-delete','sum-srice','print-med'
+                            ,'select-med','update-med','editable','remed'],
+                'rules' => [
+                    [
+                        'actions' => ['index','view','create','delete','bulk-delete','sum-srice','print-med'
+                                        ,'select-med','update-med','editable','remed'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];

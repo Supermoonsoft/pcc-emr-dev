@@ -3,6 +3,7 @@
 namespace app\modules\doctorworkbench\controllers;
 
 use yii;
+use yii\filters\AccessControl;
 use yii\helpers\Json;
 use app\modules\doctorworkbench\models\CIcd10tm;
 use app\modules\doctorworkbench\models\PccDiagnosis;
@@ -34,11 +35,38 @@ use app\modules\drug\models\PccmedSearch;
 use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
 use app\components\PatientHelper;
+use app\components\VisitController;
 
 
 
-class OrderController extends \yii\web\Controller
+class OrderController extends VisitController
 {
+
+
+
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','procedure'
+                            ,'appointment','emr','pre-order-lab','lab','drug','treatmment-plan'
+                            ,'cc','pi','pe','education','icd10-list'],
+                'rules' => [
+                    [
+                        'actions' => ['index','procedure'
+                                        ,'appointment','emr','pre-order-lab','lab','drug','treatmment-plan'
+                                        ,'cc','pi','pe','education','icd10-list'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+
+        ];
+    }
+    
     public function actionIndex()
     {
         $modelPccDiagnosis = new PccDiagnosis();
@@ -109,10 +137,14 @@ class OrderController extends \yii\web\Controller
                              'dataProvider' => $dataProvider
                              ]);
     }
+
     public function actionEmr($cid=NULL){
-        
-        $searchModel = new GatewayEmrVisitSearch($cid);
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
+        $searchModel = new GatewayEmrVisitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
+
         return $this->render('emr',[
                              'searchModel' => $searchModel,
                              'dataProvider' => $dataProvider,
@@ -121,10 +153,12 @@ class OrderController extends \yii\web\Controller
         
     }
     public function actionPreOrderLab(){
-        
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
         $model = new Preorderlab();
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
 
         return $this->render('pre_order_lab', [
             'searchModel' => $searchModel,
@@ -138,8 +172,12 @@ class OrderController extends \yii\web\Controller
 
     public function actionLab($cid=NULL)
     {
+        $cid = PatientHelper::getCurrentCid();
+        $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PcclabSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
+
         $model = new Pcclab(); 
 
         if (Yii::$app->request->isAjax) {

@@ -3,6 +3,7 @@
 namespace app\modules\doctorworkbench\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\modules\doctorworkbench\models\CDiagtext;
 use app\modules\doctorworkbench\models\CDiagtextSearch;
 use yii\web\Controller;
@@ -22,13 +23,18 @@ class CDiagtextController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','view','create','delete','bulk-delete','create-from-diag'],
+                'rules' => [
+                    [
+                        'actions' => ['index','view','create','delete','bulk-delete','create-from-diag'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
+
         ];
     }
 

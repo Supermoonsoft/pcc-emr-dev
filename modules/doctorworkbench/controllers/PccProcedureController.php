@@ -3,6 +3,7 @@
 namespace app\modules\doctorworkbench\controllers;
 
 use Yii;
+use yii\filters\AccessControl;
 use app\modules\doctorworkbench\models\PccProcedure;
 use app\modules\doctorworkbench\models\PccProcedureSearch;
 use yii\web\Controller;
@@ -11,23 +12,27 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use app\components\PatientHelper;
 use yii\helpers\Html;
+use app\components\VisitController;
 
 /**
  * PccProcedureController implements the CRUD actions for PccProcedure model.
  */
-class PccProcedureController extends Controller
+class PccProcedureController extends VisitController
 {
-    /**
-     * @inheritdoc
-     */
+
+    
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['post'],
-                    'bulk-delete' => ['post'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','view','create','delete','bulk-delete','proced'],
+                'rules' => [
+                    [
+                        'actions' => ['index','view','create','delete','bulk-delete','proced'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
