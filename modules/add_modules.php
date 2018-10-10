@@ -29,6 +29,7 @@ $modules['chiefcomplaint'] = ['class' => 'app\modules\chiefcomplaint\Chiefcompla
 $modules['treatment'] = ['class' => 'app\modules\treatment\Treatment'];//pond
 $modules['appointment'] = ['class' => 'app\modules\appointment\Appointment'];//pond
 $modules['questionare'] = ['class' => 'app\modules\questionare\Questionare'];//inam
+$modules['education'] = ['class' => 'app\modules\education\Education'];//jub
 $modules['datecontrol'] = [
     'class' => 'kartik\datecontrol\Module',
     'displaySettings' => [

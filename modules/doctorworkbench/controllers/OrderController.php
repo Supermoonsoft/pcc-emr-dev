@@ -36,6 +36,8 @@ use yii\web\Controller;
 use app\modules\appointment\models\PccAppoinmentShow;
 use app\components\PatientHelper;
 use app\components\VisitController;
+    
+use app\modules\education\models\PccServiceEducation;
 
 
 
@@ -236,9 +238,11 @@ class OrderController extends VisitController
     }
 
     public function actionEducation(){
-       
+        
+        $model = new PccServiceEducation();
         return $this->render('education', [
-        ]);
+                             'model'=>$model
+                             ]);
     }
 
     public function actionPi()
