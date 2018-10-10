@@ -20,6 +20,9 @@ use Yii;
  * @property string $detail
  * @property array $data_json
  * @property string $last_update
+ * @property string $cid
+ * @property string $pcc_vn
+ * @property string $provider
  */
 class PccAppointment extends \yii\db\ActiveRecord
 {
@@ -41,9 +44,10 @@ class PccAppointment extends \yii\db\ActiveRecord
             [['id'], 'string'],
             [['date_service', 'time_service', 'appoint_date', 'appoint_time', 'data_json', 'last_update'], 'safe'],
             [['hn'], 'string', 'max' => 9],
-            [['vn'], 'string', 'max' => 12],
+            [['vn','pcc_vn'], 'string', 'max' => 12],
+            [['cid'], 'string', 'max' => 13],
             [['hospcode'], 'string', 'max' => 5],
-            [['hospname', 'clinic', 'detail'], 'string', 'max' => 255],
+            [['hospname', 'clinic', 'detail','provider'], 'string', 'max' => 255],
             [['id'], 'unique'],
         ];
     }

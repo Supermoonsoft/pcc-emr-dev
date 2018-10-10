@@ -1,5 +1,7 @@
 //ทำ datatable
-$('#grid-view-data-table .table').DataTable();
+$('#grid-view-data-table .table').DataTable({
+    paging: false
+});
 
 
 // Time

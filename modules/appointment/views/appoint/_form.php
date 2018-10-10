@@ -18,8 +18,8 @@ use yii\helpers\ArrayHelper;
     <?= $form->field($model, 'hospname')->hiddenInput(['value' => NULL])->label(FALSE) ?>
     <?= $form->field($model, 'hn')->hiddenInput(['value' => NULL])->label(FALSE) ?>
     <?= $form->field($model, 'vn')->hiddenInput(['value' => NULL])->label(FALSE) ?>
-    <?= $form->field($model, 'date_visit')->hiddenInput(['value' => date('Y-m-d')])->label(FALSE) ?>
-    <?= $form->field($model, 'time_visit')->hiddenInput(['value' => date('H:m:s')])->label(FALSE) ?>
+    <?= $form->field($model, 'date_service')->hiddenInput(['value' => date('Y-m-d')])->label(FALSE) ?>
+    <?= $form->field($model, 'time_service')->hiddenInput(['value' => date('H:m:s')])->label(FALSE) ?>
 
     <div style="margin:20px">
         <div class="row">

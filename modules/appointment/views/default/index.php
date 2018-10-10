@@ -85,14 +85,14 @@ Modal::end();
             'columns' => [
                 ['class' => 'kartik\grid\SerialColumn'],
                 [
-                    'attribute' => 'hospname',
+                    'attribute' => 'hospcode',
                     'label' => 'สถานที่รับบริการ',
                     'value'=> function ($model,$key,$index,$widget){
-                        if($model['hospname']==''){
+                        if($model['hospcode']==''){
                             return '';
                             
                         }else{
-                            return $model['hospname'];
+                            return $model['hospcode'];
                         }
                     }
                 ],

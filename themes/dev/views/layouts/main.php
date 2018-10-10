@@ -16,8 +16,8 @@ use yii\bootstrap\Modal;
 $sql_q = "SELECT t.pcc_vn,p.hn,t.visit_date_begin,t.visit_time_begin 
 ,concat(p.prename,p.fname,' ',p.lname) fullname
 from pcc_visit t 
-LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
-WHERE t.current_station = 'A1' order by t.visit_date_begin asc,t.visit_time_begin asc";
+INNER JOIN gateway_emr_patient  p ON p.cid = t.person_cid
+WHERE t.current_station = 'A1' order by t.visit_date_begin asc,t.visit_time_begin asc ";
 $pt_q = DbHelper::queryAll('db', $sql_q);
 $pt_count = count($pt_q);
 

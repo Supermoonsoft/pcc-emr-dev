@@ -69,6 +69,8 @@ class AppointController extends Controller {
         $cid = PatientHelper::getCurrentCid();
         $model->vn = PatientHelper::getCurrentVn();
         $model->hn = PatientHelper::getCurrentHn();
+        $model->cid = PatientHelper::getCurrentCid();
+        $model->pcc_vn = PatientHelper::getCurrentVn();
         
         $command = Yii::$app->db->createCommand("SELECT hospcode FROM gateway_emr_patient WHERE cid='$cid'");
         $hospcode = $command->queryScalar();
