@@ -73,5 +73,16 @@ WHERE t.pcc_vn = '$vn' limit 1";
         \Yii::$app->session->remove('cid');
         
     }
+    public static function openVisit($cid){
+        $date  = date('Y-m-d');
+        $time = date('H:i:s');
+        $sql = "insert into pcc_visit (person_cid,visit_date_begin,visit_time_begin,current_station) values ('$cid','$date','$time','A1')";
+        DbHelper::execute('db', $sql);
+
+        $sql = "select pcc_vn from pcc_visit where person_cid = '$cid' order by pcc_vn DESC limit 1";
+        $pcc_vn = DbHelper::queryScalar('db', $sql);       
+        return $pcc_vn;
+        
+    }
 
 }

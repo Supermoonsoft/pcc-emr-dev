@@ -85,6 +85,7 @@ class OrderController extends VisitController
     }
     public function actionAppointment() {
         $events = PccAppoinmentShow::find()->all();
+        $cid = PatientHelper::getCurrentCid();
         
         
         
@@ -109,12 +110,12 @@ class OrderController extends VisitController
         SELECT a.hospcode,a.hospname,a.hn,a.vn,a.date_visit,a.clinic,a.appoint_date,a.appoint_detail,a.appoint_doctor
         FROM gateway_emr_appointment  a
         LEFT JOIN gateway_emr_patient p ON p.hn=a.hn
-        where p.cid='3200700311770'
+        where p.cid='$cid'
         UNION ALL
         SELECT a.hospcode,a.hospname,a.hn,a.vn,a.date_service,a.clinic,a.appoint_date,a.detail,'' AS doctor
         FROM pcc_appointment a
         LEFT JOIN gateway_emr_patient p ON p.hn = a.hn
-        where p.cid='3200700311770') AS t1
+        where p.cid='$cid') AS t1
         ORDER BY date_visit DESC";
         $rawData = \Yii::$app->db->createCommand($sql)->queryAll();
         $dataProvider = new \yii\data\ArrayDataProvider([

@@ -9,6 +9,8 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\components\DbHelper;
+use yii\data\ArrayDataProvider;
 
 class SiteController extends Controller {
 
@@ -127,12 +129,26 @@ class SiteController extends Controller {
         return $this->render('about');
     }
 
-    public function actionPatientSearch() {
+    public function actionPatientSearch() { //  tehnn
         $cid = \Yii::$app->request->post('cid');
-        if (empty($cid)) {
-            return $this->redirect(['/site/index']);
+        $cid = trim($cid);
+        if(empty($cid)){
+            return $this->redirect(['index']);
         }
-        return $this->redirect(['/doctorworkbench/order']);
+        $sql =  " SELECT t.hn,t.cid,concat(t.prename,t.fname,' ',t.lname) fullname,t.birthday,t.agey 
+from gateway_emr_patient t   
+WHERE t.hn like '%$cid%'  or t.cid like  '%$cid%' or t.fname like  '%$cid%'  or  t.lname like  '%$cid%' order by t.hn";
+        
+        $raw = DbHelper::queryAll('db', $sql);
+        $dataProvider = new ArrayDataProvider([
+            'allModels'=>$raw
+        ]);
+        
+        return $this->render('patient_search',[
+            'dataProvider'=>$dataProvider
+        ]);
+        
+        
     }
 
 }

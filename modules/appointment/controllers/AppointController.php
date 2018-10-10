@@ -83,8 +83,8 @@ class AppointController extends Controller {
             $color_code = $command->queryScalar();
             $command = Yii::$app->db->createCommand("SELECT name FROM c_clinic WHERE code='$model->clinic'");
             $color_text = $command->queryScalar();
-            $datals = $connection->createCommand("INSERT INTO pcc_appoinment_show (startdate,enddate,color,oapp_id,clinic_text)
-                                                    VALUES ('$model->appoint_date','$model->appoint_date','$color_code','$model->id','$color_text')")->execute();
+            $datals = $connection->createCommand("INSERT INTO pcc_appoinment_show (startdate,enddate,color,oapp_id,clinic_text,cid)
+                                                    VALUES ('$model->appoint_date','$model->appoint_date','$color_code','$model->id','$color_text','$cid')")->execute();
 
             return $this->redirect(['/doctorworkbench/order/appointment']);
         }

@@ -93,7 +93,7 @@ $cid = PatientHelper::getCurrentCid();
                                 ]);
                                 ?>
                                 <div class="form-group">
-                                    <input type="text" name="cid" id="cid_search" class="form-control" maxlength="13" placeholder="HN/CID">
+                                    <input type="text" name="cid" id="cid_search" class="form-control" maxlength="13" placeholder="HN/CID/NAME">
                                 </div>
                                 <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
 

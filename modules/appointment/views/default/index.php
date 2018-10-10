@@ -50,7 +50,7 @@ Modal::end();
 	'clientOptions' => [
     'header' => [
 
-        'right'=>'agendaWeek,agendaDay,agendaMonth',
+        'right'=>'month,agendaWeek,agendaDay',
     ],
   ],
         ));
@@ -315,6 +315,15 @@ $this->registerCss("
     background: #000063;
     color: white;
 }
+                   .fc-agendaDay-button  {
+                   border-color: #000063;
+                   color: #000063
+                   }
+                   .fc-agendaDay-button:hover {
+                   background: #000063;
+                   color: white;
+                   }
+                   
 
 .fc-header-toolbar {
    background-color: #1de9b6;

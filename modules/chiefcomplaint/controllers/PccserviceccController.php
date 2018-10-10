@@ -11,6 +11,7 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\filters\AccessControl;
 /**
  * PccserviceccController implements the CRUD actions for Pccservicecc model.
  */
@@ -22,12 +23,18 @@ class PccserviceccController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','delete','update',],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','delete','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
+
         ];
     }
 

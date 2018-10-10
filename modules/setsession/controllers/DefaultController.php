@@ -19,4 +19,10 @@ class DefaultController extends Controller
         PatientHelper::setCurrentVn($pcc_vn);
         return $this->redirect(['/doctorworkbench/pcc-diagnosis']);
     }
+    
+    public function actionSkipQueue($cid){
+        $pcc_vn = PatientHelper::openVisit($cid);
+        PatientHelper::setCurrentVn($pcc_vn);
+        return $this->redirect(['/doctorworkbench/pcc-diagnosis']);
+    }
 }

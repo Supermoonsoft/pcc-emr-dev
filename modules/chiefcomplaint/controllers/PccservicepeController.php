@@ -8,6 +8,7 @@ use app\modules\chiefcomplaint\models\PccservicepeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
 
 /**
  * PccservicepeController implements the CRUD actions for Pccservicepe model.
@@ -20,12 +21,18 @@ class PccservicepeController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','delete','update',],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','delete','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
+
         ];
     }
 
