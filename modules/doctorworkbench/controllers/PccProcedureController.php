@@ -24,17 +24,17 @@ class PccProcedureController extends VisitController
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index','view','create','delete','bulk-delete','proced'],
-                'rules' => [
-                    [
-                        'actions' => ['index','view','create','delete','bulk-delete','proced'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index','view','create','delete','bulk-delete','proced'],
+//                'rules' => [
+//                    [
+//                        'actions' => ['index','view','create','delete','bulk-delete','proced'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
         ];
     }
 

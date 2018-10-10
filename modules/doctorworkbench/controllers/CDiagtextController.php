@@ -23,17 +23,17 @@ class CDiagtextController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index','view','create','delete','bulk-delete','create-from-diag'],
-                'rules' => [
-                    [
-                        'actions' => ['index','view','create','delete','bulk-delete','create-from-diag'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index','view','create','delete','bulk-delete','create-from-diag'],
+//                'rules' => [
+//                    [
+//                        'actions' => ['index','view','create','delete','bulk-delete','create-from-diag'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
 
         ];
     }

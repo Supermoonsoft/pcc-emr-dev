@@ -25,19 +25,19 @@ class PccMedicationController extends VisitController
     public function behaviors()
     {
         return [
-             'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index','view','create','delete','bulk-delete','sum-srice','print-med'
-                            ,'select-med','update-med','editable','remed'],
-                'rules' => [
-                    [
-                        'actions' => ['index','view','create','delete','bulk-delete','sum-srice','print-med'
-                                        ,'select-med','update-med','editable','remed'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//             'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index','view','create','delete','bulk-delete','sum-srice','print-med'
+//                            ,'select-med','update-med','editable','remed'],
+//                'rules' => [
+//                    [
+//                        'actions' => ['index','view','create','delete','bulk-delete','sum-srice','print-med'
+//                                        ,'select-med','update-med','editable','remed'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
         ];
     }
 

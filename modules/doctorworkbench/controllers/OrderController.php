@@ -48,21 +48,21 @@ class OrderController extends VisitController
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index','procedure'
-                            ,'appointment','emr','pre-order-lab','lab','drug','treatmment-plan'
-                            ,'cc','pi','pe','education','icd10-list'],
-                'rules' => [
-                    [
-                        'actions' => ['index','procedure'
-                                        ,'appointment','emr','pre-order-lab','lab','drug','treatmment-plan'
-                                        ,'cc','pi','pe','education','icd10-list'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index','procedure'
+//                            ,'appointment','emr','pre-order-lab','lab','drug','treatmment-plan'
+//                            ,'cc','pi','pe','education','icd10-list'],
+//                'rules' => [
+//                    [
+//                        'actions' => ['index','procedure'
+//                                        ,'appointment','emr','pre-order-lab','lab','drug','treatmment-plan'
+//                                        ,'cc','pi','pe','education','icd10-list'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
 
         ];
     }
