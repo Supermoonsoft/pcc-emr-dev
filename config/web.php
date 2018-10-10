@@ -68,14 +68,15 @@ $config = [
       ],
      */
     ],
-    /*
+   /* 
     'as access' => [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             //'*',
-            'site/*',
-            // 'user/*',
-             'users/security/login',
+            'site/index',
+            'site/about',
+            // 'users/*',
+             'user/security/login',
              //'admin/*',
              //'rbac/*',            
              'gii/*',
@@ -104,7 +105,7 @@ $config = [
         ]
     ], // inam
      
-     */
+   */  
     'params' => $params,
 ];
 
