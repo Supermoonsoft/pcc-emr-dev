@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\emr;
+namespace app\modules\education;
 
 /**
- * emr module definition class
+ * education module definition class
  */
-class Emr extends \yii\base\Module
+class Education extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\emr\controllers';
+    public $controllerNamespace = 'app\modules\education\controllers';
 
     /**
      * {@inheritdoc}

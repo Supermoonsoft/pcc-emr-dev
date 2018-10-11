@@ -35,7 +35,7 @@ class PccServiceEducation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['education_code',], 'required'],
+            [['id', 'hn'], 'required'],
             [['id'], 'string'],
             [['date_service', 'data_json', 'last_update'], 'safe'],
             [['hn'], 'string', 'max' => 9],
