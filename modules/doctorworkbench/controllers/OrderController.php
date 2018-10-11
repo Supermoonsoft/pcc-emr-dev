@@ -37,7 +37,9 @@ use app\modules\appointment\models\PccAppoinmentShow;
 use app\components\PatientHelper;
 use app\components\VisitController;
     
+
 use app\modules\education\models\PccServiceEducation;
+use app\modules\education\models\PccServiceEducationSearch;
 
 
 
@@ -240,8 +242,15 @@ class OrderController extends VisitController
     public function actionEducation(){
         
         $model = new PccServiceEducation();
+        $vn= PatientHelper::getCurrentVn();
+        $cid =PatientHelper::getCurrentCid();
+        $searchModel = new PccServiceEducationSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid,'pcc_vn'=>$vn]);
+        $dataProvider->query->orderBy('date_service ASC');
         return $this->render('education', [
-                             'model'=>$model
+                             'model'=>$model,
+                             'dataProvider'=>$dataProvider
                              ]);
     }
 

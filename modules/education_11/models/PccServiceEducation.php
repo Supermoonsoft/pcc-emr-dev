@@ -67,9 +67,4 @@ class PccServiceEducation extends \yii\db\ActiveRecord
             'provider' => 'Provider',
         ];
     }
-    public function getEdname(){
-        return CSpecialpp::find()
-                ->select(['specialpp'])
-                ->where(['id_specialpp'=> $this->education_code]);
-    }
 }

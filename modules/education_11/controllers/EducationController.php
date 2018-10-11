@@ -68,37 +68,30 @@ class EducationController extends Controller {
         $request = Yii::$app->request;
         $model = new PccServiceEducation();
 
-        $vn= PatientHelper::getCurrentVn();
-        $cid =PatientHelper::getCurrentCid();
-        $searchModel = new PccServiceEducationSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where(['cid' => $cid,'pcc_vn'=>$vn]);  
-        $dataProvider->query->orderBy('date_service ASC');
-       
-       
-//            $cid = $model->cid;
-//            $command = Yii::$app->db->createCommand("SELECT hospcode FROM gateway_emr_patient WHERE cid='$cid'");
-//            $hospcode = $command->queryScalar();
-//
-//            $model->hospcode = $hospcode;
-            
-            
         if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
             
-           
+            $cid = PatientHelper::getCurrentCid();
+            $model->hn = PatientHelper::getCurrentHn();
+            $model->cid = PatientHelper::getCurrentCid();
+            $model->pcc_vn = PatientHelper::getCurrentVn();
+            $model->date_service = date('Y-m-d');
+
+            $command = Yii::$app->db->createCommand("SELECT hospcode FROM gateway_emr_patient WHERE cid='$cid'");
+            $hospcode = $command->queryScalar();
+
+            $model->hospcode = $hospcode;
 
 
 
 
 
             if ($model->load(Yii::$app->request->post()) && $model->save()) {
-               return ['forceReload'=>'#crud-education-pjax'];
+               return ['forceReload'=>'#crud-procedure-pjax'];
             }
 
             return $this->render('create', [
                         'model' => $model,
-                        'dataProvider'=>$dataProvider
             ]);
         }
     }
@@ -167,30 +160,6 @@ class EducationController extends Controller {
             $out['results'] = ['id' => $id, 'text' => 'test'];
         }
         return $out;
-    }
-    
-    public function actionTableDelete()
-    {        
-        $request = Yii::$app->request;
-        $pks = explode(',', $request->post( 'pks' )); // Array or selected records primary keys
-        foreach ( $pks as $pk ) {
-            $model = $this->findModel($pk);
-            $model->delete();
-        }
-
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-education-pjax'];
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            return $this->redirect(['index']);
-        }
-       
     }
 
 }

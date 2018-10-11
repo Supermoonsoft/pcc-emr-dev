@@ -16,7 +16,8 @@
 ]);?>
 <?php
     echo $this->render('@app/modules/education/views/education/create',[
-        'model'=>$model
+        'model'=>$model,
+        'dataProvider'=>$dataProvider
                        //'searchModel' => $searchModel,
                        //'dataProvider' => $dataProvider,
                        //'cid'=>$cid

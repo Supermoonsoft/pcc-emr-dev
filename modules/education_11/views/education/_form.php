@@ -5,8 +5,6 @@ use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\web\View;
-use app\components\PatientHelper;
-use kartik\grid\GridView;
 
 $this->registerJs($this->render('../../dist/js/script.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
@@ -52,26 +50,20 @@ function (data, params) {
 JS;
 ?>
 
-<?php
-
-
-?>
-
-
 <div class="pcc-service-education-form">
 
     <?php $form = ActiveForm::begin(['id' => 'form-education', 'action' => ['/education/education/create'], 'options' => ['data-pjax' => 1],]); ?>
 
-    <?= $form->field($model, 'hn')->hiddenInput(['value'=>NULL])->label(false); ?>
-    <?= $form->field($model, 'provider')->hiddenInput(['value'=>NULL])->label(false); ?>
-    <?= $form->field($model, 'pcc_vn')->hiddenInput(['value'=>PatientHelper::getCurrentVn()])->label(false); ?>
-    <?= $form->field($model, 'cid')->hiddenInput(['value'=>PatientHelper::getCurrentCid()])->label(false); ?>
-    <?= $form->field($model, 'education_name')->hiddenInput(['value'=>NULL])->label(false); ?>
-    <?= $form->field($model, 'hospcode')->hiddenInput(['value'=>NULL])->label(false); ?>
+    <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'provider')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'cid')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'education_name')->hiddenInput()->label(false); ?>
+    <?= $form->field($model, 'hospcode')->hiddenInput()->label(false); ?>
     <?= $form->field($model, 'date_service')->hiddenInput(['value' => date('Y-m-d H:m:s')])->label(false); ?>
 
     <div class="row">
-        <fieldset style="margin-left: 35px;margin-right:35px">
+        <fieldset style="margin-left: 20px;margin-right:20px">
             <legend class="scheduler-border"><i class="fas fa-graduation-cap"></i> Education Form</legend> 
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 15px" >
 
@@ -116,109 +108,3 @@ JS;
     <?php ActiveForm::end(); ?>
 
 </div>
-<?php
-    $columns =[
-    [
-        'class' => 'kartik\grid\CheckboxColumn',
-        'width' => '20px',
-    ],
-    [
-        'class' => 'kartik\grid\SerialColumn',
-        'width' => '30px',
-    ],
-        [
-        'class'=>'\kartik\grid\DataColumn',
-        'width' => '200px',
-        'attribute'=>'education_code',
-        'value' => function($model){
-            return $model->education_code;
-        }
-    ],
-    [
-        'class'=>'\kartik\grid\DataColumn',
-        'attribute'=>'education_name',
-        'value' => function($model){
-            return $model->edname->specialpp;
-        }
-    ],
-
-    
-
-];
-?>
-<div style="margin-left: 20px;margin-right: 20px">
-<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
-
-    <?=
-        GridView::widget([
-            'id' => 'crud-education',
-            'dataProvider' => $dataProvider,
-            'pjax' => true,
-            'columns' => $columns,
-            'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
-            'showPageSummary' => true,
-            'striped' => true,
-            'condensed' => true,
-            'responsive' => true,
-            'summary' => false,
-            //'layout' => $layout,
-            'rowOptions'=>function($model){
-                if($model->date_service == Date('Y-m-d')){
-                    return ['class' => 'info'];
-                }
-            },
-            'replaceTags' => [
-                '{custom}' => function($widget) {
-                    if ($widget->panel === true) {
-                        return '';
-                    } else {
-                        return '';
-                    }
-                }
-            ],
-            'pager' => [
-                'options'=>['class'=>'pagination'], 
-                'prevPageLabel' => 'Previous', 
-                'nextPageLabel' => 'Next',
-                'firstPageLabel'=>'First',
-                'lastPageLabel'=>'Last',
-                'nextPageCssClass'=>'next',
-                'prevPageCssClass'=>'prev',
-                'firstPageCssClass'=>'first',
-                'lastPageCssClass'=>'last',
-                'maxButtonCount'=>10,
-        ],        
-        ])
-        ?>
-
-</div>
-
-
-
-<?php
-$js = <<< JS
- $("#btn-delete").click(function(){
-    if (confirm("Are you sure Delete?") == true) {
-       var keys = $("#crud-education").yiiGridView("getSelectedRows");
-        //console.log(keys);
-        var url = 'index.php?r=education/education/table-delete'
-        if(keys.length>0){
-            $.ajax({
-                url:url,
-                method:'post',
-                data:{pks:keys.join()},
-                success: function(response){
-                $.pjax.reload({container:response.forceReload});
-                }
-            });
-        }
-    }else{
-       console.log('no');
-    }
-        
-    
-  });
-
-JS;
-$this->registerJS($js);
-?>
