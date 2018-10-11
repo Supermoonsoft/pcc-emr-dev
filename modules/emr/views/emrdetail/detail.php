@@ -3,17 +3,15 @@
 use app\modules\emr\models\GatewayEmrVisit;
 //use app\modules\emr\models\PccDiagnosis;
 //use app\modules\emr\models\PccDiagnosisSearch;
-
 use app\modules\emr\models\GatewayEmrDiag;
 use app\modules\emr\models\GatewayEmrDiagSearch;
-
 use yii\widgets\DetailView;
 use kartik\grid\GridView;
 
 $model = GatewayEmrVisit::findOne($id);
 //$modelDiag = PccDiagnosis::find()->where(['vn' => $vn, 'provider_code' => $provider_code]);
- $searchModel = new GatewayEmrDiagSearch();
-$dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$hospcode);
+$searchModel = new GatewayEmrDiagSearch();
+$dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams, $vn, $hospcode);
 ?>
 <div class="col-sm-6">
     <div class="panel panel-success">
@@ -25,65 +23,70 @@ $dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$ho
             </div>
         </div>
         <div class="panel-body">
-            <?=
-            DetailView::widget([
-                
-                'model' => $model,
-                'attributes' => [
-                    [
-                        'attribute' => 'pulse',
-                        'value' => function($model) {
-                            if ($model->pulse == '') {
-                                return '';
-                            } else {
-                                return $model->pulse;
-                            }
-                        }
-                    ],
-                    [
-                        'attribute' => 'cc',
-                        'value' => function($model) {
-                            if ($model->cc == '') {
-                                return '';
-                            } else {
-                                return $model->cc;
-                            }
-                        }
-                    ],
-                    [
-                        'attribute' => 'pe',
-                        'value' => function($model) {
-                            if ($model->pe == '') {
-                                return '';
-                            } else {
-                                return $model->pe;
-                            }
-                        }
-                    ],
-                            [
-                        'attribute' => 'pi',
-                        'value' => function($model) {
-                            if ($model->pi == '') {
-                                return '';
-                            } else {
-                                return $model->pi;
-                            }
-                        }
-                    ],
-                    //'pi',
-                    [
-                        'attribute' => 'bpd',
-                        'value' => function($model) {
-                            if ($model->bpd == '') {
-                                return '';
-                            } else {
-                                return $model->bpd . ' / ' . $model->bps;
-                            }
-                        }
-                    ],
-                ],
-            ])
-            ?>
+<?=
+DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+        [
+            'attribute' => 'pulse',
+            'value' => function($model) {
+                $bp = $model->bpd . ' / ' . $model->bps;
+                $pulse = $model->pulse ? $model->pulse : 'ไม่มี';
+                $temp = $model->temperature ? $model->temperature : 'ไม่มี';
+                $rr = $model->rr ? $model->rr : 'ไม่มี';
+
+                if ($model->pulse == '') {
+                    return '';
+                } else {
+                    return 'BP = ' . $bp . ' , Pulse = ' . $pulse . ' , Temp = ' .
+                            $temp . ' , RR = ' . $rr;
+                }
+            }
+        ],
+        [
+            'attribute' => 'cc',
+            'value' => function($model) {
+                if ($model->cc == '') {
+                    return '';
+                } else {
+                    return $model->cc;
+                }
+            }
+        ],
+        [
+            'attribute' => 'pe',
+            'value' => function($model) {
+                if ($model->pe == '') {
+                    return '';
+                } else {
+                    return $model->pe;
+                }
+            }
+        ],
+        [
+            'attribute' => 'pi',
+            'value' => function($model) {
+                if ($model->pi == '') {
+                    return '';
+                } else {
+                    return $model->pi;
+                }
+            }
+        ],
+    //'pi',
+//                    [
+//                        'attribute' => 'bpd',
+//                        'value' => function($model) {
+//                            if ($model->bpd == '') {
+//                                return '';
+//                            } else {
+//                                return $model->bpd . ' / ' . $model->bps;
+//                            }
+//                        }
+//                    ],
+    ],
+])
+?>
         </div>
     </div>
 </div>
@@ -98,26 +101,26 @@ $dataProviderDiag = $searchModel->search(Yii::$app->request->queryParams,$vn,$ho
             </div>
         </div>
         <div class="panel-body">
-           
-            <?=
-            GridView::widget([
-                'dataProvider' => $dataProviderDiag,
-                //'filterModel' => $searchModel,
-                //'showPageSummary'=>true,
-                'striped'=>true,
-                'pjax' => true,
-                'pjaxSettings' => [
-                    'neverTimeout' => true,
-                ],
-                'striped' => true,
-                'hover' => true,
-                'columns' => [
-                    ['class' => 'yii\grid\SerialColumn'],
-                    'icd_code',
-                    'icd_name'
-                ],
-            ]);
-            ?>
+
+<?=
+GridView::widget([
+    'dataProvider' => $dataProviderDiag,
+    //'filterModel' => $searchModel,
+    //'showPageSummary'=>true,
+    'striped' => true,
+    'pjax' => true,
+    'pjaxSettings' => [
+        'neverTimeout' => true,
+    ],
+    'striped' => true,
+    'hover' => true,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        'icd_code',
+        'icd_name'
+    ],
+]);
+?>
         </div>
     </div>
 </div>
