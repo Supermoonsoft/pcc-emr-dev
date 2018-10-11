@@ -70,7 +70,7 @@ $send = 0;
                         <thead>
                             <tr>
                                 <th></th>                                
-                                <th>Hn</th>
+                                <th>CID</th>
                                 <th >ลำดับส่ง</th>
                                 <th >เวลามา</th>                                
                                 <th >วันนัด</th>                                
@@ -85,7 +85,7 @@ $send = 0;
                                     <td>
                                         <input class="chk_pt" type="checkbox" name="pt[]" value="<?= $value['pcc_vn'] ?>" />
                                     </td>
-                                    <td><?= $value['hn'] ?></td>
+                                    <td><?= $value['cid'] ?></td>
                                     <td data-num=2 >
                                     <input type="hidden" name="num[]" value="" id="input<?=$value['pcc_vn']?>"/>
                                     <input type="hidden" name="sendtime[]" value="" id="time<?=$value['pcc_vn']?>"/>

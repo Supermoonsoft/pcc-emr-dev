@@ -72,20 +72,21 @@ JS;
 <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
     <?=
-    $form->field($model, 'cc')->widget(Select2::className(), [
-        'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
-        'options' => [
-            'placeholder' => 'Diagtext',
-            'multiple' => true,
-            'id' => 'cc',
-            'class' => 'clear',
-        ],
-        'pluginOptions' => [
-            'tags' => true,
-            'allowClear' => true,
-            'tokenSeparators' => [',', ' '],
-            'maximumInputLength' => 50
-        ],])->label(false);
+    // $form->field($model, 'cc')->widget(Select2::className(), [
+    //     'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
+    //     'options' => [
+    //         'placeholder' => 'Diagtext',
+    //         'multiple' => true,
+    //         'id' => 'cc',
+    //         'class' => 'clear',
+    //     ],
+    //     'pluginOptions' => [
+    //         'tags' => true,
+    //         'allowClear' => true,
+    //         'tokenSeparators' => [',', ' '],
+    //         'maximumInputLength' => 50
+    //     ],])->label(false);
+    $form->field($model, 'cc')->textArea(['rows'=>5])->label(false);
     ?>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">

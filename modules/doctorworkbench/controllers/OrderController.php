@@ -147,6 +147,8 @@ class OrderController extends VisitController
         $searchModel = new GatewayEmrVisitSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_visit DESC');
+
 
         return $this->render('emr',[
                              'searchModel' => $searchModel,
@@ -163,6 +165,8 @@ class OrderController extends VisitController
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_visit DESC');
+
 
         return $this->render('pre_order_lab', [
             'searchModel' => $searchModel,
@@ -181,6 +185,8 @@ class OrderController extends VisitController
         $searchModel = new PcclabSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_visit DESC');
+
 
         $model = new Pcclab(); 
 
@@ -206,6 +212,7 @@ class OrderController extends VisitController
         $searchModel = new PccmedSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_visit DESC');
 
         return $this->render('drug', [
             'searchModel' => $searchModel,
