@@ -62,6 +62,7 @@ use yii\helpers\ArrayHelper;
 
     <?php //echo  $form->field($model, 'pos_no')->textInput(['maxlength' => true]) ?>
 <hr/>
+    <?= $form->field($model, 'hospcode')->textInput(['maxlength' => true])->label('สถานบริการ') ?>
     <?= $form->field($model, 'role')->dropDownList(
             [10=>'admin',20=>'doctor',30=>'nurse',40=>'phar',50=>'dent',60=>'sasuk'],
             ['prompt'=>'ระดับผู้ใช้งาน']        

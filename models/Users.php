@@ -75,7 +75,7 @@ class Users extends BaseUser
             [['auth_key'], 'string', 'max' => 32],
             [['registration_ip'], 'string', 'max' => 45],
             [['pname', 'occ_no', 'pos_no'], 'string', 'max' => 20],
-            [['role'], 'string', 'max' => 5],
+            [['role','hospcode'], 'string', 'max' => 5],
         ];
     }
 
@@ -108,6 +108,7 @@ class Users extends BaseUser
             'pos_id' => 'ตำแหน่ง',
             'pos_no' => 'เลขที่ประจำตำแหน่ง',
             'role' => 'Role',
+            'hospcode'=>'Hospcode'
         ];
     }
 }
