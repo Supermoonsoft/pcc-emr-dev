@@ -9,6 +9,7 @@ use yii\web\JsExpression;
 use yii\widgets\Pjax;
 use app\components\PatientHelper;
 $this->registerJs($this->render('../../dist/js/script.js'));
+$this->registerJs($this->render('../../dist/js/diagnosis.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
 
 //$this->title = 'Diagnosis';
@@ -129,27 +130,6 @@ $js = <<< JS
         });
     }
   });
-
-//   $('#cc').on("change", function(e) {
-//     var isNew = $(this).find('[data-select2-tag="true"]');
-//     if(isNew.length && $.inArray(isNew.val(), $(this).val()) !== -1){
-//       //  isNew.replaceWith('<option selected value="' + isNew.val() + '">' + isNew.val() + '</option>');
-//       //  $('#console').append('<code>New tag: {"' + isNew.val() + '":"' + isNew.val() + '"}</code><br>');
-// //    alert();
-//    $.ajax({
-//     //    url: Url::to(['c-diagtext/create-from-diag']),
-//       url: 'index.php?r=doctorworkbench/c-diagtext/create-from-diag',
-//        methot:'get',
-//        dataType:'json',
-//        data: {text:isNew.val()},
-//        success: function(){
-//            console.log('success');
-//        }
-//    });
-   
-//     }
-// });
-
 JS;
 $this->registerJS($js);
 ?>

@@ -86,7 +86,7 @@ JS;
     //         'tokenSeparators' => [',', ' '],
     //         'maximumInputLength' => 50
     //     ],])->label(false);
-    $form->field($model, 'cc')->textArea(['rows'=>5])->label(false);
+    $form->field($model, 'cc')->textArea(['rows'=>5,'id' => 'cc'])->label(false);
     ?>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -138,7 +138,7 @@ JS;
     ?>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-<?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+<?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text">เพิ่ม</span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
             
             </div>
     </div>
@@ -157,3 +157,11 @@ JS;
 
 <?php ActiveForm::end(); ?>
 
+
+<?php 
+$js = <<< JS
+
+JS;
+$this->registerJS($js);
+
+?>
