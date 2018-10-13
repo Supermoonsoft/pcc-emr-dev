@@ -26,13 +26,16 @@ $module = \Yii::$app->controller->module->id;
                 </li>
                 
                 <li>
-                    <a class="<?= $module == 'stock' ? 'on-active' : 'non-active' ?>" title="PCC-STOCK" href="<?= Url::to(['/stock/pcc-service-medication/dispen']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>
+                    <a class="<?= $module == 'stock' ? 'on-active' : 'non-active' ?>" title="PCC-USAGE-STOCK" href="<?= Url::to(['/stock/pcc-service-medication/dispen']) ?>"><i class="fa fa-table" aria-hidden="true"></i> STOCK</a>
                 </li>
                 <li>
-                    <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fas fa-dollar-sign"></i> ACOUNTING</a>
+                    <a class="<?= $module == 'account' ? 'on-active' : 'non-active' ?>" title="งานบัญชี" href="#"><i class="fas fa-dollar-sign"></i> ACCOUNTING</a>
                 </li>
 				<li>
                     <a  href="#"><i class="fas fa-book"></i> E-DOC</a>
+                </li>
+				<li>
+                    <a  href="#"><i class="fas fa-book"></i> EDUCATE</a>
                 </li>
                 <li>
                     <a href="#"><i class="fas fa-notes-medical"></i> E-FORM</a>
