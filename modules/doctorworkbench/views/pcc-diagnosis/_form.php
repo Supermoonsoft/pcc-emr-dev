@@ -69,6 +69,8 @@ JS;
 <span id="create" action="<?=$action_create;?>"></span>
 <span id="update" action="<?=$action_update;?>"></span>
 <span class="get_id" id="" ></span>
+<div id="some-element" data=""></div>
+<div id="text"></div>
 
     <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => $action_create, 'options' => ['data-pjax' => 1],]); ?>
     <?php echo $form->field($model, 'id')->hiddenInput(['id' => 'id','disabled' => true])->label(false); ?>
@@ -80,20 +82,21 @@ JS;
 <div class="row">
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
     <?=
-    // $form->field($model, 'cc')->widget(Select2::className(), [
-    //     'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
-    //     'options' => [
-    //         'placeholder' => 'Diagtext',
-    //         'multiple' => true,
-    //         'id' => 'cc',
-    //         'class' => 'clear',
-    //     ],
-    //     'pluginOptions' => [
-    //         'tags' => true,
-    //         'allowClear' => true,
-    //         'tokenSeparators' => [',', ' '],
-    //         'maximumInputLength' => 50
-    //     ],])->label(false);
+       // $form->field($model, 'cc')->widget(Select2::className(), [
+       // 'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
+        // 'options' => [
+        //     'placeholder' => 'Diagtext',
+        //     'multiple' => true,
+        //     'id' => 'cc',
+        //     'class' => 'clear',
+        //     // 'value' => ['01', '02', '03'],
+        // ],
+        // 'pluginOptions' => [
+        //     'tags' => true,
+        //     'allowClear' => true,
+        //     'tokenSeparators' => [',', ' '],
+        //     'maximumInputLength' => 50
+        // ],])->label(false);
     $form->field($model, 'cc')->textArea(['rows'=>5,'id' => 'cc'])->label(false);
     ?>
     </div>
