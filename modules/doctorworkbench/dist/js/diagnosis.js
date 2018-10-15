@@ -35,6 +35,7 @@ $(function(){
 
     $('.kv-row-checkbox').click(function(e){
         var keys = $("#crud-diagnosis").yiiGridView("getSelectedRows");
+        var id = $(this).attr('value');
         if(keys.length > 1){
             swal('เลือกเพียง 1 รายการ');
             return false;
@@ -45,30 +46,42 @@ $(function(){
                 $('#btn-save').addClass('btn-warning');
                 $('#icon').removeClass('fas fa-plus');
                 $('#icon').addClass('fas fa-edit');
+                $.ajax({
+                    type: "post",
+                    url: "index.php?r=doctorworkbench/pcc-diagnosis/get-diag",
+                    data:{id:id},
+                   dataType: "json",
+                    success: function (response) {
+                        console.log(JSON.stringify(response));
+                        var cc = JSON.parse(response.cc);
+                        $('#cc').val(cc);
+                        $('#icd_code').val(response.icd_code).trigger('change');
+                        $('#diag_type').val(response.diag_type).trigger('change');
+                        $('#form-diagnosis').attr('action', $('#update').attr('action'));
+                    }
+                });
+
+
             }else{
                 $('#btn_text').text('เพิ่ม');
                 $('#btn-save').addClass('btn-success');
                 $('#btn-save').removeClass('btn-warning');
                 $('#icon').addClass('fas fa-plus');
                 $('#icon').removeClass('fas fa-edit');
+                $('#cc').val('');
+                $('#form-diagnosis')[0].reset();
+                $('#form-diagnosis').attr('action', $('#create').attr('action'));
+
+
     
             }
         }
        
-        var id = $(this).attr('value');
-        console.log(id);
+        
+        // console.log(id);
        
        
-//       $.ajax({
-//        type: "post",
-//        url: "index.php?r=doctorworkbench/pcc-medication/select-med",
-//        data:{id:id},
-//        dataType: "json",
-//        success: function (response) {
-//            console.log(JSON.stringify(response));
-//            $('#icode').val(response).trigger('change');
-//        }
-//    });
+
     });
     
 });

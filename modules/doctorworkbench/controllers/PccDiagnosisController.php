@@ -178,4 +178,12 @@ public function actionEditable(){
         }
       }
 }
+
+public function actionGetDiag(){
+    $request = Yii::$app->request;
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    $model = $this->findModel($request->post('id'));
+    return $model;
+}
+
 }

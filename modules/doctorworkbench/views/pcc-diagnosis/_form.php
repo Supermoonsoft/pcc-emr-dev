@@ -5,12 +5,14 @@ use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
 use yii\web\View;
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use app\modules\doctorworkbench\models\CDiagtext;
 
 $url = \yii\helpers\Url::to(['icd10-list']); //กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name; //กำหนดค่าเริ่มต้น
-
+$action_create = Url::to(['create']);
+$action_update = Url::to(['update']);
 $formatJs = <<< 'JS'
 var formatRepo = function (repo) {
     if (repo.loading) {
@@ -63,7 +65,12 @@ JS;
     <button class="btn btn-info"><i class="fas fa-pills"></i> button-2</button>
     <button class="btn btn-success"><i class="fas fa-diagnoses"></i> button-3</button>
 </legend> 
-    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => ['create'], 'options' => ['data-pjax' => 1],]); ?>
+
+<span id="create" action="<?=$action_create;?>"></span>
+<span id="update" action="<?=$action_update;?>"></span>
+
+    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => $action_create, 'options' => ['data-pjax' => 1],]); ?>
+    <?php echo $form->field($model, 'id')->textInput(['id' => 'id'])->label(false); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'vn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false); ?>
