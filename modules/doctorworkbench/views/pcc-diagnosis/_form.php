@@ -68,9 +68,10 @@ JS;
 
 <span id="create" action="<?=$action_create;?>"></span>
 <span id="update" action="<?=$action_update;?>"></span>
+<span class="get_id" id="" ></span>
 
     <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => $action_create, 'options' => ['data-pjax' => 1],]); ?>
-    <?php echo $form->field($model, 'id')->textInput(['id' => 'id'])->label(false); ?>
+    <?php echo $form->field($model, 'id')->hiddenInput(['id' => 'id','disabled' => true])->label(false); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'vn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'pcc_vn')->hiddenInput()->label(false); ?>

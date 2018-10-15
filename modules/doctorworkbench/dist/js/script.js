@@ -15,6 +15,7 @@ var form = $(this);
                 $('.fires').val(null).select2('open');
                 totalPrice($('#cid').val());
                $(form)[0].reset();
+            //    window.location.reload(true);
              })
 
          }

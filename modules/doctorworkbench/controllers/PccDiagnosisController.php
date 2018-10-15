@@ -82,6 +82,25 @@ class PccDiagnosisController extends VisitController
         }
     }
 
+    public function actionUpdate()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        // $request = Yii::$app->request;
+        $post = Yii::$app->request->post('PccDiagnosis');
+        if ($post) {
+            $model = $this->findModel($post['id']);
+            $model->icd_name = CIcd10tm::find()->where(['diagcode' => $post['icd_code']])->one()->diagename;
+            if ($post['cc'] == "") {
+                $model->cc = NULL;
+              }else {$model->cc = json_encode($post['cc']);}
+        $model->diag_type = $post['diag_type'];
+        $model->save(false);
+        return ['forceReload'=>'#crud-diagnosis-pjax'];
+       
+        }
+    }
+
+
     private function DiagText($cc){
 
     }
