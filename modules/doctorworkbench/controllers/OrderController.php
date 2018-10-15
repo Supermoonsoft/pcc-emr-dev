@@ -165,7 +165,7 @@ class OrderController extends VisitController
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
-        $dataProvider->query->orderBy('date_visit DESC');
+        $dataProvider->query->orderBy('id DESC');
 
 
         return $this->render('pre_order_lab', [
