@@ -20,9 +20,10 @@ $(function(){
                    dataType: "json",
                     success: function (response) {
                         console.log(JSON.stringify(response));
-                        var cc = JSON.parse(response.cc);
-                        $('#cc').val(cc);
-                        $('#icd_code').val(response.icd_code).trigger('change');
+                        var diag_text = JSON.parse(response.diag_text);
+                        $('#diag_text').val(diag_text);
+                        // $('#icd_code').val(response.icd_code).trigger('change');
+                        $('#icd_code').val(response.icd_code);
                         $('#diag_type').val(response.diag_type).trigger('change');
                         $('#form-diagnosis').attr('action', $('#update').attr('action'));
                         $('#id').attr('disabled',false).val(response.id);
@@ -42,15 +43,15 @@ $(function(){
                 $('#btn-save').removeClass('btn-warning');
                 $('#icon').addClass('fas fa-plus');
                 $('#icon').removeClass('fas fa-edit');
-                $('#cc').val('');
+                $('#diag_text').val('');
             }
         }
     });
     
 
-    $('#diag_type').change(function(e){
-        var id = $(this).val();
-        var markup = '"' + id + '",';
-        $('#cc').append(markup);
-    });
+    // $('#diag_type').change(function(e){
+    //     var id = $(this).val();
+    //     var markup = '"' + id + '",';
+    //     $('#cc').append(markup);
+    // });
 });

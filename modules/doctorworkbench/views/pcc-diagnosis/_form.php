@@ -97,7 +97,7 @@ JS;
         //     'tokenSeparators' => [',', ' '],
         //     'maximumInputLength' => 50
         // ],])->label(false);
-    $form->field($model, 'cc')->textArea(['rows'=>5,'id' => 'cc'])->label(false);
+    $form->field($model, 'diag_text')->textArea(['rows'=>5,'id' => 'diag_text'])->label(false);
     ?>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -106,7 +106,8 @@ JS;
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <?=
     $form->field($model, 'icd_code')->widget(Select2::className(), [
-        'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
+        // 'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
+        // 'initValueText' => '', //กำหนดค่าเริ่มต้น
         // 'theme' => Select2::THEME_DEFAULT,/
         'options' => ['id' => 'icd_code', 'placeholder' => 'Select ICD10...','class' => 'clear'],
         'pluginOptions' => [
@@ -134,7 +135,7 @@ JS;
             
       <?=
     $form->field($model, 'diag_type')->widget(Select2::className(), [
-        'data' => ArrayHelper::map(app\modules\doctorworkbench\models\CDiagtype::find()->all(), 'diagtype', function($model, $defaultValue) {
+        'data' => ArrayHelper::map(app\modules\doctorworkbench\models\CDiagtype::find()->orderBy(['diagtype' => SORT_ASC])->all(), 'diagtype', function($model, $defaultValue) {
                     return $model->diagtype . '-' . $model->name1;
                 }),
         'options' => [

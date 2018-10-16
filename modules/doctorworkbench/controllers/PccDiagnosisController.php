@@ -69,9 +69,9 @@ class PccDiagnosisController extends VisitController
         if ($model->load($request->post())) {
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
             //$model->diag_type = 2;
-            if ($model->cc == "") {
-                $model->cc = NULL;
-              }else {$model->cc = json_encode($model->cc);}
+            if ($model->diag_text == "") {
+                $model->diag_text = NULL;
+              }else {$model->diag_text = json_encode($model->diag_text);}
             //   $model->date_service = Date('Y-m-d');
          $model->save(false);
          return ['forceReload'=>'#crud-diagnosis-pjax'];
@@ -90,9 +90,9 @@ class PccDiagnosisController extends VisitController
         if ($post) {
             $model = $this->findModel($post['id']);
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $post['icd_code']])->one()->diagename;
-            if ($post['cc'] == "") {
-                $model->cc = NULL;
-              }else {$model->cc = json_encode($post['cc']);}
+            if ($post['diag_text'] == "") {
+                $model->diag_text = NULL;
+              }else {$model->diag_text = json_encode($post['diag_text']);}
         $model->diag_type = $post['diag_type'];
         $model->save(false);
         return ['forceReload'=>'#crud-diagnosis-pjax'];

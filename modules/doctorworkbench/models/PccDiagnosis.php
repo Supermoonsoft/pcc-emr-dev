@@ -20,7 +20,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
         return [
             [['icd_code', 'diag_type'], 'required'],
             [['id'], 'string'],
-            [['date_service', 'time_service', 'data_json', 'last_update','cc','cid','pcc_vn'], 'safe'],
+            [['date_service', 'time_service', 'data_json', 'last_update','diag_text','cid','pcc_vn'], 'safe'],
             [['hn'], 'string', 'max' => 9],
             [['vn', 'pcc_vn'], 'string', 'max' => 12],
             [['provider_code', 'hospcode'], 'string', 'max' => 5],
@@ -51,7 +51,7 @@ class PccDiagnosis extends \yii\db\ActiveRecord
             'diag_type' => 'Diag Type',
             'data_json' => 'Data Json',
             'last_update' => 'Last Update',
-            'cc' => 'cc',           
+            'diag_text' => 'diag_text',           
             'pcc_vn' => 'PCC_VN',
             'hospcode' => 'Hospcode',
             'cid' => 'เลขบัตรประชาชน',            
