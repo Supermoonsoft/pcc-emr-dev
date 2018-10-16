@@ -39,7 +39,7 @@ class DefaultController extends Controller {
         from pcc_visit t 
         LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
         WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-        AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
+        AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc LIMIT 10";
         $raw = DbHelper::queryAll('db', $sql);
         
 
