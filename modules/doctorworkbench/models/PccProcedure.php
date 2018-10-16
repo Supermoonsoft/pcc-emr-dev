@@ -4,27 +4,6 @@ namespace app\modules\doctorworkbench\models;
 
 use Yii;
 
-/**
- * This is the model class for table "pcc_procedure".
- *
- * @property string $id
- * @property string $hn
- * @property string $vn
- * @property string $provider_code
- * @property string $provider_name
- * @property string $date_service
- * @property string $time_service
- * @property string $procedure_code
- * @property string $procedure_name
- * @property string $start_date
- * @property string $start_time
- * @property string $end_date
- * @property string $end_time
- * @property string $procedure_price
- * @property array $data_json
- * @property string $last_update
- * @property string $doctor
- */
 class PccProcedure extends \yii\db\ActiveRecord
 {
     /**
@@ -41,7 +20,7 @@ class PccProcedure extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            //[['id','procedure_code'], 'required'],
+            [['procedure_code'], 'required'],
             //[['id'], 'string'],
             [['date_service', 'time_service', 'start_date', 'start_time', 'end_date', 'end_time', 'data_json', 'last_update', 'pcc_vn','cid'], 'safe'],
             [['hn'], 'string', 'max' => 9],

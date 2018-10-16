@@ -160,7 +160,8 @@ class PccMedicationController extends VisitController
     }
 // รวมราคายา
     public function actionSumPrice($cid=null){
-    return PccMedication::find()->where(['cid' => $cid])->sum('totalprice');
+     return  PccMedication::find()->where(['cid' => $cid])->sum('unitprice * qty');
+    
     }
 
     // ปรินสติกเกอร์ยา
@@ -206,7 +207,7 @@ public function actionEditable() {
             if ($data->load($post)) {
                 $data->save();
                 //$value = $_POST['PccMedication'];
-                return ['output' => '', 'message' => ''];
+                return ['output' => '', 'message' => '','forceReload'=>'#crud-medication-pjax'];
             }
         }
     }
