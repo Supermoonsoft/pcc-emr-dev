@@ -75,7 +75,7 @@ class PreorderlabController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->cid  = $cid;
             $model->pcc_vn = $pcc_vn;
-            $model->save();
+            $model->save(false);
         }
         return [
             'forceReload'=>'#pre-order-lab-pjax'];

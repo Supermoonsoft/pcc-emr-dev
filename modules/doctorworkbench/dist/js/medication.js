@@ -17,7 +17,7 @@ $(function(){
          success: function (response) {
             $.pjax.reload({container: response.forceReload});
             $(response.forceReload).on('pjax:complete', function() {
-                totalPrice($('#cid').val());
+                // totalPrice($('#cid').val());
                 $('#icode').val(null).trigger('change');
                $('#form-medication')[0].reset();
              })

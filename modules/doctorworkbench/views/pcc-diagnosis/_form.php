@@ -97,7 +97,7 @@ JS;
         //     'tokenSeparators' => [',', ' '],
         //     'maximumInputLength' => 50
         // ],])->label(false);
-    $form->field($model, 'diag_text')->textArea(['rows'=>5,'id' => 'diag_text'])->label(false);
+    $form->field($model, 'diag_text')->textArea(['rows'=>3,'id' => 'diag_text','style' => 'height:80px;'])->label(false);
     ?>
     </div>
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -151,6 +151,7 @@ JS;
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
 <?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text">เพิ่ม</span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+<?php echo Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
             
             </div>
     </div>
@@ -163,7 +164,6 @@ JS;
 
  
     </fieldset>
-<?php // Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
 
     </div>
 

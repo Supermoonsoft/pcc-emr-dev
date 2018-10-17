@@ -119,6 +119,7 @@ return [
                             $('#totalprice').html(formatter.format(response));
                         }
                     });
+                    $.pjax.reload({container: '#crud-medication-pjax'});
                 }",
             ],
             ],
