@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
+use yii\widgets\Pjax;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
@@ -16,14 +17,15 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 .total-price{
     border-top: 3px solid #9b25af;
     box-shadow: 0 0 1px rgba(0,0,0,.125), 0 1px 3px rgba(0,0,0,.2);
-    height: 56px;
+    height: 33px;
     width: 158%;
-    margin-top: 9px;
+    margin-top: 24px;
     background-color: #eee;
     color: #9b25af; 
+    margin-left: -24px;
 }
 .total-price > p{
-    font-size: 36px;
+    font-size: 25px;
     margin-left: 6px;
 }
 
@@ -45,8 +47,9 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                         }),
                     'options' => [
                         'id' => 'icode',
+                        
                          'placeholder' => 'รายการยา ...',
-                         'class' => 'fires'
+                         'class' => 'fires clear'
                         // 'onchange' => 'alert (this.value)'                         
                         ],
                     'pluginOptions' => [
@@ -79,14 +82,20 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 <?= $form->field($model, 'qty')->textInput(['id' => 'qty']) ?>  
         </div>
-        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-            <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','style' => 'margin-top:25px;']) ?>
-        </div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','style' => 'margin-top:25px;margin-right:5px;']) ?>
+<?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','../report/viewer.php?vn='.$model->pcc_vn.'&cid='.$model->cid,['class' => 'btn btn-info','target' => '_blank','style' => 'margin-top:25px;'])?>
+       
+        </div>
+
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
      <div class="total-price">
      <p id="totalprice"></p>
      </div>
             </div>
+            
+           
+            
         </div>
     </div>
 <?php ActiveForm::end(); ?>

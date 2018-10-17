@@ -63,9 +63,8 @@ $this->render('../default/panel_top', [
 <?php echo $this->render('./create', ['model' => $model]); ?>
 
 <div style="margin-top:15px;margin-bottom:10px;">
-<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger pull-eft', 'id' => 'btn-delete','style' => 'margin-right: 5px;']) ?>
-<?= Html::button('<i class="fa fa-edit"></i> แก้ไขที่เลือก', ['class' => 'btn btn-warning pull-eft', 'id' => 'btn-update-select']) ?>
-<?=Html::a('<i class="fa fa-print"></i> พิมพ์ฉลากยา','../report/viewer.php?vn='.$model->pcc_vn.'&cid='.$model->cid,['class' => 'btn btn-info pull-right','target' => '_blank'])?>
+<?php // Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger pull-eft', 'id' => 'btn-delete','style' => 'margin-right: 5px;']) ?>
+<?php // Html::button('<i class="fa fa-edit"></i> แก้ไขที่เลือก', ['class' => 'btn btn-warning pull-eft', 'id' => 'btn-update-select']) ?>
 
 </div>
 </fieldset>

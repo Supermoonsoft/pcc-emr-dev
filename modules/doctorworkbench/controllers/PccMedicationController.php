@@ -140,7 +140,7 @@ class PccMedicationController extends VisitController
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            return ['forceClose'=>true,'forceReload'=>'#crud-medication-pjax'];
         }else{
             /*
             *   Process for non-ajax request
@@ -207,7 +207,7 @@ public function actionEditable() {
             if ($data->load($post)) {
                 $data->save();
                 //$value = $_POST['PccMedication'];
-                return ['output' => '', 'message' => '','forceReload'=>'#crud-medication-pjax'];
+                return ['output' => '', 'message' => ''];
             }
         }
     }

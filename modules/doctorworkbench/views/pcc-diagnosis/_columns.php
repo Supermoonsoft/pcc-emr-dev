@@ -1,4 +1,5 @@
 <?php
+use yii\helpers\Html;
 use yii\helpers\Url;
 use kartik\editable\Editable;
 return [
@@ -77,6 +78,28 @@ return [
     //                       'data-confirm-title'=>'Are you sure?',
     //                       'data-confirm-message'=>'Are you sure want to delete this item'], 
     // ],
-    
+    [
+        'class' => 'kartik\grid\ActionColumn',
+        'template' => '{delete}',
+        'buttons' => [
+            'delete' => function ($url) {
+                return Html::a('<i class="far fa-trash-alt"></i> ', '#', [
+                    'title' => Yii::t('yii', 'Delete'),
+                    'class' => 'btn btn-sm btn-danger',
+                    'aria-label' => Yii::t('yii', 'Delete'),
+                    'onclick' => "
+                        // if (confirm('ok?')) {
+                            $.ajax('$url', {
+                                type: 'POST'
+                            }).done(function(data) {
+                                $.pjax.reload({container: '#crud-diagnosis-pjax'});
+                            });
+                        // }
+                        return false;
+                    ",
+                ]);
+            },
+        ],
+    ],
 
 ];   
