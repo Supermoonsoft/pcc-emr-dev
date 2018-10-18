@@ -14,6 +14,7 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'procedure_name',
+        'header'=>'Procedure Name', 
         'value' => function($model){
             return $model->proced->title_th;
         }
@@ -21,6 +22,7 @@ return [
 
     [
         'class'=>'\kartik\grid\DataColumn',
+        'header'=>'Doctor', 
         'attribute'=>'doctor',
     ],
     [

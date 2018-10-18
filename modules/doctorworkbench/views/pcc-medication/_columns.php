@@ -56,6 +56,7 @@ return [
  [
          'class' => 'kartik\grid\EditableColumn',
          'attribute' => 'druguse',
+         'header'=>'วิธีใช้', 
          'refreshGrid' => true,
          'editableOptions' => [
              'inputType' => \kartik\editable\Editable::INPUT_SELECT2,
