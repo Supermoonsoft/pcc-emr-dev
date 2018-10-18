@@ -3,6 +3,7 @@
 namespace app\modules\doctorworkbench\models;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
 use app\modules\doctorworkbench\models\CDrugusage;
+use app\modules\doctorworkbench\models\GatewayCDruguage;
 use Yii;
 
 /**
@@ -94,5 +95,8 @@ class PccMedication extends \yii\db\ActiveRecord
     }
     public  function getDruguse(){
         return @$this->hasOne(CDrugusage::className(), ['drugusage' => 'druguse']);
+    }
+    public  function getDrugusehos(){
+        return @$this->hasOne(GatewayCDruguage::className(), ['drugusage' => 'druguse']);
     }
 }

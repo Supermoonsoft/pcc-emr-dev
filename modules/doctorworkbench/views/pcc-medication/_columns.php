@@ -2,7 +2,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\modules\doctorworkbench\models\CDrugusage;
+use app\modules\doctorworkbench\models\GatewayCDruguage;
 use yii\helpers\ArrayHelper;
 use kartik\editable\Editable;
 use kartik\grid\GridView;
@@ -68,7 +68,7 @@ return [
              'submitButton' => ['class' => 'btn btn-primary', 'icon' => '<i class="glyphicon glyphicon-ok"></i>'],
              'resetButton' => ['class' => 'btn btn-warning', 'icon' => '<i class="glyphicon glyphicon-refresh"></i>'],
              'options' => [
-                 'data' => ArrayHelper::map(CDrugusage::find()->all(), 'shortlist', 'shortlist'),
+                 'data' => ArrayHelper::map(GatewayCDruguage::find()->where(['status'=>'Y'])->all(), 'drugusage', 'shortlist'),
                  'options' => [
                      'placeholder' => 'Please select...',
                      'multiple' => false,
@@ -77,14 +77,16 @@ return [
                  
          ],
          'contentOptions' => ['class' => 'pjax-load'],
-//         'value' => function($model) {
-//             $models = CDrugusage::find()->where(['shortlist' => $model->druguse])->one();
-//             if ($model->druguse != '') {
-//                 return $models->shortlist;
-//             } else {
-//                 return '-';
-//             }
-//         }
+         'value' => function($model) {
+             //$models = GatewayCDruguage::find()->where(['drugusage' => $model->druguse])->one();
+             if ($model->druguse != '') {
+                 return $model->drugusehos->shortlist;
+                 //return $models->shortlist
+                 return $model->druguse;
+             } else {
+                 return '-';
+             }
+         }
      ],
    [
        'class' => 'kartik\grid\EditableColumn',
