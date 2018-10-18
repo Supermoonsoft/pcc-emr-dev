@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use kartik\grid\GridView;
 use yii\widgets\Pjax;
 /* @var $this yii\web\View */
@@ -14,7 +15,7 @@ $this->title = 'Preorderlabs';
  <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
-
+<br>
 <?php
 // กำหนด laypout ของ Gridvire เอง
 $layout = <<< HTML
@@ -44,12 +45,11 @@ $layout = <<< HTML
 </div>
 HTML;
 ?>
-<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
 
 <div class="preorderlab-index">
  <?=
         GridView::widget([
-            'id' => 'pre-order-lab',
+            'id' => 'preorderlab',
             'dataProvider' => $dataProvider,
             'pjax' => true,
             'columns' => [
@@ -66,12 +66,38 @@ HTML;
                 'lab_result_date',
                 'lab_result',
                 'standard_result',
+                [
+                    'class' => 'kartik\grid\ActionColumn',
+                    'template' => '{delete}',
+                    'buttons' => [
+                        'delete' => function ($url, $model) {
+                            $uri = Url::to(['/lab/preorderlab/delete', 'id' => $model->id]);
+                            // $url = Url::to(['post/view', 'id' => 100]);
+                            return Html::a('<i class="far fa-trash-alt"></i> ', '#', [
+                                'title' => Yii::t('yii', 'Delete'),
+                                'class' => '',
+                                'aria-label' => Yii::t('yii', 'Delete'),
+                                'onclick' => "
+                                    // if (confirm('ok?')) {
+                                        $.ajax('$uri', {
+                                            type: 'POST'
+                                        }).done(function(data) {
+                                            $.pjax.reload({container: '#preorderlab-pjax'});
+                                        });
+                                    // }
+                                    return false;
+                                ",
+                            ]);
+                        },
+                    ],
+                ],
             ],
             'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
             'showPageSummary' => true,
             'striped' => true,
             'condensed' => true,
             'responsive' => true,
+            'headerRowOptions' => ['style' => 'background-color: #eee;'],
             'summary' => false,
             //'layout' => $layout,
             'replaceTags' => [
@@ -101,7 +127,7 @@ HTML;
 <?php
 $js = <<< JS
  $("#btn-delete").click(function(){
-    var keys = $("#pre-order-lab").yiiGridView("getSelectedRows");
+    var keys = $("#preorderlab").yiiGridView("getSelectedRows");
     //console.log(keys);
     var url = 'index.php?r=lab/preorderlab/bulk-delete'
     if(keys.length>0){

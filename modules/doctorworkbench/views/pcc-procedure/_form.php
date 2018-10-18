@@ -83,7 +83,9 @@ JS;
             <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
        
         <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
-</div>       
+        <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:0px;']) ?>
+
+    </div>       
     </div>
     <?php ActiveForm::end(); ?>
 </div>

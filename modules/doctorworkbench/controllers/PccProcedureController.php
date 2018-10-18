@@ -118,10 +118,8 @@ class PccProcedureController extends VisitController
 
     public function actionDelete($id)
     {
-       
-            $model = $this->findModel($id);
-            $model->delete();
-    
+        $request = Yii::$app->request;
+        $this->findModel($id)->delete();
 
         if($request->isAjax){
             /*

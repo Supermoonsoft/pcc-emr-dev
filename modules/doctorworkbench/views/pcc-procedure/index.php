@@ -59,7 +59,6 @@ HTML;
 	<legend class="scheduler-border"><i class="fas fa-diagnoses"></i> Procedure Form</legend> 
 <?php  echo $this->render('./create',['model' => $model]);?>
 </fieldset>
-<?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:5px;']) ?>
 
     <?=
         GridView::widget([
@@ -72,6 +71,7 @@ HTML;
             'striped' => true,
             'condensed' => true,
             'responsive' => true,
+            'headerRowOptions' => ['style' => 'background-color: #eee;'],
             'summary' => false,
             //'layout' => $layout,
             'rowOptions'=>function($model){

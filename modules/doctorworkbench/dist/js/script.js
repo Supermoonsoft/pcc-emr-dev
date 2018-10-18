@@ -10,13 +10,15 @@ var form = $(this);
          data: form.serialize(),
          success: function (response) {
             $.pjax.reload({container: response.forceReload});
+            $('.fires').val(null).select2('open');
             $(response.forceReload).on('pjax:complete', function() {
                 $('.clear').val(null).trigger('change');
-                $('.fires').val(null).select2('open');
                 totalPrice($('#cid').val());
                $(form)[0].reset();
             //    window.location.reload(true);
              })
+
+             
 
          }
     });

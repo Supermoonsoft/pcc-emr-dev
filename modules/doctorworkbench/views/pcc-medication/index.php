@@ -82,6 +82,7 @@ $this->render('../default/panel_top', [
             'condensed' => true,
             'responsive' => true,
             'summary' => false,
+            'headerRowOptions' => ['style' => 'background-color: #eee;'],
             //'layout' => $layout,
             'rowOptions'=>function($model){
                 if($model->date_service == Date('Y-m-d')){

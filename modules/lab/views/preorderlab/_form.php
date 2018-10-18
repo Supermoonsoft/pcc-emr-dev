@@ -172,13 +172,17 @@ $this->registerJS($js);
     ])->label('ชื่อแลป');
     ?>
 </div>
-
+<div class="box-row" style="width:300px;">
+<div class="form-group pull-left" style="margin-left:-71px;">
+        <?= Html::submitButton('<i class="fas fa-plus"></i> บันทึก', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
+        <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:0px;']) ?>
+    
+    </div>
+        </div>
 
 <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-        <div class="form-group pull-left" style="margin-left:89px;">
-        <?= Html::submitButton('<i class="fas fa-plus"></i> บันทึก', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
-    </div>
+       
         </div>
 </div>
 

@@ -33,7 +33,7 @@ li.dropdown:hover > .dropdown-menu {
 	background-color: #eee;
 }
 .nav-tabs > li {
-    background-color: #c7c7c7c7;
+    background-color: #eee;
 }
 .nav-tabs > li > a {
     color:#353535;

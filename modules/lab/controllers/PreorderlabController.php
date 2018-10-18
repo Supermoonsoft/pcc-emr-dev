@@ -78,7 +78,7 @@ class PreorderlabController extends Controller
             $model->save(false);
         }
         return [
-            'forceReload'=>'#pre-order-lab-pjax'];
+            'forceReload'=>'#preorderlab-pjax'];
     }
 
     /**
@@ -110,11 +110,25 @@ class PreorderlabController extends Controller
      */
     public function actionDelete($id)
     {
+        $request = Yii::$app->request;
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
-    }
+        if($request->isAjax){
+            /*
+            *   Process for ajax request
+            */
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ['forceClose'=>true,'forceReload'=>'#preorderlab-pjax'];
+        }else{
+            /*
+            *   Process for non-ajax request
+            */
+            return $this->redirect(['index']);
+        }
 
+
+    }
+    
     /**
      * Finds the Preorderlab model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -145,7 +159,7 @@ class PreorderlabController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#pre-order-lab-pjax'];
+            return ['forceClose'=>true,'forceReload'=>'#preorderlab-pjax'];
         }else{
             /*
             *   Process for non-ajax request

@@ -24,6 +24,9 @@ $this->registerCss($this->render('../../dist/css/style.css'));
     margin: 0px;
     border-radius: 4px;
 }
+/* .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+    background-color: #fcf7ff;
+} */
 </style>
 
 <?php
@@ -82,12 +85,16 @@ HTML;
             'responsive' => true,  
             'summary'=>false,
             'showFooter' => false,
+            'headerRowOptions' => ['style' => 'background-color: #eee;'],
             //'layout' => $layout,
             'rowOptions'=>function($model){
                 if($model->date_service == Date('Y-m-d')){
                     return ['class' => 'info'];
                 }
             },
+            'options' => [
+                'class' => 'background-color: red',
+             ],
             'replaceTags' => [
                 '{custom}' => function($widget) {
                     if ($widget->panel === true) {
@@ -126,6 +133,16 @@ $js = <<< JS
             data:{pks:keys.join()},
             success: function(){
              $.pjax.reload({container: "#crud-diagnosis-pjax"});
+             $('.clear').val(null).trigger('change');
+                $('.fires').val(null).select2('open');
+                totalPrice($('#cid').val());
+               $('#form-diagnosis')[0].reset();
+               $('#id').attr('disabled',true).val('');
+               $('#icon').removeClass('fas fa-edit');
+               $('#icon').addClass('fas fa-plus');
+               $('#btn-save').addClass('btn-success');
+                $('#btn-save').removeClass('btn-warning');
+                $('#form-diagnosis').attr('action', $('#create').attr('action'));
             }
         });
     }

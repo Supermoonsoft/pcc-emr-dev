@@ -144,7 +144,7 @@ return [
                 'delete' => function ($url) {
                     return Html::a('<i class="far fa-trash-alt"></i> ', '#', [
                         'title' => Yii::t('yii', 'Delete'),
-                        'class' => 'btn btn-sm btn-danger',
+                        'class' => '',
                         'aria-label' => Yii::t('yii', 'Delete'),
                         'onclick' => "
                             // if (confirm('ok?')) {
