@@ -51,5 +51,7 @@ $modules['datecontrol'] = [
         Module::FORMAT_TIME => [],
     ],]; //Oh
 
+$modules['eform']= ['class' => 'app\modules\eform\Eform']; 
+
 return $modules;
 

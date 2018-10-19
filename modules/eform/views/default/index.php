@@ -1,0 +1,24 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <div class="panel-title"><i class="fa fa-passport"></i> เอกสาร</div>  
+    </div>
+    <div class="panel-body text-center">
+        <div class="row">
+            <div class="col-lg-4">
+
+            </div>
+            <div class="col-lg-4">
+                <p><a href="#" class="btn btn-blue btn-lg btn-block">ใบลา และใบขออนุญาต</a></p>
+                <p><a href="#" class="btn btn-pink btn-lg btn-block">ธุรกรรม และการเงิน</a></p>
+                <p><a href="#" class="btn btn-orange btn-lg btn-block">พัสดุ ครุภัณฑ์</a></p>
+            </div>
+
+            <div class="col-lg-4">
+
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

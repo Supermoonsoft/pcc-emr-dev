@@ -38,7 +38,7 @@ $module = \Yii::$app->controller->module->id;
                     <a  href="#"><i class="fas fa-book"></i> EDUCATE</a>
                 </li>
                 <li>
-                    <a href="#"><i class="fas fa-notes-medical"></i> E-FORM</a>
+                    <a class="<?= $module == 'eform' ? 'on-active' : 'non-active' ?>" href="<?=Url::to(['/eform/default/index'])?>"><i class="fas fa-notes-medical"></i> E-FORM</a>
                 </li>
                 <li>
                     <a class="<?= $module == 'questionare' ? 'on-active' : 'non-active' ?>" title="ประเมินคัดกรอง" href="<?= Url::to(['/questionare/default/index']) ?>"><i class="fa fa-filter" aria-hidden="true"></i> QUESTIONNAIRE</a>
