@@ -72,7 +72,7 @@ class DefaultController extends Controller {
         $count = $query->count();
         $pages = new Pagination(['totalCount' => $count]);
         $query->offset($pages->offset);
-        $query->limit($pages->limit);
+        $query->limit(10);
         $rows = $query->all();
         return $this->render('index', [
                     'data' => $sql_update,
