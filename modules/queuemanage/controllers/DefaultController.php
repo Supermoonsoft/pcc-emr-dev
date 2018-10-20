@@ -36,7 +36,8 @@ class DefaultController extends Controller {
         
         $date1 = date('Y-m-d');
         $date2 = date('Y-m-d');
-
+        // $date1 = date('2018-08-01');
+        // $date2 = date('2018-10-20');
         // $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
         // ,concat(p.prename,p.fname,' ',p.lname) fullname
         // from pcc_visit t 
@@ -56,23 +57,27 @@ class DefaultController extends Controller {
         // compose the query
         $query->select(["t.jhcis_vn","t.pcc_vn as pcc_vn","p.hn","p.cid","t.visit_date_begin","t.visit_time_begin","concat(p.prename,p.fname,' ',p.lname) fullname"]);
         $query->leftJoin("gateway_emr_patient  p","p.cid = t.person_cid");
-        $query->where("t.visit_date_begin BETWEEN :date1 AND :date2");
+        $query->where("t.visit_date_begin BETWEEN :date1 AND :date2 AND t.current_station = 'A0'");
+        // $query->where("t.current_station = 'A0'");
         $query->from('pcc_visit t');
-        $query->orderBy(['t.jhcis_vn' => SORT_ASC]);
-        $query->limit(10);
         $query->addParams([':date1' => $date1,':date2' => $date2]);
-        $rows = $query->all();
+
+        $query->orderBy([
+            't.jhcis_vn' => SORT_ASC,
+            't.visit_date_begin' => SORT_ASC,
+            't.visit_time_begin' => SORT_ASC
+            ]);
         $command = $query->createCommand();
         $rows = $command->queryAll();
         $count = $query->count();
         $pages = new Pagination(['totalCount' => $count]);
-        $models = $query->offset($pages->offset)
-            ->limit($pages->limit)
-            ->all();
+        $query->offset($pages->offset);
+        $query->limit($pages->limit);
+        $rows = $query->all();
         return $this->render('index', [
                     'data' => $sql_update,
                     'param' => $param,
-                    'models' => $models,
+                    // 'models' => $models,
                     'pages' => $pages,
                     'rows' => $rows
  

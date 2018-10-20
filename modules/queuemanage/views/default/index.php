@@ -77,7 +77,7 @@ $send = 0;
                         <thead style="background-color: #eee;">
                             <tr>
                                 <th></th>                                
-                                <th>CID</th>
+                                <th>บัตรประชาชน</th>
                                 <th >ลำดับส่ง</th>
                                 <th >เวลามา</th>                                
                                 <th >วันนัด</th>                                
