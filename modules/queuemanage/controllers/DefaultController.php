@@ -8,6 +8,8 @@ use app\components\DbHelper;
 use yii\data\SqlDataProvider;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
+use yii\data\Pagination;
+use yii\db\Query;
 use app\modules\queuemanage\models\PccDoctorRoomQueue;
 use app\modules\queuemanage\models\PccVisit;
 use app\modules\queuemanage\models\PccVisitSearch;
@@ -34,19 +36,46 @@ class DefaultController extends Controller {
         
         $date1 = date('Y-m-d');
         $date2 = date('Y-m-d');
-        $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
-        ,concat(p.prename,p.fname,' ',p.lname) fullname
-        from pcc_visit t 
-        LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
-        WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
-        AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc LIMIT 10";
-        $raw = DbHelper::queryAll('db', $sql);
-        
 
+        // $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
+        // ,concat(p.prename,p.fname,' ',p.lname) fullname
+        // from pcc_visit t 
+        // LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
+        // WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
+        // AND t.current_station = 'A0' order by t.visit_date_begin asc,t.visit_time_begin asc";
+        // $raw = DbHelper::queryAll('db', $sql);
+
+        // $sqlcount = "SELECT count(*) from pcc_visit t 
+        // LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
+        // WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
+        // AND t.current_station = 'A0'";
+        // $count = DbHelper::queryScalar('db', $sqlcount);
+
+         #################################
+         $query = new Query;
+        // compose the query
+        $query->select(["t.jhcis_vn","t.pcc_vn as pcc_vn","p.hn","p.cid","t.visit_date_begin","t.visit_time_begin","concat(p.prename,p.fname,' ',p.lname) fullname"]);
+        $query->leftJoin("gateway_emr_patient  p","p.cid = t.person_cid");
+        $query->where("t.visit_date_begin BETWEEN :date1 AND :date2");
+        $query->from('pcc_visit t');
+        $query->orderBy(['t.jhcis_vn' => SORT_ASC]);
+        $query->limit(10);
+        $query->addParams([':date1' => $date1,':date2' => $date2]);
+        $rows = $query->all();
+        $command = $query->createCommand();
+        $rows = $command->queryAll();
+        $count = $query->count();
+        $pages = new Pagination(['totalCount' => $count]);
+        $models = $query->offset($pages->offset)
+            ->limit($pages->limit)
+            ->all();
         return $this->render('index', [
-                    'raw' => $raw,
                     'data' => $sql_update,
-                    'param' => $param
+                    'param' => $param,
+                    'models' => $models,
+                    'pages' => $pages,
+                    'rows' => $rows
+ 
         ]);
     }
 
@@ -82,7 +111,10 @@ public function actionSave(){
         return $this->redirect(['/queuemanage']);
 
 }
+
+
 }
+
 
 public function actionViewAll(){
     // \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

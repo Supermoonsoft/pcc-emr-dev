@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
+use yii\widgets\LinkPager;
 use app\modules\queuemanage\models\CDoctorRoom;
 
 DataTableAsset::register($this);
@@ -52,22 +53,28 @@ $send = 0;
             'method' => 'post'
         ]);
         ?>
-        <div style="margin-bottom: 3px">
+ <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right: 0px">
+            <div style="margin-bottom: 3px">
             <?php
             $array = ArrayHelper::map(CDoctorRoom::find()->orderBy('id ASC')->all(),'id','room_title');
             echo Html::dropDownList('room', '0',$array, ['class' => 'form-control form-control-inline', 'id' => 'room','prompt'=>'เลือกห้องตรวจ'])
             ?>
-
-            <button id='btn_add_q' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
-             <?=Html::a('<i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า',['/queuemanage/room'], ['class' => 'btn btn-light-green pull-right'])?>
-        
+            <button id='btn-save' type="submit" class="btn btn-pink"><i class="fa fa-check"></i> ส่งพบแพทย์</button>
+            <?php // ActiveForm::end(); ?>     
+            <input type='text' id='txt_name' placeholder='ค้นหา' class="form-control form-control-inline pull-right">
+             
         </div>
-
-        <div class="row">
+            </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                <div id="grid-view-data-table" class="grid-view">
+             <?=Html::a('<i class="fa fa-user-md" aria-hidden="true"></i> ตั้งค่า',['/queuemanage/room'], ['class' => 'btn btn-light-green pull-right'])?>                
+            </div>
+        </div>
+        
+        <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="padding-right: 0px">
                     <table class="table  table-bordered">
-                        <thead>
+                        <thead style="background-color: #eee;">
                             <tr>
                                 <th></th>                                
                                 <th>CID</th>
@@ -80,7 +87,7 @@ $send = 0;
                         </thead>
                         <tbody>
 
-                            <?php foreach ($raw as $key => $value): ?>
+                            <?php foreach ($rows as $key => $value): ?>
                                 <tr data-cid="<?= $value['cid'] ?>" class="tr-vn">
                                     <td>
                                         <input class="chk_pt" type="checkbox" name="pt[]" value="<?= $value['pcc_vn'] ?>" />
@@ -94,7 +101,12 @@ $send = 0;
                                     <div  id="<?=$value['pcc_vn']?>" class="send_no"></div>
                                     <div id="time<?=$value['pcc_vn']?>"></div>
                                     </td>
-                                    <td><?= $value['visit_date_begin'] . ' ' . $value['visit_time_begin'] ?></td>                                    
+                                    <td>
+                                        <?php
+                                        $thaidate = new  CDoctorRoom();
+                                        echo $thaidate->thaidate($value['visit_date_begin']) . ' ' . $value['visit_time_begin'] ?>
+                                    
+                                    </td>                                    
                                     <td></td>
                                     <td><?= $value['fullname'] ?></td>
 
@@ -103,7 +115,11 @@ $send = 0;
                         </tbody>
 
                     </table>
-                </div>
+                    <?php
+echo LinkPager::widget([
+    'pagination' => $pages,
+]);
+?>
             </div>
             <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="panel panel-info">
@@ -140,13 +156,45 @@ $send = 0;
         <?php else:?>
 <?=$this->render('./view_all',['raw' => $raw,]);?>
         <?php endif;?>
-
-
-
     </div>
 </div>
 
 <?php
 $this->registerJs($this->render('script.js'));
+?>
+
+
+<?php
+$js = <<< JS
+$(document).ready(function(){
+
+$('#txt_name').keyup(function(){ // เมื่อมีการค้นหา
+
+  var search = $(this).val(); // นำค่า vulue ใส่ในตัวแปร search
+
+  $('table tbody tr').hide();
+
+  var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+  if(len > 0){
+
+    $('table tbody tr:not(.notfound) td:contains("'+search+'")').each(function(){
+       $(this).closest('tr').show();
+    });
+  }else{
+    $('.notfound').show();
+  }
+
+});
+});
+$.expr[":"].contains = $.expr.createPseudo(function(arg) {
+ return function( elem ) {
+   return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+ };
+});
+
+JS;
+$this->registerJS($js);
+
 ?>
 
