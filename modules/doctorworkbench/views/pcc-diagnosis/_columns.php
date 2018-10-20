@@ -4,8 +4,21 @@ use yii\helpers\Url;
 use kartik\editable\Editable;
 return [
     [
-        'class' => 'kartik\grid\CheckboxColumn',
+        // 'class' => 'kartik\grid\CheckboxColumn',
+        'class' => 'kartik\grid\RadioColumn',
         'width' => '20px',
+        // 'checkboxOptions' => function ($model, $key, $index, $widget) { 
+        //     if($model->id ==  Yii::$app->request->get('id')){
+        //         //return ['value' => $model->id, 'checked' => ['key' => $model->id]];
+
+        //     }
+        // }
+        'radioOptions' => function ($model) {
+            return [
+                'value' => $model->id,
+                'checked' => $model->id == Yii::$app->request->get('id')
+            ];
+        }
     ],
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -14,12 +27,13 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'icd_code',
-        'header' => 'ICD10'
+        'header' => 'ICD10',
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'icd_name',
         'header' => 'ชื่อโรค',
+
     ],
     [
         // 'class' => '\kartik\grid\DataColumn',

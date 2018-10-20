@@ -44,19 +44,26 @@ class PccDiagnosisController extends VisitController
     
     public function actionIndex()
     {    
+        $id = Yii::$app->request->get('id');
         $cid = PatientHelper::getCurrentCid();
         $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccDiagnosisSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
         $dataProvider->query->orderBy('date_service ASC');
-        $model = new PccDiagnosis(); 
+        if($id){
+            $model =  PccDiagnosis::find()->where(['id' => $id])->one(); 
+
+        }else{
+            $model = new PccDiagnosis(); 
+        }
         $model->cid = $cid;
         $model->pcc_vn = $pcc_vn;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
+            'id' => $id
             
         ]);
     }
@@ -67,14 +74,19 @@ class PccDiagnosisController extends VisitController
         $model = new PccDiagnosis();  
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($request->post())) {
+            if($model->icd_code){
             $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
+            }else{
+                $model->icd_code = NULL;
+            }
             //$model->diag_type = 2;
-            if ($model->diag_text == "") {
-                $model->diag_text = NULL;
-              }else {$model->diag_text = json_encode($model->diag_text);}
+            // if ($model->diag_text == "") {
+            //     $model->diag_text = NULL;
+            //   }else {$model->diag_text = json_encode($model->diag_text);}
             //   $model->date_service = Date('Y-m-d');
          $model->save(false);
-         return ['forceReload'=>'#crud-diagnosis-pjax'];
+        //  return ['forceReload'=>'#crud-diagnosis-pjax'];
+        return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -82,7 +94,7 @@ class PccDiagnosisController extends VisitController
         }
     }
 
-    public function actionUpdate()
+    public function actionUpdateAjax()
     {
         Yii::$app->response->format = Response::FORMAT_JSON;
         // $request = Yii::$app->request;
@@ -100,6 +112,23 @@ class PccDiagnosisController extends VisitController
         }
     }
 
+    public function actionUpdate($id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $request = Yii::$app->request;
+        $model = $this->findModel($id);       
+            if ($model->load($request->post()) ) {
+                 if($model->icd_code){
+                $model->icd_name = CIcd10tm::find()->where(['diagcode' => $model->icd_code])->one()->diagename;
+                }else{
+                    $model->icd_code = NULL;
+                }
+            $model->save();
+               return $this->redirect(['index']);                
+            } else {
+                return $this->redirect(['index']);
+            }
+        }
 
     private function DiagText($cc){
 
@@ -115,7 +144,8 @@ class PccDiagnosisController extends VisitController
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            // return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            return $this->redirect(['index']);            
         }else{
             /*
             *   Process for non-ajax request
@@ -164,7 +194,7 @@ public function actionIcd10List($q = null, $id = null){
     $out = ['results'=>['diagcode'=>'','text'=>'']];
     if(!is_null($q)){
         $query = new \yii\db\Query();
-        $query->select('diagename,diagtname,diagcode as id, diagcode as text')
+        $query->select(["diagename","diagtname","diagcode as id", "concat('(',diagcode,')',' - ',diagename,' - ',diagtname) as text"])
                 ->from('c_icd10tm')
                 ->where("diagcode LIKE '%".$q."%'")
                 ->orWhere("diagename LIKE '%".$q."%'")

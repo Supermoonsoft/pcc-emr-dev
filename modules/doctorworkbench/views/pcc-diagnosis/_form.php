@@ -7,12 +7,28 @@ use yii\web\JsExpression;
 use yii\web\View;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
-use app\modules\doctorworkbench\models\CDiagtext;
+use app\modules\doctorworkbench\models\CIcd10tm;
 
 $url = \yii\helpers\Url::to(['icd10-list']); //กำหนด URL ที่จะไปโหลดข้อมูล
-$prefix = empty($person->prefix_id) ? '' : BasePrefix::findOne($model->prefix_id)->prefix_name; //กำหนดค่าเริ่มต้น
+
+// $prefix = empty($model->id) ? '' : CIcd10tm::findOne($model->icd_code)->diagcode; //กำหนดค่าเริ่มต้น
 $action_create = Url::to(['create']);
 $action_update = Url::to(['update']);
+
+if($model->id){
+    $action = Url::to(['update','id' => $model->id]);
+    if($model->icd_code){
+        $fix = CIcd10tm::findOne($model->icd_code);
+        $prefix = '('.$fix->diagcode.') - '.$fix->diagename.' - '.$fix->diagtname;
+    }else{
+    $prefix = '';
+    }
+    
+}else{
+    $action = Url::to(['create']);
+    $prefix = '';
+
+}
 $formatJs = <<< 'JS'
 var formatRepo = function (repo) {
     if (repo.loading) {
@@ -56,8 +72,6 @@ JS;
         min-height: 123px;
     }
 </style>
-
-
 <div class="pcc-diagnosis-form">
 <fieldset>
     <legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form 
@@ -72,7 +86,7 @@ JS;
 <div id="some-element" data=""></div>
 <div id="text"></div>
 
-    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => $action_create, 'options' => ['data-pjax' => 1],]); ?>
+    <?php $form = ActiveForm::begin(['id' => 'form-diagnosis', 'action' => $action, 'options' => ['data-pjax' => 1],]); ?>
     <?php echo $form->field($model, 'id')->hiddenInput(['id' => 'id','disabled' => true])->label(false); ?>
     <?= $form->field($model, 'hn')->hiddenInput()->label(false); ?>
         <?= $form->field($model, 'vn')->hiddenInput()->label(false); ?>
@@ -106,9 +120,12 @@ JS;
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
     <?=
     $form->field($model, 'icd_code')->widget(Select2::className(), [
-        // 'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
+        'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
         // 'initValueText' => '', //กำหนดค่าเริ่มต้น
         // 'theme' => Select2::THEME_DEFAULT,/
+        // 'data' => ArrayHelper::map(CIcd10tm::find()->limit(10)->all(), 'diagcode', function($model, $defaultValue) {
+        //     return $model->diagcode.' '.$model->diagtname;
+        // }),
         'options' => ['id' => 'icd_code', 'placeholder' => 'Select ICD10...','class' => 'clear'],
         'pluginOptions' => [
             'allowClear' => true,
@@ -125,7 +142,7 @@ JS;
             'templateResult' => new JsExpression('formatRepo'),
         ],
         'pluginEvents' => [
-            "select2:select" => "function() { $('#diag_type').select2('open'); }",
+           "select2:select" => "function() { $('#diag_type').select2('open'); }",
         ]
     ])->label(false);
     ?>
@@ -150,9 +167,20 @@ JS;
     ?>
         </div>
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-<?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text">เพิ่ม</span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
-<?php echo Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
-            
+        <?php if($model->id):?>
+<?php echo Html::submitButton('<i id="icon" class="fa fa-edit"></i><span id="btn_text">แก้ไข</span>', ['class' => 'btn btn-warning', 'id' => 'btn-save']) ?>
+&nbsp;<?= Html::a('<i class="fa fa-trash"></i> ลบรายการ', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'คุณต้องการที่จะลบรายการนี้หรือไม่',
+                'method' => 'post',
+            ],
+        ]) ?>  
+<?php else:?>
+        <?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text">เพิ่ม</span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+        <?php endif;?>
+<?php // echo Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
+   
             </div>
     </div>
     
