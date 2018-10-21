@@ -9,7 +9,7 @@ use yii\helpers\Html;
 
 <?php
 Modal::begin([
-    'header' => '<h4><i class="fa fa-calendars">บันทึกการนัด</h4>',
+    'header' => '<h4><บันทึกการนัด</h4>',
     'id' => 'modal',
     'options' => [
         'tabindex' => FALSE
@@ -277,8 +277,7 @@ $this->registerCss("
     padding: 4px 8px;
     font-size: 14px;
     cursor: pointer;
-    width:80px;
-    height:30px;
+    width:70px;
     border-radius: 5px;
 }
 

@@ -98,7 +98,7 @@ class OrderController extends VisitController
             
             $event = new \yii2fullcalendar\models\Event();
             $event->id = $eve->id;
-            $event->title = $eve->clinic_text;
+            $event->title = $eve->clinic_text.' '.$eve->qty;
             $event->start = $eve->startdate;
             $event->end = $eve->enddate;
             $event->backgroundColor = $eve->color;

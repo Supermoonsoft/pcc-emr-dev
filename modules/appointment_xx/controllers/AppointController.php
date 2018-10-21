@@ -67,7 +67,7 @@ class AppointController extends Controller {
         
 
         $cid = PatientHelper::getCurrentCid();
-        //$model->vn = PatientHelper::getCurrentVn();
+        $model->vn = PatientHelper::getCurrentVn();
         $model->hn = PatientHelper::getCurrentHn();
         $model->cid = PatientHelper::getCurrentCid();
         $model->pcc_vn = PatientHelper::getCurrentVn();
@@ -78,31 +78,16 @@ class AppointController extends Controller {
         $model->hospcode = $hospcode;
 
 
-        if ($model->load(Yii::$app->request->post()) && $model->save(FALSE)) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
 
             $command = Yii::$app->db->createCommand("SELECT color FROM c_clinic WHERE code='$model->clinic'");
             $color_code = $command->queryScalar();
             $command = Yii::$app->db->createCommand("SELECT name FROM c_clinic WHERE code='$model->clinic'");
             $color_text = $command->queryScalar();
-            
-            $command = Yii::$app->db->createCommand("SELECT count(id) AS tcount  FROM pcc_appoinment_show WHERE startdate='$model->appoint_date' and clinic_text='$color_text' ");
-            $qty = $command->queryScalar();
-            
-            
-            if($qty==''){
-                $qty=1;
-                $datals = $connection->createCommand("INSERT INTO pcc_appoinment_show (startdate,enddate,color,oapp_id,clinic_text,cid,qty)
-                                                    VALUES ('$model->appoint_date','$model->appoint_date','$color_code','$model->id','$color_text','$cid',$qty)")->execute();
+            $datals = $connection->createCommand("INSERT INTO pcc_appoinment_show (startdate,enddate,color,oapp_id,clinic_text,cid)
+                                                    VALUES ('$model->appoint_date','$model->appoint_date','$color_code','$model->id','$color_text','$cid')")->execute();
 
-            }else{
-               $qty= $qty+1;
-               $datals = $connection->createCommand("UPDATE pcc_appoinment_show SET qty ='$qty' WHERE startdate='$model->appoint_date' and clinic_text='$color_text' ")->execute();
-
-            }
-            
-             
-            
             return $this->redirect(['/doctorworkbench/order/appointment']);
         }
 

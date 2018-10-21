@@ -44,7 +44,7 @@ class PccAppointment extends \yii\db\ActiveRecord
             [['id'], 'string'],
             [['date_service', 'time_service', 'appoint_date', 'appoint_time', 'data_json', 'last_update'], 'safe'],
             [['hn'], 'string', 'max' => 9],
-            [['vn','pcc_vn'], 'string', 'max' => 14],
+            [['vn','pcc_vn'], 'string', 'max' => 12],
             [['cid'], 'string', 'max' => 13],
             [['hospcode'], 'string', 'max' => 5],
             [['hospname', 'clinic', 'detail','provider'], 'string', 'max' => 255],

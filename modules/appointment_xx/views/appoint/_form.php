@@ -4,8 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
-
-
+/* @var $this yii\web\View */
+/* @var $model app\modules\appointment\models\GatewayEmrAppointment */
+/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <div class="gateway-emr-appointment-form">
