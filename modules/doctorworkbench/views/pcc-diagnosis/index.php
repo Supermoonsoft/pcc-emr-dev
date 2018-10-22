@@ -9,7 +9,7 @@ use yii\web\JsExpression;
 use yii\widgets\Pjax;
 use app\components\PatientHelper;
 $this->registerJs($this->render('../../dist/js/script.js'));
-// $this->registerJs($this->render('../../dist/js/diagnosis.js'));
+$this->registerJs($this->render('../../dist/js/rediag.js'));
 $this->registerCss($this->render('../../dist/css/style.css'));
 
 //$this->title = 'Diagnosis';
@@ -117,6 +117,140 @@ HTML;
                 'maxButtonCount'=>10,
         ],       
         ])?>
+ <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
+        
+        <div class="row" style="margin-bottom: 2px;">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            <button class="btn btn-info" id="re-diag" onClick=<?php //new JsExpression($alert)?>><i class="fa fa-check"></i> xxxxxx </button>
+                
+            </div>    
+            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+            <div class="progress" style=" height: 34px;margin-bottom: -8px;margin-left: -71px;">
+  <div id='p' class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar"
+  aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="padding-top: 8px; font-size: 20px;">
+  100
+  </div>
+</div>
+            </div>
+            
+        </div>
+
+ <?= GridView::widget([
+        'dataProvider' => $drugHis,
+        //'filterModel' => $searchModel,
+        //'showPageSummary'=>true,
+        'summary'=>false,
+        'pjax'=>true,
+        'pjaxSettings'=>[
+            'neverTimeout'=>true,
+        ],
+        'options' => [
+            'id' => 'gridview-id'
+        ],
+        'striped'=>true,
+        'hover'=>true, 
+        'toolbar' =>  ['{toggleData}',],
+        'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'], 
+        'rowOptions' => function ($model, $key, $index, $grid) { //สามารถกำหนด data-key ใหม่ (ปกติจะใช้ PK)
+            return ['data' => ['key' => [
+                'pcc_vn' => $model->pcc_vn,
+                'diag_text' => $model->diag_text,
+                'icd_code' => $model->icd_code,
+                'diag_type' => $model->diag_type,
+                'hn' => $model->hn,
+                'vn' => $model->vn,
+            ]]];
+        }, 
+        'columns' => [
+            [
+                'class' => 'yii\grid\CheckboxColumn',
+                'header' => false,
+                'checkboxOptions' =>
+
+                function($model) {
+        
+                    return ['value' => $model->id, 'class' => $model->pcc_vn, 'id' => 'checkbox'];
+        
+                }
+            ],
+            [
+                'attribute'=>'date_visit', 
+                'format'=>'raw',
+                'value'=>function ($model, $key, $index, $widget) { 
+                    return Html::checkbox($model->pcc_vn).' '.$model->thaidate($model->date_service);
+                },
+                'filter'=>false,
+                'group'=>true,  // enable grouping,
+                'groupedRow'=>true,                    // move grouped column to a single grouped row
+                'groupOddCssClass'=>'kv-grouped-row',  // configure odd group cell css class
+                'groupEvenCssClass'=>'kv-grouped-row', // configure even group cell css class
+            ],
+            [
+                'class'=>'\kartik\grid\DataColumn',
+                'attribute'=>'diag_text',
+                'header' => 'DiagText',
+                'width' => '185px',
+                'value' => function($model){
+                    return $model->diag_text;
+                }
+
+            ],
+            [
+                'class'=>'\kartik\grid\DataColumn',
+                'width' => '40px',
+                'attribute'=>'icd_code',
+                'header' => 'ICD10',
+            ],
+            [
+                'class'=>'\kartik\grid\DataColumn',
+                'attribute'=>'icd_name',
+                'header' => 'ชื่อโรค',
+        
+            ],
+            [
+                // 'class' => '\kartik\grid\DataColumn',
+                'attribute' => 'diag_type',
+                'hAlign' => 'left',
+                'vAlign' => 'middle',
+                'header' => 'ประเภท',
+                'value' => function($model){
+                    if($model->diag_type != ''){
+                        return $model->diagtype1->diagtype.'-'.$model->diagtype1->name1;
+                    } else {
+                        return '-';
+                    }
+                    
+                }
+            ],
+            // [
+            //     'class' => 'kartik\grid\ActionColumn',
+            //     'template' => '{delete}',
+            //     'buttons' => [
+            //         'delete' => function ($url) {
+            //             return Html::a('<i class="far fa-trash-alt"></i> ', '#', [
+            //                 'title' => Yii::t('yii', 'Delete'),
+            //                 'class' => '',
+            //                 'aria-label' => Yii::t('yii', 'Delete'),
+            //                 'onclick' => "
+            //                     // if (confirm('ok?')) {
+            //                         $.ajax('$url', {
+            //                             type: 'POST'
+            //                         }).done(function(data) {
+            //                             $.pjax.reload({container: '#crud-diagnosis-pjax'});
+            //                         });
+            //                     // }
+            //                     return false;
+            //                 ",
+            //             ]);
+            //         },
+            //     ],
+            // ],
+        ],
+            
+    ]); ?>
+
+
+
 <?php echo $this->render('../default/panel_foot');?>
 
 <?php

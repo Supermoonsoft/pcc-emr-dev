@@ -9,6 +9,7 @@ use app\modules\doctorworkbench\models\PccDiagnosisSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Expression;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\helpers\Json;
@@ -49,8 +50,14 @@ class PccDiagnosisController extends VisitController
         $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccDiagnosisSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->where(['cid' => $cid,'pcc_vn' => $pcc_vn]);
         $dataProvider->query->orderBy('date_service ASC');
+
+        // $drugHis = PccDiagnosis::find()->where(['cid' => $cid])->all();
+        $drugHis = $searchModel->search(Yii::$app->request->queryParams);
+        $drugHis->query->Where(['cid' => $cid]);
+        $drugHis->query->andWhere(['NOT IN', 'date_service', date('Y-m-d')]);
+        $drugHis->query->orderBy('date_service DESC');
         if($id){
             $model =  PccDiagnosis::find()->where(['id' => $id])->one(); 
 
@@ -62,6 +69,7 @@ class PccDiagnosisController extends VisitController
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'drugHis' => $drugHis,
             'model' => $model,
             'id' => $id
             
@@ -72,6 +80,8 @@ class PccDiagnosisController extends VisitController
     {
         $request = Yii::$app->request;
         $model = new PccDiagnosis();  
+        $expression = new Expression("NOW()");
+
         Yii::$app->response->format = Response::FORMAT_JSON;
         if ($model->load($request->post())) {
             if($model->icd_code){
@@ -79,11 +89,7 @@ class PccDiagnosisController extends VisitController
             }else{
                 $model->icd_code = NULL;
             }
-            //$model->diag_type = 2;
-            // if ($model->diag_text == "") {
-            //     $model->diag_text = NULL;
-            //   }else {$model->diag_text = json_encode($model->diag_text);}
-            //   $model->date_service = Date('Y-m-d');
+        $model->date_service = (new \yii\db\Query)->select($expression)->scalar();
          $model->save(false);
         //  return ['forceReload'=>'#crud-diagnosis-pjax'];
         return $this->redirect(['index']);
@@ -114,6 +120,7 @@ class PccDiagnosisController extends VisitController
 
     public function actionUpdate($id)
     {
+        $expression = new Expression("NOW()");
         Yii::$app->response->format = Response::FORMAT_JSON;
         $request = Yii::$app->request;
         $model = $this->findModel($id);       
@@ -123,6 +130,7 @@ class PccDiagnosisController extends VisitController
                 }else{
                     $model->icd_code = NULL;
                 }
+            $model->last_update = (new \yii\db\Query)->select($expression)->scalar();
             $model->save();
                return $this->redirect(['index']);                
             } else {
@@ -130,8 +138,34 @@ class PccDiagnosisController extends VisitController
             }
         }
 
-    private function DiagText($cc){
+    public function actionReDiag(){
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $expression = new Expression("NOW()");
+       $request = Yii::$app->request;
+       $cid = PatientHelper::getCurrentCid();
+       $pcc_vn = PatientHelper::getCurrentVn();
+       $data = $request->post('value');
+            $model = new PccDiagnosis();
+            $model->pcc_vn = $pcc_vn;
+            $model->cid  = $cid;
+            if($data['icd_code']){
+                $model->icd_name = CIcd10tm::find()->where(['diagcode' => $data['icd_code']])->one()->diagename;
+                }else{
+                    $model->icd_code = NULL;
+                }
+                $model->diag_text = $data['diag_text'];
+                $model->diag_type = $data['diag_type'];
+                $model->icd_code = $data['icd_code'];
+                $data['vn'] == ""? $model->vn = NULL : $model->vn = $data['vn'];
+                $data['hn'] == ""? $model->hn = NULL : $model->hn = $data['hn'];
+            $model->date_service = (new \yii\db\Query)->select($expression)->scalar();
+          $model->save(false);
+        return ['success'];
 
+            // return ['success'];
+
+        
+        
     }
 
     public function actionDelete($id)

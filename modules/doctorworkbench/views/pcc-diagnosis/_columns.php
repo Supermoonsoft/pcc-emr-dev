@@ -26,6 +26,12 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'attribute'=>'diag_text',
+        'header' => 'DiagText',
+    ],
+    [
+        'class'=>'\kartik\grid\DataColumn',
+        'width' => '40px',
         'attribute'=>'icd_code',
         'header' => 'ICD10',
     ],
