@@ -86,6 +86,7 @@ JS;
 <div class="pcc-diagnosis-form">
 <fieldset>
     <legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form 
+    <button class="btn btn-default"><i class="fas fa-address-card"></i> General</button>
     <button class="btn btn-green"><i class="fas fa-female"></i> Obs-Gyn</button>
     <button class="btn btn-diag-info"><i class="fas fa-user-md"></i> Surgery</button>
     <button class="btn btn-primary"><i class="fas fa-pills"></i> Medicine</button>

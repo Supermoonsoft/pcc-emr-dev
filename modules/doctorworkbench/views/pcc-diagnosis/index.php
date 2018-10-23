@@ -121,7 +121,7 @@ HTML;
         
         <div class="row" style="margin-bottom: 2px;">
             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-            <button class="btn btn-info" id="re-diag" onClick=<?php //new JsExpression($alert)?>><i class="fa fa-check"></i> xxxxxx </button>
+            <button class="btn btn-info" id="re-diag" onClick=<?php //new JsExpression($alert)?>><i class="fa fa-check"></i>  วินิจฉัยปัจจุบัน</button>
                 
             </div>    
             <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
