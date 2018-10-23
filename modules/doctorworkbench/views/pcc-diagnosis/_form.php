@@ -179,9 +179,9 @@ JS;
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
         <?php if($model->id):?>
-<?php echo Html::submitButton('<i id="icon" class="fa fa-edit"></i><span id="btn_text">แก้ไข</span>', ['class' => 'btn btn-warning', 'id' => 'btn-save']) ?>
+<?php echo Html::submitButton('<i id="icon" class="fa fa-edit"></i><span id="btn_text"></span>', ['class' => 'btn btn-warning', 'id' => 'btn-save']) ?>
 <?php else:?>
-        <?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text">เพิ่ม</span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+        <?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text"></span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
         <?php endif;?>
 <?php // echo Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
    
