@@ -98,7 +98,7 @@ class OrderController extends VisitController
             
             $event = new \yii2fullcalendar\models\Event();
             $event->id = $eve->id;
-            $event->title = $eve->clinic_text.' '.$eve->qty;
+            $event->title = $eve->clinic_text;
             $event->start = $eve->startdate;
             $event->end = $eve->enddate;
             $event->backgroundColor = $eve->color;
@@ -158,16 +158,23 @@ class OrderController extends VisitController
         
     }
     public function actionPreOrderLab(){
+        $id = Yii::$app->request->get('id');
         $cid = PatientHelper::getCurrentCid();
         $pcc_vn = PatientHelper::getCurrentVn();
-        $model = new Preorderlab();
-        $model->lab_request_date = Date('Y-m-d');
+        
         $searchModel = new PreorderlabSeach();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid,'pcc_vn' => $pcc_vn]);
         $dataProvider->query->orderBy('id DESC');
-
-
+        if($id){
+            $model = Preorderlab::find()->where(['id' => $id])->one(); 
+            if(!$model){
+                return $this->redirect(['/doctorworkbench/order/pre-order-lab']);
+            }
+        }else{
+           $model = new Preorderlab();
+           $model->lab_request_date = Date('Y-m-d');
+        }
         return $this->render('pre_order_lab', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

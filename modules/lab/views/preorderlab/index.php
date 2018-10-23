@@ -52,20 +52,59 @@ HTML;
             'id' => 'preorderlab',
             'dataProvider' => $dataProvider,
             'pjax' => true,
+            'rowOptions'=>function($model,$id){
+                if($model->id == Yii::$app->request->get('id')){
+                    return ['class' => 'success'];
+                }
+            },
             'columns' => [
                 [
-                    'class' => 'kartik\grid\CheckboxColumn',
+                    'class' => 'kartik\grid\RadioColumn',
                     'width' => '20px',
+                    'radioOptions' => function ($model) {
+                        return [
+                            'value' => $model->id,
+                            'checked' => $model->id == Yii::$app->request->get('id'),
+                            'onclick'=> 'window.location.href = "'.Url::to(['/doctorworkbench/order/pre-order-lab','id' => $model->id]).'"'
+                        ];
+                    }
                 ],
                 [
                     'class' => 'kartik\grid\SerialColumn',
                     'width' => '30px',
                 ],
-                'lab_name',
-                'lab_request_date',
-                'lab_result_date',
-                'lab_result',
-                'standard_result',
+                [
+                    'class'=>'\kartik\grid\DataColumn',
+                    'attribute'=>'lab_name',
+                    'header' => 'lab_name',
+                    'value' => function($model){
+                        return $model->labname->labname_en;
+                    }
+                ],
+                [
+                    'class'=>'\kartik\grid\DataColumn',
+                    'attribute'=>'lab_request_date',
+                    'header' => 'lab_request_date',
+                    'value' => function($model){
+                        return $model->thaidate($model->lab_request_date);
+                    }
+                ],
+                [
+                    'class'=>'\kartik\grid\DataColumn',
+                    'attribute'=>'lab_result_date',
+                    'header' => 'lab_result_date',
+                    'value' => function($model){
+                        return $model->thaidate($model->lab_result_date);
+                    }
+                ],
+                [
+                    'class'=>'\kartik\grid\DataColumn',
+                    'attribute'=>'standard_result',
+                    'header' => 'standard_result',
+                    'value' => function($model){
+                        return $model->standard_result;
+                    }
+                ],
                 [
                     'class' => 'kartik\grid\ActionColumn',
                     'template' => '{delete}',

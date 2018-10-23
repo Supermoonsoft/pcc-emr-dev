@@ -60,9 +60,16 @@ class PccDiagnosisController extends VisitController
         $drugHis->query->orderBy('date_service DESC');
         if($id){
             $model =  PccDiagnosis::find()->where(['id' => $id])->one(); 
+            if(!$model){
+        return $this->redirect(['index']);
+
+            }
 
         }else{
             $model = new PccDiagnosis(); 
+            $model->cid = $cid;
+            $model->pcc_vn = $pcc_vn;
+
         }
         
         // $model->cid = $cid;
@@ -90,15 +97,11 @@ class PccDiagnosisController extends VisitController
             }else{
                 $model->icd_code = NULL;
             }
-        $model->date_service = (new \yii\db\Query)->select($expression)->scalar();
+         $model->date_service = (new \yii\db\Query)->select($expression)->scalar();
          $model->save(false);
-         return ['forceReload'=>'#crud-diagnosis-pjax'];
+        return ['forceReload'=>'#crud-diagnosis-pjax'];
         // return $this->redirect(['index']);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+        } 
     }
 
     public function actionUpdateAjax()
