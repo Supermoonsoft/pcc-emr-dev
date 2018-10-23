@@ -15,11 +15,11 @@ $this->title = 'Pcclabs';
     <?php Pjax::begin(); ?>
     <?php //Html::beginForm(['/lab/pcclab/preorder'],'post');?>
 
-    <div style="margin-bottom: 3px">
+    <div style="margin-bottom: 1px">
         <?php $alert = 'swal("ส่งทีละหลายรายการ...")' ;?>
             
             <?php // Html::a('<button id="btn-add" onClick='.new JsExpression($alert).' class="btn btn-info" ><i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>', ['/doctorworkbench/order/pre-order-lab']) ?>
-            <div class="row" style="margin-bottom: 10px;">
+            <div class="row" style="margin-bottom: 3px;">
             <div class="col-xs-ภ col-sm-3 col-md-3 col-lg-3">
             <button class="btn btn-info" id="order-lab" onClick=<?php //new JsExpression($alert)?>>
             <i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
