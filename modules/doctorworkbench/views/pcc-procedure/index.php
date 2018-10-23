@@ -11,8 +11,10 @@ $this->registerCss($this->render('../../dist/css/style.css'));
 //$this->title = 'Procedure';
 //$this->params['breadcrumbs'][] = ['label' => 'Order', 'url' => ['/doctorworkbench/pcc-diagnosis']];
 //$this->params['breadcrumbs'][] = $this->title;
+$action_index = Url::to(['index']);
 
 ?>
+<span id="index" action="<?=$action_index;?>"></span>
 
 <?php
 // กำหนด laypout ของ Gridvire เอง
@@ -78,6 +80,9 @@ HTML;
                 if($model->date_service == Date('Y-m-d')){
                     return ['class' => 'info'];
                 }
+                if($model->id == Yii::$app->request->get('id')){
+                    return ['class' => 'success'];
+                }
             },
             'replaceTags' => [
                 '{custom}' => function($widget) {
@@ -121,8 +126,9 @@ $js = <<< JS
         });
     }
   });
-
+ 
 JS;
 $this->registerJS($js);
 ?>
+
 

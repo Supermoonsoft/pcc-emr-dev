@@ -64,8 +64,9 @@ class PccDiagnosisController extends VisitController
         }else{
             $model = new PccDiagnosis(); 
         }
-        $model->cid = $cid;
-        $model->pcc_vn = $pcc_vn;
+        
+        // $model->cid = $cid;
+        // $model->pcc_vn = $pcc_vn;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -91,8 +92,8 @@ class PccDiagnosisController extends VisitController
             }
         $model->date_service = (new \yii\db\Query)->select($expression)->scalar();
          $model->save(false);
-        //  return ['forceReload'=>'#crud-diagnosis-pjax'];
-        return $this->redirect(['index']);
+         return ['forceReload'=>'#crud-diagnosis-pjax'];
+        // return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -178,8 +179,8 @@ class PccDiagnosisController extends VisitController
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-            // return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
-            return $this->redirect(['index']);            
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            // return $this->redirect(['index']);            
         }else{
             /*
             *   Process for non-ajax request

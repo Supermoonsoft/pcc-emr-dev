@@ -104,8 +104,12 @@ $this->registerJS($js);
     <legend class="scheduler-border"><i class="fas fa-flask"></i> Pre Order Lab Form
 </legend> 
 <br>
-<?php $form = ActiveForm::begin(['layout' => 'horizontal','id' => 'form','action' => ['/lab/preorderlab/create']]); ?>
-<div class="box-row" style="width:500px;">
+<?php $form = ActiveForm::begin(['id' => 'form','action' => ['/lab/preorderlab/create']]); ?>
+<!-- <div class="box-row" style="width:500px;"> -->
+
+<div class="row">
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+        
 <?= $form->field($model, 'lab_request_date',[
         'horizontalCssClasses' => [
             'label' => 'col-sm-2',
@@ -120,9 +124,9 @@ $this->registerJS($js);
             ]
         ]
     ])->label('วันสั่ง') ?>
-</div>
-<div class="box-row" style="width:500px;">
-<?= $form->field($model, 'lab_result_date',[
+    </div>
+    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+    <?= $form->field($model, 'lab_result_date',[
         'horizontalCssClasses' => [
             'label' => 'col-sm-2',
             'wrapper' => 'col-sm-8',
@@ -136,9 +140,10 @@ $this->registerJS($js);
             ]
         ]
     ])->label('วันนัด') ?>
-</div>
-<div class="box-row" style="width:1000px;">
-<?=
+        </div>
+  
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <?=
     $form->field($model, 'lab_code',[
         'horizontalCssClasses' => [
             'label' => 'col-sm-1',
@@ -171,26 +176,16 @@ $this->registerJS($js);
          ]
     ])->label('ชื่อแลป');
     ?>
-</div>
-<div class="box-row" style="width:300px;">
-<div class="form-group pull-left" style="margin-left:-71px;">
-        <?= Html::submitButton('<i class="fas fa-plus"></i> บันทึก', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
-        <?= Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:0px;']) ?>
-    
+   
     </div>
-        </div>
 
-<div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-       
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+        <div class="form-group pull-left" style="margin-top:25px;">
+        <?= Html::submitButton('<i class="fas fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
+        <?php // Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:0px;']) ?>
         </div>
+    </div>
 </div>
-
-
-
-
-
-
     <?php ActiveForm::end(); ?>
     </fieldset>
 </div>

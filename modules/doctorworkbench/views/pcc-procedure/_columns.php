@@ -4,8 +4,15 @@ use yii\helpers\Url;
 
 return [
     [
-        'class' => 'kartik\grid\CheckboxColumn',
+        'class' => 'kartik\grid\RadioColumn',
         'width' => '20px',
+        'radioOptions' => function ($model) {
+            return [
+                'value' => $model->id,
+                'checked' => $model->id == Yii::$app->request->get('id'),
+                'onclick'=> 'window.location.href = "'.Url::to(['/doctorworkbench/pcc-procedure','id' => $model->id]).'"'
+            ];
+        }
     ],
     [
         'class' => 'kartik\grid\SerialColumn',
@@ -14,15 +21,13 @@ return [
     [
         'class'=>'\kartik\grid\DataColumn',
         'attribute'=>'procedure_name',
-        'header'=>'Procedure Name', 
         'value' => function($model){
-            return $model->proced->title_th;
+            return $model->proced->title.' - '.$model->proced->title_th;
         }
     ],
 
     [
         'class'=>'\kartik\grid\DataColumn',
-        'header'=>'Doctor', 
         'attribute'=>'doctor',
     ],
     [
