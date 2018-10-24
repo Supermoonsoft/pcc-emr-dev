@@ -12,6 +12,7 @@ $this->registerJS($this->render('@app/modules/doctorworkbench/dist/js/script.js'
 
 $this->title = 'Preorderlabs';
 ?>
+
  <?= $this->render('_form', [
         'model' => $model,
     ]) ?>
@@ -180,7 +181,11 @@ $js = <<< JS
         });
     }
   });
-
+  $('#preorderlab').on('grid.radiocleared', function(ev, key, val) {
+    //console.log("Key = " + key + ", Val = " + val);
+    //window.location.href = $('#index').attr('action');
+    alert();
+});
 JS;
 $this->registerJS($js);
 ?>

@@ -1,5 +1,5 @@
 <?php
-
+use yii\helpers\Url;
 use yii\helpers\Html;
 use kartik\widgets\Select2;
 use yii\web\JsExpression;
@@ -14,6 +14,14 @@ $this->registerCss($this->render('@app/modules/doctorworkbench/dist/css/style.cs
 
 $url = \yii\helpers\Url::to(['/lab/preorderlab/lab-list']); //กำหนด URL ที่จะไปโหลดข้อมูล
 $prefix = empty($model->lab_code) ? '' : CLabtest::findOne($model->lab_code)->labname_en; //กำหนดค่าเริ่มต้น
+
+if($model->id){
+    $action = Url::to(['/lab/preorderlab/update','id' => $model->id]);
+    
+}else{
+    $action = Url::to(['/lab/preorderlab/create']);
+
+}
 
 $formatJs = <<< 'JS'
 
@@ -96,7 +104,7 @@ $this->registerJS($js);
     <legend class="scheduler-border"><i class="fas fa-flask"></i> Pre Order Lab Form
 </legend> 
 <br>
-<?php $form = ActiveForm::begin(['id' => 'form','action' => ['/lab/preorderlab/create']]); ?>
+<?php $form = ActiveForm::begin(['id' => 'form','action' => $action]); ?>
 <!-- <div class="box-row" style="width:500px;"> -->
 
 <div class="row">
@@ -109,7 +117,6 @@ $this->registerJS($js);
             'wrapper' => 'col-sm-10',
             'error' => '',
             'hint' => '',
- 
         ]
     ])->widget(Select2::className(), [
         'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
@@ -171,7 +178,11 @@ $this->registerJS($js);
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
         <div class="form-group pull-left" style="margin-top:25px;">
-        <?= Html::submitButton('<i class="fas fa-plus"></i>', ['class' => 'btn btn-success','id' => 'btn-save']) ?>
+        <?php if($model->id):?>
+<?php echo Html::submitButton('<i id="icon" class="fa fa-edit"></i><span id="btn_text"></span>', ['class' => 'btn btn-warning', 'id' => 'btn-save']) ?>
+<?php else:?>
+        <?php echo Html::submitButton('<i id="icon" class="fa fa-plus"></i><span id="btn_text"></span>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+        <?php endif;?>
         <?php // Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger','id'=>'btn-delete','style' => 'margin-bottom:0px;']) ?>
         </div>
     </div>

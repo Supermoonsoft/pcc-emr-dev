@@ -76,9 +76,9 @@ class PreorderlabController extends Controller
             $model->cid  = $cid;
             $model->pcc_vn = $pcc_vn;
             $model->save(false);
+        return ['forceReload'=>'#preorderlab-pjax'];
+
         }
-        return [
-            'forceReload'=>'#preorderlab-pjax'];
     }
 
     /**
@@ -90,15 +90,14 @@ class PreorderlabController extends Controller
      */
     public function actionUpdate($id)
     {
+        Yii::$app->response->format = Response::FORMAT_JSON;
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            // return $this->redirect(['view', 'id' => $model->id]);
+            // return ['forceReload'=>'#preorderlab-pjax'];
+            return $this->redirect(['/doctorworkbench/order/pre-order-lab']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
