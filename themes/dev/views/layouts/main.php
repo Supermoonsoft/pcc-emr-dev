@@ -12,6 +12,8 @@ use app\components\PatientHelper;
 use app\components\loading\ShowLoading;
 use app\components\DbHelper;
 use yii\bootstrap\Modal;
+use app\modules\queuemanage\models\GatewayEmrAllergy;
+
 
 $sql_q = "SELECT t.pcc_vn,p.hn,t.visit_date_begin,t.visit_time_begin 
 ,concat(p.prename,p.fname,' ',p.lname) fullname
@@ -25,6 +27,9 @@ DevAsset::register($this);
 \yii\bootstrap\BootstrapAsset::register($this);
 
 $cid = PatientHelper::getCurrentCid();
+$allergy = GatewayEmrAllergy::find();
+$count = $allergy->where(['cid' => $cid])->count();
+
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -116,7 +121,12 @@ $cid = PatientHelper::getCurrentCid();
 
                     </ul>
                     <ul class="nav navbar-nav navbar-right" style="padding-right: 20px;">
-                        <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i><span class="badge badge-light"></span></a></li>
+                        <li><a data-toggle="modal" data-target="#myModal"><i class="fa fa-bell"  style="font-size:20px;color:white"></i>
+                       
+                        <?php if($count > 0):?>
+                        <span class="badge badge-light"><?=$count;?></span>
+                                <?php endif;?>
+                        </a></li>
 
                         <li style="padding-right: 30px;"><a data-toggle="modal" data-target="#myModal2"><i class="fa fa-user"  style="font-size:20px;color:white;"></i><span class="badge badge-light"><?= $pt_count ?></span></a></li>
 
@@ -187,10 +197,70 @@ $cid = PatientHelper::getCurrentCid();
                     </div>
 
                     <div class="modal-body">
-                        <h3><i class="fa fa-exclamation"></i> แพ้ยา Penicillin</h3>
-                        <h3><i class="fa fa-exclamation"></i> วัคซีน -</h3>
+                        <!-- <h3><i class="fa fa-exclamation"></i> แพ้ยา Penicillin</h3> -->
+<!-- แพ้ยา -->
+                    <style>
+                    ul.timeline {
+                        list-style-type: none;
+                        position: relative;
+                    }
+                    ul.timeline:before {
+                        content: ' ';
+                        background: #d4d9df;
+                        display: inline-block;
+                        position: absolute;
+                        left: 29px;
+                        width: 2px;
+                        height: 100%;
+                        z-index: 400;
+                    }
+                    ul.timeline > li {
+                        margin: 20px 0;
+                        padding-left: 20px;
+                    }
+                    ul.timeline > li:before {
+                        content: ' ';
+                        background: white;
+                        display: inline-block;
+                        position: absolute;
+                        border-radius: 50%;
+                        border: 3px solid #22c0e8;
+                        left: 20px;
+                        width: 20px;
+                        height: 20px;
+                        z-index: 400;
+                    }
+
+                    .label-pink,
+                    .badge-pink { background-color: #d6487e!important }
+                    .label-primary.arrowed:before { border-right-color: #2283c5 }
+                    .label-primary.arrowed-in:before { border-color: #2283c5 }
+                    .label-primary.arrowed-right:after { border-left-color: #2283c5 }
+                    .label-primary.arrowed-in-right:after { border-color: #2283c5 }
+                    .label-pink.arrowed:before { border-right-color: #d6487e }
+                    .label-pink.arrowed-in:before { border-color: #d6487e }
+                    .label-pink.arrowed-right:after { border-left-color: #d6487e }
+                    .label-pink.arrowed-in-right:after { border-color: #d6487e }
+                    </style>
+                <div class="row">
+                        <div class="col-md-12">
+                            <h4><i class="fa fa-exclamation"></i> แพ้ยา Penicillin</h4>
+                            <ul class="timeline">
+                            <?php $i = 1; foreach($allergy->where(['cid' => $cid])->all() as $allergy):?>
+                                <li>
+                                    <a target="_blank" href="https://www.totoprayogo.com/#"><?=$allergy->drug_name;?></a>
+                                    <p>	<span class="label label-large label-pink arrowed-right">ระดับ</span> : <?=$allergy->level;?></p>
+                                    <p><span class="label label-large label-primary arrowed-right">อาการ</span> : <?=$allergy->symptom;?></p>
+                                </li>
+                                <hr>
+                                <?php endforeach;?>
+                            </ul>
+                        </div>
                     </div>
 
+                        <!-- <h3><i class="fa fa-exclamation"></i> วัคซีน -</h3> -->
+                    </div>
+<!-- จบแพ้ยา -->
                 </div><!-- modal-content -->
             </div><!-- modal-dialog -->
         </div><!-- modal -->
