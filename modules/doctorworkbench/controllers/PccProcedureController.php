@@ -44,13 +44,20 @@ class PccProcedureController extends VisitController
      */
     public function actionIndex()
     {    
+        $id = Yii::$app->request->get('id');
         $cid = PatientHelper::getCurrentCid();
         $pcc_vn = PatientHelper::getCurrentVn();
         $searchModel = new PccProcedureSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);  
         $dataProvider->query->orderBy('date_service ASC');
-        $model = new PccProcedure(); 
+        if($id){
+            $model = PccProcedure::find()->where(['id' => $id])->one(); 
+
+        }else{
+            $model = new PccProcedure(); 
+        }
+        
         $model->cid = $cid;
         $model->pcc_vn = $pcc_vn; 
 
@@ -116,6 +123,17 @@ class PccProcedureController extends VisitController
        
     }
 
+    public function actionUpdate($id)
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $request = Yii::$app->request;
+        $model =  $this->findModel($id);  
+            if($model->load($request->post()) && $model->save()){
+            return $this->redirect(['index']);      
+            }
+    }
+
+
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
@@ -133,17 +151,8 @@ class PccProcedureController extends VisitController
             */
             return $this->redirect(['index']);
         }
-
-
     }
 
-     /**
-     * Delete multiple existing PccProcedure model.
-     * For ajax request will return json object
-     * and for non-ajax request if deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionBulkDelete()
     {        
         $request = Yii::$app->request;
@@ -189,7 +198,7 @@ class PccProcedureController extends VisitController
         $out = ['results'=>['id'=>'','text'=>'']];
         if(!is_null($q)){
             $query = new \yii\db\Query();
-            $query->select('id, title as text,title,title_th')
+            $query->select(["id","concat(title,' - ',title_th) as text","title","title_th"])
                     ->from('c_proced')
                     ->where("id LIKE '%".$q."%'")
                     ->orWhere("title LIKE '%".$q."%'")

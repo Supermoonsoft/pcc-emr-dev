@@ -11,7 +11,9 @@ $this->registerJS($this->render('@app/modules/doctorworkbench/dist/js/script.js'
 
 
 $this->title = 'Preorderlabs';
+$action_index = Url::to(['/doctorworkbench/order/pre-order-lab']);
 ?>
+<span id="index" action="<?=$action_index;?>"></span>
 
  <?= $this->render('_form', [
         'model' => $model,
@@ -183,8 +185,8 @@ $js = <<< JS
   });
   $('#preorderlab').on('grid.radiocleared', function(ev, key, val) {
     //console.log("Key = " + key + ", Val = " + val);
-    //window.location.href = $('#index').attr('action');
-    alert();
+    window.location.href = $('#index').attr('action');
+    //alert();
 });
 JS;
 $this->registerJS($js);

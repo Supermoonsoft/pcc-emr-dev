@@ -127,6 +127,11 @@ $js = <<< JS
     }
   });
  
+  $('#crud-procedure').on('grid.radiocleared', function(ev, key, val) {
+    //console.log("Key = " + key + ", Val = " + val);
+    window.location.href = $('#index').attr('action');
+    //alert();
+});
 JS;
 $this->registerJS($js);
 ?>
