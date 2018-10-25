@@ -75,8 +75,10 @@ class PreorderlabController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $model->cid  = $cid;
             $model->pcc_vn = $pcc_vn;
+            $model->lab_request_date = $model->edate($model->lab_request_date);
+            $model->lab_result_date = $model->edate($model->lab_result_date);
             $model->save(false);
-        return ['forceReload'=>'#preorderlab-pjax'];
+            return ['forceReload'=>'#preorderlab-pjax'];
 
         }
     }
@@ -93,7 +95,10 @@ class PreorderlabController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->lab_request_date = $model->edate($model->lab_request_date);
+            $model->lab_result_date = $model->edate($model->lab_result_date);
+            $model->save(false);
             // return $this->redirect(['view', 'id' => $model->id]);
             // return ['forceReload'=>'#preorderlab-pjax'];
             return $this->redirect(['/doctorworkbench/order/pre-order-lab']);

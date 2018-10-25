@@ -40,7 +40,8 @@
         "kartik-v/yii2-widget-select2": "dev-master",
         "kartik-v/yii2-widget-datepicker": "dev-master",
         "kartik-v/yii2-datecontrol": "dev-master",
-        "mdmsoft/yii2-admin": "dev-master#e9cc1d8adc as 2.8-p1"
+        "mdmsoft/yii2-admin": "dev-master#e9cc1d8adc as 2.8-p1",
+        "karatae99/yii2-date-picker-thai-widget": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",

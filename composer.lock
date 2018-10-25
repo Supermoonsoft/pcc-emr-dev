@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "53aa0c67707134a22494ebed439c226c",
+    "content-hash": "c441eb8611fd035e0fe6d940b69bbd64",
     "packages": [
         {
             "name": "bower-asset/animate.css",
@@ -42,6 +42,28 @@
             "type": "bower-asset",
             "license": [
                 "MIT"
+            ]
+        },
+        {
+            "name": "bower-asset/bootstrap-datepicker",
+            "version": "v1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/uxsolutions/bootstrap-datepicker.git",
+                "reference": "d364be5b066b38f3675a5a1dc174ce1ab1f3360e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/uxsolutions/bootstrap-datepicker/zipball/d364be5b066b38f3675a5a1dc174ce1ab1f3360e",
+                "reference": "d364be5b066b38f3675a5a1dc174ce1ab1f3360e",
+                "shasum": null
+            },
+            "require": {
+                "bower-asset/jquery": ">=1.7.1,<4.0.0"
+            },
+            "type": "bower-asset",
+            "license": [
+                "Apache-2.0"
             ]
         },
         {
@@ -587,6 +609,60 @@
                 "yii2"
             ],
             "time": "2016-03-21T10:56:25+00:00"
+        },
+        {
+            "name": "karatae99/yii2-date-picker-thai-widget",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/karatae99/yii2-date-picker-thai-widget.git",
+                "reference": "034a885c8be3957fd9d19068a2b53a0c08b17e12"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/karatae99/yii2-date-picker-thai-widget/zipball/034a885c8be3957fd9d19068a2b53a0c08b17e12",
+                "reference": "034a885c8be3957fd9d19068a2b53a0c08b17e12",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/bootstrap-datepicker": "1.7.0",
+                "yiisoft/yii2": ">=2.0.9",
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "asset-installer-paths": {
+                    "bower-asset-library": "vendor/bower"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "karatae99\\datepicker\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Akaranan Naree",
+                    "email": "karatae99@hotmail.com",
+                    "role": "Beginner Developer"
+                }
+            ],
+            "description": "Bootstrap DatePicker Thai Buddhist-Era (B.E.) widget for Yii2.",
+            "keywords": [
+                "buddhist",
+                "calendar",
+                "datepicker",
+                "extension",
+                "thai",
+                "widget",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2018-06-30T18:53:52+00:00"
         },
         {
             "name": "kartik-v/bootstrap-checkbox-x",

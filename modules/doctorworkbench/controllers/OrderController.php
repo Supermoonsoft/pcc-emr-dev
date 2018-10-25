@@ -171,9 +171,12 @@ class OrderController extends VisitController
             if(!$model){
                 return $this->redirect(['/doctorworkbench/order/pre-order-lab']);
             }
+           $model->lab_request_date = $model->thaidate($model->lab_request_date);
+           $model->lab_result_date = $model->thaidate($model->lab_result_date);
+
         }else{
            $model = new Preorderlab();
-           $model->lab_request_date = Date('Y-m-d');
+           $model->lab_request_date = $model->thaidate(Date('Y-m-d'));
         }
         return $this->render('pre_order_lab', [
             'searchModel' => $searchModel,

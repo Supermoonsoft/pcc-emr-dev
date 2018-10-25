@@ -118,6 +118,25 @@ class Preorderlab extends \yii\db\ActiveRecord
         }
     }
 
+    public function Edate($date){
+        // if(preg_match('/(\d{4}-\d{2}-\d{2})/', $date)){ //ถ้ามีค่าในรูปแบบ 2016-05-20 13:30:45
+
+            if($date == ''){ //ถ้าไม่มีข้อมูล
+                //$this->setAttribute($column_name, null); //กำหนดให้เป็นค่าว่าง
+                return '0000-00-00';
+            }else{
+                // $date_and_time = explode('.', $date);
+                $ymd = explode('/', $date);//แยก ปี-เดือน-วัน
+                $year = (int) $ymd[2];//กำหนดให้เป็น int เพื่อการคำนวณ
+                $year = $year - 543;// นำปี +543
+               return $result = $year. '-' . $ymd[1] . '-' . $ymd[0] ;//ได้รูปแบบ วัน/เดือน/ปี ชั่วโมง:นาที:วินาทีี
+                
+            }
+
+          //  return $date;
+        // }
+    }
+
 
     public function getLabname(){
         return $this->hasOne(CLabtest::className(), ['code' => 'lab_code']);

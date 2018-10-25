@@ -8,6 +8,8 @@ use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use kartik\datecontrol\DateControl;
 use app\modules\lab\models\CLabtest;
+use karatae99\datepicker\DatePicker;
+
 
 $this->registerCss($this->render('@app/modules/doctorworkbench/dist/css/style.css'));
 
@@ -144,37 +146,25 @@ $this->registerJS($js);
    
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-        
-<?= $form->field($model, 'lab_request_date',[
-        'horizontalCssClasses' => [
-            'label' => 'col-sm-2',
-           'wrapper' => 'col-sm-8',
+    <?= $form->field($model, 'lab_request_date')->widget(
+    DatePicker::className(), [
+	'language' => 'th', // Thai B.E.
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'dd/mm/yyyy'
         ]
-    ])->widget(DateControl::classname(), [
-        'type'=>DateControl::FORMAT_DATE,
-        'ajaxConversion'=>false,
-        'widgetOptions' => [
-            'pluginOptions' => [
-                'autoclose' => true
-            ]
-        ]
-    ])->label('วันสั่ง') ?>
+])->label('วันสั่ง');?>
     </div>
     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-    <?= $form->field($model, 'lab_result_date',[
-        'horizontalCssClasses' => [
-            'label' => 'col-sm-2',
-            'wrapper' => 'col-sm-8',
+<?= $form->field($model, 'lab_result_date')->widget(
+    DatePicker::className(), [
+	'language' => 'th', // Thai B.E.
+        'clientOptions' => [
+            'autoclose' => true,
+            'format' => 'dd/mm/yyyy'
         ]
-    ])->widget(DateControl::classname(), [
-        'type'=>DateControl::FORMAT_DATE,
-        'ajaxConversion'=>false,
-        'widgetOptions' => [
-            'pluginOptions' => [
-                'autoclose' => true
-            ]
-        ]
-    ])->label('วันนัด') ?>
+])->label('วันนัด');?>
+
         </div>
         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
         <div class="form-group pull-left" style="margin-top:25px;">
