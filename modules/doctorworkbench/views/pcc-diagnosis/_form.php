@@ -87,9 +87,9 @@ JS;
 <fieldset>
     <legend class="scheduler-border"><i class="fas fa-user-md"></i> Diagnosis Form 
     <button class="btn btn-default"><i class="fas fa-address-card"></i> General</button>
-    <button class="btn btn-green"><i class="fas fa-female"></i> Obs-Gyn</button>
-    <button class="btn btn-diag-info"><i class="fas fa-user-md"></i> Surgery</button>
-    <button class="btn btn-primary"><i class="fas fa-pills"></i> Medicine</button>
+    <button class="btn btn-primary"><i class="fas fa-female"></i> Obs-Gyn</button>
+    <button class="btn btn-success"><i class="fas fa-user-md"></i> Surgery</button>
+    <button class="btn btn-diag-info"><i class="fas fa-pills"></i> Medicine</button>
     <button class="btn btn-warning"><i class="fas fa-child"></i> Pediatric</button>
     <button class="btn btn-danger"><i class="fas fa-user-md"></i> E-E-N-T</button>
 </legend> 
@@ -109,34 +109,12 @@ JS;
 
 <div class="row">
     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-    <?=
-       // $form->field($model, 'cc')->widget(Select2::className(), [
-       // 'data' => ArrayHelper::map(CDiagtext::find()->all(), 'id', 'text'),
-        // 'options' => [
-        //     'placeholder' => 'Diagtext',
-        //     'multiple' => true,
-        //     'id' => 'cc',
-        //     'class' => 'clear',
-        //     // 'value' => ['01', '02', '03'],
-        // ],
-        // 'pluginOptions' => [
-        //     'tags' => true,
-        //     'allowClear' => true,
-        //     'tokenSeparators' => [',', ' '],
-        //     'maximumInputLength' => 50
-        // ],])->label(false);
-    $form->field($model, 'diag_text')->textInput(['id' => 'diag_text','placeholder' => 'Diagtext'])->label(false);
+    <?=$form->field($model, 'diag_text')->textInput(['id' => 'diag_text','placeholder' => 'Diagtext'])->label(false);
     ?>
     </div>
     <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-    <?=
-    $form->field($model, 'icd_code')->widget(Select2::className(), [
+    <?=$form->field($model, 'icd_code')->widget(Select2::className(), [
         'initValueText' => $prefix, //กำหนดค่าเริ่มต้น
-        // 'initValueText' => '', //กำหนดค่าเริ่มต้น
-        // 'theme' => Select2::THEME_DEFAULT,/
-        // 'data' => ArrayHelper::map(CIcd10tm::find()->limit(10)->all(), 'diagcode', function($model, $defaultValue) {
-        //     return $model->diagcode.' '.$model->diagtname;
-        // }),
         'options' => ['id' => 'icd_code', 'placeholder' => 'Select ICD10...','class' => 'clear'],
         'pluginOptions' => [
             'allowClear' => true,
@@ -158,9 +136,7 @@ JS;
     ])->label(false);
     ?>
         </div>
- 
-        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-            
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"> 
       <?=
     $form->field($model, 'diag_type')->widget(Select2::className(), [
         'data' => ArrayHelper::map(app\modules\doctorworkbench\models\CDiagtype::find()->orderBy(['diagtype' => SORT_ASC])->all(), 'diagtype', function($model, $defaultValue) {
@@ -186,21 +162,7 @@ JS;
 <?php // echo Html::button('<i class="fa fa-trash"></i> ลบรายการ', ['class' => 'btn btn-danger', 'id' => 'btn-delete', 'style' => 'margin-left:5px;']) ?>    
    
             </div>
-    
 </div>
-
- 
     </fieldset>
-
     </div>
-
 <?php ActiveForm::end(); ?>
-
-
-<?php 
-$js = <<< JS
-
-JS;
-$this->registerJS($js);
-
-?>

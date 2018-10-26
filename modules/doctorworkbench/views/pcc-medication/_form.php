@@ -80,7 +80,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         </div>
 
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-<?= $form->field($model, 'qty')->textInput(['id' => 'qty'])->label(false); ?>  
+<?= $form->field($model, 'qty')->textInput(['id' => 'qty','placeholder' => 'จำนวน ...',])->label(false); ?>  
         </div>
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
         <div style="margin-top:0px">
