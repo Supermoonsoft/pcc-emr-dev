@@ -78,14 +78,17 @@ return [
          ],
          'contentOptions' => ['class' => 'pjax-load'],
          'value' => function($model) {
-             //$models = GatewayCDruguage::find()->where(['drugusage' => $model->druguse])->one();
-             if ($model->druguse != '') {
-                 return $model->drugusehos->shortlist;
-                 //return $models->shortlist
-                 return $model->druguse;
-             } else {
-                 return '-';
-             }
+            //  $models = GatewayCDruguage::find()->where(['drugusage' => $model->druguse])->one();
+            //  if ($model->druguse != '') {
+            //     // return $model->drugusehos->shortlist;
+            //      //return $models->shortlist
+            //      return $model->druguse;
+            //  } else {
+            //      return '-';
+            //  }
+           
+                return $model->findDruguse($model->druguse);
+       
          }
      ],
    [

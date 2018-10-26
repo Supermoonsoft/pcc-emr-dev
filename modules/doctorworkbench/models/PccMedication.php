@@ -89,6 +89,15 @@ class PccMedication extends \yii\db\ActiveRecord
             'pcc_vn' => 'pcc vn',
         ];
     }
+    
+    function FindDruguse($id){
+        $model = GatewayCDruguage::find()->where(['drugusage' => $id])->one();
+        if($model){
+            return $model->shortlist;
+        }else{
+            return $id;
+        }
+    }
 
     public  function getDrugitems(){
         return @$this->hasOne(GatewayCDrugItems::className(), ['icode' => 'icode']);
