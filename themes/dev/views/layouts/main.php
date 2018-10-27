@@ -244,9 +244,14 @@ $count = $allergy->where(['cid' => $cid])->count();
                     </style>
                 <div class="row">
                         <div class="col-md-12">
+                            <?php
+                            $allergys = $allergy->where(['cid' => $cid])->all()
+                            ?>
+                            <?php if($allergys):?>
                             <h4><i class="fa fa-exclamation"></i> แพ้ยา Penicillin</h4>
+                            <?php endif;?>
                             <ul class="timeline">
-                            <?php $i = 1; foreach($allergy->where(['cid' => $cid])->all() as $allergy):?>
+                            <?php $i = 1; foreach($allergys as $allergy):?>
                                 <li>
                                     <a target="_blank" href="https://www.totoprayogo.com/#"><?=$allergy->drug_name;?></a>
                                     <p>	<span class="label label-large label-pink arrowed-right">ระดับ</span> : <?=$allergy->level;?></p>
