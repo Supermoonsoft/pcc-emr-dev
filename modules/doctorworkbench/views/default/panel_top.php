@@ -60,7 +60,7 @@ li.dropdown:hover > .dropdown-menu {
   <li class="<?=$lab;?>"><?=Html::a('<i class="fas fa-flask"></i> Lab History', ['/doctorworkbench/order/lab'])?></li> 
   <li class="<?=$drug;?>"><?=Html::a('<i class="fas fa-prescription"></i> Drug History', ['/doctorworkbench/order/drug'])?></li>  
   <li class="<?=$cc;?>"><?=Html::a('<i class="fas fa-universal-access"></i> CC', ['/doctorworkbench/order/cc'])?></li>    
-  <li class="<?=$pi;?>"><?=Html::a('<i class="fas fa-file-alt"></i> PI', ['/doctorworkbench/order/pi'])?></li>    
+  <li class="<?=$pi;?>"><?=Html::a('<i class="fas fa-file-alt"></i> VS', ['/doctorworkbench/order/pi'])?></li>    
   <li class="<?=$pe;?>"><?=Html::a('<i class="fas fa-street-view"></i> PE', ['/doctorworkbench/order/pe'])?></li>    
     <li class="<?=$diagnosis;?>"><?=Html::a('<i class="fas fa-user-md"></i> Diganosis', ['/doctorworkbench/pcc-diagnosis'])?></li>
     <li class="<?=$medication;?>"><?=Html::a('<i class="fas fa-pills"></i> Medication', ['/doctorworkbench/pcc-medication'])?></li>
