@@ -59,10 +59,8 @@ class DefaultController extends Controller {
         $query->distinct();
         $query->leftJoin("gateway_c_patient  p","p.cid = t.person_cid");
         $query->where("t.visit_date_begin BETWEEN :date1 AND :date2 AND t.current_station = 'A0'");
-        // $query->where("t.current_station = 'A0'");
         $query->from('pcc_visit t');
         $query->addParams([':date1' => $date1,':date2' => $date2]);
-        // $query->groupBy("t.pcc_vn");
         $query->orderBy([
             't.jhcis_vn' => SORT_ASC,
             't.visit_date_begin' => SORT_ASC,
@@ -148,7 +146,7 @@ public function actionViewAll(){
     }
     
     $sql = "SELECT t.pcc_vn,p.hn,p.cid,t.visit_date_begin,t.visit_time_begin 
-    ,concat(p.prename,p.fname,' ',p.lname) fullname,AGE(p.birthday) as age,t.visit_department
+    ,concat(p.prename,p.fname,' ',p.lname) fullname,EXTRACT(YEAR from AGE(birthday))  as age,t.visit_department
     from pcc_visit t 
     LEFT JOIN gateway_emr_patient  p ON p.cid = t.person_cid
     WHERE t.visit_date_begin BETWEEN '$date1' AND '$date2'
