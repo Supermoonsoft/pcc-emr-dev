@@ -148,6 +148,7 @@ class OrderController extends VisitController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
         $dataProvider->query->orderBy('date_visit DESC');
+        $dataProvider->pagination->pageSize = 10;
 
 
         return $this->render('emr',[
