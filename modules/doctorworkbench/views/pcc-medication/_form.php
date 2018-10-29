@@ -60,7 +60,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                         // 'onchange' => 'alert (this.value)'                         
                         ],
                     'pluginOptions' => [
-                        'allowClear' => true
+                        'allowClear' => true,
                 ],
                 'pluginEvents' => [
                     "select2:select" => "function() { $('#druguse').select2('open'); }",
@@ -80,7 +80,7 @@ $this->registerJS($this->render('../../dist/js/script.js'));
                         // 'multiple' => true,
                         'class' => ''
                     ],
-                    'pluginOptions' => ['allowClear' => true,'maximumSelectionLength'=> 2],
+                    'pluginOptions' => ['allowClear' => true,'maximumSelectionLength'=> 2,'tags' => true,],
                 'pluginEvents' => [
                     "select2:select" => "function() { $('#qty').focus(); }",
                  ]
@@ -163,6 +163,17 @@ totalPrice($('#cid').val());
 //     });
 //      });
 
+// $('#druguse').select2({
+//     placeholder: "Select or add tags",
+//     tags: true,
+//     tokenSeparators: [",", " "],
+//     createTag: function(newTag) {
+//         return {
+//             id: 'new:' + newTag.term,
+//             text: newTag.term + ' (new)'
+//         };
+//     }
+// });
 
 });
 JS;
