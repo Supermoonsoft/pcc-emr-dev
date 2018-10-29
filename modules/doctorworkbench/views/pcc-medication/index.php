@@ -68,8 +68,6 @@ $this->render('../default/panel_top', [
 
 </div>
 </fieldset>
-
-
         <?=
         GridView::widget([
             'id' => 'crud-medication',
@@ -109,7 +107,7 @@ $this->render('../default/panel_top', [
                 'firstPageCssClass'=>'first',
                 'lastPageCssClass'=>'last',
                 'maxButtonCount'=>10,
-        ],        
+                 ],        
         ])
         ?>
 <?= $this->render('../default/panel_foot'); ?>

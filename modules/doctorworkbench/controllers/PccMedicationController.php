@@ -17,6 +17,7 @@ use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
 use app\modules\doctorworkbench\models\GatewayEmrDrug;
 use app\components\VisitController;
+use app\modules\doctorworkbench\models\GatewayCDruguage;
 
 class PccMedicationController extends VisitController
 {
@@ -88,21 +89,50 @@ class PccMedicationController extends VisitController
         
         if ($model->load($request->post())) {
             $drug = GatewayCDrugItems::find()->where(['icode' => $model->icode])->one();
-           //$model->druguse = $drug->drugusage;
-            $model->unitprice = $drug->unitprice;
-            $model->tmt24_code = $drug->tmt24_code;
-            $model->drug_name = $drug->drug_name.' '.$drug->unit;	
-            $model->totalprice =  $model->qty * $drug->unitprice;
-            $model->save(false);
-            return [
-                'forceReload'=>'#crud-medication-pjax'];
-
+            $check_druguse = GatewayCDruguage::find()->where(['drugusage' => $model->druguse])->one();
+          if($check_druguse){
+           $model->druguse = $check_druguse->drugusage;
+              
+          }else{
+            $model->druguse = $this->DruguseCreate($model->druguse);
+          }
+          $model->unitprice = $drug->unitprice;
+          $model->tmt24_code = $drug->tmt24_code;
+          $model->drug_name = $drug->drug_name.' '.$drug->unit;	
+          $model->totalprice =  $model->qty * $drug->unitprice;
+          $model->save(false);
+          return ['forceReload'=>'#crud-medication-pjax'];
+       
         } else {
             return $this->render('create', [
                 'model' => $model,
             ]);
         }
        
+    }
+    private function DruguseCreate($druguse){
+    //     $check  = GatewayCDruguage::find(['drugusage' => $druguse])->one();
+    //    if($check){
+      
+    //    }else{
+        $model = new GatewayCDruguage();
+        $model->drugusage = $this->getDruguseNumber();
+        $model->shortlist = $druguse;
+        if($model->save(false)){
+            return $model->drugusage;
+        }
+    //    }
+        
+       
+    }
+
+    private function getDruguseNumber(){
+        $query =  GatewayCDruguage::find()->select('max(drugusage)')->scalar();
+        $num = $query+1;
+        return  sprintf("%04s",$num); // Zero-padding
+        $this->DruguseCreate();
+
+
     }
 
     public function actionDelete($id)
@@ -245,5 +275,14 @@ public function actionReMed(){
     ];
 
     
+}
+
+public function actionCreateDrugusage(){
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    $model = new CDrugusage();
+//    return  $model->load($request->post());
+$data =  Yii::$app->request->post('data');
+return $data;
+
 }
 }

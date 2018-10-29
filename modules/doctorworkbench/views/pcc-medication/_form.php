@@ -9,7 +9,9 @@ use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
 use app\modules\doctorworkbench\models\GatewayCDrugdose;
+use app\modules\doctorworkbench\models\GatewayCDruguage;
 $this->registerJS($this->render('../../dist/js/script.js'));
+
 
 ?>
 
@@ -30,6 +32,11 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 }
 
 </style>
+
+<?php
+
+
+?>
 <div class="pcc-medication-form">
     <?php $form = ActiveForm::begin(['id' => 'form-medication','action' => ['create'],'options' => ['data-pjax' => 1],]);?>
     
@@ -64,14 +71,16 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
 <?= $form->field($model, 'druguse')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(CDrugusage::find()->all(), 'shortlist', function($model, $defaultValue) {
+                'data' => ArrayHelper::map(GatewayCDruguage::find()->all(), 'drugusage', function($model, $defaultValue) {
                             return $model->shortlist;
                         }),
                     'options' => [
                         'id' => 'druguse', 
                         'placeholder' => 'วิธีใช้ ...',
+                        // 'multiple' => true,
+                        'class' => ''
                     ],
-                    'pluginOptions' => ['allowClear' => true],
+                    'pluginOptions' => ['allowClear' => true,'maximumSelectionLength'=> 2],
                 'pluginEvents' => [
                     "select2:select" => "function() { $('#qty').focus(); }",
                  ]
@@ -107,6 +116,53 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 $js = <<< JS
 $(function(){
 totalPrice($('#cid').val());
+
+// $('#druguse').keypress(function(){
+//     alert();
+// });
+
+// $('#druguse').on('keypress', '.select2', function (e) {
+// //   if (e.originalEvent) {
+// //     $(this).siblings('select').select2('open');    
+//    } 
+
+// });
+
+// $('#druguse').select2({
+//     noResults: function(query) {
+//       return 'No results matching: ' + query;
+//     }
+//     });
+
+// $('#druguse').addClass('select2 select2-container select2-container--krajee select2-container--focus');
+    
+// $('#druguse').select2({
+//     tags: true,
+//     insertTag: function(data, tag){
+//         tag.text = "create: " + tag.text;
+//         data.push(tag);
+//     }	
+// }).on('select2:select', function(){
+//     if($(this).find("option:selected").data("select2-tag")==true) {
+//         // some more stuff...
+//     }
+// });
+
+
+// $("#druguse").on("change", function () { 
+	
+//     console.log($(this).val());
+//     $.ajax({
+//         type: "method",
+//         url: "index.php?r=doctorworkbench%2Fpcc-medication/create-drugusage",
+//         data:{data:$(this).val()},
+//         dataType: "json",
+//         success: function (response) {
+            
+//         }
+//     });
+//      });
+
 
 });
 JS;
