@@ -245,13 +245,7 @@ class OrderController extends VisitController
     }
 
     public function actionCc(){
-        $model = new \app\modules\chiefcomplaint\models\PccServiceCc();
-        $cid = PatientHelper::getCurrentCid();
-        
-        $searchModel = new \app\modules\chiefcomplaint\models\PccServiceCcSearch;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        $dataProvider->query->where(['cid' => $cid]);
-        $dataProvider->query->orderBy('date_service DESC ');
+        $model = new Pccservicecc();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -259,7 +253,6 @@ class OrderController extends VisitController
 
         return $this->render('cc', [
             'model' => $model,
-            'dataProvider'=>$dataProvider
         ]);
 
     }
@@ -337,23 +330,23 @@ class OrderController extends VisitController
     
     public function actionPe()
     {
-       $model = new \app\modules\chiefcomplaint\models\PccServicePe();
+        $model = new \app\modules\chiefcomplaint\models\PccServicePe();
         $cid = PatientHelper::getCurrentCid();
         
         $searchModel = new \app\modules\chiefcomplaint\models\PccServicePeSearch;
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         $dataProvider->query->where(['cid' => $cid]);
         $dataProvider->query->orderBy('date_service DESC ');
-
-      
-
+        
+        
+        
         return $this->render('pe', [
-            'model' => $model,
-            'dataProvider'=>$dataProvider
-        ]);
-
-
-       
+                             'model' => $model,
+                             'dataProvider'=>$dataProvider
+                             ]);
+        
+        
+        
     }
 
         public function actionIcd10List($q = null, $id = null){

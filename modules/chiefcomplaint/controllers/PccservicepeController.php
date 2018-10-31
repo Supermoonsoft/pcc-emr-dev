@@ -97,6 +97,11 @@ class PccservicepeController extends Controller
         $model->hn=$hn;
         $model->date_service=date('Y-m-d');
         $model->time_service=date('H:m:s');
+        
+        $searchModel = new \app\modules\chiefcomplaint\models\PccServicePeSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_service DESC ');
 
         if ($request->isAjax) {
             Yii::$app->response->format = Response::FORMAT_JSON;
@@ -107,6 +112,7 @@ class PccservicepeController extends Controller
 
             return $this->render('create', [
                         'model' => $model,
+                                 'dataProvider'=>$dataProvider
             ]);
         }
 
