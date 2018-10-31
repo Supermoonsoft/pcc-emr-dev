@@ -3,8 +3,8 @@
 namespace app\modules\chiefcomplaint\controllers;
 
 use Yii;
-use app\modules\chiefcomplaint\models\PccServiceCc;
-use app\modules\chiefcomplaint\models\PccServiceCcSeach;
+use app\modules\chiefcomplaint\models\Pccservicecc;
+use app\modules\chiefcomplaint\models\PccserviceccSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,6 @@ use \yii\web\Response;
 use yii\helpers\Html;
 use yii\helpers\Json;
 use yii\filters\AccessControl;
-use app\components\PatientHelper;
 /**
  * PccserviceccController implements the CRUD actions for Pccservicecc model.
  */
@@ -24,12 +23,18 @@ class PccserviceccController extends Controller
     public function behaviors()
     {
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index','create','delete','update',],
+                'rules' => [
+                    [
+                        'actions' => ['index','create','delete','update'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
+
         ];
     }
 
@@ -70,39 +75,15 @@ class PccserviceccController extends Controller
     {
         $request = Yii::$app->request;
         $model = new Pccservicecc();
-        
-        $searchModel = new \app\modules\chiefcomplaint\models\PccServiceCcSearch;
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        //$dataProvider->query->where(['cid' => $cid,'pcc_vn'=>$vn]);
-        $dataProvider->query->orderBy('date_service DESC ');
-        
-        
-        $vn= PatientHelper::getCurrentVn();
-        $cid =PatientHelper::getCurrentCid();
-        $hn =PatientHelper::getCurrentHn();
-        
-        $model->vn = $vn;
-        $model->cid=$cid;
-        $model->hn=$hn;
-        $model->date_service=date('Y-m-d');
-        $model->time_service=date('H:m:s');
-        
-        if ($request->isAjax) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-
-            if ($model->load(Yii::$app->request->post()) && $model->save()) {
-               return ['forceReload'=>'#crud-cc-pjax'];
-            }
-
-            return $this->render('create', [
-                        'model' => $model,
-                        'dataProvider'=>$dataProvider
-            ]);
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->renderAjax(['update', 'id' => $model->id]);
+            //return ['forceReload'=>'#pccservicecc-create'];
         }
 
-        
-        
-        
+        return $this->renderAjax('create', [
+            'model' => $model,
+        ]);
     }
 
     
@@ -116,7 +97,7 @@ class PccserviceccController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }

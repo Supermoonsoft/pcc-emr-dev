@@ -245,7 +245,13 @@ class OrderController extends VisitController
     }
 
     public function actionCc(){
-        $model = new Pccservicecc();
+        $model = new \app\modules\chiefcomplaint\models\PccServiceCc();
+        $cid = PatientHelper::getCurrentCid();
+        
+        $searchModel = new \app\modules\chiefcomplaint\models\PccServiceCcSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_service DESC ');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -253,6 +259,7 @@ class OrderController extends VisitController
 
         return $this->render('cc', [
             'model' => $model,
+            'dataProvider'=>$dataProvider
         ]);
 
     }

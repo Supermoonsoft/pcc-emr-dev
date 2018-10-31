@@ -38,9 +38,6 @@ $this->registerCss("
 .control-label{
 //color:red;
 }
-.div#crud-cc-container.table-responsive.kv-grid-container{
-    margin-top:20;
-}
 
 .btn-pop {
     //padding: 5px 5px;
@@ -316,7 +313,7 @@ $this->registerJS($js);
 <div class="col-md-6">
 
     <fieldset>
-        <legend class="scheduler-border"><i class="fas fa-universal-access"></i> Chiefcomplaint Form 
+        <legend class="scheduler-border"><i class="fas fa-user-md"></i> Chiefcomplaint Form 
             <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup1-modal-lg"> อาการ </button>
             <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup2-modal-lg"> ให้คำปรึกษา </button>
             <button class="btn btn-pink" data-toggle="modal" data-target =".bd-popup3-modal-lg"> ติดตามอาการ </button>
@@ -335,7 +332,7 @@ $this->registerJS($js);
         </div><!--- END ROW--->
 
         <div class="form-group" style="text-align:right;margin-right: 10px">
-             <?php echo Html::submitButton('<i class="fa fa-plus"></i> บันทึก', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
+             <?php echo Html::submitButton('<i class="fa fa-plus"></i>', ['class' => 'btn btn-success', 'id' => 'btn-save']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>
@@ -375,10 +372,10 @@ $columns = [
 <div class="col-md-6">
 
     <fieldset style="margin-top:8px">
-        <legend class="scheduler-border"><i class="fas fa-universal-access"></i> ประวัติ Chiefcomplaint
+        <legend class="scheduler-border"><i class="fas fa-user-md"></i> ประวัติ Chiefcomplaint
 
         </legend> 
-        <div style="margin-top: 10px;margin-right: 7px;margin-left: -10px">
+
         <?=
         GridView::widget([
             'id' => 'crud-cc',
@@ -421,7 +418,7 @@ $columns = [
         ])
         ?>
 
-        </div>
+
 
     </fieldset>
 

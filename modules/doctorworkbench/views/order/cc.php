@@ -14,6 +14,6 @@
 'education' => ''
 
 ]);?>
-<?=$this->render('@app/modules/chiefcomplaint/views/pccservicecc/create',['model' => $model,]);?>
+<?=$this->render('@app/modules/chiefcomplaint/views/pccservicecc/create',['model' => $model,'dataProvider'=>$dataProvider]);?>
 
 <?=$this->render('../default/panel_foot');?>
