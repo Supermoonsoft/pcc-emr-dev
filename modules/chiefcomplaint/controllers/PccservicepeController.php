@@ -3,8 +3,8 @@
 namespace app\modules\chiefcomplaint\controllers;
 
 use Yii;
-use app\modules\chiefcomplaint\models\Pccservicepe;
-use app\modules\chiefcomplaint\models\PccservicepeSearch;
+use app\modules\chiefcomplaint\models\PccServicePe;
+use app\modules\chiefcomplaint\models\PccServicePeSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -85,7 +85,7 @@ class PccservicepeController extends Controller
     public function actionCreate()
     {
         $request = Yii::$app->request;
-        $model = new Pccservicepe();
+        $model = new PccServicePe();
         
         $vn= PatientHelper::getCurrentVn();
         $cid =PatientHelper::getCurrentCid();
