@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use kartik\widgets\Select2;
 use yii\helpers\ArrayHelper;
 use yii\widgets\Pjax;
+use yii\web\JsExpression;
 use app\modules\doctorworkbench\models\CDrugitems;
 use app\modules\doctorworkbench\models\CDrugusage;
 use app\modules\doctorworkbench\models\GatewayCDrugItems;
@@ -70,22 +71,46 @@ $this->registerJS($this->render('../../dist/js/script.js'));
         </div>
 
         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-<?= $form->field($model, 'druguse')->widget(Select2::classname(), [
-                'data' => ArrayHelper::map(GatewayCDruguage::find()->all(), 'drugusage', function($model, $defaultValue) {
-                            return $model->shortlist;
-                        }),
-                    'options' => [
-                        'id' => 'druguse', 
-                        'placeholder' => 'วิธีใช้ ...',
-                        // 'multiple' => true,
-                        'class' => ''
-                    ],
-                    'pluginOptions' => ['allowClear' => true,'maximumSelectionLength'=> 2,'tags' => true,],
-                'pluginEvents' => [
-                    "select2:select" => "function() { $('#qty').focus(); }",
-                 ]
-            ])->label(false);
+<?php
+//  $form->field($model, 'druguse')->widget(Select2::classname(), [
+//                 'data' => ArrayHelper::map(GatewayCDruguage::find()->all(), 'drugusage', function($model, $defaultValue) {
+//                             return $model->shortlist;
+//                         }),
+//                     'options' => [
+//                         'id' => 'druguse', 
+//                         'placeholder' => 'วิธีใช้ ...',
+//                         // 'multiple' => true,
+//                         'class' => ''
+//                     ],
+//                     'pluginOptions' => ['allowClear' => true,'maximumSelectionLength'=> 2,'tags' => true,],
+//                 'pluginEvents' => [
+//                     "select2:select" => "function() { $('#qty').focus(); }",
+//                  ]
+//             ])->label(false);
             ?> 
+            <?php
+                $druguse = empty($person->prefix_id) ? '' : GatewayCDruguage::findOne(['druguse' => $model->druguse])->shortlist;//กำหนดค่าเริ่มต้น
+                echo $form->field($model, 'druguse')->widget(Select2::className(), [
+                    'initValueText'=>$druguse,//กำหนดค่าเริ่มต้น
+                    'options'=>['placeholder'=>'วิธีใช้'],
+                    'pluginOptions'=>[
+                        'allowClear'=>true,
+                        'tags' => true,
+                        'minimumInputLength'=>0,//ต้องพิมพ์อย่างน้อย 3 อักษร ajax จึงจะทำงาน
+                        'ajax'=>[
+                            'url'=>\yii\helpers\Url::to(['druguse-list']),
+                            'dataType'=>'json',//รูปแบบการอ่านคือ json
+                            'data'=>new JsExpression('function(params) { return {q:params.term};}')
+                        ],
+                        'escapeMarkup'=>new JsExpression('function(markup) { return markup;}'),
+                        'templateResult'=>new JsExpression('function(prefix){ return prefix.text;}'),
+                        'templateSelection'=>new JsExpression('function(prefix) {return prefix.text;}'),
+                    ],
+                    'pluginEvents' => [
+                                            "select2:select" => "function() { $('#qty').focus(); }",
+                                         ]
+                ])->label(false);
+                ?>
         </div>
 
         <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
@@ -116,7 +141,9 @@ $this->registerJS($this->render('../../dist/js/script.js'));
 $js = <<< JS
 $(function(){
 totalPrice($('#cid').val());
-
+// $('#crud-medication-pjax').on('pjax:complete', function() {
+//     $.pjax.reload({container: '#druguse-pjax'});
+//              })
 // $('#druguse').keypress(function(){
 //     alert();
 // });

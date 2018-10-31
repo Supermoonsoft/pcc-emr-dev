@@ -285,4 +285,25 @@ $data =  Yii::$app->request->post('data');
 return $data;
 
 }
+
+public function actionDruguseList($q = null, $id = null){
+    Yii::$app->response->format = \yii\web\Response::FORMAT_JSON; //กำหนดการแสดงผลข้อมูลแบบ json
+    $out = ['results'=>['drugusage'=>'','text'=>'']];
+    if(!is_null($q)){
+        $query = new \yii\db\Query();
+        $query->select('drugusage as id, shortlist as text')  
+        ->from('gateway_c_druguage')
+                ->where("shortlist LIKE '%".$q."%'")
+                ->orWhere("drugusage LIKE '%".$q."%'")
+                ->limit(20);
+        $command = $query->createCommand();
+        $data = $command->queryAll();
+        $out['results'] = array_values($data);
+    }else if($id>0){
+        $out['results'] = ['drugusage'=>$id, 'text'=>  GatewayCDruguage::find()->where(['drugusage' => $id])->shortlist];
+    }
+    return $out;
+}
+
+
 }

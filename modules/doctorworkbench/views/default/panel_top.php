@@ -37,6 +37,7 @@ li.dropdown:hover > .dropdown-menu {
 }
 .nav-tabs > li > a {
     color:#353535;
+    margin-right: -1px;
 }
 .text-right{
     text-align: right;
