@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\eform\controllers;
+namespace app\modules_pm\eform\controllers;
 
 use yii\web\Controller;
 
 /**
- * Default controller for the `eform` module
+ * Default controller for the `Eform` module
  */
 class DefaultController extends Controller
 {
