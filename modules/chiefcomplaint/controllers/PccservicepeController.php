@@ -9,6 +9,10 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use app\components\PatientHelper;
+use \yii\web\Response;
+use yii\helpers\Html;
+use yii\helpers\Json;
 
 /**
  * PccservicepeController implements the CRUD actions for Pccservicepe model.
@@ -21,19 +25,28 @@ class PccservicepeController extends Controller
     public function behaviors()
     {
         return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['index','create','delete','update',],
-                'rules' => [
-                    [
-                        'actions' => ['index','create','delete','update'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
                 ],
             ],
-
         ];
+    
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'only' => ['index','create','delete','update',],
+//                'rules' => [
+//                    [
+//                        'actions' => ['index','create','delete','update'],
+//                        'allow' => true,
+//                        'roles' => ['@'],
+//                    ],
+//                ],
+//            ],
+//
+//        ];
     }
 
     /**
@@ -71,15 +84,32 @@ class PccservicepeController extends Controller
      */
     public function actionCreate()
     {
+        $request = Yii::$app->request;
         $model = new Pccservicepe();
+        
+        $vn= PatientHelper::getCurrentVn();
+        $cid =PatientHelper::getCurrentCid();
+        $hn =PatientHelper::getCurrentHn();
+        
+        
+        $model->vn = $vn;
+        $model->cid=$cid;
+        $model->hn=$hn;
+        $model->date_service=date('Y-m-d');
+        $model->time_service=date('H:m:s');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($request->isAjax) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+               return ['forceReload'=>'#crud-pe-pjax'];
+            }
+
+            return $this->render('create', [
+                        'model' => $model,
+            ]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
     /**

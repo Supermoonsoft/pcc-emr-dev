@@ -337,56 +337,22 @@ class OrderController extends VisitController
     
     public function actionPe()
     {
-        $request = Yii::$app->request;
-        $model = new Pccservicepe();  
+       $model = new \app\modules\chiefcomplaint\models\PccServicePe();
+        $cid = PatientHelper::getCurrentCid();
+        
+        $searchModel = new \app\modules\chiefcomplaint\models\PccServicePeSearch;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->where(['cid' => $cid]);
+        $dataProvider->query->orderBy('date_service DESC ');
 
-        if($request->isAjax){
-            /*
-            *   Process for ajax request
-            */
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            if($request->isGet){
-                return [
-                    'title'=> "Create new Pccservicepe",
-                    'content'=>$this->renderAjax('pe', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> "Create new Pccservicepe",
-                    'content'=>'<span class="text-success">Create Pccservicepe success</span>',
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                            Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote'])
-        
-                ];         
-            }else{           
-                return [
-                    'title'=> "Create new Pccservicepe",
-                    'content'=>$this->renderAjax('pe', [
-                        'model' => $model,
-                    ]),
-                    'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                                Html::button('Save',['class'=>'btn btn-primary','type'=>"submit"])
-        
-                ];         
-            }
-        }else{
-            /*
-            *   Process for non-ajax request
-            */
-            if ($model->load($request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
-            } else {
-                return $this->render('pe', [
-                    'model' => $model,
-                ]);
-            }
-        }
+      
+
+        return $this->render('pe', [
+            'model' => $model,
+            'dataProvider'=>$dataProvider
+        ]);
+
+
        
     }
 

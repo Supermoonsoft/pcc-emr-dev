@@ -12,7 +12,6 @@ $this->title = 'Create Pccservicepe';
 <div class="pccservicepe-create">
     <?= $this->render('_form', [
         'model' => $model,
-        'dataProvider'=>$dataProvider
     ]) ?>
 
 </div>
