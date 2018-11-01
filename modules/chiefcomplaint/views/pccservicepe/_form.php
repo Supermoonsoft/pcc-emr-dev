@@ -120,7 +120,7 @@ $columns = [
 <div class="col-md-6">
 
     <fieldset style="margin-top:8px">
-        <legend class="scheduler-border"><i class="fas fa-universal-access"></i> ประวัติ PE
+        <legend class="scheduler-border"><i class="fas fa-street-view"></i> ประวัติ PE
 
         </legend> 
         <div style="margin-top: 10px;margin-right: 7px;margin-left: -10px">
