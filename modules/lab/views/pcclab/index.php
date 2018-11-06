@@ -69,6 +69,7 @@ $this->title = 'Pcclabs';
             ],
             [
                 'attribute'=>'date_visit', 
+                'header' => 'Date Visit',
                 'format'=>'raw',
                 'value'=>function ($model, $key, $index, $widget) { 
                     return Html::checkbox($model->vn).' '.$model->date_visit.' (รพ.แม่ข่าย)';
@@ -86,6 +87,7 @@ $this->title = 'Pcclabs';
             ],*/
             [
                 'attribute'=>'lab_name',
+                'header' => 'lab Name',
                 'format' => 'raw',
                 'options' => ['id' => 'lab_name'],
                 'value'=>function ($model, $key, $index, $widget) { 
@@ -95,6 +97,7 @@ $this->title = 'Pcclabs';
             ],
             [
                 'attribute'=>'lab_result_date',
+                'header' => 'Lab Result Date',
                 'options' => ['id' => 'lab_result_date'],
                 'value'=>function ($model, $key, $index, $widget) { 
                     return $model->lab_result_date;
@@ -102,6 +105,7 @@ $this->title = 'Pcclabs';
             ],
             [
                 'attribute'=>'lab_result',
+                'header' => 'Lab Result',
                 'options' => [ 'id' => 'lab_result'],
                 'value'=>function ($model, $key, $index, $widget) { 
                     return $model->lab_result;
@@ -109,6 +113,7 @@ $this->title = 'Pcclabs';
             ],
             [
                 'attribute'=>'standard_result',
+                'header' => 'Standard Result',
                 'options' => [ 'id' => 'standard_result'],
                 'value'=>function ($model, $key, $index, $widget) { 
                     return $model->standard_result;
@@ -116,7 +121,7 @@ $this->title = 'Pcclabs';
             ],
             [
                 'width'=>'310px',
-                'label'=>'notyfil'
+                'label'=>'Notyfil'
             ],
 
         ],
