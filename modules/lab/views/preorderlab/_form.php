@@ -141,7 +141,7 @@ $this->registerJS($js);
         'pluginEvents' => [
             "select2:select" => "function() { $('#btn-save').focus(); }",
          ]
-    ])->label('ชื่อแลป');
+    ])->label('ชื่อแล็ป');
     ?>
    
     </div>

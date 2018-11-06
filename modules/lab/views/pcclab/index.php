@@ -22,7 +22,7 @@ $this->title = 'Pcclabs';
             <div class="row" style="margin-bottom: 3px;">
             <div class="col-xs-ภ col-sm-3 col-md-3 col-lg-3">
             <button class="btn btn-info" id="order-lab" onClick=<?php //new JsExpression($alert)?>>
-            <i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง PreOrder Lab</button>
+            <i class="fa fa-check"></i> ส่งรายการเฉพาะที่เลือก ไปยัง Pre-Order-Lab</button>
 
                 </div>
             
@@ -116,7 +116,7 @@ $this->title = 'Pcclabs';
             ],
             [
                 'width'=>'310px',
-                'label'=>'หมายเหตุ'
+                'label'=>'notyfil'
             ],
 
         ],

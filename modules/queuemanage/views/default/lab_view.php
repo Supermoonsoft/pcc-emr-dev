@@ -7,5 +7,6 @@ use yii\helpers\Html;
     <td><?=$lab->lab_name;?></td>
     <td><?=$lab->lab_result;?></td>
     <td><?=$lab->standard_result;?></td>
+    <td></td>
 </tr>
 <?php endforeach;?>

@@ -110,6 +110,7 @@ HTML;
                 ],
                 [
                     'class' => 'kartik\grid\ActionColumn',
+                    'header' => 'Action',
                     'template' => '{delete}',
                     'buttons' => [
                         'delete' => function ($url, $model) {

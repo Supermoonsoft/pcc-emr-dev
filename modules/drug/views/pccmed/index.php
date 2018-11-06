@@ -44,6 +44,7 @@ use yii\web\View;
         'columns' => [
             [
                 'attribute'=>'date_service', 
+                'header' => 'Service Date',
                 'format'=>'raw',
                 'value'=>function ($model, $key, $index, $widget) { 
                   return Html::checkbox($model->vn).' '.$model->date_visit.' (รพ.แม่ข่าย)';
@@ -67,6 +68,7 @@ use yii\web\View;
             ],
             [
                 'attribute'=>'drug_name',
+                'header' => 'Drug Name',
                 'format' => 'raw',
                 'value' => function($model){
                     return '<div >'.$model->drug_name.'&nbsp<span style="color:#0399cc" id="'.$model->id.'"></span></div>';
@@ -75,6 +77,7 @@ use yii\web\View;
             // 'drug_name',
             [
                 'attribute'=>'usage_line1',
+                'header' => 'Usage Line1',
                 'options' => ['id' => 'usage_line1'],
                 'value'=>function ($model, $key, $index, $widget) { 
                     $message = $model->usage_line1;
@@ -82,8 +85,14 @@ use yii\web\View;
                 },
                 'width'=>'400px',
             ],
-            'qty',
-            'unit',
+            [
+                'attribute'=>'qty',
+                'header' => 'Qty',
+            ],
+            [
+                'attribute'=>'unit',
+                'header' => 'Unit',
+            ]
 
         ],
     ]); ?>

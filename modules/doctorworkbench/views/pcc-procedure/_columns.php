@@ -20,6 +20,7 @@ return [
     ],
     [
         'class'=>'\kartik\grid\DataColumn',
+        'header' => 'Procedure Name',
         'attribute'=>'procedure_name',
         'value' => function($model){
             return $model->proced->title.' - '.$model->proced->title_th;
@@ -28,10 +29,12 @@ return [
 
     [
         'class'=>'\kartik\grid\DataColumn',
+        'header' => 'Doctor',
         'attribute'=>'doctor',
     ],
     [
         'class' => 'kartik\grid\ActionColumn',
+        'header' => 'Action',
         'template' => '{delete}',
         'buttons' => [
             'delete' => function ($url) {
